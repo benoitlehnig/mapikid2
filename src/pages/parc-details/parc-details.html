@@ -1,0 +1,39 @@
+<!--
+  Generated template for the ParcDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title *ngIf="parc.name!=''">{{parc.name}}</ion-title>
+    <ion-title *ngIf="parc.name==''">{{'list.NONAMEPARC' |translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-tabs tabsPlacement="top"  #myTabs (ionChange)="tabSelected($event)">
+		<ion-tab [root]="detailsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.DETAILS'|translate}}"></ion-tab>
+		<ion-tab [root]="reviewsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.REVIEWS'|translate}}" tabBadge="{{parc.reviewsLength}}"></ion-tab>
+	</ion-tabs>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button icon-left *ngIf="selectedTab===0">
+		<i class="material-icons">mode_edit</i>{{'parcDetails.REQUESTUPDATE'|translate}}
+	</button>
+	<button ion-button icon-left *ngIf="selectedTab===0">
+		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
+	</button>
+	<button ion-button icon-left *ngIf="selectedTab===0">
+		<i class="material-icons">delete</i>{{'parcDetails.SUGGESTREMOVE'|translate}}
+	</button>
+	<button ion-button icon-left *ngIf="selectedTab===1">
+		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
+	</button>
+  </ion-toolbar>
+</ion-footer>

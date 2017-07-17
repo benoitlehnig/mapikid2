@@ -1,14 +1,71 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    
+    <ion-title style="float:left"><img src="assets/images/logo8.png"  height="40px"></ion-title>
+	<ion-searchbar 
+		[(ngModel)]="autocomplete.query" 
+		[showCancelButton]="true" 
+		(ionInput)="updateSearch()" 
+		placeholder="Start typing and select ..." style="width:80%;float:left">
+	</ion-searchbar>
+	<button ion-button menuToggle right	>
+      <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+	
+	<ion-list>
+		<ion-item *ngFor="let item of autocompleteItems" 
+		(click)="chooseItem(item)">
+		{{ item.description }}
+		</ion-item>
+	</ion-list>
+	
+	<horizontal-split-pane
+    primary-component-minsize="50"
+    secondary-component-minsize="100"
+    local-storage-key="split-pane"
+    primary-component-initialratio="0.8"
+	separator-thickness="15">
+		<div class="split-pane-content-primary">
+			<div class="upper">
+				<div id="map" style="height:300px"></div>
+			</div>
+		</div>
+			<div class="split-pane-content-secondary">
+				<div class="lower">
+					<ion-list>
+					  <ion-item class="text" *ngFor="let parc of displayedList " [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key}">
+						<h2>
+							<span *ngIf="parc.parcItem.name !==''">{{parc.parcItem.name}} </span>
+							<span *ngIf="parc.parcItem.name ==''">{{ 'list.NONAMEPARC' |translate}} </span>
+						</h2>
+						<h3>
+							<span *ngIf="parc.parcItem.rate !=null">
+								<star-rating-comp [starType]="'svg'" [rating]="parc.parcItem.rate.rate" [readOnly]="true"></star-rating-comp>
+							</span> | {{parc.distance}} km
+						</h3>
+						<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>4 && parc.parcItem.open">
+							<i class="material-icons" >beenhere</i>
+						</ion-avatar>
+						<ion-avatar item-end  *ngIf="!parc.parcItem.open">
+							<i class="material-icons" >close</i>
+						</ion-avatar>
+						<ion-avatar item-end  *ngIf="parc.parcItem.free ===false">
+							<i class="material-icons">&#xE263;</i>
+						</ion-avatar>
+					  </ion-item>
+					</ion-list>
+				</div>
+		</div>
+
+	</horizontal-split-pane>
+
+
+	
+	  
+	
+		 
 </ion-content>
