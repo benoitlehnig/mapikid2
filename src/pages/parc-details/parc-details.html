@@ -15,6 +15,7 @@
 
 
 <ion-content padding>
+	<div id="mapDetails"></div>
 	<ion-tabs tabsPlacement="top"  #myTabs (ionChange)="tabSelected($event)">
 		<ion-tab [root]="detailsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.DETAILS'|translate}}"></ion-tab>
 		<ion-tab [root]="reviewsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.REVIEWS'|translate}}" tabBadge="{{parc.reviewsLength}}"></ion-tab>
@@ -23,17 +24,17 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button icon-left *ngIf="selectedTab===0">
+    <button ion-button icon-left *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
 		<i class="material-icons">mode_edit</i>{{'parcDetails.REQUESTUPDATE'|translate}}
 	</button>
-	<button ion-button icon-left *ngIf="selectedTab===0">
+	<button ion-button icon-left *ngIf="selectedTab===0 && localParc.validated ===false" (click)="validate()">
 		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
 	</button>
-	<button ion-button icon-left *ngIf="selectedTab===0">
+	<button ion-button icon-left *ngIf="selectedTab===0 && localParc.requestedForDeletion ===false" (click)="suggestRemove()" >
 		<i class="material-icons">delete</i>{{'parcDetails.SUGGESTREMOVE'|translate}}
 	</button>
-	<button ion-button icon-left *ngIf="selectedTab===1">
-		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
+	<button ion-button icon-left *ngIf="selectedTab===1 && userSigned ===true " (click)="openAddReviewModal()">
+		<i class="material-icons">done</i>{{'parcDetails.ADDREVIEW'|translate}}
 	</button>
   </ion-toolbar>
 </ion-footer>

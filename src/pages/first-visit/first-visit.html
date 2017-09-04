@@ -1,0 +1,86 @@
+<!--
+  Generated template for the FirstVisitPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-content padding class="firstVisit">
+	<div>
+        <div>
+         	<ion-img src="../../assets/images/logo_transparent.png" height="285" width="184" class="logo"></ion-img>
+        </div>
+        <div class="appName"><h1 class="mdl-typography--display-4">{{'firstVisit.APPNAME'| translate}}</h1></div>
+        <div class="numberOfParcs">
+          	<h3 class="mdl-typography--display-2">{{numberOfParcs}} {{'firstVisit.NUMPARCSSHORT'| translate}}</h3>
+        </div>
+        <div class="text-center">
+          	<h1 class="mdl-typography--display-1">{{'firstVisit.MAINTEXT1' | translate}}</h1>
+          	<h4 class="mdl-typography--display-1">{{'firstVisit.MAINTEXT2' | translate}}</h4>
+        </div>
+	</div>
+	<div>
+	    <button ion-button (click)="close()">
+	        {{'firstVisit.START'| translate}}
+	   </button>
+	</div>
+	<div class="subWelcome">        
+      	<div class="feature">
+        	<div class="circleIcon">
+          		<i class="material-icons">room</i>
+       		</div>
+        	<h4 class="circleIconLabel">{{'firstVisit.FINDPARCTITLE'| translate}}</h4>
+	        <div>
+	          	{{'firstVisit.FINDPARCFEATURE1'| translate}}
+	        </div>
+	        <div>
+	         	{{'firstVisit.FINDPARCFEATURE2'| translate}} 
+	        </div>
+	        <div>
+	          	{{numberOfParcs}} {{'firstVisit.NUMPARCS'| translate}}
+	        </div>
+	    </div>
+	    <div class="feature">
+	        <div class="circleIcon">
+	          	<i class="material-icons">sentiment_very_satisfied</i>
+	        </div>
+	        <h4 class="circleIconLabel">{{'firstVisit.COMMUNITYTITLE'| translate}}</h4>
+	        <div>
+	          	{{'firstVisit.COMMUNITYFEATURE1'| translate}} 
+	        </div>
+	        <div>
+	          	{{'firstVisit.COMMUNITYFEATURE2'| translate}}  
+	        </div>
+	        <div>
+	          	{{'firstVisit.COMMUNITYFEATURE3'| translate}} 
+	        </div>
+	    </div>
+	    <div class="feature">
+	        <div class="circleIcon">
+	         	<i class="material-icons">thumb_up</i>
+	        </div>
+	        <h4 class="circleIconLabel">{{'firstVisit.FEEDBACKTITLE'| translate}}</h4>
+	        <div>
+	          	{{'firstVisit.FEEDBACKFEATURE1'| translate}} 
+	        </div>
+	        <div>
+	          	{{'firstVisit.FEEDBACKFEATURE2'| translate}} <a href="https://www.facebook.com/mapikid/">Facebook</a>
+	        </div>
+	        <div>
+	            {{'firstVisit.FEEDBACKFEATURE3'| translate}} 
+	        </div>
+	    </div>
+	</div>
+	<div>
+	    <button ion-button (click)="close()">
+	        {{'firstVisit.START'| translate}}
+	   </button>
+	</div>
+
+	<div class="footer">
+	    {{'firstVisit.LEGALMENTION'| translate}}
+	</div>
+
+</ion-content>

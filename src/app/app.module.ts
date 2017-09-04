@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -11,10 +11,13 @@ import { ListPage } from '../pages/list/list';
 import { ParcDetailsPage } from '../pages/parc-details/parc-details';
 import { DetailsRootPage } from '../pages/details-root/details-root';
 import { ReviewsRootPage } from '../pages/reviews-root/reviews-root';
-
+import { UpdateParcPage } from '../pages/update-parc/update-parc';
+import { FirstVisitPage } from '../pages/first-visit/first-visit';
+import { AddReviewPage } from '../pages/add-review/add-review';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -23,6 +26,9 @@ import {TranslateModule} from 'ng2-translate';
 import { TranslateLoader, TranslateStaticLoader } from "ng2-translate/src/translate.service";
 import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
 import { StarRatingModule } from 'angular-star-rating';
+import { AuthService } from '../providers/auth-service/auth-service';
+import { MapService } from '../providers/map-service/map-service';
+
 
 import {
  GoogleMaps,
@@ -32,6 +38,7 @@ import {
  MarkerOptions,
  Marker
 } from '@ionic-native/google-maps';
+import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyBr7eaeJLc7iosJIBTBTmayxLeN9BvBJ48",
@@ -47,13 +54,19 @@ export const firebaseConfig = {
     ListPage,
 	ParcDetailsPage,
 	DetailsRootPage,
-	ReviewsRootPage
+	ReviewsRootPage,
+  UpdateParcPage,
+  FirstVisitPage, 
+  AddReviewPage
   ],
   imports: [
-	BrowserModule,
-	AngularFireModule.initializeApp(firebaseConfig),
+	  BrowserModule,
+	  AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     IonicModule.forRoot(MyApp),
-	SplitPaneModule,
+    IonicStorageModule.forRoot(),
+	  SplitPaneModule,
 	AngularFireDatabaseModule,
 	HttpModule,
 	StarRatingModule,
@@ -65,23 +78,29 @@ export const firebaseConfig = {
         })  ],
 	  bootstrap: [IonicApp],
 	  entryComponents: [
-		 MyApp,
-    HomePage,
-    ListPage,
-	ParcDetailsPage,
-	DetailsRootPage,
-	ReviewsRootPage
-	],
+		  MyApp,
+      HomePage,
+      ListPage,
+  	  ParcDetailsPage,
+  	  DetailsRootPage,
+  	  ReviewsRootPage,
+      UpdateParcPage,
+      FirstVisitPage,
+      AddReviewPage
+	  ],
 	 exports: [
         TranslateModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-	GoogleMaps,
+	  GoogleMaps,
     TranslateModule,
-	Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    AuthService,
+    MapService,
+	  Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GoogleMapsClusterProvider
   ]
 })
 export class AppModule {}

@@ -1,0 +1,23 @@
+page-first-visit {
+	.firstVisit{
+		text-align:center;
+		color:#FFFFFF;
+		background-color:color($colors, primary);
+	}
+	.logo{
+		background:none;
+	}
+	.material-icons{
+		font-size:60px;
+	}
+	.feature{
+		margin: 40px 12px 12px 12px;
+	}
+	.footer{
+		margin: 40px 12px 12px 12px;
+		color:#dddddd
+	}
+	.button-md{
+		background: #F2403C;
+	}
+}

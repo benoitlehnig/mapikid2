@@ -9,12 +9,30 @@ page-home {
 		color:#FFFFFF;
 	}
 	#map {
-        height: 100%;
+        height: calc(100%);
+        min-height:1px;
     }
 	.rating {
 		float:left;
 	}
 	.material-icons{
 		color:#8EC63F;
+	}
+	.split-pane-content-primary{
+		height:100%;
+	}
+	.upper{
+		height:calc(100%);
+	}
+	#user-pic{
+		display: inline-block;
+	    background-repeat: no-repeat;
+	    width: 40px;
+	    height: 40px;
+	    background-size: 40px;
+	    border-radius: 20px;
+	}
+	.list-md {
+   		margin: -1px 0 0px;
 	}
 }

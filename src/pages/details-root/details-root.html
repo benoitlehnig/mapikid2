@@ -8,6 +8,7 @@
 
 
 <ion-content padding>
+	<div id="mapDetail"></div>
 	<div *ngIf="parc.open == false" class="details">
 		<i class="material-icons" >close</i>
 		<span>{{'parcDetails.CLOSED'|translate}}</span>
@@ -21,7 +22,7 @@
 		<i class="material-icons">done</i>
         <span>{{ 'parcDetails.VALIDATEDBY'| translate }} {{parc.validationNumber}} {{ 'parcDetails.USERS'| translate }}</span>
     </h5>
-    <h5  class="details">
+    <h5 class="details">
         <div *ngIf="parc.free != false">
 			<i class="material-icons">monetization_on</i>
 			<span>{{'parcDetails.FREE'|translate}}</span>
@@ -29,6 +30,14 @@
         <div *ngIf="parc.free == false">
 			<span>{{'parcDetails.FEE'|translate}}</span>
         </div>
+    </h5>
+    <h5 class="details" *ngIf="parc.shade == true">
+        <i class="material-icons">brightness_high</i>
+        <span>{{ 'parcDetails.NOSHADE'| translate }}</span>
+    </h5>
+    <h5 class="details" *ngIf="parc.shade == false">
+        <i class="material-icons">brightness_medium</i>
+        <span>{{ 'parcDetails.SHADE'| translate }}</span>
     </h5>
 	<h5 class="mdl-card__subtitle-text generalDetails">
 		<i class="material-icons">timer</i>
@@ -42,7 +51,19 @@
 		 <i class="material-icons" id="parcDetailsOld" *ngIf="parc.sixandPlus">accessibility</i>
 		 <span *ngIf="parc.sixandPlus">{{'parcDetails.6+AGE'| translate}}</span>
     </div>
-    <div class="separator"></div>          
+    <div class="separator"></div>
+    <div class="openingHours" *ngIf="parc.opening_hours" >
+        <div class="openingHours" *ngIf="parc.opening_hours.open_now === true || parc.opening_hours.open_now === false">
+            <span *ngIf="parc.opening_hours.open_now === true">{{'parcDetails.CUROPENED'|translate}}</span>
+            <span *ngIf="parc.opening_hours.open_now === false">{{'parcDetails.CURCLOSED'|translate}}</span>
+         </div>
+        <ul>
+            <li *ngFor="let day of parc.opening_hours.weekday_text">
+               {{day}} 
+            </li>
+        </ul>
+     	<div class="separator"></div>
+    </div>        
 	<div id="parcDetailsFacilities">
 		 <h5>{{numberOfEquipment}} Equipments </h5>
 		 <div class="parcDetailsMessage" *ngIf="isLowNumberofEquipment">
@@ -58,10 +79,11 @@
 			<ion-img class="facilitiesIcon" src="assets/images/Game Complex icon icon.png" *ngIf="parc.facilities.monkeyBridge == true"></ion-img>
 			<ion-img class="facilitiesIcon" src="assets/images/Cobweb icon icon.png" *ngIf="parc.facilities.spider == true"></ion-img>
 			<ion-img class="facilitiesIcon" src="assets/images/Horse icon icon.png" *ngIf="parc.facilities.animals == true"></ion-img>
+			<ion-img class="facilitiesIcon" src="assets/images/sandbox icon.png" *ngIf="parc.facilities.sandbox == true"></ion-img>
 		</div>
 	</div>
 	<div id="parcDetailsDescription" *ngIf="parc.description">{{parc.description}}</div>
-	<div id="mapDetails" class="mdl-shadow--4dp"></div>
+	<div id="mapStreetView" class="mdl-shadow--4dp"></div>
 	<div id="parcDetailspicture" *ngIf="parc.pictureUrl">
 	</div>
 </ion-content>
