@@ -27,6 +27,7 @@
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
         "@types/google-maps": "^3.2.0",
+        "angular-split": "^0.2.2",
         "angular-star-rating": "^3.0.3",
         "angularfire2": "^4.0.0-rc.1",
         "cordova-android": "^6.2.3",

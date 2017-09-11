@@ -1,11 +1,11 @@
 import { Component,ViewChild } from '@angular/core';
-import { Nav,Platform, NavController, App  } from 'ionic-angular';
+import { Platform, App  } from 'ionic-angular';
 
 import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../pages/home/home';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
 import {TranslateService,LangChangeEvent} from 'ng2-translate';
@@ -62,8 +62,6 @@ export class MyApp {
         this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
           storage.set('langKey', event.lang);
         });
-      
-     
     });
   }
 

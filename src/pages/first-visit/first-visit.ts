@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,App } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { HomePage } from '../home/home';
 
 /**
@@ -20,7 +20,7 @@ export class FirstVisitPage {
  	
  	constructor(public navCtrl: NavController, public navParams: NavParams,private app: App,db: AngularFireDatabase) {
   		var statistics = db.object('statistics/numberOfParcs');
-		statistics.subscribe(snapshot => {
+		  statistics.subscribe(snapshot => {
 
 	   		this.numberOfParcs = snapshot.$value;
 		});

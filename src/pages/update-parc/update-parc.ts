@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController,Platform,ToastController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database';
+import { NavController, NavParams, ViewController,Platform } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import GeoFire from 'geofire';
-import {
- GoogleMaps,
- GoogleMap,
- GoogleMapsEvent,
- LatLng,
- MarkerOptions,
-CameraPosition,
- Marker
-} from '@ionic-native/google-maps';
 import { MapService } from '../../providers/map-service/map-service';
 
 /**
@@ -20,7 +11,7 @@ import { MapService } from '../../providers/map-service/map-service';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-update-parc',
   templateUrl: 'update-parc.html',
@@ -59,8 +50,8 @@ export class UpdateParcPage {
   
   constructor(public platform: Platform,public viewCtrl: ViewController,
     public navCtrl: NavController, public navParams: NavParams,
-    public db: AngularFireDatabase,private googleMaps: GoogleMaps,
-    private _map:MapService, private toastCtrl: ToastController) {
+    public db: AngularFireDatabase,
+    private _map:MapService) {
     console.log(this.navParams.get('parc'));
     
     if(this.navParams.get('mode')){
@@ -129,14 +120,25 @@ export class UpdateParcPage {
       });
   }
 
-  closeModal = function(){
-    this.viewCtrl.dismiss();
+  closeModal = function(updateMade){
+    if(updateMade){
+       this.viewCtrl.dismiss(this.mode);
+    }
+    else{
+       this.viewCtrl.dismiss();
+    }
   }
   saveParc = function(){
     var location=[this.marker.getPosition().lat(), this.marker.getPosition().lng()];
     this.parc.position = {lat: this.marker.getPosition().lat(), lng: this.marker.getPosition().lng()};
+    if(this.parc.closed === false){
+        this.parc.open = true;
+    }
+    else{
+
+      this.parc.open =false;
+    }
     console.log(this.parc);
-    
     if(this.mode==='update'){
       var parcObject = this.db.object('positions/'+this.parc.$key);
       parcObject.update(this.parc);
@@ -144,11 +146,7 @@ export class UpdateParcPage {
       this.gf.set(this.parc.$key, location).then(function() {
         
       });
-      let toast = this.toastCtrl.create({
-        message: 'User was added successfully',
-        duration: 3000,
-        position: 'bottom'
-      });
+     
 
     }
     if(this.mode==='add'){
@@ -160,12 +158,8 @@ export class UpdateParcPage {
           console.log(newPosition.key);});
       
     }
-    let toast = this.toastCtrl.create({
-        message: 'User was added successfully',
-        duration: 3000,
-        position: 'bottom'
-      });
-    this.closeModal();
+    
+    this.closeModal(true);
   }
 
   

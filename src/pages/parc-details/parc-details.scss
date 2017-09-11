@@ -12,5 +12,20 @@ page-parc-details {
         height: calc(100%);
         min-height:1px;
     }
-
+.topNoScroll{
+	overflow-y:hidden;
+}
+.button-outline-md {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    font-size:0.8em;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.toolbar-content-md {
+    text-align:center;
+}
 }

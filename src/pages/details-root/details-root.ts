@@ -1,19 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import GeoFire from 'geofire';
 import {TranslateService} from 'ng2-translate';
 import * as firebase from 'firebase';
-import {
- GoogleMaps,
- GoogleMap,
- GoogleMapsEvent,
- LatLng,
- MarkerOptions,
-CameraPosition,
- Marker
-} from '@ionic-native/google-maps';
 import { MapService } from '../../providers/map-service/map-service';
 
 /**
@@ -22,7 +13,6 @@ import { MapService } from '../../providers/map-service/map-service';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
 @Component({
   	selector: 'page-details-root',
   	templateUrl: 'details-root.html',
@@ -30,22 +20,39 @@ import { MapService } from '../../providers/map-service/map-service';
 export class DetailsRootPage {
 
 	parc: {[k: string]: any} = {};
-	map: GoogleMap ;
+	map= null ;
 	mapDetailsMap =null;
 	db: AngularFireDatabase;
 	toiletsMarkers : any[];
+	numberOfEquipment = 0;
+	isLowNumberofEquipment = true;
 	placesService: any;
 	labelWeekDay : string[] = ['','','','','','',''];
-	
-	
+	parcObject: FirebaseObjectObservable<any>;
+	marker = null;
+
 	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
-		db: AngularFireDatabase,private googleMaps: GoogleMaps, translate: TranslateService,private _map:MapService) {
-		this.parc = navParams.data;
-		if(!this.parc.facilities){
-			this.parc.facilities = null;
-		}
-		this.toiletsMarkers = [];
-		this.findClosestToilets();
+		db: AngularFireDatabase, translate: TranslateService,private _map:MapService) {
+		console.log(navParams.data.$key);
+		this.parcObject = db.object('positions/'+navParams.data.$key);
+		this.parcObject.subscribe(snapshot => {
+	   		this.parc = snapshot;
+	   		console.log(this.parc);
+	   		if(!this.parc.facilities){
+				this.parc.facilities = null;
+			}
+			var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
+			if(this.marker){
+				this.marker.setPosition(latLng);
+			}
+			if(this.map){
+				this.map.setCenter(latLng);
+			}
+			this.toiletsMarkers = [];
+			this.findClosestToilets();
+		});
+
+		
 		console.log(this.parc);
 		translate.get('parcDetails.MONDAY').subscribe((res: string) => {
 			this.labelWeekDay[0]= res;
@@ -76,6 +83,7 @@ export class DetailsRootPage {
 			this.loadMap();
 			this.setUpPlaceService();
 			this.triggerGetGoogleData();
+			this.setLowNumberofEquipment();
 		});
 	}
  
@@ -86,7 +94,7 @@ export class DetailsRootPage {
 		var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
 		this.map.setCenter(latLng);
 		this.map.setZoom(18);
-		var marker = new google.maps.Marker({
+		this.marker = new google.maps.Marker({
             position:  latLng,
             map: this.map,
             title: this.parc.name  
@@ -114,7 +122,16 @@ export class DetailsRootPage {
   	setUpPlaceService = function() {
 		this.placesService = new google.maps.places.PlacesService(this.map);
   	}
-
+  	setLowNumberofEquipment = function(){
+		if(this.parc.facilities){
+			for(let facility of this.parc.facilities) {
+				if(facility===true){
+					this.numberOfEquipment++;
+				}
+			}
+		}
+		if(this.numberOfEquipment>1){this.isLowNumberofEquipment = false;}
+	}
   	isToiletsRegistered = function(key) {
 		let id :number = -1;
 		for (let i in this.toiletsMarkers) {
@@ -133,14 +150,6 @@ export class DetailsRootPage {
 			radius: 0.2
 		});
 		var image = './assets/images/toilets.png';
-		
-		var iconPath = {
-			  icon: image,
-			  fillColor:  '#0000FF',                  
-			  scale: 8,
-			  strokeColor: '#0000FF',
-			  strokeWeight: 4
-		};
 		
 		var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location, distance) {
 			var toilet= {

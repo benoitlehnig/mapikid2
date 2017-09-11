@@ -24,21 +24,14 @@ import { Geolocation } from '@ionic-native/geolocation';
 import {HttpModule,Http} from '@angular/http';
 import {TranslateModule} from 'ng2-translate';
 import { TranslateLoader, TranslateStaticLoader } from "ng2-translate/src/translate.service";
-import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
+import { AngularSplitModule } from 'angular-split';
 import { StarRatingModule } from 'angular-star-rating';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { MapService } from '../providers/map-service/map-service';
+import { IonicPageModule } from 'ionic-angular';
 
-
-import {
- GoogleMaps,
- GoogleMap,
- GoogleMapsEvent,
- LatLng,
- MarkerOptions,
- Marker
-} from '@ionic-native/google-maps';
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
+import { OrderByDistancePipe } from '../pipes/order-by-distance/order-by-distance';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyBr7eaeJLc7iosJIBTBTmayxLeN9BvBJ48",
@@ -46,6 +39,9 @@ export const firebaseConfig = {
   	databaseURL: "https://parcmap.firebaseio.com",
   	storageBucket: "parcmap.appspot.com"
 };
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -57,7 +53,8 @@ export const firebaseConfig = {
 	ReviewsRootPage,
   UpdateParcPage,
   FirstVisitPage, 
-  AddReviewPage
+  AddReviewPage,
+    OrderByDistancePipe
   ],
   imports: [
 	  BrowserModule,
@@ -66,35 +63,43 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-	  SplitPaneModule,
-	AngularFireDatabaseModule,
-	HttpModule,
-	StarRatingModule,
-	StarRatingModule.forRoot(),
-    TranslateModule.forRoot({
-            provide: TranslateLoader,
-            useFactory: (http: Http) => new TranslateStaticLoader(http, './assets/i18n', '.json'),
-            deps: [Http]
-        })  ],
-	  bootstrap: [IonicApp],
-	  entryComponents: [
-		  MyApp,
-      HomePage,
-      ListPage,
-  	  ParcDetailsPage,
-  	  DetailsRootPage,
-  	  ReviewsRootPage,
-      UpdateParcPage,
-      FirstVisitPage,
-      AddReviewPage
-	  ],
+    AngularSplitModule,
+    IonicPageModule.forChild(DetailsRootPage),
+    IonicPageModule.forChild(ReviewsRootPage),
+    IonicPageModule.forChild(UpdateParcPage),
+  	AngularFireDatabaseModule,
+  	HttpModule,
+  	StarRatingModule,
+    IonicPageModule.forChild(ParcDetailsPage),
+  	StarRatingModule.forRoot(),
+      TranslateModule.forRoot({
+              provide: TranslateLoader,
+              useFactory: createTranslateLoader,
+              deps: [Http]
+          })  ],
+  	  bootstrap: [IonicApp],
+  	  entryComponents: [
+  		  MyApp,
+        HomePage,
+        ListPage,
+    	  ParcDetailsPage,
+    	  DetailsRootPage,
+    	  ReviewsRootPage,
+        UpdateParcPage,
+        FirstVisitPage,
+        AddReviewPage,
+
+  	  ],
 	 exports: [
-        TranslateModule
+        TranslateModule,
+        DetailsRootPage,
+        ParcDetailsPage,
+        ReviewsRootPage,
+        UpdateParcPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-	  GoogleMaps,
     TranslateModule,
     AuthService,
     MapService,

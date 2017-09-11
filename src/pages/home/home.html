@@ -6,7 +6,7 @@
 		[(ngModel)]="autocomplete.query" 
 		[showCancelButton]="true" 
 		(ionInput)="updateSearch()" 
-		placeholder="{{'header.ENTERLOCATION' | translate }}" style="width:80%;float:left">
+		placeholder="{{'header.ENTERLOCATION' | translate }}" style="width:70%;float:left">
 	</ion-searchbar>
 	<div id="user-pic"></div>
 	<button ion-button menuToggle right	>
@@ -15,7 +15,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding >
 	
 	<ion-list>
 		<ion-item *ngFor="let item of autocompleteItems" 
@@ -23,48 +23,39 @@
 		{{ item.description }}
 		</ion-item>
 	</ion-list>
-	
-	<horizontal-split-pane
-    primary-component-minsize="50"
-    secondary-component-minsize="100"
-    local-storage-key="split-pane"
-    primary-component-initialratio="0.8"
-	separator-thickness="15">
-		<div class="split-pane-content-primary">
-			<div class="upper">
-				<div id="map"></div>
-			</div>
-		</div>
-			<div class="split-pane-content-secondary">
-				<div class="lower">
-					<ion-fab top right >
-						<button ion-fab mini [navPush]="parcUpdate" [navParams]="{mode:'add', position:mapCenter}"  ><ion-icon name="add"></ion-icon></button>
-						<button ion-fab mini (click)="geolocate()"><ion-icon name="locate"></ion-icon></button>
-					</ion-fab>
-					<ion-list>
-					  <ion-item class="text" *ngFor="let parc of displayedList " [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key, map:map}">
-						<h2>
-							<span *ngIf="parc.parcItem.name !==''">{{parc.parcItem.name}} </span>
-							<span *ngIf="parc.parcItem.name ==''">{{ 'list.NONAMEPARC' |translate}} </span>
-						</h2>
-						<h3>
-							<span *ngIf="parc.parcItem.rate !=null">
-								<star-rating-comp [starType]="'svg'" [rating]="parc.parcItem.rate.rate" [readOnly]="true"></star-rating-comp>
-							</span> | {{parc.distance}} km
-						</h3>
-						<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>4 && parc.parcItem.open">
-							<i class="material-icons" >beenhere</i>
-						</ion-avatar>
-						<ion-avatar item-end  *ngIf="!parc.parcItem.open">
-							<i class="material-icons" >close</i>
-						</ion-avatar>
-						<ion-avatar item-end  *ngIf="parc.parcItem.free ===false">
-							<i class="material-icons">&#xE263;</i>
-						</ion-avatar>
-					  </ion-item>
-					</ion-list>
-				</div>
-		</div>
+	<split direction="vertical" gutterSize="15">
+    <split-area [size]="80">
+        <div id="map"></div>
+    </split-area>
+    <split-area [size]="20">
+        <ion-fab top right >
+					<button ion-fab mini [navPush]="parcUpdate" [navParams]="{mode:'add', position:mapCenter}"  ><ion-icon name="add"></ion-icon></button>
+					<button ion-fab mini (click)="geolocate()"><ion-icon name="locate"></ion-icon></button>
+				</ion-fab>
+				<ion-list>
+				  <ion-item class="text" *ngFor="let parc of parcs | orderbydistance " [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key, map:map}">
+					<h2>
+						<span *ngIf="parc.parcItem.name !==''">{{parc.parcItem.name}} </span>
+						<span *ngIf="parc.parcItem.name ==''">{{ 'list.NONAMEPARC' |translate}} </span>
+					</h2>
+					<h3>
+						<span *ngIf="parc.parcItem.rate !=null">
+							<star-rating-comp [starType]="'svg'" [rating]="parc.parcItem.rate.rate" [readOnly]="true"></star-rating-comp>
+						</span> | {{parc.distance}} km
+					</h3>
+					<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>4 && parc.parcItem.open">
+						<i class="material-icons" >beenhere</i>
+					</ion-avatar>
+					<ion-avatar item-end  *ngIf="!parc.parcItem.open">
+						<i class="material-icons" >close</i>
+					</ion-avatar>
+					<ion-avatar item-end  *ngIf="parc.parcItem.free ===false">
+						<i class="material-icons">&#xE263;</i>
+					</ion-avatar>
+				  </ion-item>
+				</ion-list>
+    </split-area>
+</split>
 
-	</horizontal-split-pane>	 
+	 
 </ion-content>

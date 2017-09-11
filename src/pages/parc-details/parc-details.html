@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding scroll="false" class="topNoScroll">
 	<div id="mapDetails"></div>
 	<ion-tabs tabsPlacement="top"  #myTabs (ionChange)="tabSelected($event)">
 		<ion-tab [root]="detailsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.DETAILS'|translate}}"></ion-tab>
@@ -22,18 +22,25 @@
 	</ion-tabs>
 </ion-content>
 
+
 <ion-footer>
   <ion-toolbar>
-    <button ion-button icon-left *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
+    <button ion-button icon-left outline *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
 		<i class="material-icons">mode_edit</i>{{'parcDetails.REQUESTUPDATE'|translate}}
 	</button>
-	<button ion-button icon-left *ngIf="selectedTab===0 && localParc.validated ===false" (click)="validate()">
+	<button ion-button icon-left outline *ngIf="selectedTab===0 && localParc.validated ==false" (click)="validate()">
 		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
 	</button>
-	<button ion-button icon-left *ngIf="selectedTab===0 && localParc.requestedForDeletion ===false" (click)="suggestRemove()" >
+	<button ion-button icon-left outline disabled *ngIf="selectedTab===0 && localParc.validated ==true" >
+		<i class="material-icons">done</i>{{'parcDetails.VALIDATED'|translate}}
+	</button>
+	<button ion-button icon-left outline right *ngIf="selectedTab===0 && localParc.requestedForDeletion ===false" (click)="suggestRemove()" >
 		<i class="material-icons">delete</i>{{'parcDetails.SUGGESTREMOVE'|translate}}
 	</button>
-	<button ion-button icon-left *ngIf="selectedTab===1 && userSigned ===true " (click)="openAddReviewModal()">
+	<button ion-button icon-left outline right disabled *ngIf="selectedTab===0 && localParc.requestedForDeletion !==false">
+		<i class="material-icons">delete</i>{{'parcDetails.SUGGESTEDREMOVE'|translate}}
+	</button>
+	<button ion-button icon-left outline *ngIf="selectedTab===1 && userSigned ===true " (click)="openAddReviewModal()">
 		<i class="material-icons">done</i>{{'parcDetails.ADDREVIEW'|translate}}
 	</button>
   </ion-toolbar>

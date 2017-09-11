@@ -19,6 +19,14 @@
     	<ion-label floating>{{'parcDetails.MESSAGELABEL'|translate}}</ion-label>
     	<ion-input type="text" value="" [(ngModel)]="review.description"></ion-input>
   	</ion-item>
-  	<button ion-button block (click)="closeModal()">{{'parcDetails.ADDREVIEWCLOSEMODAL'|translate}}</button>
-	<button ion-button block (click)="saveReview()">{{'parcDetails.SENDBUTTON'|translate}}</button>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button icon-left outline (click)="closeModal()">
+      {{'parcDetails.ADDREVIEWCLOSEMODAL'|translate}}
+  </button>
+  <button ion-button icon-left outline (click)="saveReview()">
+    <i class="material-icons">send</i>{{'parcDetails.SENDBUTTON'|translate}}
+  </button>
+  </ion-toolbar>
+</ion-footer>

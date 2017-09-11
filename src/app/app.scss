@@ -22,3 +22,11 @@ ion-app.md [padding], ion-app.md {
 ion-app.md [padding], ion-app.md [padding] .scroll-content{
 	padding:0px;
 }
+@font-face{
+	font-family: dosis;
+	src: url('../assets/font/dosis.woff2') format('woff2');
+}
+ 
+*{
+	font-family: dosis;
+}

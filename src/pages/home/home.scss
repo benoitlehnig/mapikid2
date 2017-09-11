@@ -21,6 +21,9 @@ page-home {
 	.split-pane-content-primary{
 		height:100%;
 	}
+	.lower-component{
+		overflow-y:scroll;
+	}
 	.upper{
 		height:calc(100%);
 	}
@@ -31,8 +34,15 @@ page-home {
 	    height: 40px;
 	    background-size: 40px;
 	    border-radius: 20px;
+	    float:right;
 	}
 	.list-md {
    		margin: -1px 0 0px;
+	}
+	.scroll-content{
+		overflow:hidden;
+	}
+	split-gutter[_ngcontent-c0] {
+	    background-color: #8EC63F;
 	}
 }

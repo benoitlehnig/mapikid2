@@ -33,11 +33,17 @@ page-details-root {
 	  color:#FE9F1F;
 	}
 	.separator{
-	  border-top:1px solid #e0e0e0;
+		margin-top:16px;
+		margin-bottom:16px;
+	 	border-top:1px solid #e0e0e0;
 	}
 	.details span {
 		position: relative;
 		top: -6px;
+		font-size:1.2em;
+	}
+	.mapDetails{
+		padding:16px;
 	}
 
 }

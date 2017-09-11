@@ -1,7 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,Tabs,Tab,ModalController,ToastController   } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { NavController, NavParams,Tabs,Tab,ModalController,ToastController   } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../../providers/auth-service/auth-service';
 
 import { Storage } from '@ionic/storage';
@@ -11,22 +11,13 @@ import { DetailsRootPage } from '../details-root/details-root';
 import { ReviewsRootPage } from '../reviews-root/reviews-root';
 import { UpdateParcPage } from '../update-parc/update-parc';
 import { AddReviewPage } from '../add-review/add-review';
-import {
- GoogleMaps,
- GoogleMap,
- GoogleMapsEvent,
- LatLng,
- MarkerOptions,
-CameraPosition,
- Marker
-} from '@ionic-native/google-maps';
 /**
  * Generated class for the ParcDetailsPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-parc-details',
   templateUrl: 'parc-details.html',
@@ -41,16 +32,16 @@ export class ParcDetailsPage {
 	parc: {[k: string]: any} = {};
 	detailsRootPage = DetailsRootPage;
 	reviewsRootPage = ReviewsRootPage;
-	numberOfEquipment = 0;
-	isLowNumberofEquipment = true;
 	userSigned: boolean=false;
 	localParc:{[k: string]: any} = {'validated':false,'requestedForDeletion':false};
 	toastLabelValidated :String= "";
 	toastLabelDeleted:String = "";
+	toastLabelUpdated:String = "";
+	toastLabelAdded:String = "";
 	map=null;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-  	db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,private googleMaps: GoogleMaps,
+  	db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
   	public afAuth: AngularFireAuth, private _auth: AuthService,
   	public toastCtrl: ToastController,translate: TranslateService) {
 		console.log(navParams);
@@ -63,7 +54,6 @@ export class ParcDetailsPage {
 	   		if(this.parc.reviews){ 
 				this.parc.reviewsLength = Object.keys(this.parc.reviews).length;
 			}
-			this.setLowNumberofEquipment();
 		});
 		this.afAuth.auth.onAuthStateChanged(function(user) {
         	this.userSigned = this._auth.authenticated;
@@ -87,6 +77,12 @@ export class ParcDetailsPage {
 		translate.get('parcDetails.SNACKBARLABELDELETED').subscribe((res: string) => {
 			this.toastLabelDeleted = res;
 		});
+		translate.get('parcUpdate.TOASTPARCADDED').subscribe((res: string) => {
+			this.toastLabelAdded = res;
+		});
+		translate.get('parcUpdate.TOASTPARCUPDATED').subscribe((res: string) => {
+			this.toastLabelUpdated = res;
+		});
 
 		
  	}
@@ -102,21 +98,21 @@ export class ParcDetailsPage {
 		}
 	}
   
-	setLowNumberofEquipment = function(){
-		var isLowNumberofEquipment = true;
-		if(this.parc.facilities){
-			for(let facility of this.parc.facilities) {
-				if(facility===true){
-					this.numberOfEquipment++;
-				}
-			}
-		}
-		if(this.numberOfEquipment>1){this.isLowNumberofEquipment = false;}
-	}
+	
 		
   	openUpdateParcModal = function(){
   		let obj = {parc: this.parc};
   		let myModal = this.modalCtrl.create(UpdateParcPage,obj);
+  		myModal.onDidDismiss(data => {
+  			console.log("data",data);
+  			if(data ==='update'){
+
+     		 this.presentToast(this.toastLabelUpdated);
+  			}
+  			else{
+  				this.presentToast(this.toastLabelAdded);
+  			}
+   		});
     	myModal.present();
   	}
   	openAddReviewModal = function(){

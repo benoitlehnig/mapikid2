@@ -64,6 +64,15 @@
   		<ion-label>{{'parcUpdate.+6YEARS'|translate}}</ion-label>
   		<ion-checkbox [(ngModel)]="parc.sixandPlus"></ion-checkbox>
 	</ion-item>
-	<button ion-button block (click)="closeModal()">{{'parcUpdate.CANCELBUTTON'|translate}}</button>
-	<button ion-button block (click)="saveParc()">{{'parcUpdate.UPDATEBUTTON'|translate}}</button>
+	
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button icon-left outline (click)="closeModal(false)">
+      {{'parcUpdate.CANCELBUTTON'|translate}}
+  </button>
+  <button ion-button icon-left outline (click)="saveParc()">
+    <i class="material-icons">save</i>{{'parcUpdate.UPDATEBUTTON'|translate}}
+  </button>
+  </ion-toolbar>
+</ion-footer>
