@@ -53,7 +53,7 @@ export class HomePage implements OnInit{
 		private geolocation: Geolocation,
 		public afAuth: AngularFireAuth, private _auth: AuthService, private _map:MapService,
 		public mapCluster: GoogleMapsClusterProvider,
-		public loadingCtrl: LoadingController,translate: TranslateService) {
+		public loadingCtrl: LoadingController,private translate: TranslateService) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -65,12 +65,7 @@ export class HomePage implements OnInit{
 		this.autocomplete = {
 			query: ''
 		};
-		translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
-				this.loadingLabel = res;
-		});
-		this.loading = this.loadingCtrl.create({
-	    	content: this.loadingLabel 
-	 	});
+		
 		this.db = db;
 		this.parcs =[];
 		
@@ -96,7 +91,12 @@ export class HomePage implements OnInit{
 		
 		this.platform.ready().then(() => {
 			
-			
+			this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
+				this.loadingLabel = res;
+			});
+			this.loading = this.loadingCtrl.create({
+		    	content: this.loadingLabel 
+		 	});
 			this.loadMap();
 			let gf = new GeoFire( firebase.database().ref('geofire'));
 			
@@ -283,6 +283,7 @@ export class HomePage implements OnInit{
             if (status === google.maps.GeocoderStatus.OK) {
 
 				this.parcs = [];
+				this.keys =[];
                 var latLng = new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng());
                 this.googleMapJDK.setCenter(latLng);
                 this.mapCenter = this.googleMapJDK.getCenter();

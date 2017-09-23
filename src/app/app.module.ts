@@ -29,7 +29,8 @@ import { StarRatingModule } from 'angular-star-rating';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { MapService } from '../providers/map-service/map-service';
 import { IonicPageModule } from 'ionic-angular';
-
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
 import { OrderByDistancePipe } from '../pipes/order-by-distance/order-by-distance';
 
@@ -105,7 +106,9 @@ export function createTranslateLoader(http: Http) {
     MapService,
 	  Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GoogleMapsClusterProvider
+    GoogleMapsClusterProvider,
+    GooglePlus,
+    Facebook
   ]
 })
 export class AppModule {}

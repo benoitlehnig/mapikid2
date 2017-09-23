@@ -30,3 +30,7 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content{
 *{
 	font-family: dosis;
 }
+
+ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
+	padding:0px;
+}

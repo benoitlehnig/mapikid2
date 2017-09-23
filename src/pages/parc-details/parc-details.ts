@@ -109,7 +109,7 @@ export class ParcDetailsPage {
 
      		 this.presentToast(this.toastLabelUpdated);
   			}
-  			else{
+  			if(data ==='add'){
   				this.presentToast(this.toastLabelAdded);
   			}
    		});

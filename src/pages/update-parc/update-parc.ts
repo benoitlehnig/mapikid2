@@ -62,7 +62,7 @@ export class UpdateParcPage {
       if(this.parc.open){
         this.parc.closed = !this.parc.open;
       }
-      if(this.parc.facilities === null){
+      if(this.parc.facilities === null || !this.parc.facilities){
         this.parc.facilities = {
               swing : false,
               slide :false,
@@ -121,11 +121,11 @@ export class UpdateParcPage {
   }
 
   closeModal = function(updateMade){
-    if(updateMade){
+    if(updateMade===true){
        this.viewCtrl.dismiss(this.mode);
     }
     else{
-       this.viewCtrl.dismiss();
+       this.viewCtrl.dismiss('cancel');
     }
   }
   saveParc = function(){
