@@ -26,7 +26,8 @@
 		"SNACKBARLABEL":"GeoLocation deactivated. Please activate it or enter a address in the search field !",
 		"NONAMEPARC" :"Playground",
 		"NOPARCFOUND" : "No park found around. Try to search another place or explore the map",
-		"GEOLOCALIZEBUTTON" : "Locate Me"
+		"GEOLOCALIZEBUTTON" : "Locate Me",
+		"GEOLOCATIONNOTALLOWED": "Geolocation is not authorized for Mapikid. Please go to settings to activate geolocation."
 	},
 	"list":{
 			"PARCAROUND": "Parks Around ",

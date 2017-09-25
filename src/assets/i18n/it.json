@@ -26,7 +26,8 @@
 		"SNACKBARLABEL":"GeoLocation disattivato. Attiva o inserisci un indirizzo nel campo di ricerca!",
 		"NONAMEPARC" :"Parco giochi",
 		"NOPARCFOUND" : "Nessun parco trovato intorno. Cerca di cercare un altro posto o esplorare la mappa",
-		"GEOLOCALIZEBUTTON" : "Localizza me"
+		"GEOLOCALIZEBUTTON" : "Localizza me",
+		"GEOLOCATIONNOTALLOWED": "Geolocazione non è autorizzata per Mapikid. Attiva la geolocalizzazione."
 	},
 	"list":{
 			"PARCAROUND": "Parchi intorno ",

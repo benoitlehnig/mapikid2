@@ -20,7 +20,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { Diagnostic } from '@ionic-native/diagnostic';
 import {HttpModule,Http} from '@angular/http';
 import {TranslateModule} from 'ng2-translate';
 import { TranslateLoader, TranslateStaticLoader } from "ng2-translate/src/translate.service";
@@ -108,7 +108,8 @@ export function createTranslateLoader(http: Http) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GoogleMapsClusterProvider,
     GooglePlus,
-    Facebook
+    Facebook,
+    Diagnostic
   ]
 })
 export class AppModule {}

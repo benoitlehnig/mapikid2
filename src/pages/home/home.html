@@ -29,7 +29,7 @@
     </split-area>
     <split-area [size]="20">
         <ion-fab top right >
-					<button ion-fab mini [navPush]="parcUpdate" [navParams]="{mode:'add', position:mapCenter}"  ><ion-icon name="add"></ion-icon></button>
+					<button ion-fab mini class="add" [navPush]="parcUpdate" [navParams]="{mode:'add', position:mapCenter}"  ><ion-icon name="add"></ion-icon></button>
 					<button ion-fab mini (click)="geolocate()"><ion-icon name="locate"></ion-icon></button>
 				</ion-fab>
 				<ion-list>

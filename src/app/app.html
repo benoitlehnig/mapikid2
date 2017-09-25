@@ -21,9 +21,6 @@
       <button  ion-item menuClose (click)="showFirstPage()">
         {{'header.MOREINFO'|translate}}
       </button>
-      <button  ion-item menuClose (click)="signInWithGoogle()" *ngIf="userSigned === false">
-        {{ 'header.SIGNINGOOGLE'| translate }}
-      </button>
       <button  ion-item menuClose (click)="signInWithFacebook()" *ngIf="userSigned === false">
         {{ 'header.SIGNINFACEBOOK'| translate }}
       </button>

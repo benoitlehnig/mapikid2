@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 
-import { NavController,Platform,LoadingController} from 'ionic-angular';
+import { NavController,Platform,LoadingController,ToastController} from 'ionic-angular';
 import GeoFire from 'geofire';
 import * as firebase from 'firebase';
 import { AngularFireDatabase,FirebaseObjectObservable } from 'angularfire2/database';
@@ -17,6 +17,8 @@ import { GoogleMapsClusterProvider } from '../../providers/google-maps-cluster/g
 import { Subject } from 'rxjs/Subject';
 import { OrderByDistancePipe } from "../../pipes/order-by-distance/order-by-distance";
 import {TranslateService} from 'ng2-translate';
+import { Diagnostic } from '@ionic-native/diagnostic';
+
 
 @Component({
 	selector: 'page-home',
@@ -47,13 +49,15 @@ export class HomePage implements OnInit{
 	loading = null;
 	lastRequestParcsAround = new Date().getTime();
 	loadingLabel = "";
+	geolocationNotAllowedLabel ="";
 	
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
-		private geolocation: Geolocation,
+		public geolocation: Geolocation,
 		public afAuth: AngularFireAuth, private _auth: AuthService, private _map:MapService,
 		public mapCluster: GoogleMapsClusterProvider,
-		public loadingCtrl: LoadingController,private translate: TranslateService) {
+		public loadingCtrl: LoadingController,private translate: TranslateService,
+		private diagnostic: Diagnostic,public toastCtrl: ToastController,) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -94,40 +98,43 @@ export class HomePage implements OnInit{
 			this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
 				this.loadingLabel = res;
 			});
+			this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
+				this.geolocationNotAllowedLabel = res;
+			});
 			this.loading = this.loadingCtrl.create({
 		    	content: this.loadingLabel 
 		 	});
 			this.loadMap();
-			let gf = new GeoFire( firebase.database().ref('geofire'));
 			
-			var positionOptions = {timeout: 10000, enableHighAccuracy: true};
-			this.geolocation.getCurrentPosition(positionOptions).then((resp) => {
-				//console.log('geolocation done');
-				this.currentPosition =  new LatLng(resp.coords.latitude,resp.coords.longitude);
-				this.geoQuery = gf.query({
-					center: [resp.coords.latitude,resp.coords.longitude],
-					radius: this.radius 
-				});	
-				
-				
-				var latLng = new google.maps.LatLng(resp.coords.latitude,resp.coords.longitude);
-				this.googleMapJDK.setCenter(latLng);
-				this.mapCenter = this.googleMapJDK.getCenter();
-				this.setupInitialGeoQuery();
-			}).catch((error) => {
-				console.log('Error getting location', error);
-				var latLng = new google.maps.LatLng(48.863129, 2.345152);
-				this.currentPosition =  new LatLng( 48.863129, 2.345152);
-				this.googleMapJDK.setCenter(latLng);
-				this.mapCenter = this.googleMapJDK.getCenter();
-				this.geoQuery = gf.query({
-					center:  [48.863129, 2.345152],
-					radius: this.radius 
-				});	
-				this.setupInitialGeoQuery();
-			});			
+			this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
         });		
 	}
+
+	startGeolocation = function(){
+		let gf = new GeoFire( firebase.database().ref('geofire'));
+		var positionOptions = {timeout: 10000, enableHighAccuracy: true};
+		this.geolocation.getCurrentPosition(positionOptions).then((resp) => {
+			//console.log('geolocation done');
+			this.currentPosition =  new LatLng(resp.coords.latitude,resp.coords.longitude);
+			this.geoQuery = gf.query({
+				center: [resp.coords.latitude,resp.coords.longitude],
+				radius: this.radius 
+			});	
+			var latLng = new google.maps.LatLng(resp.coords.latitude,resp.coords.longitude);
+			this.googleMapJDK.setCenter(latLng);
+			this.mapCenter = this.googleMapJDK.getCenter();
+			this.setupInitialGeoQuery();
+		}).catch((error) => {
+			console.log('Error getting location', error);
+			let toast = this.toastCtrl.create({
+		      message: this.geolocationNotAllowedLabel,
+		      duration: 10000
+		    });
+		    toast.present();
+    		this.defaultGeoLocation();
+		});		
+	};
+
 	checkCompleteLoad(value){
 
 		if(this.numberOfParcsToBeLoaded !==0 || value===-1){
@@ -148,6 +155,18 @@ export class HomePage implements OnInit{
 		}
 		
 		
+	}
+	defaultGeoLocation = function(){
+		let gf = new GeoFire( firebase.database().ref('geofire'));
+		var latLng = new google.maps.LatLng(48.863129, 2.345152);
+		this.currentPosition =  new LatLng( 48.863129, 2.345152);
+		this.googleMapJDK.setCenter(latLng);
+		this.mapCenter = this.googleMapJDK.getCenter();
+		this.geoQuery = gf.query({
+			center:  [48.863129, 2.345152],
+			radius: this.radius 
+		});	
+		this.setupInitialGeoQuery();
 	}
 
 	setupInitialGeoQuery(){
@@ -345,8 +364,8 @@ export class HomePage implements OnInit{
   		}
     };
 
-	geolocate = function(){
-		var positionOptions = {timeout: 10000, enableHighAccuracy: true};
+    geolocateUser = function(){
+    	var positionOptions = {timeout: 10000, enableHighAccuracy: true};
 		this.geolocation.getCurrentPosition(positionOptions).then((resp) => {
 			this.currentPosition =  new LatLng(resp.coords.latitude,resp.coords.longitude);
 			var latLng = new google.maps.LatLng(resp.coords.latitude,resp.coords.longitude);
@@ -356,8 +375,27 @@ export class HomePage implements OnInit{
 			
 		}).catch((error) => {
 			console.log('Error getting location', error);
-			
+			let toast = this.toastCtrl.create({
+		      message: this.geolocationNotAllowedLabel,
+		      duration: 10000
+		    });
+		    toast.present();
+    		this.defaultGeoLocation();
 		});		
 
+    }
+    
+    errorCallback = function(e) {
+    	//alert(this.geolocationNotAllowedLabel);
+    	let toast = this.toastCtrl.create({
+	      message: this.geolocationNotAllowedLabel,
+	      duration: 10000
+	    });
+	    toast.present();
+    	this.diagnostic.requestLocationAuthorization();
+    	this.geolocateUser();
+    }
+	geolocate = function(){
+		this.diagnostic.isLocationAuthorized().then(this.geolocateUser.bind(this)).catch(this.errorCallback.bind(this));
 	}
 }

@@ -26,7 +26,8 @@
 		"SNACKBARLABEL":"GeoLocation deaktiviert. Bitte aktivieren oder eine Adresse im Suchfeld eingeben!",
 		"NONAMEPARC" :"Spielplatz",
 		"NOPARCFOUND" : "Kein Spielplatz gefunden herum. Versuchen Sie, einen anderen Ort zu suchen oder die Karte zu erkunden",
-		"GEOLOCALIZEBUTTON" : "Suche mich"
+		"GEOLOCALIZEBUTTON" : "Suche mich",
+		"GEOLOCATIONNOTALLOWED": "Geolocation ist nicht für Mapikid zugelassen. Bitte Geoocation aktivieren."
 	},
 	"list":{
 			"PARCAROUND": "Parks herum ",

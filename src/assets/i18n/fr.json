@@ -25,7 +25,8 @@
 		"ADDPARCBUTTON":"Ajouter un parc",
 		"SNACKBARLABEL":"GeoLocation desactivée. Activez-la ou entrez une addresse dans la barre de recherche !",
 		"NOPARCFOUND" : "Pas de parc trouvé. Essayez une autre recherche ou explorez la carte",
-		"GEOLOCALIZEBUTTON" : "Localisez moi"
+		"GEOLOCALIZEBUTTON" : "Localisez moi",
+		"GEOLOCATIONNOTALLOWED": "La geo-localisation n'est pas authorisée. Allez dans parametres pour l'activer. "
 	},
 	"list":{
 			"PARCAROUND": "Parcs autour ",
