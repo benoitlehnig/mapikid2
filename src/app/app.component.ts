@@ -4,6 +4,8 @@ import { Platform, App  } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../pages/home/home';
@@ -22,7 +24,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
-    private _auth: AuthService) {
+    private _auth: AuthService,private ga: GoogleAnalytics) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
@@ -62,6 +64,9 @@ export class MyApp {
         this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
           storage.set('langKey', event.lang);
         });
+
+        this.ga.startTrackerWithId("UA-89879030-1");
+        
     });
   }
 

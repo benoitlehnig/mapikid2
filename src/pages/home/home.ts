@@ -18,7 +18,8 @@ import { Subject } from 'rxjs/Subject';
 import { OrderByDistancePipe } from "../../pipes/order-by-distance/order-by-distance";
 import {TranslateService} from 'ng2-translate';
 import { Diagnostic } from '@ionic-native/diagnostic';
-
+import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
 	selector: 'page-home',
@@ -57,7 +58,8 @@ export class HomePage implements OnInit{
 		public afAuth: AngularFireAuth, private _auth: AuthService, private _map:MapService,
 		public mapCluster: GoogleMapsClusterProvider,
 		public loadingCtrl: LoadingController,private translate: TranslateService,
-		private diagnostic: Diagnostic,public toastCtrl: ToastController,) {
+		private diagnostic: Diagnostic,public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,
+		private ga: GoogleAnalytics) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -94,7 +96,7 @@ export class HomePage implements OnInit{
 		};    
 		
 		this.platform.ready().then(() => {
-			
+			this.ga.trackView("Home Page");
 			this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
 				this.loadingLabel = res;
 			});
@@ -126,12 +128,7 @@ export class HomePage implements OnInit{
 			this.setupInitialGeoQuery();
 		}).catch((error) => {
 			console.log('Error getting location', error);
-			let toast = this.toastCtrl.create({
-		      message: this.geolocationNotAllowedLabel,
-		      duration: 10000
-		    });
-		    toast.present();
-    		this.defaultGeoLocation();
+			this.errorCallback();
 		});		
 	};
 
@@ -296,9 +293,10 @@ export class HomePage implements OnInit{
 	}  
 	
 	geocodeAddress(item){
-		
-		 var geocoder = new google.maps.Geocoder();
-		 geocoder.geocode({'placeId': item.place_id}, function(results, status) {
+		console.log(item);
+		this.ga.trackEvent('pageview', 'list '+ item.description);
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({'placeId': item.place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
 
 				this.parcs = [];
@@ -311,7 +309,7 @@ export class HomePage implements OnInit{
 			else{
 				
 			}
-		 }.bind(this));
+		}.bind(this));
 	}
 	
 	loadMap() {
@@ -372,29 +370,25 @@ export class HomePage implements OnInit{
             this.googleMapJDK.setCenter(latLng);
             this.mapCenter = this.googleMapJDK.getCenter();
             this.displayParcsAround(false,false);
-			
 		}).catch((error) => {
 			console.log('Error getting location', error);
-			let toast = this.toastCtrl.create({
-		      message: this.geolocationNotAllowedLabel,
-		      duration: 10000
-		    });
-		    toast.present();
-    		this.defaultGeoLocation();
+			this.errorCallback();
 		});		
 
     }
     
     errorCallback = function(e) {
     	//alert(this.geolocationNotAllowedLabel);
+	 
     	let toast = this.toastCtrl.create({
 	      message: this.geolocationNotAllowedLabel,
 	      duration: 10000
 	    });
-	    toast.present();
+    	toast.present();
     	this.diagnostic.requestLocationAuthorization();
-    	this.geolocateUser();
+    	this.defaultGeoLocation();
     }
+
 	geolocate = function(){
 		this.diagnostic.isLocationAuthorized().then(this.geolocateUser.bind(this)).catch(this.errorCallback.bind(this));
 	}

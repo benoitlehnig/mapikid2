@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+
 import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
@@ -19,8 +18,15 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+
 import {HttpModule,Http} from '@angular/http';
 import {TranslateModule} from 'ng2-translate';
 import { TranslateLoader, TranslateStaticLoader } from "ng2-translate/src/translate.service";
@@ -29,8 +35,9 @@ import { StarRatingModule } from 'angular-star-rating';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { MapService } from '../providers/map-service/map-service';
 import { IonicPageModule } from 'ionic-angular';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+
+
+
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
 import { OrderByDistancePipe } from '../pipes/order-by-distance/order-by-distance';
 
@@ -109,7 +116,9 @@ export function createTranslateLoader(http: Http) {
     GoogleMapsClusterProvider,
     GooglePlus,
     Facebook,
-    Diagnostic
+    Diagnostic,
+    OpenNativeSettings,
+    GoogleAnalytics
   ]
 })
 export class AppModule {}
