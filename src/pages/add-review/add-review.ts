@@ -20,12 +20,16 @@ export class AddReviewPage {
 	reviews:FirebaseListObservable<any[]>;
 	review:any={'rate' :0, 'description':""};
 	parcObject: FirebaseObjectObservable<any>;
+	photoUrl:string="";
+	userName:string="";
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
   	public navParams: NavParams, public db: AngularFireDatabase,
   	private ga: GoogleAnalytics,private _auth: AuthService) {
 	this.reviews = db.list('positions/'+this.navParams.get('parc').$key+ '/reviews');
 	this.parcObject = db.object('positions/'+this.navParams.get('parc').$key);
+	this.photoUrl = this._auth.displayPicture();
+	this.userName = this._auth.displayName();
   }
 
   ionViewDidLoad() {

@@ -14,7 +14,17 @@
 
 
 <ion-content padding>
-	<star-rating-comp [starType]="'svg'" [rating]="review.rate" [readOnly]="false" (onRatingChange)="onRatingChange($event)"></star-rating-comp>
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{photoUrl}}">
+        <span></span>
+    </ion-avatar>
+      <h2>{{userName}}</h2>
+    </ion-item>
+  </ion-list>
+  
+	<star-rating-comp [starType]="'svg'" [size]="'large'" [rating]="review.rate" [readOnly]="false" (onRatingChange)="onRatingChange($event)"></star-rating-comp>
 	<ion-item>
     	<ion-label floating>{{'parcDetails.MESSAGELABEL'|translate}}</ion-label>
     	<ion-input type="text" value="" [(ngModel)]="review.description"></ion-input>
