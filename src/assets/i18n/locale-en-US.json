@@ -19,6 +19,9 @@
 			"MOREINFO" : "More Information",
 			"FEEDBACKBUTTON" : "Contact us"
 	},
+	"loading" :{
+		"LOADINGLABEL": "Please wait while playgrounds are loading"
+	},
 	"map":{
 		"ADDPARCBUTTON":"Add a new park",
 		"SNACKBARLABEL":"GeoLocation deactivated. Please activate it or enter a address in the search field !",

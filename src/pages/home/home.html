@@ -23,7 +23,7 @@
 		{{ item.description }}
 		</ion-item>
 	</ion-list>
-	<split direction="vertical" gutterSize="15">
+	<split direction="vertical" gutterSize="24">
     <split-area [size]="80">
         <div id="map"></div>
     </split-area>
@@ -59,6 +59,7 @@
 			</ion-avatar>
 		  </ion-item>
 		</ion-list>
+		<div *ngIf="noParcReturned === true" class="noparc">{{ 'map.NOPARCFOUND' |translate}}</div>
     </split-area>
 </split>
 

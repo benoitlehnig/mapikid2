@@ -11,18 +11,22 @@
   	<ion-item>
   		<ion-label>{{'parcUpdate.CLOSED'|translate}}</ion-label>
   		<ion-checkbox [(ngModel)]="parc.closed"></ion-checkbox>
-	</ion-item>
-	<ion-item>
+	  </ion-item>
+	 <ion-item>
   		<ion-label>{{'parcUpdate.FREE'|translate}}</ion-label>
   		<ion-checkbox [(ngModel)]="parc.free"></ion-checkbox>
-	</ion-item>
+	  </ion-item>
 	<ion-item>
   		<ion-label>{{'parcUpdate.WATER'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.water"></ion-checkbox>
+  		<ion-checkbox [(ngModel)]="parc.facilities.water"></ion-checkbox>
 	</ion-item>
   <ion-item>
       <ion-label>{{'parcUpdate.NOSHADE'|translate}}</ion-label>
       <ion-checkbox [(ngModel)]="parc.shade"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+      <ion-label>{{'parcUpdate.EVENTS'|translate}}</ion-label>
+      <ion-checkbox [(ngModel)]="parc.events"></ion-checkbox>
   </ion-item>
 	<ion-item>
   		<ion-label>{{'parcUpdate.WC'|translate}}</ion-label>

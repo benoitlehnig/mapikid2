@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Platform, App  } from 'ionic-angular';
+import { Platform, App, ModalController  } from 'ionic-angular';
 
 import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -10,9 +10,12 @@ import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../pages/home/home';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
+import { ContactPage } from '../pages/contact/contact';
 import {TranslateService,LangChangeEvent} from 'ng2-translate';
 import { AuthService } from '../providers/auth-service/auth-service';
 import * as firebase from 'firebase/app';
+
+import { LanguagePage } from '../pages/language/language';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,15 +25,15 @@ export class MyApp {
   translate: TranslateService;
   userSigned: boolean=false;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
-    private _auth: AuthService,private ga: GoogleAnalytics) {
+    private _auth: AuthService,private ga: GoogleAnalytics,public modalCtrl: ModalController) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
     }.bind(this));
 
-    platform.ready().then(() => {
+    this.platform.ready().then(() => { 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
         statusBar.styleDefault();
@@ -70,12 +73,12 @@ export class MyApp {
     });
   }
 
-  changelanguage(langKey) {
-      
-      this.translate.use(langKey);
-  }
+  
   showFirstPage = function(){
       this.app.getActiveNav().push(FirstVisitPage);
+  }
+  showContactPage = function(){
+    this.app.getActiveNav().push(ContactPage);
   }
   signInWithGoogle(): void {
     this._auth.signInWithGoogle()
@@ -85,6 +88,10 @@ export class MyApp {
   }
   signOut(): void{
     this._auth.signOut();
+  }
+  openLanguage():void{
+    let myModal = this.modalCtrl.create(LanguagePage);
+     myModal.present();
   }
 
 }

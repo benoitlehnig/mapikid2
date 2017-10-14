@@ -12,20 +12,17 @@
 			"SIGNINGOOGLE": "Accedi con Google",
 			"SIGNINFACEBOOK": "Accedi con Facebook",
 			"SIGNOUT": "Sign-out",
-			"LANGUAGEMENUEN": "English",
-			"LANGUAGEMENUFR": "Francais",
-			"LANGUAGEMENUIT": "Italiano",
-			"LANGUAGEMENUDE": "Deutsch",
 			"ENTERLOCATION":"Inserisci una posizione",
 			"NONAMEPARC" :"Parco giochi",
 			"MOREINFO" : "Ulteriori informazioni",
-			"FEEDBACKBUTTON" : "Contattaci"
+			"FEEDBACKBUTTON" : "Contattaci",
+			"LANGUAGE": "Vicino"
 	},
 	"map":{
 		"ADDPARCBUTTON":"Aggiungi un nuovo parco",
 		"SNACKBARLABEL":"GeoLocation disattivato. Attiva o inserisci un indirizzo nel campo di ricerca!",
 		"NONAMEPARC" :"Parco giochi",
-		"NOPARCFOUND" : "Nessun parco trovato intorno. Cerca di cercare un altro posto o esplorare la mappa",
+		"NOPARCFOUND" : "Nell'area non si fa riferimento alcun parco giochi. Non esitare a aggiungere campi da gioco!",
 		"GEOLOCALIZEBUTTON" : "Localizza me",
 		"GEOLOCATIONNOTALLOWED": "Geolocazione non è autorizzata per Mapikid. Attiva la geolocalizzazione."
 	},
@@ -62,6 +59,7 @@
 			"WATER": "Acqua",
 			"NOSHADE": "Nessuna ombra, può essere molto soleggiato",
 			"SHADE": "Parco giochi con ombra",
+			"EVENTS": "Perfetto per eventi come una festa di compleanno",
 			"MONKEYBRIDGE": "Monkey Bridge",
 			"SPIDER": "Spider",
 			"SWING": "Swing",
@@ -99,6 +97,7 @@
 		"FREE":"Free",
 		"WATER": "Acqua",
 		"NOSHADE": "Nessuna ombra",
+		"EVENTS": "Perfetto per eventi come una festa di compleanno",
 		"SLIDE": "Slide",
 		"SWING": "Swing",
 		"WC": "Toilets",
@@ -138,12 +137,32 @@
 		"FEEDBACKFEATURE1" :"Sostengo il progetto",
 		"FEEDBACKFEATURE2" : "Segue Mapikid su",
 		"FEEDBACKFEATURE3" : "Segnala un bug",
-		"LEGALMENTION": "I parchi già importati provengono da OpenStreetMap. Contribuenti di Credit © OpenStreetMap. Mapikid décline toute responsabilité"
+		"LEGALMENTION": "I parchi già importati provengono da OpenStreetMap. Contribuenti di Credit © OpenStreetMap. Mapikid décline toute responsabilité",
+		"SLIDE1TITLE": "Cerca parchi giochi nelle vicinanze",
+		"SLIDE1SUBTITLE": "Utilizza geolocalizzazione o inserisci un posto nella barra di ricerca",
+		"SLIDE2TITLE": "Conferma parchi giochi",
+		"SLIDE2SUBTITLE": "Utilizza il pulsante di conferma per convalidare l'esistenza di un parco giochi",
+		"SLIDE3TITLE": "Aggiungi nuovi parchi giochi",
+		"SLIDE3SUBTITLE": "Premere il pulsante Aggiungi per aggiungere un nuovo parc e renderlo disponibile per la comunità",
+		"SLIDE4TITLE": "Aggiorna i campi da gioco",
+		"SLIDE4SUBTITLE": "Modifica i parchi giochi in base alla tua esperienza",
+		"SLIDE5TITLE": "Visitaci su Facebook"
 	},
 	"feedback":{
 		"FEEDBACKMODALTITLE": "Contact us",
-		"MESSAGELABEL" :"Enter your comments:",
+		"MESSAGELABEL": "Messaggio:",
+		"PHONELABEL": "Numero di telefono:",
+		"EMAILLABEL": "Email:",
 		"SENDBUTTON":"Send",
 		"ADDREVIEWCLOSEMODAL":"Close"
+	},
+	"language":{
+		"TITLE" : "Scegli la lingua",
+		"CLOSE" : "vicino",
+		"LANGUAGEMENUEN": "English",
+		"LANGUAGEMENUFR": "Français",
+		"LANGUAGEMENUIT": "Italiano",
+		"LANGUAGEMENUDE": "Deutsch",
+		"LANGUAGEMENUCA": "Catalan"
 	}
 }

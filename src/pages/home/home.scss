@@ -21,6 +21,9 @@ page-home {
 	.split-pane-content-primary{
 		height:100%;
 	}
+	.searchbar-md .searchbar-input {
+    	padding: 6px 41px;
+    }
 	.lower-component{
 		overflow-y:scroll;
 	}
@@ -53,5 +56,9 @@ page-home {
 	}
 	.add{
 		background-color: #F2403C;
+	}
+	.noparc{
+	    text-align: center;
+   		padding: 12px;
 	}
 }

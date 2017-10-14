@@ -7,25 +7,21 @@
 		"LOADINGLABEL": "Bitte warten Sie, während Spielplätze geladen werden"
 	},
 	"header" :{
-			"APPNAME" : "Mapikid",
-			"SIGNIN": "Anmelden",
-			"SIGNINGOOGLE": "Anmeldung mit Google",
-			"SIGNINFACEBOOK": "Anmeldung mit Facebook",
-			"SIGNOUT": "Ausloggen",
-			"LANGUAGEMENUEN": "English",
-			"LANGUAGEMENUFR": "Francais",
-			"LANGUAGEMENUIT": "Italiano",
-			"LANGUAGEMENUDE": "Deutsch",
-			"ENTERLOCATION":"Geben Sie einen Standort ein",
-			"NONAMEPARC" :"Spielplatz",
-			"MOREINFO" : "More Information",
-			"FEEDBACKBUTTON" : "Mehr Informationen"
+		"APPNAME" : "Mapikid",
+		"SIGNIN": "Anmelden",
+		"SIGNINGOOGLE": "Anmeldung mit Google",
+		"SIGNINFACEBOOK": "Anmeldung mit Facebook",
+		"SIGNOUT": "Ausloggen",
+		"ENTERLOCATION":"Geben Sie einen Standort ein",
+		"NONAMEPARC" :"Spielplatz",
+		"MOREINFO" : "More Information",
+		"FEEDBACKBUTTON" : "Mehr Informationen"
 	},
 	"map":{
 		"ADDPARCBUTTON":"Füge einen neuen Park hinzu",
 		"SNACKBARLABEL":"GeoLocation deaktiviert. Bitte aktivieren oder eine Adresse im Suchfeld eingeben!",
 		"NONAMEPARC" :"Spielplatz",
-		"NOPARCFOUND" : "Kein Spielplatz gefunden herum. Versuchen Sie, einen anderen Ort zu suchen oder die Karte zu erkunden",
+		"NOPARCFOUND" : "Kein Spielplatz ist in diesem Bereich referenziert. Zögern Sie nicht, Spielplätze hinzuzufügen!",
 		"GEOLOCALIZEBUTTON" : "Suche mich",
 		"GEOLOCATIONNOTALLOWED": "Geolocation ist nicht für Mapikid zugelassen. Bitte Geoocation aktivieren."
 	},
@@ -36,7 +32,8 @@
 			"CONFIRMED":"Bestätigt",
 			"CLOSED":"Abgeschlossen",
 			"FEE":"zahlen",
-			"LOADMORE":"Laden Sie mehr Parks"
+			"LOADMORE":"Laden Sie mehr Parks",
+			"LANGUAGE": "SPRACHE"
 	},
 	"parcDetails":{
 			"BACKTORESULT" :"urück zu den Ergebnissen",
@@ -62,6 +59,7 @@
 			"WATER": "Wasser",
 			"NOSHADE": "Kein Schatten, kann sehr sonnig sein",
 			"SHADE": "Spielplatz mit Schatten",
+			"EVENTS": "Perfekt für Veranstaltungen wie eine Geburtstagsfeier",
 			"MONKEYBRIDGE": "Affenbrücke",
 			"SPIDER": "Spinne",
 			"SWING": "Swing",
@@ -99,6 +97,7 @@
 		"FREE":"Frei",
 		"WATER": "Wasser",
 		"NOSHADE": "Kein Schatten",
+		"EVENTS": "Perfekt für Veranstaltungen wie eine Geburtstagsfeier",
 		"SLIDE": "Slide",
 		"SWING": "Swing",
 		"WC": "Toiletten",
@@ -138,12 +137,32 @@
 		"FEEDBACKFEATURE1" :"Ich unterstütze das Projekt",
 		"FEEDBACKFEATURE2" : "Ich folge Mapikid auf",
 		"FEEDBACKFEATURE3" : "Ich melde einen Fehler",
-		"LEGALMENTION": "Bereits importierte Parks sind von OpenStreetMap. Credit © OpenStreetMap Mitwirkende Mapikid décline toute responsabilité en cas de non existenz du park ou de son inaccessibilité"
+		"LEGALMENTION": "Bereits importierte Parks sind von OpenStreetMap. Credit © OpenStreetMap Mitwirkende Mapikid décline toute responsabilité en cas de non existenz du park ou de son inaccessibilité",
+		"SLIDE1TITLE": "Spielplätze in der Nähe suchen",
+		"SLIDE1SUBTITLE": "Geolocation verwenden oder einen Platz in die Suchleiste eingeben",
+		"SLIDE2TITLE": "Spielplätze bestätigen",
+		"SLIDE2SUBTITLE": "Mit der Bestätigungstaste die Existenz eines Spielplatzes bestätigen",
+		"SLIDE3TITLE": "Neue Spielplätze hinzufügen",
+		"SLIDE3SUBTITLE": "Drücken Sie die Schaltfläche Hinzufügen, um einen neuen Parc hinzuzufügen und für die Community verfügbar zu machen",
+		"SLIDE4TITLE": "Spielplätze aktualisieren",
+		"SLIDE4SUBTITLE": "Spielplätze basierend auf deiner Erfahrung ändern",
+		"SLIDE5TITLE": "Besuchen Sie uns auf Facebook"
 	},
 	"feedback":{
 		"FEEDBACKMODALTITLE": "Kontaktieren Sie uns",
-		"MESSAGELABEL" :"Geben Sie Ihre Kommentare:",
+		"MESSAGELABEL": "Nachricht:",
+		"PHONELABEL": "Telefonnummer:",
+		"EMAILLABEL": "Email:",
 		"SENDBUTTON":"Senden",
 		"ADDREVIEWCLOSEMODAL":"Schließen"
+	},
+	"language":{
+		"TITLE" : "Wähle eine Sprache",
+		"CLOSE" : "Schließen",
+		"LANGUAGEMENUEN": "English",
+		"LANGUAGEMENUFR": "Français",
+		"LANGUAGEMENUIT": "Italiano",
+		"LANGUAGEMENUDE": "Deutsch",
+		"LANGUAGEMENUCA": "Catalan"	
 	}
 }

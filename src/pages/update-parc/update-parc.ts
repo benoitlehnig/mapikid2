@@ -32,6 +32,7 @@ export class UpdateParcPage {
           closed: false,
           shade:true,
           free : true,
+          events: false,
           facilities:{
             swing : false,
             slide :false,
@@ -142,11 +143,12 @@ export class UpdateParcPage {
     console.log(this.parc);
     if(this.mode==='update'){
       var parcObject = this.db.object('positions/'+this.parc.$key);
+      console.log(this.parc);
       parcObject.update(this.parc);
-      console.log(this.parc.$key)
+      console.log(this.parc.$key);
       this.gf.set(this.parc.$key, location).then(function() {
         this.ga.trackEvent("parc_management", "Update", this.parc.$key); 
-      });
+      }.bind(this));
      
 
     }
@@ -158,7 +160,7 @@ export class UpdateParcPage {
       this.gf.set(newPosition.key, location).then(function() {
           console.log(newPosition.key);
           this.ga.trackEvent("parc_management", "Add", this.parc.$key); 
-        });
+        }.bind(this));
           
     }
     

@@ -6,20 +6,14 @@
 		</ion-header>
   <ion-content>
     <ion-list>
-      <button  ion-item menuClose (click)="changelanguage('en')">
-       	{{ 'header.LANGUAGEMENUEN'| translate }} 
-      </button>
-      <button  ion-item menuClose (click)="changelanguage('fr')">
-       	{{ 'header.LANGUAGEMENUFR'| translate }} 
-      </button>
-      <button  ion-item menuClose (click)="changelanguage('it')">
-        {{ 'header.LANGUAGEMENUIT'| translate }} 
-      </button>
-      <button  ion-item menuClose (click)="changelanguage('de')">
-        {{ 'header.LANGUAGEMENUDE'| translate }} 
+      <button  ion-item menuClose (click)="openLanguage()">
+        {{'header.LANGUAGE'|translate}}
       </button>
       <button  ion-item menuClose (click)="showFirstPage()">
         {{'header.MOREINFO'|translate}}
+      </button>
+      <button  ion-item menuClose (click)="showContactPage()">
+        {{'header.FEEDBACKBUTTON'|translate}}
       </button>
       <button  ion-item menuClose (click)="signInWithFacebook()" *ngIf="userSigned === false">
         {{ 'header.SIGNINFACEBOOK'| translate }}

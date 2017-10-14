@@ -13,6 +13,8 @@ import { ReviewsRootPage } from '../pages/reviews-root/reviews-root';
 import { UpdateParcPage } from '../pages/update-parc/update-parc';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
 import { AddReviewPage } from '../pages/add-review/add-review';
+import { ContactPage } from '../pages/contact/contact';
+import { LanguagePage } from '../pages/language/language';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -56,12 +58,14 @@ export function createTranslateLoader(http: Http) {
     MyApp,
     HomePage,
     ListPage,
-	ParcDetailsPage,
-	DetailsRootPage,
-	ReviewsRootPage,
-  UpdateParcPage,
-  FirstVisitPage, 
-  AddReviewPage,
+  	ParcDetailsPage,
+  	DetailsRootPage,
+  	ReviewsRootPage,
+    UpdateParcPage,
+    FirstVisitPage, 
+    AddReviewPage,
+    ContactPage,
+    LanguagePage,
     OrderByDistancePipe
   ],
   imports: [
@@ -96,14 +100,17 @@ export function createTranslateLoader(http: Http) {
         UpdateParcPage,
         FirstVisitPage,
         AddReviewPage,
-
+        ContactPage,
+        LanguagePage
   	  ],
 	 exports: [
         TranslateModule,
         DetailsRootPage,
         ParcDetailsPage,
         ReviewsRootPage,
-        UpdateParcPage
+        UpdateParcPage,
+        ContactPage,
+        LanguagePage
   ],
   providers: [
     StatusBar,

@@ -7,17 +7,45 @@ page-first-visit {
 	.logo{
 		background:none;
 	}
-	.material-icons{
-		font-size:60px;
-	}
+
 	.feature{
 		margin: 40px 12px 12px 12px;
 	}
 	.footer{
 		margin: 40px 12px 12px 12px;
-		color:#dddddd
+		color:#dddddd;
+		position: absolute;
+   	 	bottom: 25px;
 	}
 	.button-md{
 		background: #F2403C;
+	}
+
+	a .button-outline-md{
+		background: #8EC63F;
+		color:#FFFFFF;
+		border-color:#FFFFFF;
+	}
+	a .material-icons{
+		margin-right:12px;
+	}
+	.swiper-pagination-bullet-active{
+		background:#FFFFFF;
+	}
+	.slide-zoom{
+		height:100%;
+	}
+	.imgWrapper{
+		height:calc(50%);
+	}
+	.imgWrapper ion-img {
+		display: inline-block;
+	    /* min-width: 100%; */
+	    background: #eee;
+	    contain: content;
+	}
+    
+	.swiper-container{
+		padding-top:32px
 	}
 }

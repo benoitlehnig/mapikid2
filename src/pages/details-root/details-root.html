@@ -40,6 +40,10 @@
 	        <i class="material-icons">brightness_medium</i>
 	        <span>{{ 'parcDetails.SHADE'| translate }}</span>
 	    </div>
+	    <div class="details" *ngIf="parc.events == true">
+	        <i class="material-icons">card_giftcard</i>
+	        <span>{{ 'parcDetails.EVENTS'| translate }}</span>
+	    </div>
 		<div class="details">
 			<i class="material-icons">timer</i>
 			<span>{{'parcDetails.TOILETSAROUNDCOUNT'| translate}} {{toiletsMarkers.length}}</span>
@@ -66,21 +70,30 @@
 	     	<div class="separator"></div>
 	    </div>        
 		<div id="parcDetailsFacilities">
-			 <h5>{{numberOfEquipment}} Equipments </h5>
+			 <h5>{{numberOfEquipment}} {{ 'parcDetails.EQUIPMENTS'| translate }}</h5>
 			 <div class="parcDetailsMessage" *ngIf="isLowNumberofEquipment">
 				<span *ngIf="isLowNumberofEquipment" >{{ 'parcDetails.LOWEQUIPMENT'| translate }}</span>
 			 </div>
 			 
 			 <div *ngIf="parc.facilities!=null">
-				<ion-img class="facilitiesIcon" src="assets/images/Water tap icon icon.png" *ngIf="parc.facilities.water == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/toilets icon.png" *ngIf="parc.facilities.wc == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/Sled icon icon.png" *ngIf="parc.facilities.slide == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/Swings icon icon.png" *ngIf="parc.facilities.swing == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/Trampoline icon icon.png" *ngIf="parc.facilities.trampoline == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/Game Complex icon icon.png" *ngIf="parc.facilities.monkeyBridge == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/Cobweb icon icon.png" *ngIf="parc.facilities.spider == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/Horse icon icon.png" *ngIf="parc.facilities.animals == true"></ion-img>
-				<ion-img class="facilitiesIcon" src="assets/images/sandbox icon.png" *ngIf="parc.facilities.sandbox == true"></ion-img>
+				<ion-img  src="assets/images/Water tap icon icon.png" 
+				[ngClass]="parc.facilities.water == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<ion-img src="assets/images/toilets icon.png" 
+				[ngClass]="parc.facilities.wc == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<ion-img  src="assets/images/Sled icon icon.png" 
+				[ngClass]="parc.facilities.slide == true ? 'facilitiesIcon' : 'hide'" ></ion-img>
+				<ion-img src="assets/images/Swings icon icon.png" 
+				[ngClass]="parc.facilities.swing == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<ion-img src="assets/images/Trampoline icon icon.png" 
+				[ngClass]="parc.facilities.trampoline == true ? 'facilitiesIcon' : 'hide'" ></ion-img>
+				<ion-img src="assets/images/Game Complex icon icon.png"  
+				[ngClass]="parc.facilities.monkeyBridge == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<ion-img src="assets/images/Cobweb icon icon.png" 
+				[ngClass]="parc.facilities.spider == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<ion-img src="assets/images/Horse icon icon.png" 
+				[ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<ion-img src="assets/images/sandbox icon.png"
+				[ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"></ion-img>
 			</div>
 		</div>
 		<div id="parcDetailsDescription" *ngIf="parc.description">{{parc.description}}</div>

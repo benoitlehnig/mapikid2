@@ -9,12 +9,24 @@
   <ion-navbar>
     <ion-title *ngIf="parc.name!=''">{{parc.name}}</ion-title>
     <ion-title *ngIf="parc.name==''">{{'list.NONAMEPARC' |translate}}</ion-title>
+    <ion-buttons end>
+    	<button ion-button icon-only *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
+		<i class="material-icons">mode_edit</i>
+	</button>
+	<button ion-button icon-only *ngIf="selectedTab===0 && localParc.requestedForDeletion ===false" (click)="suggestRemove()" >
+		<i class="material-icons">delete</i>
+	</button>
+	<button ion-button icon-only disabled *ngIf="selectedTab===0 && localParc.requestedForDeletion !==false">
+		<i class="material-icons">delete</i>
+	</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding scroll="false" class="topNoScroll">
+
 	<div id="mapDetails"></div>
 	<ion-tabs tabsPlacement="top"  #myTabs (ionChange)="tabSelected($event)">
 		<ion-tab [root]="detailsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.DETAILS'|translate}}"></ion-tab>
@@ -25,21 +37,14 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button icon-left outline *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
-		<i class="material-icons">mode_edit</i>{{'parcDetails.REQUESTUPDATE'|translate}}
-	</button>
+    
 	<button ion-button icon-left outline *ngIf="selectedTab===0 && localParc.validated ==false" (click)="validate()">
 		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
 	</button>
 	<button ion-button icon-left outline disabled *ngIf="selectedTab===0 && localParc.validated ==true" >
 		<i class="material-icons">done</i>{{'parcDetails.VALIDATED'|translate}}
 	</button>
-	<button ion-button icon-left outline right *ngIf="selectedTab===0 && localParc.requestedForDeletion ===false" (click)="suggestRemove()" >
-		<i class="material-icons">delete</i>{{'parcDetails.SUGGESTREMOVE'|translate}}
-	</button>
-	<button ion-button icon-left outline right disabled *ngIf="selectedTab===0 && localParc.requestedForDeletion !==false">
-		<i class="material-icons">delete</i>{{'parcDetails.SUGGESTEDREMOVE'|translate}}
-	</button>
+	
 	<button ion-button icon-left outline *ngIf="selectedTab===1 && userSigned ===true " (click)="openAddReviewModal()">
 		<i class="material-icons">add</i>{{'parcDetails.ADDREVIEW'|translate}}
 	</button>

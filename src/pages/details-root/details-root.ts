@@ -123,15 +123,23 @@ export class DetailsRootPage {
 		this.placesService = new google.maps.places.PlacesService(this.map);
   	}
   	setLowNumberofEquipment = function(){
+  		this.numberOfEquipment = 0;
+  		console.log("setLowNumberofEquipment");
+  		console.log(this.parc.facilities)
 		if(this.parc.facilities){
-			for(let facility of this.parc.facilities) {
-				if(facility===true){
-					this.numberOfEquipment++;
-				}
-			}
+			console.log(this.parc.facilities);
+			if(this.parc.facilities.animals ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.monkeyBridge ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.sandbox ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.slide ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.spider ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.swing ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.trampoline ===true){this.numberOfEquipment++};
 		}
-		if(this.numberOfEquipment>1){this.isLowNumberofEquipment = false;}
+		console.log(this.numberOfEquipment);
+		if(this.numberOfEquipment>0){this.isLowNumberofEquipment = false;}
 	}
+	
   	isToiletsRegistered = function(key) {
 		let id :number = -1;
 		for (let i in this.toiletsMarkers) {

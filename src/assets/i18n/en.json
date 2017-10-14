@@ -7,25 +7,23 @@
 		"LOADINGLABEL": "Please wait while playgrounds are loading"
 	},
 	"header" :{
-			"APPNAME" : "Mapikid",
-			"SIGNIN": "Sign-in",
-			"SIGNINGOOGLE": "Sign-in with Google",
-			"SIGNINFACEBOOK": "Sign-in with Facebook",
-			"SIGNOUT": "Sign-out",
-			"LANGUAGEMENUEN": "English",
-			"LANGUAGEMENUFR": "Francais",
-			"LANGUAGEMENUIT": "Italiano",
-			"LANGUAGEMENUDE": "Deutsch",
-			"ENTERLOCATION":"Enter a location",
-			"NONAMEPARC" :"Playground",
-			"MOREINFO" : "More Information",
-			"FEEDBACKBUTTON" : "Contact us"
+		"APPNAME" : "Mapikid",
+		"SIGNIN": "Sign-in",
+		"SIGNINGOOGLE": "Sign-in with Google",
+		"SIGNINFACEBOOK": "Sign-in with Facebook",
+		"SIGNOUT": "Sign-out",
+		"ENTERLOCATION":"Enter a location",
+		"NONAMEPARC" :"Playground",
+		"MOREINFO" : "More Information",
+		"FEEDBACKBUTTON" : "Contact us",
+		"LANGUAGE" : "Language"
+
 	},
 	"map":{
 		"ADDPARCBUTTON":"Add a new park",
 		"SNACKBARLABEL":"GeoLocation deactivated. Please activate it or enter a address in the search field !",
 		"NONAMEPARC" :"Playground",
-		"NOPARCFOUND" : "No park found around. Try to search another place or explore the map",
+		"NOPARCFOUND" : "No playground is referenced in this area. Don't hesitate to add playgrounds !",
 		"GEOLOCALIZEBUTTON" : "Locate Me",
 		"GEOLOCATIONNOTALLOWED": "Geolocation is not authorized for Mapikid. Please go to settings to activate geolocation."
 	},
@@ -62,6 +60,7 @@
 			"WATER": "Water",
 			"NOSHADE": "No shade, can be very sunny",
 			"SHADE": "Playground with shade",
+			"EVENTS": "Perfect for events such as a birthday party",
 			"MONKEYBRIDGE": "Monkey Bridge",
 			"SPIDER": "Spider",
 			"SWING": "Swing",
@@ -99,6 +98,7 @@
 		"FREE":"Free",
 		"WATER": "Water",
 		"NOSHADE": "No shade",
+		"EVENTS": "Perfect for events such as a birthday party",
 		"SLIDE": "Slide",
 		"SWING": "Swing",
 		"WC": "Toilets",
@@ -133,17 +133,37 @@
 		"WELCOME1":"Welcome to Mapikid, the application listing all playgrounds for children around you !",
 		"WELCOME2":"Mapikid is a community for playgrounds. We have collected many playgrounds around the world and you can edit them, add more information and send your reviews",
 		"WELCOME3":"Don't hesitate to log in with your Google or Facebook account, you will be able to set reviews.",
-		"START": "Try Mapikid",
+		"START": "Try Mapikid now",
 		"FEEDBACKTITLE":"Help Improving Mapikid",
 		"FEEDBACKFEATURE1" :"I support the project",
 		"FEEDBACKFEATURE2" : "I follow Mapikid on",
 		"FEEDBACKFEATURE3" : "I report a bug",
-		"LEGALMENTION": "Already imported parks are from OpenStreetMap. Credit © OpenStreetMap contributors. Mapikid décline toute responsabilité en cas de non existence du park ou de son inaccessibilité"
+		"LEGALMENTION": "Already imported parks are from OpenStreetMap. Credit © OpenStreetMap contributors. Mapikid décline toute responsabilité en cas de non existence du park ou de son inaccessibilité",
+		"SLIDE1TITLE":"Search playgrounds nearby",
+		"SLIDE1SUBTITLE":"Use geolocation or enter a place into the search bar",
+		"SLIDE2TITLE":"Confirm playgrounds",
+		"SLIDE2SUBTITLE":"Use the confirm button to validate the existence of a playground",
+		"SLIDE3TITLE":"Add new playgrounds",
+		"SLIDE3SUBTITLE":"Press the Add button to add a new parc and make it available for the community",
+		"SLIDE4TITLE":"Update playgrounds",
+		"SLIDE4SUBTITLE":"Modify playgrounds based on your experience",
+		"SLIDE5TITLE":"Visit us on Facebook"
 	},
 	"feedback":{
-		"FEEDBACKMODALTITLE": "Contattaci",
-		"MESSAGELABEL" :"Inserisci i tuoi commenti:",
-		"SENDBUTTON":"Invia",
-		"ADDREVIEWCLOSEMODAL":"Chiudi"
+		"FEEDBACKMODALTITLE": "Contact us",
+		"MESSAGELABEL" :"Message:",
+		"PHONELABEL" :"Phone Number:",
+		"EMAILLABEL" :"Email:",
+		"SENDBUTTON":"Send",
+		"ADDREVIEWCLOSEMODAL":"Close"
+	},
+	"language":{
+		"TITLE" : "Choose Language",
+		"CLOSE" : "Close",
+		"LANGUAGEMENUEN": "English",
+		"LANGUAGEMENUFR": "Français",
+		"LANGUAGEMENUIT": "Italiano",
+		"LANGUAGEMENUDE": "Deutsch",
+		"LANGUAGEMENUCA": "Catalan"
 	}
 }

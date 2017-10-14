@@ -159,7 +159,9 @@ export class ParcDetailsPage {
 	presentToast(message) {
 	    let toast = this.toastCtrl.create({
 	      message: message,
-	      duration: 3000
+	      duration: 15000,
+	      showCloseButton: true,
+	      closeButtonText: "X"
 	    });
 	    toast.present();
  	 }

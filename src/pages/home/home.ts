@@ -20,6 +20,7 @@ import {TranslateService} from 'ng2-translate';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { Storage } from '@ionic/storage';
 
 @Component({
 	selector: 'page-home',
@@ -47,10 +48,12 @@ export class HomePage implements OnInit{
 	numberParcLoaded : Subject<number> // 0 is the initial value
 	mapCenter=null;	
 	keys=[];	
+	markers =[];
 	loading = null;
 	lastRequestParcsAround = new Date().getTime();
 	loadingLabel = "";
 	geolocationNotAllowedLabel ="";
+	noParcReturned:boolean=false;
 	
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -59,7 +62,7 @@ export class HomePage implements OnInit{
 		public mapCluster: GoogleMapsClusterProvider,
 		public loadingCtrl: LoadingController,private translate: TranslateService,
 		private diagnostic: Diagnostic,public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,
-		private ga: GoogleAnalytics) {
+		private ga: GoogleAnalytics,private storage: Storage) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -79,6 +82,8 @@ export class HomePage implements OnInit{
 	}
 
 	ngOnInit() {
+		this.ga.trackView("Home Page");
+		
 		this.afAuth.auth.onAuthStateChanged(function(user) {
 	        if (user) {
 	         	//console.log(user);
@@ -96,13 +101,21 @@ export class HomePage implements OnInit{
 		};    
 		
 		this.platform.ready().then(() => {
-			this.ga.trackView("Home Page");
-			this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
-				this.loadingLabel = res;
-			});
-			this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
-				this.geolocationNotAllowedLabel = res;
-			});
+			this.storage.get('langKey').then((val) => {
+	          	if(val !==null){
+	              	this.translate.use(val);
+	         	}
+	          	else{
+	            	this.translate.use('fr');
+	          	}
+	          	this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
+					this.loadingLabel = res;
+				});
+				this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
+					this.geolocationNotAllowedLabel = res;
+				});
+	        });
+
 			this.loading = this.loadingCtrl.create({
 		    	content: this.loadingLabel 
 		 	});
@@ -124,6 +137,7 @@ export class HomePage implements OnInit{
 			});	
 			var latLng = new google.maps.LatLng(resp.coords.latitude,resp.coords.longitude);
 			this.googleMapJDK.setCenter(latLng);
+			this.googleMapJDK.setZoom(12);
 			this.mapCenter = this.googleMapJDK.getCenter();
 			this.setupInitialGeoQuery();
 		}).catch((error) => {
@@ -167,9 +181,9 @@ export class HomePage implements OnInit{
 	}
 
 	setupInitialGeoQuery(){
-		
 		this.markersEntered =[];
 		var onKeyEnteredRegistration = this.geoQuery.on("key_entered", function(key, location, distance) {
+
 			//console.log("key entered", key,this.numberOfParcsToBeLoaded, this.markersEntered.length)
 			var keyEntered= {
                 key:key,
@@ -188,7 +202,13 @@ export class HomePage implements OnInit{
 		var onReadyRegistration =  this.geoQuery.on("ready", function() {
 			//console.log("onReadyRegistration",this.numberOfParcsToBeLoaded,this.markersEntered.length )
 			this.numberOfParcsToBeLoaded =this.markersEntered.length;
-			
+			//no parc return
+			if(this.markersEntered.length ===0){
+				this.noParcReturned = true;
+			}
+			else{
+				this.noParcReturned = false;
+			}
 			for(var i = 0;i<this.markersEntered.length;i++){
 				this.newKeyEntered(i,this.markersEntered[i].key, this.markersEntered[i].location, this.markersEntered[i].distance);
 			}
@@ -205,38 +225,33 @@ export class HomePage implements OnInit{
 			this.numberParcLoaded.next(index);	
 		}
 
-
 		else{
-			this.keys[key] = key;
 			var parc = {'key':key, 'distance':distance.toString().substring(0,4),'reviewsLength':0,'parcItem': null };
 			var parcItem: FirebaseObjectObservable<any>;
 	        parcItem = this.db.object('positions/'+key);
 			parcItem.subscribe(snapshot => {
-				parc.parcItem = snapshot;
 				
-				if(!parc.parcItem.rate){
-					parc.parcItem.rate = {'rate': 0};
-				}				
-				this.parcs.push(parc);	
-				this.displayParcMarkerJDK(parc);
-				this.numberParcLoaded.next(index);				
+					parc.parcItem = snapshot;
+					
+					if(!parc.parcItem.rate){
+						parc.parcItem.rate = {'rate': 0};
+					}				
+					this.parcs.push(parc);	
+					if(!this.keys[key]){
+						this.displayParcMarkerJDK(parc,'add');
+					}
+					else{
+						this.displayParcMarkerJDK(parc,'update');
+					}
+					this.numberParcLoaded.next(index);
+					this.keys[key] = key;		
 			});	
+			
 		}
 		//console.log("newKeyEntered",this.numberOfParcsToBeLoaded,this.markersEntered.length );
 	}
-	isParcRegistered = function(key) {
-        var id:string= null;
-        for (var i in this.parcs.length) {
-            if (this.parcs[i].key === key) {
-                id = i;
-                break;
-            }
-        }
-        return id;
-    };
 
 	orderByDistance = function(items, field, reverse) {
-		console.log("orderByDistance");
 	    var filtered = [];
 	    for(let item of items){
 	       filtered.push(item);
@@ -249,19 +264,24 @@ export class HomePage implements OnInit{
 	    return filtered;
     }
 	
-	displayParcMarkerJDK =function(parc){
-
-		var marker = new google.maps.Marker({
-	        position:  new google.maps.LatLng(parc.parcItem.position.lat, parc.parcItem.position.lng),
-	        map: this.googleMapJDK,
-	        title: parc.parcItem.name,
-	        icon:this._map.getIconPath(parc),
-	   	});
-	    marker.addListener('click', function() {
-      		this.navCtrl.push(ParcDetailsPage, {key:parc.key, map:this.map} );
-      
-      	}.bind(this));
-		this.mapCluster.addMarker(marker, true);
+	displayParcMarkerJDK =function(parc, mode){
+	   	if(mode==='add'){
+		   	var marker = new google.maps.Marker({
+		        position:  new google.maps.LatLng(parc.parcItem.position.lat, parc.parcItem.position.lng),
+		        map: this.googleMapJDK,
+		        title: parc.parcItem.name,
+		        icon:this._map.getIconPath(parc)
+	   		});
+	   		marker.addListener('click', function() {
+      			this.navCtrl.push(ParcDetailsPage, {key:parc.key, map:this.map} );
+	      	}.bind(this));
+	      	this.markers[parc.key]= marker;
+			this.mapCluster.addMarker(marker, true);
+	   	}
+	   	else{
+	   		this.markers[parc.key].setPosition(new google.maps.LatLng(parc.parcItem.position.lat, parc.parcItem.position.lng));	
+	   	}
+	   
 	} 
 	
 	updateSearch() {
@@ -293,12 +313,11 @@ export class HomePage implements OnInit{
 	}  
 	
 	geocodeAddress(item){
-		console.log(item);
 		this.ga.trackEvent('pageview', 'list '+ item.description);
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode({'placeId': item.place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
-
+            	this.autocomplete.query = item.description;
 				this.parcs = [];
 				this.keys =[];
                 var latLng = new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng());
@@ -382,7 +401,9 @@ export class HomePage implements OnInit{
 	 
     	let toast = this.toastCtrl.create({
 	      message: this.geolocationNotAllowedLabel,
-	      duration: 10000
+	      duration: 10000,
+	      showCloseButton: true,
+	      closeButtonText: "X"
 	    });
     	toast.present();
     	this.diagnostic.requestLocationAuthorization();
