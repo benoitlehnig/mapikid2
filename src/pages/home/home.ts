@@ -203,6 +203,7 @@ export class HomePage implements OnInit{
 			//console.log("onReadyRegistration",this.numberOfParcsToBeLoaded,this.markersEntered.length )
 			this.numberOfParcsToBeLoaded =this.markersEntered.length;
 			//no parc return
+			console.log(this.noParcReturned);
 			if(this.markersEntered.length ===0){
 				this.noParcReturned = true;
 			}
