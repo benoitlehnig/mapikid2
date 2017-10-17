@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,ViewController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2/database';
 import {IStarRatingOnRatingChangeEven} from 'angular-star-rating';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { AuthService } from '../../providers/auth-service/auth-service';
 
 /**
@@ -25,7 +25,7 @@ export class AddReviewPage {
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
   	public navParams: NavParams, public db: AngularFireDatabase,
-  	private ga: GoogleAnalytics,private _auth: AuthService) {
+  	private ga: FirebaseAnalytics,private _auth: AuthService) {
 	this.reviews = db.list('positions/'+this.navParams.get('parc').$key+ '/reviews');
 	this.parcObject = db.object('positions/'+this.navParams.get('parc').$key);
 	this.photoUrl = this._auth.displayPicture();
@@ -34,6 +34,7 @@ export class AddReviewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddReviewPage');
+    this.ga.setCurrentScreen("Add Review Page");
   }
   closeModal = function(){
   	this.viewCtrl.dismiss();
@@ -46,7 +47,9 @@ export class AddReviewPage {
 		photoUrl: this._auth.displayPicture(),
 		rate: this.review.rate
 	};
-	this.ga.trackEvent("parc_management", "Add_review",this.navParams.get('parc').$key, this.review.description);
+	this.ga.logEvent("parc_management", 
+		{"action": "Add_review", "parc key": this.navParams.get('parc').$key, "review": this.review.description}
+	);
   	this.reviews.push(newReview).then(
   		newReview  =>{
   			this.saveReviewAverageRate();

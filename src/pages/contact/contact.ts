@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams ,Platform} from 'ionic-angular';
 import { DatePipe } from '@angular/common';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { AngularFireDatabase } from 'angularfire2/database';
 /**
@@ -25,12 +25,12 @@ export class ContactPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   	public db: AngularFireDatabase,private platform: Platform,
-  	private ga: GoogleAnalytics,private _auth: AuthService,private datePipe: DatePipe) {
+  	private ga: FirebaseAnalytics,private _auth: AuthService,private datePipe: DatePipe) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactPage');
-    this.ga.trackView("Contact Us");
+    this.ga.setCurrentScreen("Contact Us");
   }
 
   saveFeedback = function(){
@@ -53,8 +53,9 @@ export class ContactPage {
 	      userAgent:  userAgent
 	    };
 	    newFeedback.set(feedback).then(() => {
+	    	this.ga.logEvent("SendComment", {"action" : "SendComment", "message": this.message});
 	    	this.message ="";
-	    	this.ga.trackEvent("SendComment", "SendComment", this.message);
+	    	
 	    	}
 	    );
 	};

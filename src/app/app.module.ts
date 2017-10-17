@@ -28,6 +28,7 @@ import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import {HttpModule,Http} from '@angular/http';
 import {TranslateModule} from 'ng2-translate';
@@ -125,7 +126,8 @@ export function createTranslateLoader(http: Http) {
     Facebook,
     Diagnostic,
     OpenNativeSettings,
-    GoogleAnalytics
+    GoogleAnalytics,
+    FirebaseAnalytics
   ]
 })
 export class AppModule {}

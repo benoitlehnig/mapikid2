@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import * as firebase from 'firebase';
 import GeoFire from 'geofire';
 import { MapService } from '../../providers/map-service/map-service';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 /**
  * Generated class for the ReviewsRootPage page.
  *
@@ -52,7 +52,7 @@ export class UpdateParcPage {
   constructor(public platform: Platform,public viewCtrl: ViewController,
     public navCtrl: NavController, public navParams: NavParams,
     public db: AngularFireDatabase,
-    private _map:MapService, private ga: GoogleAnalytics) {
+    private _map:MapService, private ga: FirebaseAnalytics) {
     console.log(this.navParams.get('parc'));
     
     if(this.navParams.get('mode')){
@@ -100,7 +100,8 @@ export class UpdateParcPage {
   ngOnInit() {
     this.platform.ready().then(() => {
       this.loadMap();
-      this.ga.trackView("Update Page " + this.parc.$key);
+      this.ga.setCurrentScreen("Update Page ");
+      this.ga.logEvent("Update Parc Request", {"parc key":this.parc.$key});
     }); 
   }
 
@@ -147,7 +148,7 @@ export class UpdateParcPage {
       parcObject.update(this.parc);
       console.log(this.parc.$key);
       this.gf.set(this.parc.$key, location).then(function() {
-        this.ga.trackEvent("parc_management", "Update", this.parc.$key); 
+        this.ga.logEvent("parc_management", {"action":"update","parc key":this.parc.$key});
       }.bind(this));
      
 
@@ -159,7 +160,7 @@ export class UpdateParcPage {
       console.log(newPosition.$key);
       this.gf.set(newPosition.key, location).then(function() {
           console.log(newPosition.key);
-          this.ga.trackEvent("parc_management", "Add", this.parc.$key); 
+          this.ga.logEvent("parc_management", {"action":"add","parc key":this.parc.$key});
         }.bind(this));
           
     }

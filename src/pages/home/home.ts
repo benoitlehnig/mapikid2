@@ -19,7 +19,7 @@ import { OrderByDistancePipe } from "../../pipes/order-by-distance/order-by-dist
 import {TranslateService} from 'ng2-translate';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -62,7 +62,7 @@ export class HomePage implements OnInit{
 		public mapCluster: GoogleMapsClusterProvider,
 		public loadingCtrl: LoadingController,private translate: TranslateService,
 		private diagnostic: Diagnostic,public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,
-		private ga: GoogleAnalytics,private storage: Storage) {
+		private ga: FirebaseAnalytics,private storage: Storage) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -82,7 +82,7 @@ export class HomePage implements OnInit{
 	}
 
 	ngOnInit() {
-		this.ga.trackView("Home Page");
+		this.ga.setCurrentScreen("Home Page");
 		
 		this.afAuth.auth.onAuthStateChanged(function(user) {
 	        if (user) {
@@ -314,7 +314,7 @@ export class HomePage implements OnInit{
 	}  
 	
 	geocodeAddress(item){
-		this.ga.trackEvent('pageview', 'list '+ item.description);
+		this.ga.logEvent('pageview', {"page:" :'list '+ item.description});
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode({'placeId': item.place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {

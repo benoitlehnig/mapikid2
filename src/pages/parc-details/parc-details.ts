@@ -11,7 +11,7 @@ import { DetailsRootPage } from '../details-root/details-root';
 import { ReviewsRootPage } from '../reviews-root/reviews-root';
 import { UpdateParcPage } from '../update-parc/update-parc';
 import { AddReviewPage } from '../add-review/add-review';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 /**
  * Generated class for the ParcDetailsPage page.
  *
@@ -44,7 +44,7 @@ export class ParcDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
   	db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
   	public afAuth: AngularFireAuth, private _auth: AuthService,
-  	public toastCtrl: ToastController,translate: TranslateService,private ga: GoogleAnalytics) {
+  	public toastCtrl: ToastController,translate: TranslateService,private ga: FirebaseAnalytics) {
 		console.log(navParams);
 	
 		this.parcObject = db.object('positions/'+this.navParams.get('key'));
@@ -85,7 +85,7 @@ export class ParcDetailsPage {
 			this.toastLabelUpdated = res;
 		});
 		this.platform.ready().then(() => {
-            this.ga.trackView("Details Page " + this.navParams.get('key'));
+            this.ga.setCurrentScreen("Details Page " + this.navParams.get('key'));
         });
 		
  	}
@@ -135,6 +135,7 @@ export class ParcDetailsPage {
 		this.localParc.validated = true;
 	    this.storage.set(this.parc.$key, JSON.stringify(this.localParc));
 	    this.presentToast(this.toastLabelValidated);
+	    this.ga.logEvent("parc_management", {"action":"validate","parc key":this.parc.$key});
 	}
 
 	suggestRemove = function(){
@@ -142,12 +143,13 @@ export class ParcDetailsPage {
 		if(this.parc.removalRequestNumber){
 			removalIncreased = this.parc.removalRequestNumber;
 		}
+		this.ga.logEvent("parc_management", {"action":"removal request","parc key":this.parc.$key});
 		removalIncreased = removalIncreased+1;
 		//removal of the parc
 		if(removalIncreased>5){	
 			//$scope.positionRef.child($scope.parc.$key).remove();
 			//$scope.geoFire.remove($scope.parc.$key).then($scope.closeParcDetails());
-			this.ga.trackEvent("parc_management", "Removal_request",this.parc.$key);
+			
 		}
 		else{
 			this.parcObject.update({ removalRequestNumber: removalIncreased });

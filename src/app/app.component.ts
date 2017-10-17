@@ -4,7 +4,7 @@ import { Platform, App, ModalController  } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -27,7 +27,7 @@ export class MyApp {
 
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
-    private _auth: AuthService,private ga: GoogleAnalytics,public modalCtrl: ModalController) {
+    private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
@@ -68,7 +68,7 @@ export class MyApp {
           storage.set('langKey', event.lang);
         });
 
-        this.ga.startTrackerWithId("UA-89879030-1");
+        
         
     });
   }

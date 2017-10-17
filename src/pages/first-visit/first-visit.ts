@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,App } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { HomePage } from '../home/home';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 /**
  * Generated class for the FirstVisitPage page.
  *
@@ -19,7 +19,7 @@ export class FirstVisitPage {
 	numberOfParcs = 0;
  	
  	constructor(public navCtrl: NavController, public navParams: NavParams,private app: App,
-     db: AngularFireDatabase,private ga: GoogleAnalytics) {
+     db: AngularFireDatabase,private ga: FirebaseAnalytics) {
   		var statistics = db.object('statistics/numberOfParcs');
 		  statistics.subscribe(snapshot => {
 
@@ -30,10 +30,11 @@ export class FirstVisitPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FirstVisitPage');
-    this.ga.trackView("First Visit Page");
+    this.ga.setCurrentScreen("First Visit Page");
   }
   close = function(){
   	this.app.getActiveNav().setRoot(HomePage);
+    this.ga.logEvent("First Visit Page", {"action": "close"});
   }
 
 }
