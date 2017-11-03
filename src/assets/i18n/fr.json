@@ -136,7 +136,7 @@
 		"FEEDBACKFEATURE1" :"J'en parle autour de moi",
 		"FEEDBACKFEATURE2" : "Je suis Mapikid sur ",
 		"FEEDBACKFEATURE3" : "Je signale un bug",
-		"LEGALMENTION": "Les parcs initalement recensés proviennent d'OpenStreetMap. Credit © OpenStreetMap contributors. Mapikid décline toute responsabilité en cas de non existence du parc ou de son inaccessibilité",
+		"LEGALMENTION": "Les parcs initialement recensés proviennent d'OpenStreetMap. Credit © OpenStreetMap contributors. Mapikid décline toute responsabilité en cas de non existence du parc ou de son inaccessibilité",
 		"SLIDE1TITLE": "Recherchez les aires de jeux à proximité",
 		"SLIDE1SUBTITLE": "Utilisez la géolocalisation ou entrez un lieu dans la barre de recherche",
 		"SLIDE2TITLE": "Confirmer les parcs",
@@ -162,6 +162,8 @@
 		"LANGUAGEMENUFR": "Français",
 		"LANGUAGEMENUIT": "Italiano",
 		"LANGUAGEMENUDE": "Deutsch",
-		"LANGUAGEMENUCA": "Catalan"
+		"LANGUAGEMENUCA": "Catalan",
+		"LANGUAGEMENUES": "Español",
+		"LANGUAGEMENUZH": "中国"
 	}
 }
