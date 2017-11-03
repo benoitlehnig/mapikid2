@@ -34,3 +34,17 @@ ion-app.md [padding], ion-app.md [padding] .scroll-content{
 ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
 	padding:0px;
 }
+.toolbar-background-ios{
+	background: #8EC63F;
+	color:#FFFFFF;
+}
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
+	color:#FFFFFF;
+}
+.toolbar-title-ios{
+	color:#FFFFFF;
+}
+.button-outline-ios{
+	color:#FFFFFF;
+	border-color:#FFFFFF;
+}

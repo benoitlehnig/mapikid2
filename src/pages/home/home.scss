@@ -61,4 +61,11 @@ page-home {
 	    text-align: center;
    		padding: 12px;
 	}
+	
+	.toolbar .searchbar-ios .searchbar-input{
+		background: #FFFFFF;
+	}
+	.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
+		color: #FFFFFF;
+	}
 }
