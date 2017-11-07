@@ -8,66 +8,114 @@
     	<ion-label floating>{{'parcUpdate.DESCRIPTION'|translate}}</ion-label>
     	<ion-input type="text" [(ngModel)]="parc.description"></ion-input>
   	</ion-item>
+    <div class="separator"></div>
   	<ion-item>
+     <ion-avatar item-start>
+        <i class="material-icons">close</i>
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.CLOSED'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.closed"></ion-checkbox>
+  		<ion-toggle [(ngModel)]="parc.closed"></ion-toggle>
 	  </ion-item>
 	 <ion-item>
+      <ion-avatar item-start>
+        <i class="material-icons">monetization_on</i>
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.FREE'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.free"></ion-checkbox>
+  		<ion-toggle [(ngModel)]="parc.free"></ion-toggle>
 	  </ion-item>
-	<ion-item>
-  		<ion-label>{{'parcUpdate.WATER'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.facilities.water"></ion-checkbox>
-	</ion-item>
   <ion-item>
+      <ion-avatar item-start>
+        <i class="material-icons">brightness_medium</i>
+      </ion-avatar>
       <ion-label>{{'parcUpdate.NOSHADE'|translate}}</ion-label>
-      <ion-checkbox [(ngModel)]="parc.shade"></ion-checkbox>
+      <ion-toggle [(ngModel)]="parc.shade"></ion-toggle>
   </ion-item>
   <ion-item>
+      <ion-avatar item-start>
+        <i class="material-icons">card_giftcard</i>
+      </ion-avatar>
       <ion-label>{{'parcUpdate.EVENTS'|translate}}</ion-label>
-      <ion-checkbox [(ngModel)]="parc.events"></ion-checkbox>
+      <ion-toggle [(ngModel)]="parc.events"></ion-toggle>
+  </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <i class="material-icons" id="parcDetailsLittle">accessibility</i>
+      </ion-avatar>
+      <ion-label>{{'parcUpdate.02YEARS'|translate}}</ion-label>
+      <ion-toggle [(ngModel)]="parc.lessThan2years"></ion-toggle>
+  </ion-item>
+  <ion-item>
+      <ion-avatar item-start>
+        <i class="material-icons" id="parcDetailsMiddle">accessibility</i>
+      </ion-avatar>
+      <ion-label>{{'parcUpdate.26YEARS'|translate}}</ion-label>
+      <ion-toggle [(ngModel)]="parc.between2and6"></ion-toggle>
+  </ion-item>
+  <ion-item>
+      <ion-avatar item-start>
+        <i class="material-icons" id="parcDetailsOld">accessibility</i>
+      </ion-avatar>
+      <ion-label>{{'parcUpdate.+6YEARS'|translate}}</ion-label>
+      <ion-toggle [(ngModel)]="parc.sixandPlus"></ion-toggle>
+  </ion-item>
+  <ion-item-divider>{{'parcUpdate.EQUIPMENTS'|translate}}</ion-item-divider>
+  <ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Water tap icon icon.png">
+      </ion-avatar>
+      <ion-label>{{'parcUpdate.WATER'|translate}}</ion-label>
+      <ion-toggle [(ngModel)]="parc.facilities.water"></ion-toggle>
   </ion-item>
 	<ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/toilets icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.WC'|translate}}</ion-label>
-  		<ion-checkbox  [(ngModel)]="parc.facilities.wc"></ion-checkbox>
+  		<ion-toggle  [(ngModel)]="parc.facilities.wc"></ion-toggle>
 	</ion-item>
 	<ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Sled icon icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.SLIDE'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.facilities.slide"></ion-checkbox>
+  		<ion-toggle [(ngModel)]="parc.facilities.slide"></ion-toggle>
 	</ion-item>
 	<ion-item>
+     <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Swings icon icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.SWING'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.facilities.swing"></ion-checkbox>
+  		<ion-toggle [(ngModel)]="parc.facilities.swing"></ion-toggle>
 	</ion-item>
 	<ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Trampoline icon icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.TRAMPOLINE'|translate}}</ion-label>
-  		<ion-checkbox  [(ngModel)]="parc.facilities.trampoline"></ion-checkbox>
+  		<ion-toggle  [(ngModel)]="parc.facilities.trampoline"></ion-toggle>
 	</ion-item>
 	<ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Game Complex icon icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.MONKEYBRIDGE'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.facilities.monkeyBridge"></ion-checkbox>
+  		<ion-toggle [(ngModel)]="parc.facilities.monkeyBridge"></ion-toggle>
 	</ion-item>
 	<ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Cobweb icon icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.SPIDER'|translate}}</ion-label>
-  		<ion-checkbox  [(ngModel)]="parc.facilities.spider"></ion-checkbox>
+  		<ion-toggle  [(ngModel)]="parc.facilities.spider"></ion-toggle>
 	</ion-item>
 	<ion-item>
+      <ion-avatar item-start>
+        <img class="facilitiesIcon"  src="assets/images/Horse icon icon.png">
+      </ion-avatar>
   		<ion-label>{{'parcUpdate.ANIMALS'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.facilities.animals"></ion-checkbox>
+  		<ion-toggle [(ngModel)]="parc.facilities.animals"></ion-toggle>
 	</ion-item>
-	<ion-item>
-  		<ion-label>{{'parcUpdate.02YEARS'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.lessThan2years"></ion-checkbox>
-	</ion-item>
-	<ion-item>
-  		<ion-label>{{'parcUpdate.26YEARS'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.between2and6"></ion-checkbox>
-	</ion-item>
-	<ion-item>
-  		<ion-label>{{'parcUpdate.+6YEARS'|translate}}</ion-label>
-  		<ion-checkbox [(ngModel)]="parc.sixandPlus"></ion-checkbox>
-	</ion-item>
+
 	
 </ion-content>
 <ion-footer>

@@ -85,7 +85,7 @@
 		"FRIDAY": "Dijous",
 		"SATURDAY": "Dissabte",
 		"SUNDAY": "Diumenge",
-		"TOILETSAROUNDCOUNT": "Lavabos tancats al parc (200 m): "
+		"TOILETSAROUNDCOUNT": "Lavabos tancats al parc: "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Afegeix un nou parc",
@@ -113,7 +113,8 @@
 		"UPDATEBUTTON": "Desa",
 		"CANCELBUTTON": "Cancel·la",
 		"TOASTPARCUPDATED": "Parc infantil estimat, gràcies per la modificació !",
-		"TOASTPARCADDED": "S'ha afegit amb èxit el joc, gràcies !"
+		"TOASTPARCADDED": "S'ha afegit amb èxit el joc, gràcies !",
+		"EQUIPMENTS":"instal·lacions"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",
