@@ -55,6 +55,10 @@ export class HomePage implements OnInit{
 	loadingCompleted: boolean=true;
 	geolocationNotAllowedLabel ="";
 	noParcReturned:boolean=false;
+	geoLocationMarker = new google.maps.Marker({
+		    position:  new google.maps.LatLng(0,0),
+		    map: this.googleMapJDK
+	   	});
 	
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -135,6 +139,7 @@ export class HomePage implements OnInit{
 			this.googleMapJDK.setCenter(latLng);
 			this.googleMapJDK.setZoom(12);
 			this.mapCenter = this.googleMapJDK.getCenter();
+			this.geoLocationMarker.setPosition(latLng);
 			this.setupInitialGeoQuery();
 		}).catch((error) => {
 			console.log('Error getting location', error);
@@ -385,6 +390,7 @@ export class HomePage implements OnInit{
             this.googleMapJDK.setCenter(latLng);
             this.mapCenter = this.googleMapJDK.getCenter();
             this.displayParcsAround(false,false);
+            this.geoLocationMarker.setPosition(latLng);
 		}).catch((error) => {
 			console.log('Error getting location', error);
 			this.errorCallback();

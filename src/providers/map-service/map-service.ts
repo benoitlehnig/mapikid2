@@ -80,5 +80,7 @@ export class MapService {
       label = {text: '$', color: "#FFFFFF"};
     }
 	}
+
+  
  
 }
