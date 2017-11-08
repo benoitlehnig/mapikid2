@@ -68,4 +68,13 @@ page-home {
 	.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
 		color: #FFFFFF;
 	}
+	ion-spinner {
+		float: left;
+	    position: absolute;
+	    margin-left: -38px;
+    	margin-top: 8px;
+	}
+	.spinner-crescent circle{
+	    stroke: #8EC63F;
+	}
 }

@@ -51,13 +51,13 @@ export class HomePage implements OnInit{
 	markers =[];
 	loading = null;
 	lastRequestParcsAround = new Date().getTime();
-	loadingLabel = "";
 	geolocationNotAllowedLabel ="";
 	noParcReturned:boolean=false;
 	geoLocationMarker = new google.maps.Marker({
 		    position:  new google.maps.LatLng(0,0),
 		    map: this.googleMapJDK
 	   	});
+	loadingCompleted: boolean=true;
 	
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -112,17 +112,13 @@ export class HomePage implements OnInit{
 	          	else{
 	            	this.translate.use('fr');
 	          	}
-	          	this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
-					this.loadingLabel = res;
-				});
+	          	
 				this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
 					this.geolocationNotAllowedLabel = res;
 				});
 	        });
 
-			this.loading = this.loadingCtrl.create({
-		    	content: this.loadingLabel 
-		 	});
+			this.loadingCompleted = false;
 			this.loadMap();
 			
 			this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
@@ -157,7 +153,7 @@ export class HomePage implements OnInit{
 			if(value >= Number(this.numberOfParcsToBeLoaded)-1 || value===-1){
 				console.log("all parcs loaded");
 				try{
-					this.loading.dismiss();
+					this.loadingCompleted =true;
 				}
 				catch(err) {
 				    console.log("error", err);
@@ -197,10 +193,7 @@ export class HomePage implements OnInit{
             };
             this.markersEntered.push(keyEntered);
             if(this.markersEntered.length===10){
-				this.loading = this.loadingCtrl.create({
-	    			content: this.loadingLabel 
-		 			});
-		 		this.loading.present();
+				this.loadingCompleted = false;
 			}
 		}.bind(this));
 
