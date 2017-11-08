@@ -85,7 +85,7 @@
 			"FRIDAY": "Freitag",
 			"SATURDAY": "Samstag",
 			"SUNDAY": "Sonntag",
-			"TOILETSAROUNDCOUNT": "Toiletten geschlossen zum Park : "
+			"TOILETSAROUNDCOUNT": "Toiletten geschlossen zum Park (200m): "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Neuen Park hinzufügen",
@@ -113,8 +113,7 @@
 		"UPDATEBUTTON": "Speichern",
 		"CANCELBUTTON": "Abbrechen",
 		"TOASTPARCUPDATED": "Spielplatz udated, danke für die Änderung!",
-		"TOASTPARCADDED": "Spielplatz erfolgreich hinzugefügt, danke!",
-		"EQUIPMENTS":"Anlagen"
+		"TOASTPARCADDED": "Spielplatz erfolgreich hinzugefügt, danke!"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",

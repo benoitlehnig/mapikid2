@@ -84,7 +84,7 @@
 		"FRIDAY": "Viernes",
 		"SATURDAY": "Sábado",
 		"SUNDAY": "Domingo",
-		"TOILETSAROUNDCOUNT": "Baños cerca del parque : "
+		"TOILETSAROUNDCOUNT": "Baños cerca del parque (200 m): "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC": "Agregar un nuevo parque",
@@ -112,8 +112,7 @@
 		"UPDATEBUTTON": "Guardar",
 		"CANCELBUTTON": "Cancelar",
 		"TOASTPARCUPDATED": "El parque ha sido cambiado con éxito, ¡gracias!",
-		"TOASTPARCADDED": "¡El parque se ha agregado con éxito, gracias!",
-		"EQUIPMENTS":"Equipos"
+		"TOASTPARCADDED": "¡El parque se ha agregado con éxito, gracias!"
 	},
 	"firstVisit":{
 		"APPNAME" :"Mapikid",

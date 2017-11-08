@@ -13,7 +13,7 @@ export class MapService {
   }
 
   createMapJDK(element){
-  	var mapTypeId = google.maps.MapTypeId.ROADMAP;
+  	var mapTypeId = google.maps.MapTypeId.HYBRID;
 	  var mapTypeControl = true;
 	  var mapTypeControlOptions = {
 		  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU

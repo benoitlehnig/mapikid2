@@ -84,7 +84,7 @@
 			"FRIDAY": "Vendredi",
 			"SATURDAY": "Samedi",
 			"SUNDAY": "Dimanche",
-			"TOILETSAROUNDCOUNT": "Toilettes près du parc : "
+			"TOILETSAROUNDCOUNT": "Toilettes près du parc (200m): "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Ajouter un nouveau parc",
@@ -112,8 +112,7 @@
 		"UPDATEBUTTON": "Sauvegarder",
 		"CANCELBUTTON": "Annuler",
 		"TOASTPARCUPDATED": "Le parc a été modifié avec succés, merci !",
-		"TOASTPARCADDED": "Le parc a été ajouté avec succés, merci !",
-		"EQUIPMENTS":"Equipements"
+		"TOASTPARCADDED": "Le parc a été ajouté avec succés, merci !"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",

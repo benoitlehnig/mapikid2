@@ -85,7 +85,7 @@
 			"FRIDAY": "Venerdì",
 			"SATURDAY": "Sabato",
 			"SUNDAY": "Domenica",
-			"TOILETSAROUNDCOUNT": "Bagni chiusi al parco : "
+			"TOILETSAROUNDCOUNT": "Bagni chiusi al parco (200 m): "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Aggiungi nuovo parco",
@@ -113,8 +113,7 @@
 		"UPDATEBUTTON": "Salva",
 		"CANCELBUTTON": "Annulla",
 		"TOASTPARCUPDATED": "Parco giochi, grazie per la modifica!",
-		"TOASTPARCADDED": "Il parco giochi è stato aggiunto con successo, grazie!",
-		"EQUIPMENTS":"Facilities"
+		"TOASTPARCADDED": "Il parco giochi è stato aggiunto con successo, grazie!"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",
