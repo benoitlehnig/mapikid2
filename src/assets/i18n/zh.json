@@ -84,7 +84,7 @@
 			"FRIDAY": "星期五",
 			"SATURDAY": "星期六",
 			"SUNDAY": "星期天",
-			"TOILETSAROUNDCOUNT": "公园附近的厕所（200米）： "
+			"TOILETSAROUNDCOUNT": "公园附近的厕所： "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"添加新公园",
@@ -112,7 +112,8 @@
 		"UPDATEBUTTON": "保存",
 		"CANCELBUTTON": "取消",
 		"TOASTPARCUPDATED": "公园已经成功修改，谢谢！",
-		"TOASTPARCADDED": "公园已经成功添加，谢谢！"
+		"TOASTPARCADDED": "公园已经成功添加，谢谢！",
+		"EQUIPMENTS":"设备"
 	},
 	"firstVisit":{
 		"APPNAME": "Mapikid",

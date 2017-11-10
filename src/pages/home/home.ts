@@ -51,9 +51,14 @@ export class HomePage implements OnInit{
 	markers =[];
 	loading = null;
 	lastRequestParcsAround = new Date().getTime();
-	loadingLabel = "";
 	geolocationNotAllowedLabel ="";
 	noParcReturned:boolean=false;
+	geoLocationMarker = new google.maps.Marker({
+		    position:  new google.maps.LatLng(0,0),
+		    map: this.googleMapJDK,
+		    icon:this._map.getIconPathCurrentPosition()
+	   	});
+	loadingCompleted: boolean=true;
 	
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -108,17 +113,13 @@ export class HomePage implements OnInit{
 	          	else{
 	            	this.translate.use('fr');
 	          	}
-	          	this.translate.get('loading.LOADINGLABEL').subscribe((res: string) => {
-					this.loadingLabel = res;
-				});
+	          	
 				this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
 					this.geolocationNotAllowedLabel = res;
 				});
 	        });
 
-			this.loading = this.loadingCtrl.create({
-		    	content: this.loadingLabel 
-		 	});
+			this.loadingCompleted = false;
 			this.loadMap();
 			
 			this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
@@ -139,6 +140,7 @@ export class HomePage implements OnInit{
 			this.googleMapJDK.setCenter(latLng);
 			this.googleMapJDK.setZoom(12);
 			this.mapCenter = this.googleMapJDK.getCenter();
+			this.geoLocationMarker.setPosition(latLng);
 			this.setupInitialGeoQuery();
 		}).catch((error) => {
 			console.log('Error getting location', error);
@@ -152,7 +154,7 @@ export class HomePage implements OnInit{
 			if(value >= Number(this.numberOfParcsToBeLoaded)-1 || value===-1){
 				console.log("all parcs loaded");
 				try{
-					this.loading.dismiss();
+					this.loadingCompleted =true;
 				}
 				catch(err) {
 				    console.log("error", err);
@@ -192,10 +194,7 @@ export class HomePage implements OnInit{
             };
             this.markersEntered.push(keyEntered);
             if(this.markersEntered.length===10){
-				this.loading = this.loadingCtrl.create({
-	    			content: this.loadingLabel 
-		 			});
-		 		this.loading.present();
+				this.loadingCompleted = false;
 			}
 		}.bind(this));
 
@@ -337,7 +336,7 @@ export class HomePage implements OnInit{
 		this.mapHeight = String(this.platform.height()/2)+"px";
 		let element: HTMLElement = document.getElementById('map');
 
-		this.googleMapJDK = this._map.createMapJDK(element);
+		this.googleMapJDK = this._map.createMapJDK(element,false);
 
 		this.googleMapJDK.addListener('dragend', function() {
 			//console.log('dragend');
@@ -390,6 +389,7 @@ export class HomePage implements OnInit{
             this.googleMapJDK.setCenter(latLng);
             this.mapCenter = this.googleMapJDK.getCenter();
             this.displayParcsAround(false,false);
+            this.geoLocationMarker.setPosition(latLng);
 		}).catch((error) => {
 			console.log('Error getting location', error);
 			this.errorCallback();

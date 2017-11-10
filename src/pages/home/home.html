@@ -8,6 +8,7 @@
 		(ionInput)="updateSearch()" 
 		placeholder="{{'header.ENTERLOCATION' | translate }}" style="width:70%;float:left">
 	</ion-searchbar>
+	<ion-spinner name="crescent" *ngIf="loadingCompleted !=true"></ion-spinner>
 	<div id="user-pic"></div>
 	<button ion-button menuToggle right	>
       <ion-icon name="menu"></ion-icon>
