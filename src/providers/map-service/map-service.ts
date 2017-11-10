@@ -12,12 +12,12 @@ export class MapService {
     
   }
 
-  createMapJDK(element){
+  createMapJDK(element, mapTypeControl){
   	var mapTypeId = google.maps.MapTypeId.ROADMAP;
-	  var mapTypeControl = true;
 	  var mapTypeControlOptions = {
 		  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
 	  };
+
 
   	var googleMapJDK = new google.maps.Map(element, {
 		center: {lat: 48.863129, lng: 2.345152},
@@ -71,6 +71,18 @@ export class MapService {
   	}	
   	return iconPath;
   }
+  getIconPathCurrentPosition(){
+    var iconPath = {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor:  '#FFFFFF',  
+      fillOpacity: 1,                
+      scale: 8,
+      strokeColor: '#33B9B2',
+      strokeWeight: 4
+    };
+    return iconPath;
+  }
+
   getLabelName(parc){
 		var label = {text: '', color: ""};
 		if(!parc.parcItem.open){

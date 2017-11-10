@@ -55,7 +55,8 @@ export class HomePage implements OnInit{
 	noParcReturned:boolean=false;
 	geoLocationMarker = new google.maps.Marker({
 		    position:  new google.maps.LatLng(0,0),
-		    map: this.googleMapJDK
+		    map: this.googleMapJDK,
+		    icon:this._map.getIconPathCurrentPosition()
 	   	});
 	loadingCompleted: boolean=true;
 	
@@ -335,7 +336,7 @@ export class HomePage implements OnInit{
 		this.mapHeight = String(this.platform.height()/2)+"px";
 		let element: HTMLElement = document.getElementById('map');
 
-		this.googleMapJDK = this._map.createMapJDK(element);
+		this.googleMapJDK = this._map.createMapJDK(element,false);
 
 		this.googleMapJDK.addListener('dragend', function() {
 			//console.log('dragend');
