@@ -75,11 +75,11 @@ export class MapService {
   getIconPathCurrentPosition(){
     var iconPath = {
       path: google.maps.SymbolPath.CIRCLE,
-      fillColor:  '#FFFFFF',  
+      fillColor:  '#33B9B2',  
       fillOpacity: 1,                
       scale: 8,
-      strokeColor: '#33B9B2',
-      strokeWeight: 4
+      strokeColor: '#FFFFFF',
+      strokeWeight: 2
     };
     return iconPath;
   }
