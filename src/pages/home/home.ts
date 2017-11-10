@@ -336,7 +336,11 @@ export class HomePage implements OnInit{
 		this.mapHeight = String(this.platform.height()/2)+"px";
 		let element: HTMLElement = document.getElementById('map');
 
-		this.googleMapJDK = this._map.createMapJDK(element,false);
+		this.googleMapJDK = this._map.createMapJDK(element,false,google.maps.MapTypeId.ROADMAP);
+		var centerControlDiv = document.createElement('div');
+		centerControlDiv.id="centerControlDiv";
+      	var centerControl = this.centerControl(centerControlDiv, this.googleMapJDK);
+      	this.googleMapJDK.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
 
 		this.googleMapJDK.addListener('dragend', function() {
 			//console.log('dragend');
@@ -414,4 +418,25 @@ export class HomePage implements OnInit{
 	geolocate = function(){
 		this.diagnostic.isLocationAuthorized().then(this.geolocateUser.bind(this)).catch(this.errorCallback.bind(this));
 	}
+
+	centerControl(controlDiv, map) {
+
+	    // Set CSS for the control border.
+	    var controlUI = document.createElement('div');
+
+	    controlUI.style.textAlign = 'center';
+	    controlUI.title = 'Click to recenter the map';
+	    controlDiv.appendChild(controlUI);
+	    // Set CSS for the control interior.
+	    var controlText = document.createElement('i');
+	    controlText.className = 'material-icons';
+	    controlText.innerHTML = 'my_location';
+	    controlUI.appendChild(controlText);
+
+	    // Setup the click event listeners: simply set the map to Chicago.
+	    controlUI.addEventListener('click', function() {
+	      this.geolocate();
+	    }.bind(this));
+
+  	}
 }

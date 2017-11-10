@@ -90,7 +90,7 @@ export class DetailsRootPage {
  
   	loadMap = function(){		
 		let element: HTMLElement = document.getElementById('mapDetail');
-		this.map = this._map.createMapJDK(element,true);
+		this.map = this._map.createMapJDK(element,true,google.maps.MapTypeId.HYBRID);
 		var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
 		this.map.setCenter(latLng);
 		this.map.setZoom(18);

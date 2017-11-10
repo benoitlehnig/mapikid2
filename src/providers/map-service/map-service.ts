@@ -12,8 +12,9 @@ export class MapService {
     
   }
 
-  createMapJDK(element, mapTypeControl){
-  	var mapTypeId = google.maps.MapTypeId.ROADMAP;
+  createMapJDK(element, mapTypeControl,mapTtypeId){
+  	var mapTypeId = mapTtypeId;
+
 	  var mapTypeControlOptions = {
 		  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
 	  };

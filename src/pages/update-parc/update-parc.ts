@@ -107,7 +107,7 @@ export class UpdateParcPage {
 
   loadMap = function(){
     let element: HTMLElement = document.getElementById('mapUpdateDetail');
-    this.map = this._map.createMapJDK(element,true);
+    this.map = this._map.createMapJDK(element,true,google.maps.MapTypeId.ROADMAP);
     if(this.mode==='add'){
       console.log(this.navParams.get('position'));
       this.parc.position =  {lat: this.navParams.get('position').lat(), lng: this.navParams.get('position').lng()} ;
