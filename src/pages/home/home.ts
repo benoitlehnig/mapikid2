@@ -140,6 +140,7 @@ export class HomePage implements OnInit{
 			this.googleMapJDK.setCenter(latLng);
 			this.googleMapJDK.setZoom(12);
 			this.mapCenter = this.googleMapJDK.getCenter();
+			this.geoLocationMarker.setMap(this.googleMapJDK);
 			this.geoLocationMarker.setPosition(latLng);
 			this.setupInitialGeoQuery();
 		}).catch((error) => {
@@ -393,6 +394,7 @@ export class HomePage implements OnInit{
             this.googleMapJDK.setCenter(latLng);
             this.mapCenter = this.googleMapJDK.getCenter();
             this.displayParcsAround(false,false);
+            this.geoLocationMarker.setMap(this.googleMapJDK);
             this.geoLocationMarker.setPosition(latLng);
 		}).catch((error) => {
 			console.log('Error getting location', error);
