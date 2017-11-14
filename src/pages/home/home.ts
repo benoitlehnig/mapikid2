@@ -121,8 +121,14 @@ export class HomePage implements OnInit{
 
 			this.loadingCompleted = false;
 			this.loadMap();
+			if(this.platform.is('ios')){
+				this.startGeolocation();
+			}
+			else{
+				this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
+			}
 			
-			this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
+			
         });		
 	}
 
