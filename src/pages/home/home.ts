@@ -424,7 +424,13 @@ export class HomePage implements OnInit{
     }
 
 	geolocate = function(){
-		this.diagnostic.isLocationAuthorized().then(this.geolocateUser.bind(this)).catch(this.errorCallback.bind(this));
+		if(this.platform.is('ios')){
+				this.startGeolocation();
+			}
+			else{
+				this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
+			}
+		
 	}
 
 	centerControl(controlDiv, map) {
