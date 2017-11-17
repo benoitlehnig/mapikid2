@@ -8,19 +8,18 @@
 
 <ion-content padding>
 	<ion-list>
-	  <ion-item class="text" *ngFor="let review	 of reviews  | async" >
+	  <ion-item class="text"  text-wrap *ngFor="let review	 of reviews  | async" >
 		<ion-avatar item-start>
 			<img src="{{review.photoUrl}}">
 		</ion-avatar>
 		
 		<h2>
-			<star-rating-comp [starType]="'svg'" [rating]="review.rate" [readOnly]="true"></star-rating-comp>
-			{{review.text}}
-			
+			{{review.name}}
 		</h2>
 		<h3>
-			{{review.name}}
+			<star-rating-comp [starType]="'svg'" [rating]="review.rate" [readOnly]="true"></star-rating-comp>
 		</h3>
+		<p>{{review.text}}</p>
 	  </ion-item>
 	</ion-list>					 
 </ion-content>

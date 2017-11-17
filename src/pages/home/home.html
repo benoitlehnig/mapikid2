@@ -29,12 +29,6 @@
         <div id="map"></div>
     </split-area>
     <split-area [size]="20">
-		<ion-fab bottom right >
-			<button ion-fab mini class="add" [navPush]="parcUpdate" [navParams]="{mode:'add', position:mapCenter}" ><ion-icon name="add"></ion-icon></button>
-		
-		</ion-fab>
-			
-			
 		<ion-list>
 		  	<ion-item class="text" *ngFor="let parc of parcs | orderbydistance " [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key, map:map}">
 			<h2>
@@ -59,7 +53,11 @@
 		</ion-list>
 		<div *ngIf="noParcReturned === true" class="noparc">{{ 'map.NOPARCFOUND' |translate}}</div>
     </split-area>
-</split>
 
+</split>
+<ion-fab bottom right >
+	<button ion-fab mini class="add" [navPush]="parcUpdate" [navParams]="{mode:'add', position:mapCenter}" ><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+			
 	 
 </ion-content>
