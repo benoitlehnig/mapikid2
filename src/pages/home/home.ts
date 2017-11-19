@@ -117,18 +117,15 @@ export class HomePage implements OnInit{
 				this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
 					this.geolocationNotAllowedLabel = res;
 				});
-	        });
-
-			this.loadingCompleted = false;
-			this.loadMap();
-			if(this.platform.is('ios')){
-				this.startGeolocation();
-			}
-			else{
-				this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
-			}
-			
-			
+				this.loadingCompleted = false;
+				this.loadMap();
+				if(this.platform.is('ios')){
+					this.startGeolocation();
+				}
+				else{
+					this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
+				}
+	        });		
         });		
 	}
 
