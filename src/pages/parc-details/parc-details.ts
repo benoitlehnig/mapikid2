@@ -12,6 +12,9 @@ import { ReviewsRootPage } from '../reviews-root/reviews-root';
 import { UpdateParcPage } from '../update-parc/update-parc';
 import { AddReviewPage } from '../add-review/add-review';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { LoginPage } from '../login/login';
+
+
 /**
  * Generated class for the ParcDetailsPage page.
  *
@@ -40,6 +43,7 @@ export class ParcDetailsPage {
 	toastLabelUpdated:String = "";
 	toastLabelAdded:String = "";
 	map=null;
+	login = LoginPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
   	db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
@@ -104,20 +108,27 @@ export class ParcDetailsPage {
 	
 		
   	openUpdateParcModal = function(){
-  		let obj = {parc: this.parc};
-  		let myModal = this.modalCtrl.create(UpdateParcPage,obj);
-  		myModal.onDidDismiss(data => {
-  			console.log("data",data);
-  			if(data ==='update'){
+  		if(this._auth.authenticated ===false ){
+  			let myModal = this.modalCtrl.create(this.login);
+    		myModal.present();
+  		}
+  		else{
+  			let obj = {parc: this.parc};
+  			let myModal = this.modalCtrl.create(UpdateParcPage,obj);
+	  		myModal.onDidDismiss(data => {
+	  			console.log("data",data);
+	  			if(data ==='update'){
 
-     		 this.presentToast(this.toastLabelUpdated);
-  			}
-  			if(data ==='add'){
-  				this.presentToast(this.toastLabelAdded);
-  			}
-   		});
-    	myModal.present();
+	     		 this.presentToast(this.toastLabelUpdated);
+	  			}
+	  			if(data ==='add'){
+	  				this.presentToast(this.toastLabelAdded);
+	  			}
+	   		});
+	    	myModal.present();
+  		}
   	}
+
   	openAddReviewModal = function(){
   		let obj = {parc: this.parc};
   		let myModal = this.modalCtrl.create(AddReviewPage,obj);

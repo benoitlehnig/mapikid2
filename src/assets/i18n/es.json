@@ -167,5 +167,11 @@
 		"LANGUAGEMENUCA": "Catalan",
 		"LANGUAGEMENUES": "Español",
 		"LANGUAGEMENUZH": "中国"
+	},
+	"login":{
+		"TITLE" : "Por favor autentica",
+		"TEXT" : "Para agregar o modificar parques o debe autenticarse.",
+		"SIGNINFACEBOOK": "Conectar con Facebook",
+		"CLOSE" : "Cerrar"
 	}
 }

@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 
-import { NavController,Platform,LoadingController,ToastController} from 'ionic-angular';
+import { NavController,Platform,LoadingController,ToastController,ModalController} from 'ionic-angular';
 import GeoFire from 'geofire';
 import * as firebase from 'firebase';
 import { AngularFireDatabase,FirebaseObjectObservable } from 'angularfire2/database';
@@ -21,6 +21,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
 
 @Component({
 	selector: 'page-home',
@@ -31,6 +32,7 @@ export class HomePage implements OnInit{
 
 	parcDetails = ParcDetailsPage;
 	parcUpdate = UpdateParcPage;
+	login =LoginPage;
 	parcs: any[];
 	userPicture:String="";
 	displayedList:any[];
@@ -67,7 +69,7 @@ export class HomePage implements OnInit{
 		public mapCluster: GoogleMapsClusterProvider,
 		public loadingCtrl: LoadingController,private translate: TranslateService,
 		private diagnostic: Diagnostic,public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,
-		private ga: FirebaseAnalytics,private storage: Storage) {
+		private ga: FirebaseAnalytics,private storage: Storage, public modalCtrl: ModalController) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -449,5 +451,16 @@ export class HomePage implements OnInit{
 	      this.geolocate();
 	    }.bind(this));
 
+  	}
+
+  	addParc(){
+  		if(this._auth.authenticated ===false ){
+  			let myModal = this.modalCtrl.create(this.login);
+    		myModal.present();
+  		}
+  		else{
+  
+  			this.navCtrl.push(this.parcUpdate, {mode:'add', position:this.mapCenter} );
+  		}
   	}
 }

@@ -1,31 +1,31 @@
 page-parc-details {
-.toolbar-background-md{
-	background-color: #8EC63F;
-}
-.bar-button-default-md{
-	color:#ffffff
-}
-.toolbar-title-md{
-	color:#ffffff
-}
-#mapDetails{
-        height: calc(100%);
-        min-height:1px;
+    .toolbar-background-md{
+    	background-color: #8EC63F;
     }
-.topNoScroll{
-	overflow-y:hidden;
-}
-.button-outline-md {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    color: #FFFFFF;
-    font-size:0.8em;
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-.toolbar-content-md,.toolbar-content-ios {
-    text-align:center;
-}
+    .bar-button-default-md{
+    	color:#ffffff
+    }
+    .toolbar-title-md{
+    	color:#ffffff
+    }
+    #mapDetails{
+            height: calc(100%);
+            min-height:1px;
+        }
+    .topNoScroll{
+    	overflow-y:hidden;
+    }
+    .button-outline-md {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #FFFFFF;
+        color: #FFFFFF;
+        font-size:0.8em;
+        background-color: transparent;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .toolbar-content-md,.toolbar-content-ios {
+        text-align:center;
+    }
 }

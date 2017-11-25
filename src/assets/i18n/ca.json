@@ -167,5 +167,11 @@
 		"LANGUAGEMENUCA": "Catalan",
 		"LANGUAGEMENUES": "Español",
 		"LANGUAGEMENUZH": "中国"
+	},
+	"login" : {
+		"TITLE" : "Autenticar",
+		"TEXT" : "Per afegir o modificar parcs o heu d'autenticar.",
+		"SIGNINFACEBOOK": "Connecta't amb Facebook",
+		"CLOSE" : "Tanca"
 	}
 }

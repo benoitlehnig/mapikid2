@@ -14,8 +14,9 @@
 		"SIGNOUT": "Ausloggen",
 		"ENTERLOCATION":"Geben Sie einen Standort ein",
 		"NONAMEPARC" :"Spielplatz",
-		"MOREINFO" : "More Information",
-		"FEEDBACKBUTTON" : "Mehr Informationen"
+		"MOREINFO" : "Mehr Informationen",
+		"LANGUAGE" : "Sprache",
+		"FEEDBACKBUTTON" : "Kontaktiere uns"
 	},
 	"map":{
 		"ADDPARCBUTTON":"Füge einen neuen Park hinzu",
@@ -167,5 +168,11 @@
 		"LANGUAGEMENUCA": "Catalan",
 		"LANGUAGEMENUES": "Español",
 		"LANGUAGEMENUZH": "中国"	
+	},
+	"login" : {
+		"TITLE": "Bitte authentifizieren",
+		"TEXT": "Um Parks hinzuzufügen oder zu ändern oder um sich zu authentifizieren.",
+		"SIGNINFACEBOOK": "Mit Facebook verbinden",
+		"CLOSE": "Schließen"
 	}
 }

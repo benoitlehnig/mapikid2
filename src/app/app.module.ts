@@ -15,6 +15,7 @@ import { FirstVisitPage } from '../pages/first-visit/first-visit';
 import { AddReviewPage } from '../pages/add-review/add-review';
 import { ContactPage } from '../pages/contact/contact';
 import { LanguagePage } from '../pages/language/language';
+import { LoginPage } from '../pages/login/login';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -66,6 +67,7 @@ export function createTranslateLoader(http: Http) {
     FirstVisitPage, 
     AddReviewPage,
     ContactPage,
+    LoginPage,
     LanguagePage,
     OrderByDistancePipe
   ],
@@ -102,7 +104,8 @@ export function createTranslateLoader(http: Http) {
         FirstVisitPage,
         AddReviewPage,
         ContactPage,
-        LanguagePage
+        LanguagePage,
+        LoginPage
   	  ],
 	 exports: [
         TranslateModule,

@@ -168,5 +168,11 @@
 		"LANGUAGEMENUCA": "Catalan",
 		"LANGUAGEMENUES": "Español",
 		"LANGUAGEMENUZH": "中国"
+	},
+	"login":{
+		"TITLE": "Please authenticate",
+		"TEXT": "To add or modify parks or you must authenticate.",
+		"SIGNINFACEBOOK": "Connect with Facebook",
+		"CLOSE": "Close"
 	}
 }
