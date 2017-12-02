@@ -68,6 +68,9 @@
 	            </li>
 	        </ul>
 	     	<div class="separator"></div>
+	    </div>
+	    <div id="parcDetailsDescription" *ngIf="parc.description">
+	    	{{parc.description}}<div class="separator"></div>
 	    </div>        
 		<div id="parcDetailsFacilities">
 			 <h5>{{numberOfEquipment}} {{ 'parcDetails.EQUIPMENTS'| translate }}</h5>
@@ -94,12 +97,13 @@
 				[ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"></ion-img>
 				<ion-img src="assets/images/sandbox icon.png"
 				[ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<div *ngIf="parc.facilities.other ==true">
-						{{parc.facilities.otherDescription}}
+				<div class="other" *ngIf="parc.facilities.other ==true">
+					<i class="material-icons">info</i>
+					<span>{{parc.facilities.otherDescription}}</span>
 				</div>
 			</div>
 		</div>
-		<div id="parcDetailsDescription" *ngIf="parc.description">{{parc.description}}</div>
+		
 	</div>	
 	<div id="mapStreetView" class="mdl-shadow--4dp"></div>
 	<div id="parcDetailspicture" *ngIf="parc.pictureUrl">

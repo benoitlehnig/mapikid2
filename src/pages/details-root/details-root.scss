@@ -48,4 +48,14 @@ page-details-root {
 	.hide{
   		display: none;
 	}
+	.other .material-icons{
+		font-size: 44px;
+	    color: #8EC63F;
+	    position: relative;
+	    left: -4px;
+	}
+	.other span{
+		position:relative;
+		top:-16px;
+	}
 }

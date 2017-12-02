@@ -146,6 +146,13 @@ export class UpdateParcPage {
 
       this.parc.open =false;
     }
+    if(this.parc.facilities.otherDescription.replace(/\s+/g,"").length>0){
+      this.parc.facilities.other =true;
+    }
+    else{
+      this.parc.facilities.other =false;
+      this.parc.facilities.otherDescription =null;
+    }
     console.log(this.parc);
     if(this.mode==='update'){
       var parcObject = this.db.object('positions/'+this.parc.$key);

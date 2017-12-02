@@ -115,16 +115,12 @@
       <ion-label>{{'parcUpdate.ANIMALS'|translate}}</ion-label>
       <ion-toggle [(ngModel)]="parc.facilities.animals"></ion-toggle>
   </ion-item>
-  <ion-item>
+  <ion-item class="other">
       <ion-avatar item-start>
-        <img class="facilitiesIcon"  src="assets/images/Horse icon icon.png">
+        <i class="material-icons">info</i>
       </ion-avatar>
-      <ion-label *ngIf="parc.facilities.other===true">Other</ion-label>
-      <ion-label *ngIf="parc.facilities.other===false" floating>description of the element</ion-label>
-      <ion-input *ngIf="parc.facilities.other===true" type="text" [(ngModel)]="parc.facilities.otherDescription"></ion-input>
-      <ion-toggle [(ngModel)]="parc.facilities.other"></ion-toggle>
-
-      
+      <ion-input placeholder="Type any element not present in the list above" type="text" [(ngModel)]="parc.facilities.otherDescription">
+      </ion-input>      
   </ion-item>
 	
 </ion-content>
