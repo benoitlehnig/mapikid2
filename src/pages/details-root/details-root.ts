@@ -135,6 +135,7 @@ export class DetailsRootPage {
 			if(this.parc.facilities.spider ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.swing ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.trampoline ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.other){this.numberOfEquipment++};
 		}
 		console.log(this.numberOfEquipment);
 		if(this.numberOfEquipment>0){this.isLowNumberofEquipment = false;}

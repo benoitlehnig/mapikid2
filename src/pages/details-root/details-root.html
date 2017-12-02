@@ -94,6 +94,9 @@
 				[ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"></ion-img>
 				<ion-img src="assets/images/sandbox icon.png"
 				[ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<div *ngIf="parc.facilities.other ==true">
+						{{parc.facilities.otherDescription}}
+				</div>
 			</div>
 		</div>
 		<div id="parcDetailsDescription" *ngIf="parc.description">{{parc.description}}</div>

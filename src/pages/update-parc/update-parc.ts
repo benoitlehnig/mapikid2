@@ -42,7 +42,9 @@ export class UpdateParcPage {
             spider:false,
             monkeyBridge:false,
             animals:  false,
-            sandbox:  false
+            sandbox:  false,
+            other:false,
+            otherDescrition:null
           },
           lessThan2years: false,
           between2and6: false,
@@ -73,7 +75,9 @@ export class UpdateParcPage {
               spider:false,
               monkeyBridge:false,
               animals:  false,
-              sandbox:false
+              sandbox:false,
+              other: false,
+              otherDescription: null
         };
       }
       else {
@@ -86,11 +90,12 @@ export class UpdateParcPage {
         if(!this.parc.facilities.monkeyBridge){this.parc.facilities.monkeyBridge =false;}
         if(!this.parc.facilities.animals){this.parc.facilities.animals = false;}
         if(!this.parc.facilities.sandbox){this.parc.facilities.sandbox = false;}
+        if(!this.parc.facilities.other){this.parc.facilities.other = false;}
+        if(!this.parc.facilities.otherDescription){this.parc.facilities.otherDescription = null;}
       }
     }
     else{
       console.log(this.navParams.get('position'));
-      console.log()
       this.parc.position =  {lat: this.navParams.get('position').lat(), lng: this.navParams.get('position').lng()} ;
     }
     console.log(this.parc);

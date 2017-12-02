@@ -16,6 +16,7 @@ import { AddReviewPage } from '../pages/add-review/add-review';
 import { ContactPage } from '../pages/contact/contact';
 import { LanguagePage } from '../pages/language/language';
 import { LoginPage } from '../pages/login/login';
+import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -40,6 +41,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import { MapService } from '../providers/map-service/map-service';
 import { IonicPageModule } from 'ionic-angular';
 
+import { AdMobFree } from '@ionic-native/admob-free';
 
 
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
@@ -69,6 +71,7 @@ export function createTranslateLoader(http: Http) {
     ContactPage,
     LoginPage,
     LanguagePage,
+    LegalMentionPage,
     OrderByDistancePipe
   ],
   imports: [
@@ -105,7 +108,8 @@ export function createTranslateLoader(http: Http) {
         AddReviewPage,
         ContactPage,
         LanguagePage,
-        LoginPage
+        LoginPage,
+        LegalMentionPage
   	  ],
 	 exports: [
         TranslateModule,
@@ -130,7 +134,8 @@ export function createTranslateLoader(http: Http) {
     Diagnostic,
     OpenNativeSettings,
     GoogleAnalytics,
-    FirebaseAnalytics
+    FirebaseAnalytics,
+    AdMobFree
   ]
 })
 export class AppModule {}

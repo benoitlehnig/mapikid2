@@ -22,6 +22,8 @@ import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+
 
 @Component({
 	selector: 'page-home',
@@ -61,6 +63,11 @@ export class HomePage implements OnInit{
 		    icon:this._map.getIconPathCurrentPosition()
 	   	});
 	loadingCompleted: boolean=true;
+	bannerConfig: AdMobFreeBannerConfig = {
+	 id: 'ca-app-pub-1937225175114473/3354580488',
+	 isTesting: true,
+	 autoShow: true
+	};
 	
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -69,7 +76,7 @@ export class HomePage implements OnInit{
 		public mapCluster: GoogleMapsClusterProvider,
 		public loadingCtrl: LoadingController,private translate: TranslateService,
 		private diagnostic: Diagnostic,public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,
-		private ga: FirebaseAnalytics,private storage: Storage, public modalCtrl: ModalController) {
+		private ga: FirebaseAnalytics,private storage: Storage, public modalCtrl: ModalController,private admobFree: AdMobFree) {
 
 		this.numberParcLoaded = new Subject();
 		this.numberParcLoaded.next(0);
@@ -127,8 +134,18 @@ export class HomePage implements OnInit{
 				else{
 					this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
 				}
-	        });		
-        });		
+	        });	
+	       
+		});
+		this.admobFree.banner.config(this.bannerConfig);
+
+		this.admobFree.banner.prepare()
+		  	.then(() => {
+		    // banner Ad is ready
+		    // if we set autoShow to false, then we will need to call the show method here
+		    	//this.admobFree.banner.show();
+		  	})
+		  	.catch(e => console.log(e));			
 	}
 
 	startGeolocation = function(){
@@ -463,4 +480,4 @@ export class HomePage implements OnInit{
   			this.navCtrl.push(this.parcUpdate, {mode:'add', position:this.mapCenter} );
   		}
   	}
-}
+  }

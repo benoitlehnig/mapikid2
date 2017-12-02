@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../pages/home/home';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
+import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
 import { ContactPage } from '../pages/contact/contact';
 import {TranslateService,LangChangeEvent} from 'ng2-translate';
 import { AuthService } from '../providers/auth-service/auth-service';
@@ -83,6 +84,9 @@ export class MyApp {
   signInWithGoogle(): void {
     this._auth.signInWithGoogle()
   }
+  showLegalMention = function(){
+    this.app.getActiveNav().push(LegalMentionPage);
+  }
   signInWithFacebook(): void {
     this._auth.signInWithFacebook()
   }
@@ -91,7 +95,7 @@ export class MyApp {
   }
   openLanguage():void{
     let myModal = this.modalCtrl.create(LanguagePage);
-     myModal.present();
+    myModal.present();
   }
 
 }
