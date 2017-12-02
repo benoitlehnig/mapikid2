@@ -114,7 +114,8 @@
 		"CANCELBUTTON": "Annuler",
 		"TOASTPARCUPDATED": "Le parc a été modifié avec succés, merci !",
 		"TOASTPARCADDED": "Le parc a été ajouté avec succés, merci !",
-		"EQUIPMENTS":"Equipements"
+		"EQUIPMENTS":"Equipements",
+		"OTHER":"Ajoutez des équipements non listés au dessus"
 
 	},
 	"firstVisit":{

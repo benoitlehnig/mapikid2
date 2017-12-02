@@ -116,7 +116,8 @@
 		"CANCELBUTTON": "Abbrechen",
 		"TOASTPARCUPDATED": "Spielplatz udated, danke für die Änderung!",
 		"TOASTPARCADDED": "Spielplatz erfolgreich hinzugefügt, danke!",
-		"EQUIPMENTS":"Anlagen"
+		"EQUIPMENTS":"Anlagen",
+		"OTHER":"Fügen Sie Ausrüstung hinzu, die nicht oben aufgeführt ist"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",

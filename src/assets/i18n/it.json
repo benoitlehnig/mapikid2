@@ -115,7 +115,8 @@
 		"CANCELBUTTON": "Annulla",
 		"TOASTPARCUPDATED": "Parco giochi, grazie per la modifica!",
 		"TOASTPARCADDED": "Il parco giochi è stato aggiunto con successo, grazie!",
-		"EQUIPMENTS":"Facilities"
+		"EQUIPMENTS":"Facilities",
+		"OTHER":"Aggiungi attrezzature non elencate sopra"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",

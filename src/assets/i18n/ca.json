@@ -17,7 +17,7 @@
 		"MOREINFO" : "Més informació",
 		"FEEDBACKBUTTON" : "Contacteu amb nosaltres",
 		"LANGUAGE": "LLENGUATGE",
-		"LEGALMENTION": "Terms of use"
+		"LEGALMENTION": "Mencions legals"
 	},
 	"map":{
 		"ADDPARCBUTTON":"Afegeix un nou parc",
@@ -115,7 +115,8 @@
 		"CANCELBUTTON": "Cancel·la",
 		"TOASTPARCUPDATED": "Parc infantil estimat, gràcies per la modificació !",
 		"TOASTPARCADDED": "S'ha afegit amb èxit el joc, gràcies !",
-		"EQUIPMENTS":"instal·lacions"
+		"EQUIPMENTS":"instal·lacions",
+		"OTHER":"Afegiu equips no inclosos a la llista anterior"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",

@@ -114,7 +114,8 @@
 		"CANCELBUTTON": "取消",
 		"TOASTPARCUPDATED": "公园已经成功修改，谢谢！",
 		"TOASTPARCADDED": "公园已经成功添加，谢谢！",
-		"EQUIPMENTS":"设备"
+		"EQUIPMENTS":"设备",
+		"OTHER":"添加上面未列出的设备"
 	},
 	"firstVisit":{
 		"APPNAME": "Mapikid",

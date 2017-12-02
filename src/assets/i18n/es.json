@@ -114,7 +114,8 @@
 		"CANCELBUTTON": "Cancelar",
 		"TOASTPARCUPDATED": "El parque ha sido cambiado con éxito, ¡gracias!",
 		"TOASTPARCADDED": "¡El parque se ha agregado con éxito, gracias!",
-		"EQUIPMENTS":"Equipos"
+		"EQUIPMENTS":"Equipos",
+		"OTHER":"Agregar equipo no mencionado anteriormente"
 	},
 	"firstVisit":{
 		"APPNAME" :"Mapikid",
@@ -175,7 +176,7 @@
 		"SIGNINFACEBOOK": "Conectar con Facebook",
 		"CLOSE" : "Cerrar"
 	},
-		"legalMention":{
+	"legalMention":{
 		"LEGALMENTION": "Mentions Légales",
 		"EDITOR": "Editeur : Benoit Lehnig",
 		"PUBLICATIONDIRECTOR": "Directeur de la publication : Benoit Lehnig ",

@@ -115,7 +115,8 @@
 		"CANCELBUTTON": "Cancel",
 		"TOASTPARCUPDATED": "Playground udated, thanks for the modification !",
 		"TOASTPARCADDED": "Playground successfully added, thanks !",
-		"EQUIPMENTS":"Facilities"
+		"EQUIPMENTS":"Facilities",
+		"OTHER":"Type elements not present in the list above"
 	},
 	"firstVisit":{
 		"APPNAME":"Mapikid",
