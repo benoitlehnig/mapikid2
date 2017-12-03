@@ -65,7 +65,7 @@ export class HomePage implements OnInit{
 	loadingCompleted: boolean=true;
 	bannerConfig: AdMobFreeBannerConfig = {
 	 id: 'ca-app-pub-1937225175114473/3354580488',
-	 isTesting: true,
+	 isTesting: false,
 	 autoShow: true
 	};
 	
