@@ -11,8 +11,14 @@ page-login {
     .padding{
     	padding:16px;
     }
+
     .button-outline-ios {
 	    color: #8EC63F		;
 	    border-color: #8EC63F;
 	}
+	.button-outline-md, .button-outline-ios{
+		width: calc(100% - 72px);
+    	text-align: center;
+    	margin: 12px auto 12px auto;
+    }
 }

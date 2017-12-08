@@ -26,6 +26,11 @@ export class LoginPage {
     this._auth.signInWithFacebook();
     this.viewCtrl.dismiss();
   }
+
+  signInWithGoogle(): void {
+    this._auth.signInWithGoogle();
+    this.viewCtrl.dismiss();
+  }
   
   close(){
   	this.viewCtrl.dismiss();

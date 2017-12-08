@@ -16,10 +16,14 @@
 <ion-content padding >
 	<p class="padding">{{ 'login.TEXT'| translate }}</p>
  	<div class="center">
- 		<button  ion-button outline icon-left (click)="signInWithFacebook()" >
- 		<ion-icon name="logo-facebook"></ion-icon>
+ 		<button  ion-button outline icon-left block (click)="signInWithFacebook()" >
+ 		  <ion-icon name="logo-facebook"></ion-icon>
         {{ 'login.SIGNINFACEBOOK'| translate }}
-    	</button>
+    </button>
+    <button  ion-button outline icon-left block (click)="signInWithGoogle()" >
+      <ion-icon name="logo-google"></ion-icon>
+        {{ 'login.SIGNINGOOGLE'| translate }}
+    </button>
     </div>
 </ion-content>
 

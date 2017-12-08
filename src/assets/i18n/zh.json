@@ -172,6 +172,7 @@
 		"TITLE" : "请认证",
 		"TEXT" : "添加或修改公园或者你必须验证。",
 		"SIGNINFACEBOOK" : "连接Facebook", 
+		"SIGNINGOOGLE" : "连接Google", 
 		"CLOSE" : "关闭"
 	},
 		"legalMention":{

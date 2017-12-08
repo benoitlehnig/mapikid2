@@ -17,6 +17,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import * as firebase from 'firebase/app';
 
 import { LanguagePage } from '../pages/language/language';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,10 +26,15 @@ export class MyApp {
   rootPage:any = HomePage;
   translate: TranslateService;
   userSigned: boolean=false;
-
+  bannerConfig: AdMobFreeBannerConfig = {
+    id: 'ca-app-pub-1937225175114473/3354580488',
+    isTesting: false,
+    autoShow: true
+  };
+  
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
-    private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController) {
+    private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,private admobFree: AdMobFree) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
@@ -38,6 +44,19 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
         statusBar.styleDefault();
+        if(this.platform.is('android')){
+          this.bannerConfig.id = "ca-app-pub-1937225175114473/4113122211";
+        }
+        this.admobFree.banner.config(this.bannerConfig);
+
+        this.admobFree.banner.prepare()
+        .then(() => {
+        // banner Ad is ready
+        // if we set autoShow to false, then we will need to call the show method here
+          //this.admobFree.banner.show();
+        })
+        .catch(e => console.log(e));  
+        
         splashScreen.hide();
         this.translate= translate;
         this.translate.setDefaultLang('fr');

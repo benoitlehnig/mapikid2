@@ -174,6 +174,7 @@
 		"TITLE" : "Por favor autentica",
 		"TEXT" : "Para agregar o modificar parques o debe autenticarse.",
 		"SIGNINFACEBOOK": "Conectar con Facebook",
+		"SIGNINGOOGLE": "Conectar con Google",
 		"CLOSE" : "Cerrar"
 	},
 	"legalMention":{
