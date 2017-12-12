@@ -85,7 +85,10 @@
 			"FRIDAY": "Vendredi",
 			"SATURDAY": "Samedi",
 			"SUNDAY": "Dimanche",
-			"TOILETSAROUNDCOUNT": "Toilettes près du parc : "
+			"TOILETSAROUNDCOUNT": "Toilettes près du parc : ",
+			"CURRENTWEATHER": "Météo actuelle",
+			"WEATHERIN": "Dans ",
+			"WEATHERHOURS": " heures "
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Ajouter un nouveau parc",

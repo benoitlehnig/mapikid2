@@ -86,7 +86,10 @@
 		"FRIDAY": "Dijous",
 		"SATURDAY": "Dissabte",
 		"SUNDAY": "Diumenge",
-		"TOILETSAROUNDCOUNT": "Lavabos tancats al parc: "
+		"TOILETSAROUNDCOUNT": "Lavabos tancats al parc: ",
+		"CURRENTWEATHER": "Clima actual",
+		"WEATHERIN": "Dins de ",
+		"WEATHERHOURS": " hores"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Afegeix un nou parc",

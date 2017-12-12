@@ -46,6 +46,7 @@ import { AdMobFree } from '@ionic-native/admob-free';
 
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
 import { OrderByDistancePipe } from '../pipes/order-by-distance/order-by-distance';
+import { WeatherProvider } from '../providers/weather/weather';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyBr7eaeJLc7iosJIBTBTmayxLeN9BvBJ48",
@@ -135,7 +136,8 @@ export function createTranslateLoader(http: Http) {
     OpenNativeSettings,
     GoogleAnalytics,
     FirebaseAnalytics,
-    AdMobFree
+    AdMobFree,
+    WeatherProvider
   ]
 })
 export class AppModule {}

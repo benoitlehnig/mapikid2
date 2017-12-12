@@ -10,6 +10,9 @@
 <ion-content padding>
 	<div id="mapDetail"></div>
 	<div class="mapDetails">
+		
+
+
 		<div *ngIf="parc.open == false" class="details">
 			<i class="material-icons" >close</i>
 			<span>{{'parcDetails.CLOSED'|translate}}</span>
@@ -106,6 +109,25 @@
 		
 	</div>	
 	<div id="mapStreetView" class="mdl-shadow--4dp"></div>
-	<div id="parcDetailspicture" *ngIf="parc.pictureUrl">
-	</div>
+	<div id="parcDetailspicture" *ngIf="parc.pictureUrl"></div>
+	<ion-grid>
+	  <ion-row>
+	    <ion-col class="current" col-4 *ngIf="localWeather">
+      		<h4>{{'parcDetails.CURRENTWEATHER'|translate}}</h4>
+      		<i class="wi wi-owm-{{localWeather.weather[0].id}}"></i>
+      		<h3 class="temperature">{{round(localWeather.main.temp)}} °C</h3>
+   		</ion-col>
+	    <ion-col *ngIf="localWeather" col-8 class="forecastWeather">
+	    	<ion-grid>
+	    		<ion-row>
+		    		<ion-col col-4 *ngFor="let weather of localWeatherForecast | slice:1;let i = index">
+		    			<h4>{{'parcDetails.WEATHERIN'|translate}} {{(i+1)*3}} {{'parcDetails.WEATHERHOURS'|translate}}</h4>
+		    			<i  class="wi wi-owm-{{weather.weather[0].id}}"></i>
+	      				<h3 class="temperature">{{round(weather.main.temp)}} °C</h3>
+			    	</ion-col>
+			    </ion-row>
+			</ion-grid>
+		</ion-col>
+	  </ion-row>
+	</ion-grid>
 </ion-content>

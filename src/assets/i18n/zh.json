@@ -85,7 +85,10 @@
 			"FRIDAY": "星期五",
 			"SATURDAY": "星期六",
 			"SUNDAY": "星期天",
-			"TOILETSAROUNDCOUNT": "公园附近的厕所： "
+			"TOILETSAROUNDCOUNT": "公园附近的厕所： ",
+			"CURRENTWEATHER": "目前的天气",
+			"WEATHERIN": "在 ",
+			"WEATHERHOURS": " 小时内"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"添加新公园",

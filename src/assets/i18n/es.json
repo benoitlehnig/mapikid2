@@ -85,7 +85,10 @@
 		"FRIDAY": "Viernes",
 		"SATURDAY": "Sábado",
 		"SUNDAY": "Domingo",
-		"TOILETSAROUNDCOUNT": "Baños cerca del parque : "
+		"TOILETSAROUNDCOUNT": "Baños cerca del parque : ",
+		"CURRENTWEATHER": "Clima actual",
+		"WEATHERIN": "Dentro de ",
+		"WEATHERHOURS": " horas"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC": "Agregar un nuevo parque",

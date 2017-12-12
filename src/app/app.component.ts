@@ -32,6 +32,7 @@ export class MyApp {
     autoShow: true
   };
   
+  
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
     private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,private admobFree: AdMobFree) {

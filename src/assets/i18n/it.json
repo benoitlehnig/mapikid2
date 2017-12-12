@@ -86,7 +86,10 @@
 			"FRIDAY": "Venerdì",
 			"SATURDAY": "Sabato",
 			"SUNDAY": "Domenica",
-			"TOILETSAROUNDCOUNT": "Bagni chiusi al parco : "
+			"TOILETSAROUNDCOUNT": "Bagni chiusi al parco : ",
+			"CURRENTWEATHER": "Tempo attuale",
+			"WEATHERIN": "Entro ",
+			"WEATHERHOURS": " ore"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Aggiungi nuovo parco",

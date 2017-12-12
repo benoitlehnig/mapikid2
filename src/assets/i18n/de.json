@@ -87,7 +87,10 @@
 			"FRIDAY": "Freitag",
 			"SATURDAY": "Samstag",
 			"SUNDAY": "Sonntag",
-			"TOILETSAROUNDCOUNT": "Toiletten geschlossen zum Park : "
+			"TOILETSAROUNDCOUNT": "Toiletten geschlossen zum Park : ",
+			"CURRENTWEATHER": "Aktuelles Wetter",
+			"WEATHERIN": "In ",
+			"WEATHERHOURS": " Stunden"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Neuen Park hinzufügen",

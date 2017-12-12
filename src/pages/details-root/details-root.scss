@@ -58,4 +58,23 @@ page-details-root {
 		position:relative;
 		top:-16px;
 	}
+	.wi{
+		color: #8EC63F;
+		font-size:2.5em;
+	}
+	.temperature{
+		color: #8EC63F;
+	}
+	.forecastWeather, .forecastWeather .grid{
+		padding:0px;
+		text-align:center;
+	}
+	.current{
+		background: #8EC63F;
+		color:#FFFFFF;
+		text-align:center;
+	}
+	.current .temperature, .current .wi{
+		color: #FFFFFF;
+	}
 }
