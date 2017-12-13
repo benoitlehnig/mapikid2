@@ -32,6 +32,9 @@ export class DetailsRootPage {
 	marker = null;
 	public localWeather:Object;
 	public localWeatherForecast:Object;
+	public uvIndex:Object;
+	public pollution:Object;
+
 
 	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
 		db: AngularFireDatabase, translate: TranslateService,private _map:MapService, private weatherService:WeatherProvider) {
@@ -150,12 +153,26 @@ export class DetailsRootPage {
 			  this.localWeather = data;
 			  console.log(data);
 			});
+		this.weatherService.uvIndex(this.parc.position.lat, this.parc.position.lng)
+		.map(data => data.json())
+			.subscribe(data=> {
+			  this.uvIndex = data;
+			  console.log(data);
+			});
+		/*this.weatherService.pollution(this.parc.position.lat, this.parc.position.lng)
+		.map(data => data.json())
+			.subscribe(data=> {
+			  this.pollution = data;
+			  console.log(data);
+			});*/
 		this.weatherService.forecastGeographicCoordinates(this.parc.position.lat, this.parc.position.lng,4)
 		.map(data => data.json())
 			.subscribe(data=> {
 			  this.localWeatherForecast = data.list;
 			  console.log(data);
 			});
+
+
 	}
   	isToiletsRegistered = function(key) {
 		let id :number = -1;

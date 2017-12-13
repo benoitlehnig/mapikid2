@@ -25,6 +25,19 @@ export class WeatherProvider {
       	url+='&units=metric';
    		return this.http.get(url);
   	}
+    uvIndex(lat: string , lon:string){
+      let url = this.baseUrl +'uvi';
+      url+= `?lat=${lat}&lon=${lon}`;
+      url+= '&appid=' +this.appId;
+      return this.http.get(url);
+    }
+    pollution(lat: string , lon:string){
+      let url = "http://api.openweathermap.org/pollution/v1/co";
+      url+= `/${lat},${lon}`;
+      url+= '/current';
+      url+= '?appid=' +this.appId;
+      return this.http.get(url);
+    }
   
   	forecastGeographicCoordinates(lat: string , lon:string , numbOfDays:number){
 
