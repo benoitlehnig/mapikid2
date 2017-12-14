@@ -60,7 +60,7 @@ page-details-root {
 	}
 	.wi{
 		color: #8EC63F;
-		font-size:2.5em;
+		font-size:3em;
 	}
 	.temperature{
 		color: #8EC63F;
@@ -73,8 +73,24 @@ page-details-root {
 		background: #8EC63F;
 		color:#FFFFFF;
 		text-align:center;
+		padding-bottom:0px;
 	}
 	.current .temperature, .current .wi{
 		color: #FFFFFF;
+	}
+	.uvIndex0,.uvIndex1,.uvIndex2{
+		background: rgb(40, 149, 0);
+	}
+	.uvIndex3,.uvIndex4,.uvIndex5{
+		background: rgb(247, 228, 0);
+	}
+	.uvIndex6,.uvIndex7,.uvIndex8{
+		background: rgb(248, 89, 0);
+	}
+	.uvIndex9,.uvIndex10{
+		background:rgb(248, 89, 0);
+	}
+	.uvIndex11, .uvIndex12,.uvIndex13, .uvIndex14,.uvIndex15, .uvIndex16,.uvIndex17, .uvIndex18,.uvIndex19, .uvIndex20,.uvIndex21, .uvIndex22{
+		background:rgb(107, 73, 200);
 	}
 }

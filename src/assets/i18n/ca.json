@@ -89,7 +89,8 @@
 		"TOILETSAROUNDCOUNT": "Lavabos tancats al parc: ",
 		"CURRENTWEATHER": "Clima actual",
 		"WEATHERIN": "Dins de ",
-		"WEATHERHOURS": " hores"
+		"WEATHERHOURS": " hores",
+		"UVINDEX": "Índex UV"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Afegeix un nou parc",

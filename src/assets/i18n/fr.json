@@ -88,7 +88,8 @@
 			"TOILETSAROUNDCOUNT": "Toilettes près du parc : ",
 			"CURRENTWEATHER": "Météo actuelle",
 			"WEATHERIN": "Dans ",
-			"WEATHERHOURS": " heures "
+			"WEATHERHOURS": " heures ",
+			"UVINDEX": "Indice UV"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Ajouter un nouveau parc",

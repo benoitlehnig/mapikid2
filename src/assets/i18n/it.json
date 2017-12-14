@@ -89,7 +89,8 @@
 			"TOILETSAROUNDCOUNT": "Bagni chiusi al parco : ",
 			"CURRENTWEATHER": "Tempo attuale",
 			"WEATHERIN": "Entro ",
-			"WEATHERHOURS": " ore"
+			"WEATHERHOURS": " ore",
+			"UVINDEX": "Indice UV"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Aggiungi nuovo parco",

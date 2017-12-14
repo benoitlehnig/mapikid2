@@ -89,7 +89,8 @@
 			"TOILETSAROUNDCOUNT": "Toilets closed to the park : ",
 			"CURRENTWEATHER": "Current weather",
 			"WEATHERIN": "In ",
-			"WEATHERHOURS": " hours"
+			"WEATHERHOURS": " hours",
+			"UVINDEX": "UV Index"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Add New Park",
