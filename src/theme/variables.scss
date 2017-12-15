@@ -13,7 +13,7 @@ $app-direction: ltr;
 
 
 @import "ionic.globals";
-
+@import "weather-icons-master/sass/weather-icons.scss";
 
 // Shared Variables
 // --------------------------------------------------
@@ -86,3 +86,16 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+@font-face {
+    font-family: 'weathericons';
+    src: url('#{$font-path}/weathericons-regular-webfont.eot');
+    src: url('#{$font-path}/weathericons-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$font-path}/weathericons-regular-webfont.woff2') format('woff2'),
+         url('#{$font-path}/weathericons-regular-webfont.woff') format('woff'),
+         url('#{$font-path}/weathericons-regular-webfont.ttf') format('truetype'),
+         url('#{$font-path}/weathericons-regular-webfont.svg#weather_iconsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

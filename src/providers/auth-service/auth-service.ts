@@ -43,7 +43,8 @@ export class AuthService {
     if (this.platform.is('cordova')) {
       return this.googlePlus.login(
         {'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-        'webClientId': '173150624731-hhbhkegkks3becjeklm8jd448uubogqj.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+        'webClientId': '173150624731-3gj50f18au5gtvqtbq5o1pa50hj832nk.apps.googleusercontent.com',
+         // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
         'offline': true
         }
         )

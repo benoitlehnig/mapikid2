@@ -6,7 +6,7 @@ import GeoFire from 'geofire';
 import {TranslateService} from 'ng2-translate';
 import * as firebase from 'firebase';
 import { MapService } from '../../providers/map-service/map-service';
-
+import { WeatherProvider } from '../../providers/weather/weather';
 /**
  * Generated class for the DetailsRootPage page.
  *
@@ -30,9 +30,14 @@ export class DetailsRootPage {
 	labelWeekDay : string[] = ['','','','','','',''];
 	parcObject: FirebaseObjectObservable<any>;
 	marker = null;
+	public localWeather:Object;
+	public localWeatherForecast:Object;
+	public uvIndex:Object;
+	public pollution:Object;
+
 
 	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
-		db: AngularFireDatabase, translate: TranslateService,private _map:MapService) {
+		db: AngularFireDatabase, translate: TranslateService,private _map:MapService, private weatherService:WeatherProvider) {
 		console.log(navParams.data.$key);
 		this.parcObject = db.object('positions/'+navParams.data.$key);
 		this.parcObject.subscribe(snapshot => {
@@ -50,6 +55,7 @@ export class DetailsRootPage {
 			}
 			this.toiletsMarkers = [];
 			this.findClosestToilets();
+			this.getWeather();
 		});
 
 		
@@ -140,7 +146,34 @@ export class DetailsRootPage {
 		console.log(this.numberOfEquipment);
 		if(this.numberOfEquipment>0){this.isLowNumberofEquipment = false;}
 	}
-	
+	getWeather(){
+		this.weatherService.geographicCoordinates(this.parc.position.lat, this.parc.position.lng)
+		.map(data => data.json())
+			.subscribe(data=> {
+			  this.localWeather = data;
+			  console.log(data);
+			});
+		this.weatherService.uvIndex(this.parc.position.lat, this.parc.position.lng)
+		.map(data => data.json())
+			.subscribe(data=> {
+			  this.uvIndex = data;
+			  console.log(data);
+			});
+		/*this.weatherService.pollution(this.parc.position.lat, this.parc.position.lng)
+		.map(data => data.json())
+			.subscribe(data=> {
+			  this.pollution = data;
+			  console.log(data);
+			});*/
+		this.weatherService.forecastGeographicCoordinates(this.parc.position.lat, this.parc.position.lng,4)
+		.map(data => data.json())
+			.subscribe(data=> {
+			  this.localWeatherForecast = data.list;
+			  console.log(data);
+			});
+
+
+	}
   	isToiletsRegistered = function(key) {
 		let id :number = -1;
 		for (let i in this.toiletsMarkers) {
@@ -237,6 +270,9 @@ export class DetailsRootPage {
 		}
 			
 	}
+	round(value: number): number {
+        return Math.round(value);
+    }
 
 
 }

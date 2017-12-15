@@ -18,7 +18,7 @@
       <button  ion-item menuClose (click)="signInWithFacebook()" *ngIf="userSigned === false">
         {{ 'header.SIGNINFACEBOOK'| translate }}
       </button>
-      <button  hideWhen="android" ion-item menuClose (click)="signInWithGoogle()" *ngIf="userSigned === false">
+      <button ion-item menuClose (click)="signInWithGoogle()" *ngIf="userSigned === false">
         {{ 'header.SIGNINGOOGLE'| translate }}
       </button>
       <button  ion-item menuClose (click)="signOut()" *ngIf="userSigned === true">

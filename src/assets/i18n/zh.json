@@ -85,7 +85,11 @@
 			"FRIDAY": "星期五",
 			"SATURDAY": "星期六",
 			"SUNDAY": "星期天",
-			"TOILETSAROUNDCOUNT": "公园附近的厕所： "
+			"TOILETSAROUNDCOUNT": "公园附近的厕所： ",
+			"CURRENTWEATHER": "目前的天气",
+			"WEATHERIN": "在 ",
+			"WEATHERHOURS": " 小时内",
+			"UVINDEX": "紫外线指数"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"添加新公园",
@@ -229,6 +233,10 @@
 		"CONTENT10" : "La législation française s'applique au présent contrat.",
 		"ARTICLE11" : "ARTICLE 11 :  Publication par l’Utilisateur",
 		"CONTENT11" : "La Plateforme permet aux membres de publier des informations concernant les aires de jeux.Dans ses publications, le membre s’engage à respecter les règles de la Netiquette et les règles de droit en vigueur. La Plateforme exerce une modération a priori et a posteriori sur les publications et se réserve le droit de refuser leur mise en ligne, sans avoir à s’en justifier auprès du membre. Le membre reste titulaire de l’intégralité de ses droits de propriété intellectuelle. Mais en publiant une publication sur la Plateforme, il cède à la société éditrice le droit non exclusif et gratuit de représenter, reproduire, adapter, modifier, diffuser et distribuer sa publication, directement ou par un tiers autorisé, dans le monde entier, sur tout support (numérique ou physique), pour la durée de la propriété intellectuelle. Le Membre cède notamment le droit d'utiliser sa publication sur internet et sur les réseaux de téléphonie mobile. La société éditrice s'engage à faire figurer le nom du membre à proximité de chaque utilisation de sa publication.",
-		"CLOSEMODAL" : "Fermer"
+		"CLOSEMODAL" : "Fermer",
+		"CREDITS": "CREDITS",
+		"CREDIT1": "天气数据来自OpenWeatherMap.org，信用©OpenWeatherMap",
+		"CREDIT2": "大部分已经进口的公园都是来自OpenStreetMap，信贷©OpenStreetMap贡献者"
+
 	}
 }
