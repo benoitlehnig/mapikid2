@@ -246,7 +246,8 @@
 		"CLOSEMODAL" : "Fermer",
 		"CREDITS": "CREDITS",
 		"CREDIT1": "天气数据来自OpenWeatherMap.org，信用©OpenWeatherMap",
-		"CREDIT2": "大部分已经进口的公园都是来自OpenStreetMap，信贷©OpenStreetMap贡献者"
+		"CREDIT2": "大部分已经进口的公园都是来自OpenStreetMap，信贷©OpenStreetMap贡献者",
+		"CREDIT3" : "Playground icons designed by freepik from Flaticon"
 
 	}
 }

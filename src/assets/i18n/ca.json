@@ -248,6 +248,7 @@
 		"CLOSEMODAL" : "Fermer",
 		"CREDITS" : "CRÈDITS",
 		"CREDIT1" : "Les dades meteorològiques es recopilen des d'OpenWeatherMap.org. Crèdit © OpenWeatherMap",
-		"CREDIT2" : "La majoria dels parcs ja importats són d'OpenStreetMap. Els col·laboradors de Credit © OpenStreetMap"
+		"CREDIT2" : "La majoria dels parcs ja importats són d'OpenStreetMap. Els col·laboradors de Credit © OpenStreetMap",
+		"CREDIT3" : "Playground icons designed by freepik from Flaticon"
 	}
 }

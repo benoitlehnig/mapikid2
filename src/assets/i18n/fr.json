@@ -248,6 +248,7 @@
 		"CLOSEMODAL" : "Fermer",
 		"CREDITS" : "CRÉDITS",
 		"CREDIT1": "Les données météo proviennent d'OpenWeatherMap.org. Crédit © OpenWeatherMap",
-		"CREDIT2": "La plupart des parcs déjà importés proviennent d'OpenStreetMap. Crédit © OpenStreetMap contributors"
+		"CREDIT2": "La plupart des parcs déjà importés proviennent d'OpenStreetMap. Crédit © OpenStreetMap contributors",
+		"CREDIT3" : "Les icones d'équipement sont designées par freepik de Flaticon"
 	}
 }

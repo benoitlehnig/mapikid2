@@ -249,6 +249,7 @@
 		"CLOSEMODAL" : "Fermer",
 		"CREDITS": "CREDITS",
 		"CREDIT1": "Wetterdaten werden von OpenWeatherMap.org gesammelt. Credit © OpenWeatherMap",
-		"CREDIT2": "Die meisten der bereits importierten Parks stammen von OpenStreetMap. Credit © OpenStreetMap contributors"
+		"CREDIT2": "Die meisten der bereits importierten Parks stammen von OpenStreetMap. Credit © OpenStreetMap contributors",
+		"CREDIT3" : "Playground icons designed by freepik from Flaticon"
 	}
 }
