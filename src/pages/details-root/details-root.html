@@ -82,24 +82,20 @@
 			 </div>
 			 
 			 <div *ngIf="parc.facilities!=null">
-				<ion-img  src="assets/images/Water tap icon icon.png" 
-				[ngClass]="parc.facilities.water == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<ion-img src="assets/images/toilets icon.png" 
-				[ngClass]="parc.facilities.wc == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<ion-img  src="assets/images/Sled icon icon.png" 
-				[ngClass]="parc.facilities.slide == true ? 'facilitiesIcon' : 'hide'" ></ion-img>
-				<ion-img src="assets/images/Swings icon icon.png" 
-				[ngClass]="parc.facilities.swing == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<ion-img src="assets/images/Trampoline icon icon.png" 
-				[ngClass]="parc.facilities.trampoline == true ? 'facilitiesIcon' : 'hide'" ></ion-img>
-				<ion-img src="assets/images/Game Complex icon icon.png"  
-				[ngClass]="parc.facilities.monkeyBridge == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<ion-img src="assets/images/Cobweb icon icon.png" 
-				[ngClass]="parc.facilities.spider == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<ion-img src="assets/images/Horse icon icon.png" 
-				[ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"></ion-img>
-				<ion-img src="assets/images/sandbox icon.png"
-				[ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"></ion-img>
+				<img src="assets/images/Water tap icon icon.png" [ngClass]="parc.facilities.water == true ? 'facilitiesIcon' : 'hide'" />
+				<img src="assets/images/toilets icon.png" [ngClass]="parc.facilities.wc == true ? 'facilitiesIcon' : 'hide'"/>
+				<img  src="assets/images/equipment/childhood-20.png" [ngClass]="parc.facilities.slide == true ? 'facilitiesIcon' : 'hide'" />
+				<img src="assets/images/equipment/childhood.png" [ngClass]="parc.facilities.swing == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/amusement-park-2.png"[ngClass]="parc.facilities.trampoline == true ? 'facilitiesIcon' : 'hide'" />
+				<img src="assets/images/equipment/playground.png" [ngClass]="parc.facilities.monkeyBridge == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/childhood-14.png" [ngClass]="parc.facilities.spider == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/childhood-22.png" [ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/childhood-18.png" [ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/childhood-2.png" [ngClass]="parc.facilities.turnstile == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/childhood-4.png" [ngClass]="parc.facilities.seesaw == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/climb.png" [ngClass]="parc.facilities.climb == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/soccer-field.png" [ngClass]="parc.facilities.football == true ? 'facilitiesIcon' : 'hide'"/>
+				<img src="assets/images/equipment/sports-ball.png" [ngClass]="parc.facilities.basketball == true ? 'facilitiesIcon' : 'hide'"/>
 				<div class="other" *ngIf="parc.facilities.other ==true">
 					<i class="material-icons">info</i>
 					<span>{{parc.facilities.otherDescription}}</span>

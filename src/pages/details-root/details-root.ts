@@ -140,6 +140,11 @@ export class DetailsRootPage {
 			if(this.parc.facilities.slide ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.spider ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.swing ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.turnstile ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.seesaw ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.climb ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.football ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.basketball ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.trampoline ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.other){this.numberOfEquipment++};
 		}
@@ -153,7 +158,7 @@ export class DetailsRootPage {
 			  this.localWeather = data;
 			  console.log(data);
 			});
-		this.weatherService.uvIndex(this.parc.position.lat, this.parc.position.lng)
+		this.weatherService.guvIndex(this.parc.position.lat, this.parc.position.lng)
 		.map(data => data.json())
 			.subscribe(data=> {
 			  this.uvIndex = data;

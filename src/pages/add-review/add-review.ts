@@ -48,7 +48,7 @@ export class AddReviewPage {
 		rate: this.review.rate
 	};
 	this.ga.logEvent("parc_management", 
-		{"action": "Add_review", "parc key": this.navParams.get('parc').$key, "review": this.review.description}
+		{"action": "Add_review", "parc_key": this.navParams.get('parc').$key, "review": this.review.description}
 	);
   	this.reviews.push(newReview).then(
   		newReview  =>{

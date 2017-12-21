@@ -146,7 +146,7 @@ export class ParcDetailsPage {
 		this.localParc.validated = true;
 	    this.storage.set(this.parc.$key, JSON.stringify(this.localParc));
 	    this.presentToast(this.toastLabelValidated);
-	    this.ga.logEvent("parc_management", {"action":"validate","parc key":this.parc.$key});
+	    this.ga.logEvent("parc_management", {"action":"validate","parc_key":this.parc.$key});
 	}
 
 	suggestRemove = function(){
@@ -154,7 +154,7 @@ export class ParcDetailsPage {
 		if(this.parc.removalRequestNumber){
 			removalIncreased = this.parc.removalRequestNumber;
 		}
-		this.ga.logEvent("parc_management", {"action":"removal request","parc key":this.parc.$key});
+		this.ga.logEvent("parc_management", {"action":"removal request","parc_key":this.parc.$key});
 		removalIncreased = removalIncreased+1;
 		//removal of the parc
 		if(removalIncreased>5){	

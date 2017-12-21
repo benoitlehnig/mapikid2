@@ -43,6 +43,11 @@ export class UpdateParcPage {
             monkeyBridge:false,
             animals:  false,
             sandbox:  false,
+            turnstile:  false,
+            seesaw:  false,
+            climb:  false,
+            football:  false,
+            basketball:  false,
             other:false,
             otherDescrition:null
           },
@@ -77,6 +82,11 @@ export class UpdateParcPage {
               animals:  false,
               sandbox:false,
               other: false,
+              turnstile:  false,
+              seesaw:  false,
+              climb:  false,
+              football:  false,
+              basketball:  false,
               otherDescription: null
         };
       }
@@ -90,6 +100,11 @@ export class UpdateParcPage {
         if(!this.parc.facilities.monkeyBridge){this.parc.facilities.monkeyBridge =false;}
         if(!this.parc.facilities.animals){this.parc.facilities.animals = false;}
         if(!this.parc.facilities.sandbox){this.parc.facilities.sandbox = false;}
+        if(!this.parc.facilities.turnstile){this.parc.facilities.turnstile = false;}
+        if(!this.parc.facilities.seesaw){this.parc.facilities.seesaw = false;}
+        if(!this.parc.facilities.climb){this.parc.facilities.climb = false;}
+        if(!this.parc.facilities.football){this.parc.facilities.football = false;}
+        if(!this.parc.facilities.basketball){this.parc.facilities.basketball = false;}
         if(!this.parc.facilities.other){this.parc.facilities.other = false;}
         if(!this.parc.facilities.otherDescription){this.parc.facilities.otherDescription = null;}
       }
@@ -106,7 +121,7 @@ export class UpdateParcPage {
     this.platform.ready().then(() => {
       this.loadMap();
       this.ga.setCurrentScreen("Update Page ");
-      this.ga.logEvent("Update Parc Request", {"parc key":this.parc.$key});
+      this.ga.logEvent("Update Parc Request", {"parc_key":this.parc.$key});
     }); 
   }
 
@@ -146,8 +161,10 @@ export class UpdateParcPage {
 
       this.parc.open =false;
     }
-    if(this.parc.facilities.otherDescription.replace(/\s+/g,"").length>0){
-      this.parc.facilities.other =true;
+    if(this.parc.facilities.otherDescription){
+       if(this.parc.facilities.otherDescription.replace(/\s+/g,"").length>0){
+        this.parc.facilities.other =true;
+      }
     }
     else{
       this.parc.facilities.other =false;
@@ -160,7 +177,7 @@ export class UpdateParcPage {
       parcObject.update(this.parc);
       console.log(this.parc.$key);
       this.gf.set(this.parc.$key, location).then(function() {
-        this.ga.logEvent("parc_management", {"action":"update","parc key":this.parc.$key});
+        this.ga.logEvent("parc_management", {"action":"update","parc_key":this.parc.$key});
       }.bind(this));
      
 
@@ -172,15 +189,13 @@ export class UpdateParcPage {
       console.log(newPosition.$key);
       this.gf.set(newPosition.key, location).then(function() {
           console.log(newPosition.key);
-          this.ga.logEvent("parc_management", {"action":"add","parc key":this.parc.$key});
+          this.ga.logEvent("parc_management", {"action":"add","parc_key":this.parc.$key});
         }.bind(this));
           
     }
     
     this.closeModal(true);
   }
-
-  
 
 }
 ;

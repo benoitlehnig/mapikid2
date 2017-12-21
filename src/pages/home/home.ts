@@ -323,7 +323,7 @@ export class HomePage implements OnInit{
 	}  
 	
 	geocodeAddress(item){
-		this.ga.logEvent('pageview', {"page:" :'list '+ item.description});
+		this.ga.logEvent('pageview', {"page:" :'list_'+ item.description});
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode({'placeId': item.place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
