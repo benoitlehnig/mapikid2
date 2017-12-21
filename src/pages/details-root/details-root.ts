@@ -158,7 +158,7 @@ export class DetailsRootPage {
 			  this.localWeather = data;
 			  console.log(data);
 			});
-		this.weatherService.guvIndex(this.parc.position.lat, this.parc.position.lng)
+		this.weatherService.uvIndex(this.parc.position.lat, this.parc.position.lng)
 		.map(data => data.json())
 			.subscribe(data=> {
 			  this.uvIndex = data;
