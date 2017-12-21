@@ -130,10 +130,11 @@ export class DetailsRootPage {
   	}
   	setLowNumberofEquipment = function(){
   		this.numberOfEquipment = 0;
-  		console.log("setLowNumberofEquipment");
   		console.log(this.parc.facilities)
 		if(this.parc.facilities){
 			console.log(this.parc.facilities);
+			if(this.parc.facilities.water ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.wc ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.animals ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.monkeyBridge ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.sandbox ===true){this.numberOfEquipment++};
