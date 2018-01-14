@@ -31,6 +31,7 @@ export class MyApp {
     isTesting: false,
     autoShow: true
   };
+  bannerActivate:boolean = false;
   
   
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
@@ -45,18 +46,21 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
         statusBar.styleDefault();
-        if(this.platform.is('android')){
+        if(this.bannerActivate ===true){
+          if(this.platform.is('android')){
           this.bannerConfig.id = "ca-app-pub-1937225175114473/4113122211";
-        }
-        this.admobFree.banner.config(this.bannerConfig);
+          }
+          this.admobFree.banner.config(this.bannerConfig);
 
-        this.admobFree.banner.prepare()
-        .then(() => {
-        // banner Ad is ready
-        // if we set autoShow to false, then we will need to call the show method here
-          //this.admobFree.banner.show();
-        })
-        .catch(e => console.log(e));  
+          this.admobFree.banner.prepare()
+          .then(() => {
+          // banner Ad is ready
+          // if we set autoShow to false, then we will need to call the show method here
+            //this.admobFree.banner.show();
+          })
+          .catch(e => console.log(e));  
+        }
+        
         
         splashScreen.hide();
         this.translate= translate;
