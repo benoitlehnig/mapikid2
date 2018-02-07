@@ -110,11 +110,8 @@ export class UpdateParcPage {
       }
     }
     else{
-      console.log(this.navParams.get('position'));
-      this.parc.position =  {lat: this.navParams.get('position').lat(), lng: this.navParams.get('position').lng()} ;
+      this.parc.position =  this.navParams.get('position');
     }
-    console.log(this.parc);
-   
   }
 
   ngOnInit() {
@@ -130,7 +127,7 @@ export class UpdateParcPage {
     this.map = this._map.createMapJDK(element,true,google.maps.MapTypeId.ROADMAP);
     if(this.mode==='add'){
       console.log(this.navParams.get('position'));
-      this.parc.position =  {lat: this.navParams.get('position').lat(), lng: this.navParams.get('position').lng()} ;
+      this.parc.position =  this.navParams.get('position');
     }
     var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
     this.map.setCenter(latLng);
@@ -170,6 +167,7 @@ export class UpdateParcPage {
       this.parc.facilities.other =false;
       this.parc.facilities.otherDescription =null;
     }
+
     console.log(this.parc);
     if(this.mode==='update'){
       var parcObject = this.db.object('positions/'+this.parc.$key);
@@ -196,6 +194,5 @@ export class UpdateParcPage {
     
     this.closeModal(true);
   }
-
 }
 ;

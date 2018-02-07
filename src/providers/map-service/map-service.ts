@@ -1,16 +1,53 @@
 
 import { Injectable } from '@angular/core';
 import {googlemaps} from 'googlemaps';
+import {
+ GoogleMaps,
+ GoogleMap,
+ GoogleMapsEvent,
+ GoogleMapOptions,
+ CameraPosition,
+ MarkerOptions,
+ Marker,
+ LatLng 
+} from '@ionic-native/google-maps';
+import { Http,Headers,RequestOptions } from '@angular/http';
 
 @Injectable()
 export class MapService {
   
-   private googleMapJDK=null ;
-
-  	
-  constructor() {
+  private googleMapJDK=null ;
+  private googleMapNative: GoogleMap; null;
+  private baseUrl ='https://us-central1-parcmap.cloudfunctions.net/listPlaygroundsAround';
+  private mapCenter= {lat:0, lng:0};  
+  private useNativeMap:boolean = true;
+  constructor(private googleMaps: GoogleMaps, public http: Http) {
     
   }
+
+  createMapNative(element, mapTypeControl,mapTtypeId){
+    let location = new LatLng(-34.9290,138.6010);
+    let mapOptions: GoogleMapOptions = {
+        camera: {
+          target: {
+            lat: 43.0741904,
+            lng: -89.3809802
+          },
+          zoom: 18,
+          tilt: 30
+        },
+        controls: {
+          compass: true,
+          myLocationButton: true,
+          indoorPicker: true,
+          zoom: true
+        },
+    };
+    this.googleMapNative = GoogleMaps.create(element, mapOptions);
+    this.useNativeMap = true;
+    return this.googleMapNative;
+  }
+
 
   createMapJDK(element, mapTypeControl,mapTtypeId){
   	var mapTypeId = mapTtypeId;
@@ -36,10 +73,13 @@ export class MapService {
       mapTypeControlOptions: mapTypeControlOptions,
       gestureHandling : 'greedy',
       fullscreenControl: false
-	});
-	return googleMapJDK;
+	  });
+    this.useNativeMap = false;
+    this.googleMapJDK = googleMapJDK;
+	  return googleMapJDK;
 
   }
+
   getGoogleMapJDK() {
   	return this.googleMapJDK
   }
@@ -94,6 +134,58 @@ export class MapService {
     }
 	}
 
+   getPlaygroundsByGeographicCoordinates(lat: number , lon:number, radius:number){
+      let url = this.baseUrl +`?lat=${lat}&lng=${lon}&radius=${radius}`;
+      return this.http.get(url);
+    }
+
+    getPlaygroundDetails( listOfParcs){
+      let headers = new Headers();
+      headers.append( 'Content-Type', 'application/x-www-form-urlencoded');
+      let bodyForm = new FormData();
+      let bodyInside =[];
+      for(var i=0;i<listOfParcs.length;i++){
+        bodyForm.append("key", listOfParcs[i].key)
+        var key = {"key": listOfParcs[i].key};
+        bodyInside.push(key);
+      }
+      let options = new RequestOptions({ headers: headers });
+      //let body = JSON.stringify(bodyInside);
+      //console.log(body);
+
+      let url = 'https://us-central1-parcmap.cloudfunctions.net/getPlaygroundDetails';
+      return this.http.post(url,bodyForm,options);
+    }
   
- 
+   setCurrentMapCenter = function(){  
+    console.log("setCurrentMapCenter>>", this.mapCenter);  
+    if(this.useNativeMap ===true){
+      var target = this.googleMapNative.getCameraTarget();
+      this.mapCenter = {lat: target.lat, lng: target.lng};
+    }
+    else{
+      if(this.googleMapJDK !==null){
+         this.mapCenter = {lat: this.googleMapJDK.getCenter().lat(), lng: this.googleMapJDK.getCenter().lng()}; ; 
+      }
+     
+    }
+    console.log("setCurrentMapCenter>> end ",this.mapCenter);
+  }
+  setMapCenter = function(lat,lng){
+    if(this.useNativeMap ===true){
+    }
+    else{
+      var latLng = new google.maps.LatLng(lat,lng);
+      this.googleMapJDK.setCenter(latLng);
+    }
+  }
+  getCenter = function(){
+    return this.mapCenter;
+  }
+  
+  getAddress = function(mlat,mlng){
+    let nominatimURL = 'http://nominatim.openstreetmap.org/reverse?format=json&lat='+mlat+'&lon=' + mlng;
+    return this.http.get(nominatimURL);
+  }
+
 }

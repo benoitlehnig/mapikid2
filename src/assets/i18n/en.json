@@ -95,7 +95,8 @@
 			"CURRENTWEATHER": "Current weather",
 			"WEATHERIN": "In ",
 			"WEATHERHOURS": " hours",
-			"UVINDEX": "UV Index"
+			"UVINDEX": "UV Index",
+			"VALIDATEDBYINSTITUTION" : "Confirmed by the town hall"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Add New Park",

@@ -95,7 +95,8 @@
 		"CURRENTWEATHER": "Clima actual",
 		"WEATHERIN": "Dins de ",
 		"WEATHERHOURS": " hores",
-		"UVINDEX": "Índex UV"
+		"UVINDEX": "Índex UV",
+		"VALIDATEDBYINSTITUTION": "Confirmat per l'Ajuntament"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Afegeix un nou parc",

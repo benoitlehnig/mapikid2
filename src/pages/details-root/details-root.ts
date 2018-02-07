@@ -30,6 +30,7 @@ export class DetailsRootPage {
 	labelWeekDay : string[] = ['','','','','','',''];
 	parcObject: FirebaseObjectObservable<any>;
 	marker = null;
+	mapURL = "https://www.google.com/maps/dir/?api=1&destination=";
 	public localWeather:Object;
 	public localWeatherForecast:Object;
 	public uvIndex:Object;
@@ -56,6 +57,8 @@ export class DetailsRootPage {
 			this.toiletsMarkers = [];
 			this.findClosestToilets();
 			this.getWeather();
+			this.codeAddress();
+			this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
 		});
 
 		
@@ -90,6 +93,7 @@ export class DetailsRootPage {
 			this.setUpPlaceService();
 			this.triggerGetGoogleData();
 			this.setLowNumberofEquipment();
+
 		});
 	}
  
@@ -276,6 +280,24 @@ export class DetailsRootPage {
 		}
 			
 	}
+	codeAddress = function() {
+			var geocoder = new google.maps.Geocoder();
+		    var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
+		    geocoder.geocode( {'location': latLng}, function(results, status) {
+		      if(status === google.maps.GeocoderStatus.OK) {
+		       	for( var j=0;j<results.length;j++){
+					console.log("street_address test", results[j].types[0], results[j].formatted_address);
+					if(results[j].types[0] === "street_address"){
+						console.log("street_address", results[j].formatted_address);
+						this.parc.street_address = results[j].formatted_address;
+					}
+				}
+		      } else {
+		        alert('Geocode was not successful for the following reason: ' + status);
+		      }
+		}.bind(this));
+	};
+
 	round(value: number): number {
         return Math.round(value);
     }

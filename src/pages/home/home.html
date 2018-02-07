@@ -27,6 +27,7 @@
 	<split direction="vertical" gutterSize="24">
     <split-area [size]="80">
         <div id="map"></div>
+        <div id="map2"></div>
     </split-area>
     <split-area [size]="20">
 		<ion-list>
@@ -43,9 +44,13 @@
 			<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>4 && parc.parcItem.open">
 				<i class="material-icons" >beenhere</i>
 			</ion-avatar>
+			<ion-avatar item-end  *ngIf="parc.parcItem.validatedByInstitution ===true">
+				<i class="material-icons">account_balance</i>
+			</ion-avatar>
 			<ion-avatar item-end  *ngIf="!parc.parcItem.open">
 				<i class="material-icons" >close</i>
 			</ion-avatar>
+			
 			<ion-avatar item-end  *ngIf="parc.parcItem.free ===false">
 				<i class="material-icons">&#xE263;</i>
 			</ion-avatar>

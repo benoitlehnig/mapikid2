@@ -43,6 +43,16 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { AdMobFree } from '@ionic-native/admob-free';
 
+import {
+ GoogleMaps,
+ GoogleMap,
+ GoogleMapsEvent,
+ GoogleMapOptions,
+ CameraPosition,
+ MarkerOptions,
+ Marker,
+ LatLng
+} from '@ionic-native/google-maps';
 
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
 import { OrderByDistancePipe } from '../pipes/order-by-distance/order-by-distance';
@@ -131,6 +141,7 @@ export function createTranslateLoader(http: Http) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GoogleMapsClusterProvider,
     GooglePlus,
+    GoogleMaps,
     Facebook,
     Diagnostic,
     OpenNativeSettings,

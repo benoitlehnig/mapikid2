@@ -96,5 +96,8 @@ page-home {
 	    padding-top: 0px!important;
 	}
 
-
+	.item-md ion-avatar[item-right], .item-md ion-thumbnail[item-right], .item-md ion-avatar[item-end], .item-md ion-thumbnail[item-end] {
+    	min-width: 0px; 
+    	min-height: 0x; 
+	}
 }

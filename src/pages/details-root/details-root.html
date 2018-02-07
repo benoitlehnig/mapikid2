@@ -17,6 +17,10 @@
 			<i class="material-icons" >close</i>
 			<span>{{'parcDetails.CLOSED'|translate}}</span>
 		</div>
+		<div *ngIf="parc.validatedByInstitution ===true"  class="details">
+			<i class="material-icons">account_balance</i>
+            <span>{{ 'parcDetails.VALIDATEDBYINSTITUTION'| translate }} </span>
+	    </div>
 		<div *ngIf="isLowNumberofEquipment || parc.initialized"  class="details">
 			<i class="material-icons">sms</i>
 			<span *ngIf="parc.initialized">{{'parcDetails.INITIALIAZED'| translate }} </span>
@@ -46,6 +50,10 @@
 	    <div class="details" *ngIf="parc.events == true">
 	        <i class="material-icons">card_giftcard</i>
 	        <span>{{ 'parcDetails.EVENTS'| translate }}</span>
+	    </div>
+	    <div class="details" *ngIf="parc.street_address">
+	        <i class="material-icons">place</i>
+	        <span><a href={{mapURL}}>{{ parc.street_address }}</a></span>
 	    </div>
 		<div class="details">
 			<i class="material-icons">timer</i>

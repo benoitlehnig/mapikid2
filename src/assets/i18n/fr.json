@@ -94,7 +94,8 @@
 			"CURRENTWEATHER": "Météo actuelle",
 			"WEATHERIN": "Dans ",
 			"WEATHERHOURS": " heures ",
-			"UVINDEX": "Indice UV"
+			"UVINDEX": "Indice UV",
+			"VALIDATEDBYINSTITUTION" : "Confirmé par la mairie"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Ajouter un nouveau parc",

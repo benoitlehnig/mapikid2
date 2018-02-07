@@ -1,0 +1,1 @@
+//# sourceMappingURL=parc-details.module.js.map

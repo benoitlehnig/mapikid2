@@ -74,5 +74,8 @@ export class GoogleMapsClusterProvider {
  	redraw(){
     	this.markerCluster.redraw();
     }
+    clearMarkers(){
+        this.markerCluster.clearMarkers();
+    }
 
 }
