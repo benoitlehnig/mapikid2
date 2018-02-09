@@ -73,6 +73,11 @@ export class HomePage implements OnInit{
 		    map: this.googleMapJDK,
 		    icon:this._map.getIconPathCurrentPosition()
 	   	});
+	markerAddress= new google.maps.Marker({
+            position: {lat: 0, lng: 0},
+            draggable: false,
+            icon: 'https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=ff000000,ea4335,960a0a,ffffff&color=ff000000?scale=1'
+         });
 	loadingCompleted: boolean=true;
 	httpRequestActivated: boolean = false;
 	useNativeMap:boolean = false;
@@ -391,6 +396,14 @@ export class HomePage implements OnInit{
 				this.parcs = [];
 				this.keys =[];
                 this._map.setMapCenter(results[0].geometry.location.lat(),results[0].geometry.location.lng());
+                this.markerAddress.setPosition({lat: results[0].geometry.location.lat(), lng:results[0].geometry.location.lng()});
+                console.log(this.markerAddress.getPosition().lat(), this.markerAddress.getPosition().lng());
+                this.markerAddress.setTitle(item.description);
+                if(this.useNativeMap === false){
+                	this.markerAddress.setMap( this.googleMapJDK);
+                	console.log(this.markerAddress);
+                }
+
                 this.displayParcsAround(true,false);
 			}
 			else{
@@ -539,6 +552,7 @@ export class HomePage implements OnInit{
             this._map.setMapCenter(resp.coords.latitude,resp.coords.longitude);
             this.displayParcsAround(false,false);
             this.setLocationMarker(resp.coords.latitude,resp.coords.longitude);
+            this.markerAddress.setMap(null);
 		}).catch((error) => {
 			console.log('Error getting location', error);
 			this.errorCallback();
