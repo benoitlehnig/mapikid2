@@ -57,7 +57,7 @@ export class HomePage implements OnInit{
 	geoQuery:any;
 	markersEntered: any[];
 	mapHeight:String="0px";
-	radius: number = 5;
+	radius: number = 3;
 	quickRadius: number = 0.5;
 	numberOfParcsToBeLoaded: number = 0;
 	numberParcLoaded2 : number=0; // 0 is the initial value
@@ -284,7 +284,7 @@ export class HomePage implements OnInit{
 			var parc = {'key':key, 'distance':distance.toString().substring(0,4),'reviewsLength':0,'parcItem': null };
 			var parcItemObject: FirebaseObjectObservable<any>;
 	        parcItemObject = this.db.object('positions/'+key);
-			parcItemObject.subscribe(snapshot => {			
+			var subscription = parcItemObject.subscribe(snapshot => {			
 				parc.parcItem = snapshot;
 				if(!parc.parcItem.rate){
 					parc.parcItem.rate = {'rate': 0};
@@ -299,6 +299,7 @@ export class HomePage implements OnInit{
 				this.numberParcLoaded2 = this.numberParcLoaded2 +1;
 				this.checkCompleteLoad();
 				this.keys[key] = key;		
+				subscription.unsubscribe();
 			});	
 		}
 	}

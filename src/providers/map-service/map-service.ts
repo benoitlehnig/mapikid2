@@ -59,7 +59,7 @@ export class MapService {
 
   	var googleMapJDK = new google.maps.Map(element, {
 		center: {lat: 48.863129, lng: 2.345152},
-		zoom: 12,
+		zoom: 14,
 		styles: [{
 			featureType: 'poi',
       stylers: [{ visibility: 'off' }]  // Turn off points of interest.

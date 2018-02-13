@@ -45,7 +45,7 @@ var MapService = /** @class */ (function () {
         };
         var googleMapJDK = new google.maps.Map(element, {
             center: { lat: 48.863129, lng: 2.345152 },
-            zoom: 12,
+            zoom: 7,
             styles: [{
                     featureType: 'poi',
                     stylers: [{ visibility: 'off' }] // Turn off points of interest.
@@ -62,9 +62,11 @@ var MapService = /** @class */ (function () {
         });
         return googleMapJDK;
     };
+
     MapService.prototype.getGoogleMapJDK = function () {
         return this.googleMapJDK;
     };
+    
     MapService.prototype.getIconPath = function (parc) {
         var iconPath = {
             path: google.maps.SymbolPath.CIRCLE,
