@@ -30,7 +30,7 @@
         "@ionic-native/google-maps": "^4.5.2",
         "@ionic-native/google-plus": "^4.2.1",
         "@ionic-native/httpd": "^4.4.2",
-        "@ionic-native/open-native-settings": "^4.2.1",
+        "@ionic-native/open-native-settings": "^4.5.3",
         "@ionic-native/splash-screen": "3.12.1",
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
@@ -39,6 +39,8 @@
         "angular-star-rating": "^3.0.3",
         "angularfire2": "^4.0.0-rc.1",
         "cordova-admob-sdk": "^0.12.0",
+        "cordova-android": "7.0.0",
+        "cordova-android-play-services-gradle-release": "^1.2.0",
         "cordova-browser": "^4.1.0",
         "cordova-ios": "^4.4.0",
         "cordova-open-native-settings": "^1.5.0",
@@ -74,6 +76,7 @@
         "zone.js": "0.8.12"
     },
     "devDependencies": {
+        "@angular/cli": "^1.6.1",
         "@ionic/app-scripts": "2.0.2",
         "@ionic/cli-plugin-cordova": "1.6.1",
         "@ionic/cli-plugin-ionic-angular": "1.4.1",
@@ -105,8 +108,8 @@
             "cordova-plugin-googlemaps": {
                 "API_KEY_FOR_ANDROID": "AIzaSyCDoJLIWXsVscHUAjtIyoUcMgLVsFtBRiM",
                 "API_KEY_FOR_IOS": "AIzaSyANTileVecd6qtzC2iHA5UPrksZaW7kUMk",
-                "LOCATION_WHEN_IN_USE_DESCRIPTION": "Show your location on the map",
-                "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map"
+                "LOCATION_WHEN_IN_USE_DESCRIPTION": "Map&Kid uses your location to find the nearest playgrounds.",
+                "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Map&Kid uses your location to find the nearest playgrounds."
             },
             "cordova-plugin-admob-free": {},
             "phonegap-plugin-push": {},
