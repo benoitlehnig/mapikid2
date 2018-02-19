@@ -31,7 +31,7 @@
     </split-area>
     <split-area [size]="20">
 		<ion-list>
-		  	<ion-item class="text" *ngFor="let parc of parcs | orderbydistance " [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key, map:map}">
+		  	<ion-item class="text" *ngFor="let parc of parcsList" [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key}">
 			<h2>
 				<span *ngIf="parc.parcItem.name !==''">{{parc.parcItem.name}} </span>
 				<span *ngIf="parc.parcItem.name ==''">{{ 'list.NONAMEPARC' |translate}} </span>

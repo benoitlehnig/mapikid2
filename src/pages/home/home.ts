@@ -45,8 +45,8 @@ export class HomePage implements OnInit{
 	parcUpdate = UpdateParcPage;
 	login =LoginPage;
 	parcs: any[];
+	parcsList: any[];
 	userPicture:String="";
-	displayedList:any[];
 	db: AngularFireDatabase;
 	googleMapJDK=null ;
 	googleMapNative= null;
@@ -55,12 +55,12 @@ export class HomePage implements OnInit{
 	autocomplete: any;
 	acService:any;
 	geoQuery:any;
-	markersEntered: any[];
+	markersEntered: 0;
 	mapHeight:String="0px";
 	radius: number = 3;
 	quickRadius: number = 0.5;
 	numberOfParcsToBeLoaded: number = 0;
-	numberParcLoaded2 : number=0; // 0 is the initial value
+	numberParcLoaded : number=0; // 0 is the initial value
 	mapCenter= {lat:0, lng:0};	
 	keys=[];	
 	markers =[];
@@ -100,8 +100,6 @@ export class HomePage implements OnInit{
 		
 		this.db = db;
 		this.parcs =[];
-		
-		
 	}
 
 	ngOnInit() {
@@ -184,31 +182,10 @@ export class HomePage implements OnInit{
 		});		
 	};
 
-	checkCompleteLoad_old(value){
-		/*console.log(this.numberOfParcsToBeLoaded, value);
-		if(this.numberOfParcsToBeLoaded !==0 || value===-1){
-			if(value >= Number(this.numberOfParcsToBeLoaded)-1 || value===-1){
-				console.log("all parcs loaded");
-				try{
-					this.loadingCompleted =true;
-				}
-				catch(err) {
-				    console.log("error", err);
-				}
-				this.numberOfParcsToBeLoaded = 0;
-				this.numberParcLoaded.next(0);
-				this.updateDistance();	
-				this.displayedList = this.parcs;
-				if(this.useNativeMap === false){
-					this.mapCluster.redraw();
-				}
-				//this.getPlaygroundsDetails();
-			}
-		}*/
-	}
+
 	checkCompleteLoad(){
 		let returnedValue = false;
-		if(this.numberOfParcsToBeLoaded - this.numberParcLoaded2 <=0){
+		if(this.numberOfParcsToBeLoaded - this.numberParcLoaded <=0){
 			returnedValue = true;
 			try{
 				this.loadingCompleted =true;
@@ -217,9 +194,9 @@ export class HomePage implements OnInit{
 				    console.log("error", err);
 			}
 			this.numberOfParcsToBeLoaded = 0;
-			this.numberParcLoaded2 = 0;
+			this.numberParcLoaded = 0;
 			this.updateDistance();	
-			this.displayedList = this.parcs;
+			this.parcsList = this.parcs.slice(0,20);
 			if(this.useNativeMap === false){
 				this.mapCluster.redraw();
 			}
@@ -243,7 +220,7 @@ export class HomePage implements OnInit{
 	}
 
 	setupInitialGeoQuery(){
-		this.markersEntered =[];
+		this.markersEntered =0;
 		this.loadingCompleted = false;
 		this.numberOfParcsToBeLoaded=0;
 		var onKeyEnteredRegistration = this.geoQuery.on("key_entered", function(key, location, distance) {
@@ -252,32 +229,28 @@ export class HomePage implements OnInit{
                 location:location,
                 distance: distance
             };
-            this.markersEntered.push(keyEntered);
+            this.markersEntered++;
             this.numberOfParcsToBeLoaded = this.numberOfParcsToBeLoaded +1;
-            this.newKeyEntered( this.markersEntered.length,keyEntered.key, keyEntered.location, keyEntered.distance);
-            if(this.markersEntered.length===10){
-				this.loadingCompleted = false;
-			}
+            this.newKeyEntered(keyEntered.key, keyEntered.location, keyEntered.distance);
 		}.bind(this));
 
 		var onReadyRegistration =  this.geoQuery.on("ready", function() {
 			
-			if(this.markersEntered.length ===0){
+			if(this.markersEntered ===0){
 				this.noParcReturned = true;
 				this.checkCompleteLoad();
 			}
 			else{
 				this.noParcReturned = false;
 			}
-			this.markersEntered =[];
+			this.markersEntered =0;
 		}.bind(this));
 	}
 
 
-	newKeyEntered(index,key, location, distance){
+	newKeyEntered(key, location, distance){
 		if(this.keys[key]){
-		
-			this.numberParcLoaded2 = this.numberParcLoaded2+1;
+			this.numberParcLoaded = this.numberParcLoaded+1;
 			this.checkCompleteLoad();
 		}
 		else{
@@ -296,10 +269,9 @@ export class HomePage implements OnInit{
 				else{
 					this.displayParcMarker(parc,'update');
 				}
-				this.numberParcLoaded2 = this.numberParcLoaded2 +1;
+				this.numberParcLoaded = this.numberParcLoaded +1;
 				this.checkCompleteLoad();
-				this.keys[key] = key;		
-				subscription.unsubscribe();
+				this.keys[key] = key;
 			});	
 		}
 	}
@@ -346,7 +318,7 @@ export class HomePage implements OnInit{
 				        icon:this._map.getIconPath(parc)
 			   		});
 			   		marker.addListener('click', function() {
-		      			this.navCtrl.push(ParcDetailsPage, {key:parc.key, map:this.map} );
+		      			this.navCtrl.push(ParcDetailsPage, {key:parc.key} );
 			      	}.bind(this));
 			      	this.markers[parc.key]= marker;
 					this.mapCluster.addMarker(marker, true);
@@ -517,7 +489,7 @@ export class HomePage implements OnInit{
 						}
 						this.updateDistance();
 						this.loadingCompleted = true;
-						this.displayedList = this.parcs;
+						
 						if(this.useNativeMap === false){
 							this.mapCluster.redraw();
 						}
