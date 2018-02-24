@@ -37,6 +37,7 @@ var DetailsRootPage = /** @class */ (function () {
         this.isLowNumberofEquipment = true;
         this.labelWeekDay = ['', '', '', '', '', '', ''];
         this.marker = null;
+        this.mapURL = "https://www.google.com/maps/dir/?api=1&destination=";
         this.loadMap = function () {
             var element = document.getElementById('mapDetail');
             this.map = this._map.createMapJDK(element, true, google.maps.MapTypeId.HYBRID);
@@ -221,6 +222,24 @@ var DetailsRootPage = /** @class */ (function () {
                 this.parc.name = results.name;
             }
         };
+        this.codeAddress = function () {
+            var geocoder = new google.maps.Geocoder();
+            var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
+            geocoder.geocode({ 'location': latLng }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    for (var j = 0; j < results.length; j++) {
+                        console.log("street_address test", results[j].types[0], results[j].formatted_address);
+                        if (results[j].types[0] === "street_address") {
+                            console.log("street_address", results[j].formatted_address);
+                            this.parc.street_address = results[j].formatted_address;
+                        }
+                    }
+                }
+                else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            }.bind(this));
+        };
         console.log(navParams.data.$key);
         this.parcObject = db.object('positions/' + navParams.data.$key);
         this.parcObject.subscribe(function (snapshot) {
@@ -239,6 +258,8 @@ var DetailsRootPage = /** @class */ (function () {
             _this.toiletsMarkers = [];
             _this.findClosestToilets();
             _this.getWeather();
+            _this.codeAddress();
+            _this.mapURL = _this.mapURL + _this.parc.position.lat + "," + _this.parc.position.lng;
         });
         console.log(this.parc);
         translate.get('parcDetails.MONDAY').subscribe(function (res) {

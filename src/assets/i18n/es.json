@@ -23,6 +23,8 @@
 		"ADDPARCBUTTON":"Agregar un parque",
 		"SNACKBARLABEL":"GeoLocation desactivado, ¡active o ingrese una dirección en la barra de búsqueda!",
 		"NOPARCFOUND" : "No se menciona ningún parque infantil en esta área, no dudes en agregar el que conoces ",
+		"NONAMEPARC" :"Playground",
+		"TAPHERE" :"Haz clic para tener más información",
 		"GEOLOCALIZEBUTTON" : "Ubíquenme",
 		"GEOLOCATIONNOTALLOWED": "La geolocalización no está permitida, vaya a la configuración para activarlo."
 	},

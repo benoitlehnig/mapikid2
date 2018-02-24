@@ -12,6 +12,7 @@ import {
  LatLng 
 } from '@ionic-native/google-maps';
 import { Http,Headers,RequestOptions } from '@angular/http';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Injectable()
 export class MapService {
@@ -21,7 +22,23 @@ export class MapService {
   private baseUrl ='https://us-central1-parcmap.cloudfunctions.net/listPlaygroundsAround';
   private mapCenter= {lat:0, lng:0};  
   private useNativeMap:boolean = true;
-  constructor(private googleMaps: GoogleMaps, public http: Http) {
+  private defaultMapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: 48.863129, 
+          lng:  2.345152
+        },
+        zoom: 18,
+        tilt: 30
+      },
+      controls: {
+        compass: true,
+        myLocationButton: true,
+        indoorPicker: true,
+        zoom: true
+      },
+  };
+  constructor(private googleMaps: GoogleMaps, public http: Http, public _geoLoc: Geolocation) {
     
   }
 
@@ -44,10 +61,47 @@ export class MapService {
         },
     };
     this.googleMapNative = GoogleMaps.create(element, mapOptions);
+    this.googleMapNative.one(GoogleMapsEvent.MAP_READY).then( () => {
+      this.getLocation().then(res=>{ 
+
+        let location = new LatLng(res.coords.latitude, res.coords.longitude);
+        let options : CameraPosition<any> = {
+          target:location,
+          zoom: 18,
+          tilt: 30
+
+        }
+        this.setMapCenter(location.lat,location.lng);
+        this.googleMapNative.moveCamera(options);
+        console.log(res)});
+      console.log("camera ready");
+      this.googleMapNative.on(GoogleMapsEvent.MAP_CLICK).subscribe(
+            (data) => {
+                alert("Click MAP");
+            });
+       this.googleMapNative.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(
+            (data) => {
+                alert("Click MAP_DRAG_END");
+            });
+       this.googleMapNative.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(
+            (data) => {
+                alert("Click MY_LOCATION_BUTTON_CLICK");
+            });
+
+      
+    });
     this.useNativeMap = true;
     return this.googleMapNative;
   }
 
+  getLocation(){
+    var positionOptions = {timeout: 10000, enableHighAccuracy: true};
+        return this._geoLoc.getCurrentPosition(positionOptions);   
+  }
+    
+  onCameraEvents(cameraPosition) {
+     console.log(cameraPosition.target.lat);
+  }
 
   createMapJDK(element, mapTypeControl,mapTtypeId){
   	var mapTypeId = mapTtypeId;
@@ -112,6 +166,24 @@ export class MapService {
   	}	
   	return iconPath;
   }
+   getIconNative(parc){
+    let image = {
+      url: './assets/images/marker_open.png',
+      size: {
+        width: 18,
+        height: 18
+      }
+    };
+    if(!parc.parcItem.open){
+      image.url ='./assets/images/marker_closed.png'
+    }
+
+    if(parc.parcItem.free===false){
+      image.url ='./assets/images/marker_fee.png'
+    }  
+    return image;
+  }
+
   getIconPathCurrentPosition(){
     var iconPath = {
       path: google.maps.SymbolPath.CIRCLE,
@@ -160,12 +232,12 @@ export class MapService {
    setCurrentMapCenter = function(){  
     console.log("setCurrentMapCenter>>", this.mapCenter);  
     if(this.useNativeMap ===true){
-      var target = this.googleMapNative.getCameraTarget();
-      this.mapCenter = {lat: target.lat, lng: target.lng};
+     // var target = this.googleMapNative.getCameraTarget();
+     // this.mapCenter = {lat: target.lat, lng: target.lng};
     }
     else{
       if(this.googleMapJDK !==null){
-         this.mapCenter = {lat: this.googleMapJDK.getCenter().lat(), lng: this.googleMapJDK.getCenter().lng()}; ; 
+         this.mapCenter = {lat: this.googleMapJDK.getCenter().lat(), lng: this.googleMapJDK.getCenter().lng()};  
       }
      
     }
@@ -182,10 +254,16 @@ export class MapService {
   getCenter = function(){
     return this.mapCenter;
   }
+  setCenter = function(lat,lng){
+     this.mapCenter = {lat: lat, lng:lng}; ;
+  }
   
   getAddress = function(mlat,mlng){
     let nominatimURL = 'http://nominatim.openstreetmap.org/reverse?format=json&lat='+mlat+'&lon=' + mlng;
     return this.http.get(nominatimURL);
+  }
+  getDefaultMapOptions(){
+    return this.defaultMapOptions;
   }
 
 }

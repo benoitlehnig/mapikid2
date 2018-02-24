@@ -23,6 +23,7 @@
 		"ADDPARCBUTTON":"Afegeix un nou parc",
 		"SNACKBARLABEL":"GeoLocation desactivat. Si us plau, activeu-lo o introduïu una adreça al camp de cerca!",
 		"NONAMEPARC" :"Parc infantil",
+		"TAPHERE" :"Feu clic per tenir més informació",
 		"NOPARCFOUND" : "No es fa referència a cap parc infantil en aquesta zona. No dubti a afegir patis infantils!",
 		"GEOLOCALIZEBUTTON" : "Localitzeu-me",
 		"GEOLOCATIONNOTALLOWED": "Geolocalización no està autoritzada per Map&Kid. Aneu a la configuració per activar la geolocalización"

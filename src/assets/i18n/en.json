@@ -23,6 +23,7 @@
 		"ADDPARCBUTTON":"Add a new park",
 		"SNACKBARLABEL":"GeoLocation deactivated. Please activate it or enter a address in the search field !",
 		"NONAMEPARC" :"Playground",
+		"TAPHERE" :"Tap here for more information",
 		"NOPARCFOUND" : "No playground is referenced in this area. Don't hesitate to add playgrounds !",
 		"GEOLOCALIZEBUTTON" : "Locate Me",
 		"GEOLOCATIONNOTALLOWED": "Geolocation is not authorized for Map&Kid. Please go to settings to activate geolocation."

@@ -74,6 +74,9 @@ var GoogleMapsClusterProvider = /** @class */ (function () {
     GoogleMapsClusterProvider.prototype.redraw = function () {
         this.markerCluster.redraw();
     };
+    GoogleMapsClusterProvider.prototype.clearMarkers = function () {
+        this.markerCluster.clearMarkers();
+    };
     GoogleMapsClusterProvider = __decorate([
         Injectable(),
         __metadata("design:paramtypes", [Http])

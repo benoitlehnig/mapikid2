@@ -12,6 +12,7 @@ import {
  GoogleMapOptions,
  CameraPosition,
  MarkerOptions,
+ MarkerCluster,
  Marker,
  LatLng
 } from '@ionic-native/google-maps';
@@ -50,6 +51,7 @@ export class HomePage implements OnInit{
 	db: AngularFireDatabase;
 	googleMapJDK=null ;
 	googleMapNative= null;
+	mapClusterNative:MarkerCluster=null;
 	currentPosition:LatLng; 
 	autocompleteItems: any;
 	autocomplete: any;
@@ -64,9 +66,12 @@ export class HomePage implements OnInit{
 	mapCenter= {lat:0, lng:0};	
 	keys=[];	
 	markers =[];
+	markerCluster =[];
 	loading = null;
 	lastRequestParcsAround = new Date().getTime();
 	geolocationNotAllowedLabel ="";
+	playgroundNoName ="";
+	tapHereLabel ="";
 	noParcReturned:boolean=false;
 	geoLocationMarker = new google.maps.Marker({
 		    position:  new google.maps.LatLng(0,0),
@@ -80,7 +85,7 @@ export class HomePage implements OnInit{
          });
 	loadingCompleted: boolean=true;
 	httpRequestActivated: boolean = false;
-	useNativeMap:boolean = false;
+	useNativeMap:boolean = true;
 
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -130,13 +135,23 @@ export class HomePage implements OnInit{
 				this.translate.get('map.GEOLOCATIONNOTALLOWED').subscribe((res: string) => {
 					this.geolocationNotAllowedLabel = res;
 				});
+				this.translate.get('map.NONAMEPARC').subscribe((res: string) => {
+					this.playgroundNoName = res;
+				});
+				this.translate.get('map.TAPHERE').subscribe((res: string) => {			
+					this.tapHereLabel = res;
+				});
 				this.loadingCompleted = false;
 				this.loadMap();
 				if(this.platform.is('ios')){
-					this.startGeolocation();
+					if(this.useNativeMap === false){
+						this.startGeolocation();
+					}
 				}
 				else{
-					this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
+					if(this.useNativeMap === false){
+						this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
+					}
 				}
 	        });	
 	       
@@ -196,9 +211,16 @@ export class HomePage implements OnInit{
 			this.numberOfParcsToBeLoaded = 0;
 			this.numberParcLoaded = 0;
 			this.updateDistance();	
-			this.parcsList = this.parcs.slice(0,20);
+			if(this.parcsList){
+				this.parcsList.splice(0, this.parcsList.length);
+			}
+			
+			this.parcsList = this.parcs.slice(0,10);
 			if(this.useNativeMap === false){
 				this.mapCluster.redraw();
+			}
+			else{
+
 			}
 		}
 		else{
@@ -235,9 +257,11 @@ export class HomePage implements OnInit{
 		}.bind(this));
 
 		var onReadyRegistration =  this.geoQuery.on("ready", function() {
-			
-			if(this.markersEntered ===0){
+			if(this.markersEntered ===0 && this.parcs.length ===0){
 				this.noParcReturned = true;
+				this.checkCompleteLoad();
+			}
+			else if(this.markersEntered ===0 && this.parcs.length !==0){
 				this.checkCompleteLoad();
 			}
 			else{
@@ -290,22 +314,58 @@ export class HomePage implements OnInit{
     }
 	displayParcMarker =function(parc, mode){
 		if(this.useNativeMap === true){
+			let name = this.playgroundNoName;
+			if(parc.parcItem.name !==''){
+				name = parc.parcItem.name;
+			}
 			if(mode==='add'){
 				this.googleMapNative.addMarker({
 				    'position': {
 				      lat: parc.parcItem.position.lat,
 				      lng: parc.parcItem.position.lng
 				    },
-				    'title': parc.parcItem.name
+				    'title': name,
+				    'snippet': this.tapHereLabel,
+				    'icon': this._map.getIconNative(parc)
+				  }).then((marker: Marker) => {
+				  		this.markers[parc.key]= marker;
+				  		/*this.markerCluster.push({
+					    'position': {
+					      lat: parc.parcItem.position.lat,
+					      lng: parc.parcItem.position.lng
+					    },
+					    'title': name,
+					    'snippet': "Tap here to get more details!",
+					    'icon': this._map.getIconNative(parc)
+					  });
+					  */
+				  		marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(() => {
+				          	this.navCtrl.push(ParcDetailsPage, {key:parc.key} );
+				        });
+				        
+				  });
+				  this.markers.push({
+				    'position': {
+				      lat: parc.parcItem.position.lat,
+				      lng: parc.parcItem.position.lng
+				    },
+				    'title': name,
+				    'snippet': "Tap here to get more details!",
+				    'icon': this._map.getIconNative(parc)
 				  });
 			}
 			else{
+				this.markers[parc.key].setPosition({
+				      lat: parc.parcItem.position.lat,
+				      lng: parc.parcItem.position.lng
+				    })
 			}
 		}
 		else{
 			this.displayParcMarkerJDK(parc,mode);
 		}
-	}
+	};
+
 	displayParcMarkerJDK =function(parc, mode){
 		if(parc.parcItem){
 			if(parc.parcItem.position){
@@ -368,13 +428,34 @@ export class HomePage implements OnInit{
             	this.autocomplete.query = item.description;
 				this.parcs = [];
 				this.keys =[];
-                this._map.setMapCenter(results[0].geometry.location.lat(),results[0].geometry.location.lng());
+				if(this.useNativeMap ===false){
+                	this._map.setMapCenter(results[0].geometry.location.lat(),results[0].geometry.location.lng());
+            	}
+            	else{
+            		let location = new LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+		        	let options : CameraPosition<any> = {
+		          		target:location,
+		          		zoom: 18,
+		          		tilt: 30
+
+		        	};
+		        	this.googleMapNative.moveCamera(options);
+            	}
                 this.markerAddress.setPosition({lat: results[0].geometry.location.lat(), lng:results[0].geometry.location.lng()});
                 console.log(this.markerAddress.getPosition().lat(), this.markerAddress.getPosition().lng());
                 this.markerAddress.setTitle(item.description);
                 if(this.useNativeMap === false){
                 	this.markerAddress.setMap( this.googleMapJDK);
                 	console.log(this.markerAddress);
+                }
+                else{
+                	this.googleMapNative.addMarker({
+				    'position': {
+				      lat: results[0].geometry.location.lat(),
+				      lng: results[0].geometry.location.lng()
+				    },
+				    'title': item.description
+				  });
                 }
 
                 this.displayParcsAround(true,false);
@@ -384,20 +465,11 @@ export class HomePage implements OnInit{
 			}
 		}.bind(this));
 	}
+	
 	loadMapNative(){
 		this.mapHeight = String(this.platform.height()/2)+"px";
 		let element: HTMLElement = document.getElementById('map');
-		this.googleMapNative = this._map.createMapNative(element,false,google.maps.MapTypeId.ROADMAP);
-		this.googleMapNative.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe(data => function(){
-			console.log("CAMERA_MOVE_END",data);	
-			this._map.setCurrentMapCenter();
-		    this.displayParcsAround(false,false);
-		    console.log(this._map.getCenter());
-		    this._map.setMapCenter(data.target.lat,data.target.lng);
-	    }.bind(this));
-	    this.googleMapNative.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK, function() {
-		    alert("The my location button is clicked.");
-		}.bind(this));
+		this.googleMapNative = this.createMapNative(element,false,google.maps.MapTypeId.ROADMAP);
 		
 	}
 
@@ -453,6 +525,7 @@ export class HomePage implements OnInit{
 	        this.getPlaygroundsAround(false,false,this.radius);
 		}
     };
+
     cleanParcsDisplayed = function(){
     	for(var i=0;i<this.markers.length;i++){
     		this.markers[i].setMap(null);
@@ -460,7 +533,13 @@ export class HomePage implements OnInit{
     	this.markers =[];
     	this.parcs = [];
   		this.keys = [];
-      	this.mapCluster.clearMarkers();
+  		if(this.useNativeMap ===true){
+			//this.mapClusterNative.empty();
+		}
+		else{
+			this.mapCluster.clearMarkers();
+		}
+      	
     }
 
     getPlaygroundsAround =  function(cleanParc, forceRequest,radius){
@@ -499,7 +578,7 @@ export class HomePage implements OnInit{
     };
     getPlaygroundsDetails =  function(){
     	this._map.getPlaygroundDetails(this.parcs).map(data => data.json())
-					.subscribe(data=> {console.log(data)})
+			.subscribe(data=> {console.log(data)})
   
     }
 
@@ -583,4 +662,89 @@ export class HomePage implements OnInit{
   			this.navCtrl.push(this.parcUpdate, {mode:'add', position:this._map.getCenter()} );
   		}
   	}
+
+  	createMapNative(element, mapTypeControl,mapTtypeId){
+    	let location = new LatLng(-34.9290,138.6010);
+    	let mapOptions: GoogleMapOptions = this._map.getDefaultMapOptions();
+    	this.googleMapNative = GoogleMaps.create(element, mapOptions);
+    	this.googleMapNative.one(GoogleMapsEvent.MAP_READY).then( () => {
+    		console.log("camera ready");
+    		let gf = new GeoFire( firebase.database().ref('geofire'));
+    		
+	      	this.getLocation().then(res=>{ 
+	        	
+	        	let location = new LatLng(res.coords.latitude, res.coords.longitude);
+	        	this._map.setCenter(location.lat,location.lng);
+	        	this.geoQuery = gf.query({
+					center: [res.coords.latitude,res.coords.longitude],
+					radius: this.radius 
+				});	
+		        let options : CameraPosition<any> = {
+		          target:location,
+		          zoom: 12,
+		          tilt: 30
+		        };
+	        	this.setupInitialGeoQuery();
+	       		this.googleMapNative.moveCamera(options);
+	        })
+	     	.catch((error) => {
+				console.log('Error getting location', error);
+				this.errorCallback(error);
+			});
+      	
+      
+       		this.googleMapNative.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(
+            (data) => {
+                console.log("CAMERA_MOVE_END",data);	
+                var target = this.googleMapNative.getCameraTarget();
+     			var mapCenter = {lat: target.lat, lng: target.lng};
+				console.log(mapCenter);
+				this._map.setMapCenter(mapCenter.lat,mapCenter.lng);
+				this._map.setCenter(mapCenter.lat,mapCenter.lng);
+				this.displayParcsAround(false,false);
+			    console.log(this._map.getCenter());
+            });
+      		this.googleMapNative.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(
+            (data) => {
+                this.getLocation().then(res=>{ 
+	            	let location = new LatLng(res.coords.latitude, res.coords.longitude);
+		        	let options : CameraPosition<any> = {
+		          		target:location,
+		          		zoom: 12,
+		          		tilt: 30
+
+		        	};
+		        	this.googleMapNative.moveCamera(options);
+	        		this._map.setMapCenter(location.lat,location.lng);
+	        		this._map.setCenter(location.lat,location.lng);
+	        		this.displayParcsAround(false,false);
+	        	});
+            });
+      		/*
+            this.googleMapNative.addMarkerCluster({
+		   		//maxZoomLevel: 5,
+		    	boundsDraw: true,
+		    	markers: this.markerCluster,
+		    	icons: [
+		            {min: 20, max: 49, url: 'assets/images/m1.png', anchor: {x: 16, y: 16}},
+		            {min: 50, max: 99, url: 'assets/images/m2.png.png', anchor: {x: 16, y: 16}},
+		            {min: 100, max: 199, url: 'assets/images/m3.png.png', anchor: {x: 24, y: 24}},
+		            {min: 200, max: 499, url: 'assets/images/m4.png.png', anchor: {x: 32, y: 32}},
+		            {min: 500, max: 5000, url: 'assets/images/m5.png.png', anchor: {x: 32, y: 32}}
+		         ]
+		  	}).then((markerCluster: MarkerCluster) => {
+		  		this.mapClusterNative =markerCluster ;
+		  		console.log(markerCluster)
+		  	});
+		  	*/
+		  	
+    	});
+    	this.useNativeMap = true;
+    	return this.googleMapNative;
+  	}
+
+  getLocation(){
+    var positionOptions = {timeout: 10000, enableHighAccuracy: true};
+    return this.geolocation.getCurrentPosition(positionOptions);   
   }
+}

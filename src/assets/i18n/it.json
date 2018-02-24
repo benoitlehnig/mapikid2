@@ -23,6 +23,7 @@
 		"ADDPARCBUTTON":"Aggiungi un nuovo parco",
 		"SNACKBARLABEL":"GeoLocation disattivato. Attiva o inserisci un indirizzo nel campo di ricerca!",
 		"NONAMEPARC" :"Parco giochi",
+		"TAPHERE" :"Fai clic per avere maggiori informazioni",
 		"NOPARCFOUND" : "Nell'area non si fa riferimento alcun parco giochi. Non esitare a aggiungere campi da gioco!",
 		"GEOLOCALIZEBUTTON" : "Localizza me",
 		"GEOLOCATIONNOTALLOWED": "Geolocazione non è autorizzata per Map&Kid. Attiva la geolocalizzazione."

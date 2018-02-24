@@ -118,10 +118,11 @@ export class ParcDetailsPage {
 	  		myModal.onDidDismiss(data => {
 	  			console.log("data",data);
 	  			if(data ==='update'){
-
-	     		 this.presentToast(this.toastLabelUpdated);
+	  				this.localParc.validated = true;
+	     		 	this.presentToast(this.toastLabelUpdated);
 	  			}
 	  			if(data ==='add'){
+	  				this.localParc.validated = true;
 	  				this.presentToast(this.toastLabelAdded);
 	  			}
 	   		});

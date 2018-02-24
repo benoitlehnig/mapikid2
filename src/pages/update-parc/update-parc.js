@@ -13,6 +13,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import GeoFire from 'geofire';
 import { MapService } from '../../providers/map-service/map-service';
+import { AuthService } from '../../providers/auth-service/auth-service';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 /**
  * Generated class for the ReviewsRootPage page.
@@ -21,7 +22,7 @@ import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
  * on Ionic pages and navigation.
  */
 var UpdateParcPage = /** @class */ (function () {
-    function UpdateParcPage(platform, viewCtrl, navCtrl, navParams, db, _map, ga) {
+    function UpdateParcPage(platform, viewCtrl, navCtrl, navParams, db, _map, ga, _auth) {
         this.platform = platform;
         this.viewCtrl = viewCtrl;
         this.navCtrl = navCtrl;
@@ -29,6 +30,7 @@ var UpdateParcPage = /** @class */ (function () {
         this.db = db;
         this._map = _map;
         this.ga = ga;
+        this._auth = _auth;
         this.map = null;
         this.mode = "update";
         this.gf = new GeoFire(firebase.database().ref('geofire'));
@@ -70,7 +72,7 @@ var UpdateParcPage = /** @class */ (function () {
             this.map = this._map.createMapJDK(element, true, google.maps.MapTypeId.ROADMAP);
             if (this.mode === 'add') {
                 console.log(this.navParams.get('position'));
-                this.parc.position = { lat: this.navParams.get('position').lat(), lng: this.navParams.get('position').lng() };
+                this.parc.position = this.navParams.get('position');
             }
             var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
             this.map.setCenter(latLng);
@@ -108,6 +110,9 @@ var UpdateParcPage = /** @class */ (function () {
                 this.parc.facilities.other = false;
                 this.parc.facilities.otherDescription = null;
             }
+            if (this._auth.authenticated !== false) {
+                this.parc.modifiedBy = this._auth.displayName();
+            }
             console.log(this.parc);
             if (this.mode === 'update') {
                 var parcObject = this.db.object('positions/' + this.parc.$key);
@@ -119,6 +124,9 @@ var UpdateParcPage = /** @class */ (function () {
                 }.bind(this));
             }
             if (this.mode === 'add') {
+                if (this._auth.authenticated !== false) {
+                    this.parc.addedBy = this._auth.displayName();
+                }
                 var newPosition = this.db.database.ref('positions').push();
                 console.log(this.parc);
                 newPosition.set(this.parc).then(console.log(newPosition.key));
@@ -211,10 +219,8 @@ var UpdateParcPage = /** @class */ (function () {
             }
         }
         else {
-            console.log(this.navParams.get('position'));
-            this.parc.position = { lat: this.navParams.get('position').lat(), lng: this.navParams.get('position').lng() };
+            this.parc.position = this.navParams.get('position');
         }
-        console.log(this.parc);
     }
     UpdateParcPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -232,7 +238,7 @@ var UpdateParcPage = /** @class */ (function () {
         __metadata("design:paramtypes", [Platform, ViewController,
             NavController, NavParams,
             AngularFireDatabase,
-            MapService, FirebaseAnalytics])
+            MapService, FirebaseAnalytics, AuthService])
     ], UpdateParcPage);
     return UpdateParcPage;
 }());

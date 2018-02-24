@@ -16,18 +16,7 @@ var OrderByDistancePipe = /** @class */ (function () {
     }
     OrderByDistancePipe.prototype.transform = function (items) {
         //console.log("orderByDistance");
-        var filtered = [];
-        if (items) {
-            for (var _i = 0, items_1 = items; _i < items_1.length; _i++) {
-                var item = items_1[_i];
-                filtered.push(item);
-            }
-            ;
-            filtered.sort(function (a, b) {
-                return (parseFloat(a['distance']) > parseFloat(b['distance']) ? 1 : -1);
-            });
-        }
-        return filtered.slice(0, 25);
+        return items.slice(0, 25);
     };
     OrderByDistancePipe = __decorate([
         Pipe({

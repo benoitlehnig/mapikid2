@@ -23,6 +23,7 @@
 		"ADDPARCBUTTON":"Füge einen neuen Park hinzu",
 		"SNACKBARLABEL":"GeoLocation deaktiviert. Bitte aktivieren oder eine Adresse im Suchfeld eingeben!",
 		"NONAMEPARC" :"Spielplatz",
+		"TAPHERE" :"Klicken, um weitere Informationen zu erhalten",
 		"NOPARCFOUND" : "Kein Spielplatz ist in diesem Bereich referenziert. Zögern Sie nicht, Spielplätze hinzuzufügen!",
 		"GEOLOCALIZEBUTTON" : "Suche mich",
 		"GEOLOCATIONNOTALLOWED": "Geolocation ist nicht für Map&Kid zugelassen. Bitte Geoocation aktivieren."

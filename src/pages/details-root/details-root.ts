@@ -59,6 +59,7 @@ export class DetailsRootPage {
 			this.getWeather();
 			this.codeAddress();
 			this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
+			this.setLowNumberofEquipment();
 		});
 
 		
@@ -92,7 +93,7 @@ export class DetailsRootPage {
 			this.loadMap();
 			this.setUpPlaceService();
 			this.triggerGetGoogleData();
-			this.setLowNumberofEquipment();
+			
 
 		});
 	}

@@ -23,6 +23,8 @@
 		"ADDPARCBUTTON":"添加公园",
 		"SNACKBARLABEL":"地理位置已禁用，激活或在搜索栏中输入地址！",
 		"NOPARCFOUND" : "这个地区没有参考游乐场，不要犹豫，添加你知道的",
+		"NONAMEPARC" :"游乐区",
+		"TAPHERE" :"点击以获取更多信息",
 		"GEOLOCALIZEBUTTON" : "找我",
 		"GEOLOCATIONNOTALLOWED": "地理位置定位是不允许的，去设置激活它 "
 	},

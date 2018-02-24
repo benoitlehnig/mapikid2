@@ -4,7 +4,9 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import * as firebase from 'firebase';
 import GeoFire from 'geofire';
 import { MapService } from '../../providers/map-service/map-service';
+import { AuthService } from '../../providers/auth-service/auth-service';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the ReviewsRootPage page.
  *
@@ -56,10 +58,12 @@ export class UpdateParcPage {
           sixandPlus: false
     };
   
+  localParc:{[k: string]: any} = {'validated':false,'requestedForDeletion':false};
+
   constructor(public platform: Platform,public viewCtrl: ViewController,
     public navCtrl: NavController, public navParams: NavParams,
-    public db: AngularFireDatabase,
-    private _map:MapService, private ga: FirebaseAnalytics) {
+    public db: AngularFireDatabase, private storage: Storage,
+    private _map:MapService, private ga: FirebaseAnalytics,private _auth: AuthService,) {
     console.log(this.navParams.get('parc'));
     
     if(this.navParams.get('mode')){
@@ -112,6 +116,18 @@ export class UpdateParcPage {
     else{
       this.parc.position =  this.navParams.get('position');
     }
+    storage.get(this.parc.$key).then((val) => {
+      console.log(val);
+      if(val !==null){
+        this.localParc = JSON.parse(val);
+     }  
+      else{
+     
+      }
+    }).catch(function (err) {
+      //   we got an error
+     console.log(err);
+    });
   }
 
   ngOnInit() {
@@ -167,6 +183,17 @@ export class UpdateParcPage {
       this.parc.facilities.other =false;
       this.parc.facilities.otherDescription =null;
     }
+    if(this._auth.authenticated !==false ){
+      this.parc.modifiedBy = this._auth.displayName();
+    }
+    var validateIncreased = 0;
+    if(this.parc.validationNumber){
+      validateIncreased = this.parc.validationNumber;
+    }
+    this.parc.validationNumber = validateIncreased+1;
+    this.parc.initialized = false;
+    this.localParc.validated = true;
+    this.storage.set(this.parc.$key, JSON.stringify(this.localParc));
 
     console.log(this.parc);
     if(this.mode==='update'){
@@ -181,6 +208,9 @@ export class UpdateParcPage {
 
     }
     if(this.mode==='add'){
+      if(this._auth.authenticated !==false ){
+        this.parc.addedBy = this._auth.displayName();
+      }
       var newPosition = this.db.database.ref('positions').push();
       console.log(this.parc);
       newPosition.set(this.parc).then(console.log(newPosition.key));
