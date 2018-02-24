@@ -30,11 +30,11 @@ export class FirstVisitPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FirstVisitPage');
-    this.ga.setCurrentScreen("First Visit Page");
+    this.ga.setCurrentScreen("First_Visit_Page");
   }
   close = function(){
   	this.app.getActiveNav().setRoot(HomePage);
-    this.ga.logEvent("First Visit Page", {"action": "close"});
+    this.ga.logEvent("First_Visit_Page", {"action": "close"});
   }
 
 }
