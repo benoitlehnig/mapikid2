@@ -97,7 +97,8 @@
 			"WEATHERIN": "In ",
 			"WEATHERHOURS": " hours",
 			"UVINDEX": "UV Index",
-			"VALIDATEDBYINSTITUTION" : "Confirmed by the town hall"
+			"VALIDATEDBYINSTITUTION" : "Confirmed by the town hall",
+			"VIEWALLREVIEWS" : "View all reviews"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Add New Park",

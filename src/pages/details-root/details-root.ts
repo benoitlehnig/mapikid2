@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component,Input } from '@angular/core';
+import { NavController, NavParams,ModalController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import GeoFire from 'geofire';
@@ -7,6 +7,11 @@ import {TranslateService} from 'ng2-translate';
 import * as firebase from 'firebase';
 import { MapService } from '../../providers/map-service/map-service';
 import { WeatherProvider } from '../../providers/weather/weather';
+import {ReviewsRootPage} from '../reviews-root/reviews-root';
+import {AddReviewPage} from '../add-review/add-review';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../login/login';
+import { AuthService } from '../../providers/auth-service/auth-service';
 /**
  * Generated class for the DetailsRootPage page.
  *
@@ -19,11 +24,11 @@ import { WeatherProvider } from '../../providers/weather/weather';
 })
 export class DetailsRootPage {
 
+	@Input() parcKey:string;
 	parc: {[k: string]: any} = {};
 	map= null ;
 	mapDetailsMap =null;
-	db: AngularFireDatabase;
-	toiletsMarkers : any[];
+	toiletsMarkers : any[]=[];
 	numberOfEquipment = 0;
 	isLowNumberofEquipment = true;
 	placesService: any;
@@ -35,35 +40,18 @@ export class DetailsRootPage {
 	public localWeatherForecast:Object;
 	public uvIndex:Object;
 	public pollution:Object;
-
+	firstReviews =[];
+	parcReviews = ReviewsRootPage;
+	userSigned: boolean=false;
+	login = LoginPage;
 
 	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
-		db: AngularFireDatabase, translate: TranslateService,private _map:MapService, private weatherService:WeatherProvider) {
-		console.log(navParams.data.$key);
-		this.parcObject = db.object('positions/'+navParams.data.$key);
-		this.parcObject.subscribe(snapshot => {
-	   		this.parc = snapshot;
-	   		console.log(this.parc);
-	   		if(!this.parc.facilities){
-				this.parc.facilities = null;
-			}
-			var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
-			if(this.marker){
-				this.marker.setPosition(latLng);
-			}
-			if(this.map){
-				this.map.setCenter(latLng);
-			}
-			this.toiletsMarkers = [];
-			this.findClosestToilets();
-			this.getWeather();
-			this.codeAddress();
-			this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
-			this.setLowNumberofEquipment();
-		});
-
+		private db: AngularFireDatabase, translate: TranslateService,private _map:MapService,
+		public modalCtrl: ModalController,
+		private weatherService:WeatherProvider,public afAuth: AngularFireAuth, private _auth: AuthService) {
 		
-		console.log(this.parc);
+		
+		
 		translate.get('parcDetails.MONDAY').subscribe((res: string) => {
 			this.labelWeekDay[0]= res;
 		});
@@ -85,16 +73,56 @@ export class DetailsRootPage {
 		translate.get('parcDetails.SUNDAY').subscribe((res: string) => {
 			this.labelWeekDay[6]= res;
 		});		
+		this.afAuth.auth.onAuthStateChanged(function(user) {
+        	this.userSigned = this._auth.authenticated;
+    	}.bind(this));
 	}
 	
 
 	ngOnInit() {
 		this.platform.ready().then(() => {
-			this.loadMap();
-			this.setUpPlaceService();
-			this.triggerGetGoogleData();
-			
-
+			console.log("this.parKey",this.parcKey);
+			if(this.parcKey){
+				this.parcObject = this.db.object('positions/'+this.parcKey);
+				this.parcObject.subscribe(snapshot => {
+			   		this.parc = snapshot;
+			   		if(!this.parc.facilities){
+						this.parc.facilities = null;
+					}
+					var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
+					if(this.marker){
+						this.marker.setPosition(latLng);
+					}
+					if(this.map){
+						this.map.setCenter(latLng);
+					}
+					this.toiletsMarkers = [];
+					this.findClosestToilets();
+					this.getWeather();
+					this.codeAddress();
+					this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
+					this.setLowNumberofEquipment();
+					if(this.parc.reviews){ 
+						this.firstReviews =[];
+						this.parc.reviewsLength = Object.keys(this.parc.reviews).length;
+						
+						Object.keys(this.parc.reviews).forEach((prop) => { 
+							var string = String(prop);console.log(prop, String(prop),this.parc.reviews[prop]);
+							this.firstReviews.push(this.parc.reviews[prop]);
+						});
+						this.firstReviews.sort(function(a, b) {
+		    				return parseFloat(a.date) - parseFloat(b.date);
+						});
+						this.firstReviews = this.firstReviews.splice(0,3);
+					}
+					else{
+						this.parc.reviewsLength = 0;
+					}
+					this.loadMap();
+					this.setUpPlaceService();
+					this.triggerGetGoogleData();			   		
+				});
+			}
 		});
 	}
  
@@ -195,6 +223,18 @@ export class DetailsRootPage {
 		}
 		return id;
 	}
+
+	openAddReviewModal = function(){
+		if(this._auth.authenticated ===false ){
+  			let myModal = this.modalCtrl.create(this.login);
+    		myModal.present();
+  		}
+  		else{
+  			let obj = {parc: this.parc};
+  			let myModal = this.modalCtrl.create(AddReviewPage,obj);
+    		myModal.present();
+  		}  		
+  	}
 
 	findClosestToilets = function(){
 		let geoFireToilets = new GeoFire( firebase.database().ref('geofireToilets'));
@@ -303,5 +343,6 @@ export class DetailsRootPage {
         return Math.round(value);
     }
 
-
+    
+   
 }

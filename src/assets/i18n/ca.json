@@ -97,7 +97,8 @@
 		"WEATHERIN": "Dins de ",
 		"WEATHERHOURS": " hores",
 		"UVINDEX": "Índex UV",
-		"VALIDATEDBYINSTITUTION": "Confirmat per l'Ajuntament"
+		"VALIDATEDBYINSTITUTION": "Confirmat per l'Ajuntament",
+		"VIEWALLREVIEWS" : "Veure totes les ressenyes"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Afegeix un nou parc",

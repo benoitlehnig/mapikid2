@@ -94,7 +94,6 @@ export function createTranslateLoader(http: Http) {
     IonicStorageModule.forRoot(),
     AngularSplitModule,
     IonicPageModule.forChild(DetailsRootPage),
-    IonicPageModule.forChild(ReviewsRootPage),
     IonicPageModule.forChild(UpdateParcPage),
   	AngularFireDatabaseModule,
   	HttpModule,

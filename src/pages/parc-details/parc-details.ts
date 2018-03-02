@@ -42,8 +42,10 @@ export class ParcDetailsPage {
 	toastLabelDeleted:String = "";
 	toastLabelUpdated:String = "";
 	toastLabelAdded:String = "";
+	firstReviews=[];
 	map=null;
 	login = LoginPage;
+	parcKey:string="";
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
   	db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
@@ -52,12 +54,26 @@ export class ParcDetailsPage {
 		console.log(navParams);
 	
 		this.parcObject = db.object('positions/'+this.navParams.get('key'));
+		this.parcKey  = this.navParams.get('key');
 		this.parcObject.subscribe(snapshot => {
 	   		this.parc = snapshot;
-	   		console.log(this.parc);
+	   		if(!this.parc.rate){
+					this.parc.rate = {'rate': 0};
+				}	
 	   		this.parc.reviewsLength = 0;
 	   		if(this.parc.reviews){ 
 				this.parc.reviewsLength = Object.keys(this.parc.reviews).length;
+				
+				Object.keys(this.parc.reviews).forEach((prop) => { 
+					var string = String(prop);console.log(prop, String(prop),this.parc.reviews[prop]);
+					this.firstReviews.push(this.parc.reviews[prop]);
+					console.log(this.firstReviews);
+				});
+				console.log(this.firstReviews);
+				this.firstReviews.sort(function(a, b) {
+    				return parseFloat(a.date) - parseFloat(b.date);
+				});
+				
 			}
 		});
 		this.afAuth.auth.onAuthStateChanged(function(user) {
@@ -130,11 +146,7 @@ export class ParcDetailsPage {
   		}
   	}
 
-  	openAddReviewModal = function(){
-  		let obj = {parc: this.parc};
-  		let myModal = this.modalCtrl.create(AddReviewPage,obj);
-    	myModal.present();
-  	}
+  	
 
   	validate = function(){
 		var validateIncreased = 0;

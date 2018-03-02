@@ -97,7 +97,8 @@
 		"WEATHERIN": "Dentro de ",
 		"WEATHERHOURS": " horas",
 		"UVINDEX": "Índice UV",
-		"VALIDATEDBYINSTITUTION" : "Confermato dal municipio"
+		"VALIDATEDBYINSTITUTION" : "Confermato dal municipio",
+		"VIEWALLREVIEWS" : "Ver todas las críticas"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC": "Agregar un nuevo parque",

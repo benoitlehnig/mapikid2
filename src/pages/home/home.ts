@@ -46,7 +46,7 @@ export class HomePage implements OnInit{
 	parcUpdate = UpdateParcPage;
 	login =LoginPage;
 	parcs: any[];
-	parcsList: any[];
+	parcsList: any[]=[];
 	userPicture:String="";
 	db: AngularFireDatabase;
 	googleMapJDK=null ;
@@ -83,6 +83,7 @@ export class HomePage implements OnInit{
             draggable: false,
             icon: 'https://www.google.com.au/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v2_shadow-1-small.png,assets/icons/spotlight/spotlight_pin_v2-1-small.png,assets/icons/spotlight/spotlight_pin_v2_dot-1-small.png,assets/icons/spotlight/spotlight_pin_v2_accent-1-small.png&highlight=ff000000,ea4335,960a0a,ffffff&color=ff000000?scale=1'
          });
+	geoLocationMarkerNative:Marker=null;
 	loadingCompleted: boolean=true;
 	httpRequestActivated: boolean = false;
 	useNativeMap:boolean = true;
@@ -142,7 +143,11 @@ export class HomePage implements OnInit{
 					this.tapHereLabel = res;
 				});
 				this.loadingCompleted = false;
+				if( this.platform.is('core')  ) {
+				  this.useNativeMap = false;
+				} 
 				this.loadMap();
+				
 				if(this.platform.is('ios')){
 					if(this.useNativeMap === false){
 						this.startGeolocation();
@@ -160,6 +165,11 @@ export class HomePage implements OnInit{
 	
 	setLocationMarker = function(lat,lng){
 		if(this.useNativeMap ===true){
+			console.log("geoLocationMarkerNative");
+			this.geoLocationMarkerNative.setPosition( {
+				lat: lat,
+				lng: lng
+			});
 		}
 		else{
 			var latLng = new google.maps.LatLng(lat,lng);
@@ -211,11 +221,8 @@ export class HomePage implements OnInit{
 			this.numberOfParcsToBeLoaded = 0;
 			this.numberParcLoaded = 0;
 			this.updateDistance();	
-			if(this.parcsList){
-				this.parcsList.splice(0, this.parcsList.length);
-			}
 			
-			this.parcsList = this.parcs.slice(0,10);
+			
 			if(this.useNativeMap === false){
 				this.mapCluster.redraw();
 			}
@@ -258,13 +265,16 @@ export class HomePage implements OnInit{
 
 		var onReadyRegistration =  this.geoQuery.on("ready", function() {
 			if(this.markersEntered ===0 && this.parcs.length ===0){
+				console.log("onReadyRegistration","this.markersEntered ===0 && this.parcs.length ===0");
 				this.noParcReturned = true;
 				this.checkCompleteLoad();
 			}
 			else if(this.markersEntered ===0 && this.parcs.length !==0){
+				console.log("onReadyRegistration","this.markersEntered ===0 && this.parcs.length !==0");
 				this.checkCompleteLoad();
 			}
 			else{
+				console.log("onReadyRegistration","this.noParcReturned");
 				this.noParcReturned = false;
 			}
 			this.markersEntered =0;
@@ -435,7 +445,7 @@ export class HomePage implements OnInit{
             		let location = new LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
 		        	let options : CameraPosition<any> = {
 		          		target:location,
-		          		zoom: 18,
+		          		zoom: 12,
 		          		tilt: 30
 
 		        	};
@@ -472,7 +482,16 @@ export class HomePage implements OnInit{
 		this.googleMapNative = this.createMapNative(element,false,google.maps.MapTypeId.ROADMAP);
 		
 	}
-
+	dragEnd(e: {gutterNum: number, sizes: Array<number>}) {
+        if(this.useNativeMap ===true){
+	        let element: HTMLElement = document.getElementById('map');
+	        let element2: HTMLElement = document.getElementById('mapSplit');
+	        console.log(element2.offsetHeight);
+	        element.style.height = String(element2.offsetHeight)+"px";
+	        this.googleMapNative.setDiv(element);
+    	}
+    }
+    
 	loadMap() {
 		if(this.useNativeMap ===true){
 			this.loadMapNative();
@@ -583,8 +602,10 @@ export class HomePage implements OnInit{
     }
 
     updateDistance = function(){
+    	console.log("updateDistance start ");
     	var lat= Number(this._map.getCenter().lat);
 		var lng = Number(this._map.getCenter().lng);
+		console.log(lat,lng);
       	for (var i=0; i<this.parcs.length; i++){
   			this.parcs[i].distance = GeoFire.distance(
   				[lat,lng],
@@ -594,6 +615,8 @@ export class HomePage implements OnInit{
   		if(this.parcs){
   			this.parcs = this.orderByDistance(this.parcs, 'distance',false);
   		}
+  		this.parcsList = this.parcs.slice(0,10);
+  		console.log("updateDistance end ");
     };
 
     geolocateUser = function(){
@@ -684,25 +707,46 @@ export class HomePage implements OnInit{
 		          zoom: 12,
 		          tilt: 30
 		        };
+		        this.googleMapNative.addMarker({
+				    'position': {
+				     	lat: res.coords.latitude,
+				      	lng: res.coords.longitude
+				    },
+				    'icon': this._map.getIconPathCurrentPositionNative()
+
+				  }).then((marker: Marker) => {
+				  		this.geoLocationMarkerNative = marker;
+				});
 	        	this.setupInitialGeoQuery();
 	       		this.googleMapNative.moveCamera(options);
+	       		this.currentPosition =  location;
+				
 	        })
 	     	.catch((error) => {
 				console.log('Error getting location', error);
+				 this.googleMapNative.addMarker({
+				    'position': {
+				     	lat: 48.863129,
+				      	lng: 2.345152
+				    },
+				    'icon': this._map.getIconPathCurrentPositionNative()
+				}).then((marker: Marker) => {
+				  		this.geoLocationMarkerNative = marker;
+				});
+
 				this.errorCallback(error);
+				this.openNativeSettings.open("location");
 			});
       	
       
        		this.googleMapNative.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(
             (data) => {
-                console.log("CAMERA_MOVE_END",data);	
+ 
                 var target = this.googleMapNative.getCameraTarget();
      			var mapCenter = {lat: target.lat, lng: target.lng};
-				console.log(mapCenter);
 				this._map.setMapCenter(mapCenter.lat,mapCenter.lng);
 				this._map.setCenter(mapCenter.lat,mapCenter.lng);
 				this.displayParcsAround(false,false);
-			    console.log(this._map.getCenter());
             });
       		this.googleMapNative.on(GoogleMapsEvent.MY_LOCATION_BUTTON_CLICK).subscribe(
             (data) => {
@@ -717,6 +761,8 @@ export class HomePage implements OnInit{
 		        	this.googleMapNative.moveCamera(options);
 	        		this._map.setMapCenter(location.lat,location.lng);
 	        		this._map.setCenter(location.lat,location.lng);
+	        		this.currentPosition =  location;
+					this.setLocationMarker(res.coords.latitude,res.coords.longitude);
 	        		this.displayParcsAround(false,false);
 	        	});
             });

@@ -98,7 +98,8 @@
 			"WEATHERIN": "In ",
 			"WEATHERHOURS": " Stunden",
 			"UVINDEX": "UV-Index",
-			"VALIDATEDBYINSTITUTION" : "Bestätigt durch das Rathaus"
+			"VALIDATEDBYINSTITUTION" : "Bestätigt durch das Rathaus",
+			"VIEWALLREVIEWS" : "Alle Bewertungen ansehen"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Neuen Park hinzufügen",

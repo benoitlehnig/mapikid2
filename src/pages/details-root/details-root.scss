@@ -58,6 +58,10 @@ page-details-root {
 		position:relative;
 		top:-16px;
 	}
+	.weather h4{
+		font-size:1.2rem;
+		margin-bottom: 0;
+	}
 	.wi{
 		color: #8EC63F;
 		font-size:3em;
@@ -78,6 +82,11 @@ page-details-root {
 	.current .temperature, .current .wi{
 		color: #FFFFFF;
 	}
+	h3.uvIndex{
+		margin-top: 0;
+	    margin-bottom: 1rem;
+	    font-size:1.8rem
+	}
 	.uvIndex0,.uvIndex1,.uvIndex2{
 		background: rgb(40, 149, 0);
 	}
@@ -93,4 +102,32 @@ page-details-root {
 	.uvIndex11, .uvIndex12,.uvIndex13, .uvIndex14,.uvIndex15, .uvIndex16,.uvIndex17, .uvIndex18,.uvIndex19, .uvIndex20,.uvIndex21, .uvIndex22{
 		background:rgb(107, 73, 200);
 	}
+	.mapDetails .rating {
+        -webkit-box-align: left;
+        -webkit-align-items: left;
+        -moz-box-align: left;
+        -ms-flex-align: left;
+        align-items: left;
+        -webkit-box-pack: left;
+        -webkit-justify-content: left;
+        -moz-box-pack: left;
+        -ms-flex-pack: left;
+        justify-content: left;
+    }
+    .mapDetails .star{
+        width:13px;
+    }
+    .mapDetails .item-md {
+   		padding-left:0px;
+   	}
+
+    .mapDetails .label-md {
+    	margin: 7px 0px 0px 0px;
+	}
+    .reviews h2{
+    
+    }
+    .reviews{
+   		margin:-1px 0 0px;
+    }
 }
