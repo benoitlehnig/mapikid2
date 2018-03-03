@@ -547,7 +547,13 @@ export class HomePage implements OnInit{
 
     cleanParcsDisplayed = function(){
     	for(var i=0;i<this.markers.length;i++){
-    		this.markers[i].setMap(null);
+    		if(this.useNativeMap ===true){
+    			this.markers[i].remove();
+    		}
+    		else{
+    			this.markers[i].setMap(null);
+    		}
+    	
     	}
     	this.markers =[];
     	this.parcs = [];
@@ -641,9 +647,17 @@ export class HomePage implements OnInit{
 	      message: this.geolocationNotAllowedLabel,
 	      duration: 10000,
 	      showCloseButton: true,
-	      closeButtonText: "X"
+	      closeButtonText: "Settings"
 	    });
     	toast.present();
+    	toast.onDidDismiss((data, role) => {    
+       	 	console.log('Dismissed toast');
+        	if(role== "close") {
+        		if(this.useNativeMap ===true){
+           			this.openNativeSettings.open("location"); 
+           		}
+        	}
+    	});
     	this.diagnostic.requestLocationAuthorization();
     	this.defaultGeoLocation();
     }
@@ -735,7 +749,7 @@ export class HomePage implements OnInit{
 				});
 
 				this.errorCallback(error);
-				this.openNativeSettings.open("location");
+				
 			});
       	
       
