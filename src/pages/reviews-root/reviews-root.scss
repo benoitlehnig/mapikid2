@@ -1,8 +1,22 @@
 page-reviews-root {
+	.toolbar-title, .toolbar-title-md,.toolbar-background-md, .bar-button-default-md{
+		background-color: #8EC63F;
+	    color:#FFFFFF;
+	}
 	ion-avatar{
 		text-align:left;	
 	}
-	.rating{
-		justify-content: left;
+	.rating,.rating[_ngcontent-c1]{
+		-webkit-box-align: left;
+        -webkit-align-items: left;
+        -moz-box-align: left;
+        -ms-flex-align: left;
+        align-items: left;
+        -webkit-box-pack: left;
+        -webkit-justify-content: left;
+        -moz-box-pack: left;
+        -ms-flex-pack: left;
+        justify-content: left;
 	}
+
 }

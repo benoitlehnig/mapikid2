@@ -15,7 +15,7 @@ page-parc-details {
     .topNoScroll{
     	overflow-y:hidden;
     }
-    .button-outline-md {
+    .footer .button-outline-md {
         border-width: 1px;
         border-style: solid;
         border-color: #FFFFFF;
@@ -28,4 +28,15 @@ page-parc-details {
     .toolbar-content-md,.toolbar-content-ios {
         text-align:center;
     }
+
+    .toolbar-content  .default-star-filled-icon{
+        fill: #FFF;
+    }
+    .toolbar-content  .rating.color-positive[_ngcontent-c1] .star-container[_ngcontent-c1] .star[_ngcontent-c1] svg[_ngcontent-c1], .toolbar-content .rating.color-ok[_ngcontent-c1] .star-container[_ngcontent-c1] .star[_ngcontent-c1] svg[_ngcontent-c1]{
+        fill: #FFF;
+    }
+    .toolbar-content .rating.color-default[_ngcontent-c1] .star-container[_ngcontent-c1] .star[_ngcontent-c1] svg[_ngcontent-c1]{
+        fill: #FFF;
+    }
+  
 }

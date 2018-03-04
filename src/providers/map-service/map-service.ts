@@ -59,6 +59,12 @@ export class MapService {
           indoorPicker: true,
           zoom: true
         },
+        'gestures': {
+        'scroll': true,
+        'tilt': true,
+        'rotate': true,
+        'zoom': true
+      }
     };
     this.googleMapNative = GoogleMaps.create(element, mapOptions);
     this.googleMapNative.one(GoogleMapsEvent.MAP_READY).then( () => {
@@ -184,6 +190,16 @@ export class MapService {
     return image;
   }
 
+   getIconPathCurrentPositionNative(){
+    let image = {
+      url: './assets/images/location.png',
+      size: {
+        width: 30,
+        height: 30
+      }
+    };
+    return image;
+  }
   getIconPathCurrentPosition(){
     var iconPath = {
       path: google.maps.SymbolPath.CIRCLE,

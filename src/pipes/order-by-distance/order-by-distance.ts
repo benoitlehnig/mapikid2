@@ -12,8 +12,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrderByDistancePipe implements PipeTransform {
   
   transform(items) {
-  	//console.log("orderByDistance");
 
-    return items.slice(0,25);
+  	var filtered = [];
+  	if(items){
+  		for(let item of items){
+       		filtered.push(item);
+    	};
+    	filtered.sort(function (a, b) {
+        	return ( parseFloat(a['distance']) >  parseFloat(b['distance']) ? 1 : -1);
+    	});	 
+  	}
+
+    return items.slice(0,10);
   }
 }

@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable,FirebaseObjectObservable } 
 import {IStarRatingOnRatingChangeEven} from 'angular-star-rating';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { AuthService } from '../../providers/auth-service/auth-service';
-
+import * as moment from 'moment';
 /**
  * Generated class for the AddReviewPage page.
  *
@@ -22,6 +22,7 @@ export class AddReviewPage {
 	parcObject: FirebaseObjectObservable<any>;
 	photoUrl:string="";
 	userName:string="";
+	date = moment().format('YYYY-MM-DDTHH:mmZ');  
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
   	public navParams: NavParams, public db: AngularFireDatabase,
@@ -45,7 +46,8 @@ export class AddReviewPage {
 		text: this.review.description,	
 		uid: this._auth.displayName(),
 		photoUrl: this._auth.displayPicture(),
-		rate: this.review.rate
+		rate: this.review.rate,
+		date: this.date
 	};
 	this.ga.logEvent("parc_management", 
 		{"action": "Add_review", "parc_key": this.navParams.get('parc').$key, "review": this.review.description}

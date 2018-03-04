@@ -24,8 +24,8 @@
 		{{ item.description }}
 		</ion-item>
 	</ion-list>
-	<split direction="vertical" gutterSize="24">
-    <split-area [size]="80">
+	<split direction="vertical" gutterSize="24" (dragEnd)="dragEnd($event)">
+    <split-area [size]="80" id="mapSplit">
         <div id="map"></div>
         <div id="map2"></div>
     </split-area>

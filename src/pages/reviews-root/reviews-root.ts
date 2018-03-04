@@ -17,10 +17,12 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 export class ReviewsRootPage {
 
 	reviews:FirebaseListObservable<any[]>;
+  name:string="";
   
   constructor(public navCtrl: NavController, public navParams: NavParams,db: AngularFireDatabase) {
 	console.log(navParams)
-	this.reviews = db.list('positions/'+navParams.data.$key+ '/reviews');
+	this.reviews = db.list('positions/'+navParams.data.key+ '/reviews');
+  this.name = navParams.data.name;
 	console.log(this.reviews);
   }
 

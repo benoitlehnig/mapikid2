@@ -9,6 +9,7 @@
   <ion-navbar>
     <ion-title *ngIf="parc.name!=''">{{parc.name}}</ion-title>
     <ion-title *ngIf="parc.name==''">{{'list.NONAMEPARC' |translate}}</ion-title>
+    <star-rating-comp [starType]="'svg'" [rating]="parc.rate.rate" [readOnly]="true"></star-rating-comp>
     <ion-buttons end>
     	<button ion-button icon-only *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
 		<i class="material-icons">mode_edit</i>
@@ -26,18 +27,12 @@
 
 
 <ion-content padding scroll="false" class="topNoScroll">
-
-	<div id="mapDetails"></div>
-	<ion-tabs tabsPlacement="top"  #myTabs (ionChange)="tabSelected($event)">
-		<ion-tab [root]="detailsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.DETAILS'|translate}}"></ion-tab>
-		<ion-tab [root]="reviewsRootPage" [rootParams]="parc" tabTitle="{{'parcDetails.REVIEWS'|translate}}" tabBadge="{{parc.reviewsLength}}"></ion-tab>
-	</ion-tabs>
+	<page-details-root [parcKey]="parcKey"></page-details-root>
 </ion-content>
 
 
 <ion-footer>
   <ion-toolbar>
-    
 	<button ion-button icon-left outline *ngIf="selectedTab===0 && localParc.validated ==false" (click)="validate()">
 		<i class="material-icons">done</i>{{'parcDetails.VALIDATE'|translate}}
 	</button>
@@ -45,8 +40,6 @@
 		<i class="material-icons">done</i>{{'parcDetails.VALIDATED'|translate}}
 	</button>
 	
-	<button ion-button icon-left outline *ngIf="selectedTab===1 && userSigned ===true " (click)="openAddReviewModal()">
-		<i class="material-icons">add</i>{{'parcDetails.ADDREVIEW'|translate}}
-	</button>
+	
   </ion-toolbar>
 </ion-footer>

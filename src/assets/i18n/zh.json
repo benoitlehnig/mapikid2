@@ -97,7 +97,8 @@
 			"WEATHERIN": "在 ",
 			"WEATHERHOURS": " 小时内",
 			"UVINDEX": "紫外线指数",
-			"VALIDATEDBYINSTITUTION" : "由市政厅确认"
+			"VALIDATEDBYINSTITUTION" : "由市政厅确认",
+			"VIEWALLREVIEWS" : "查看所有评论"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"添加新公园",

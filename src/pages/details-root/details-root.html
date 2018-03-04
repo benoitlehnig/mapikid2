@@ -5,147 +5,165 @@
   Ionic pages and navigation.
 -->
 
-
-
-<ion-content padding>
-	<div id="mapDetail"></div>
-	<div class="mapDetails">
-		
-
-
-		<div *ngIf="parc.open == false" class="details">
-			<i class="material-icons" >close</i>
-			<span>{{'parcDetails.CLOSED'|translate}}</span>
+<div id="mapDetail"></div>
+<div class="mapDetails">
+	<div *ngIf="parc.open == false" class="details">
+		<i class="material-icons" >close</i>
+		<span>{{'parcDetails.CLOSED'|translate}}</span>
+	</div>
+	<div class="details" *ngIf="parc.street_address">
+        <i class="material-icons">place</i>
+        <span><a href={{mapURL}}>{{ parc.street_address }}</a></span>
+    </div>
+	<div *ngIf="parc.validatedByInstitution ===true"  class="details">
+		<i class="material-icons">account_balance</i>
+        <span>{{ 'parcDetails.VALIDATEDBYINSTITUTION'| translate }} </span>
+    </div>
+    <div class="openingHours" *ngIf="parc.opening_hours" >
+        <div class="openingHours" *ngIf="parc.opening_hours.open_now === true || parc.opening_hours.open_now === false">
+            <span *ngIf="parc.opening_hours.open_now === true">{{'parcDetails.CUROPENED'|translate}}</span>
+            <span *ngIf="parc.opening_hours.open_now === false">{{'parcDetails.CURCLOSED'|translate}}</span>
+         </div>
+        <ul>
+            <li *ngFor="let day of parc.opening_hours.weekday_text">
+               {{day}} 
+            </li>
+        </ul>
+    </div>
+    <div class="details" *ngIf="toiletsMarkers.length>0">
+		<i class="material-icons">timer</i>
+		<span>{{'parcDetails.TOILETSAROUNDCOUNT'| translate}} {{toiletsMarkers.length}}</span>
+	</div>
+	<!--<div *ngIf="isLowNumberofEquipment || parc.initialized"  class="details">
+		<i class="material-icons">sms</i>
+		<span *ngIf="parc.initialized">{{'parcDetails.INITIALIAZED'| translate }} </span>
+        <span *ngIf="isLowNumberofEquipment && !parc.initialized">{{ 'parcDetails.LOWEQUIPMENT'| translate }}</span>
+    </div> -->
+    <div *ngIf="parc.validationNumber"  class="details">
+		<i class="material-icons">done</i>
+        <span>{{ 'parcDetails.VALIDATEDBY'| translate }} {{parc.validationNumber}} {{ 'parcDetails.USERS'| translate }}</span>
+    </div>
+    <div class="details">
+        <div *ngIf="parc.free != false">
+			<i class="material-icons">monetization_on</i>
+			<span>{{'parcDetails.FREE'|translate}}</span>
+        </div>
+        <div *ngIf="parc.free == false">
+			<span>{{'parcDetails.FEE'|translate}}</span>
+        </div>
+    </div>
+    
+    <div  *ngIf="parc.lessThan2years || parc.between2and6 || parc.sixandPlus">
+    	<div class="separator"></div>
+		<i class="material-icons" id="parcDetailsLittle" *ngIf="parc.lessThan2years">accessibility</i>
+		<span *ngIf="parc.lessThan2years">{{'parcDetails.02AGE'| translate}}</span>
+		<i class="material-icons" id="parcDetailsMiddle" *ngIf="parc.between2and6">accessibility</i>
+		<span *ngIf="parc.between2and6">{{'parcDetails.26AGE'| translate}}</span>
+		<i class="material-icons" id="parcDetailsOld" *ngIf="parc.sixandPlus">accessibility</i>
+		<span *ngIf="parc.sixandPlus">{{'parcDetails.6+AGE'| translate}}</span>
+    </div>
+    
+    <div id="parcDetailsDescription" *ngIf="parc.description">
+    	<div class="separator"></div>
+    	{{parc.description}}
+    </div>      
+    <div class="separator"></div>  
+	<div id="parcDetailsFacilities">
+		<!-- <h5>{{numberOfEquipment}} {{ 'parcDetails.EQUIPMENTS'| translate }}</h5> -->
+		<div class="parcDetailsMessage" *ngIf="isLowNumberofEquipment">
+		 	<i class="material-icons">sms</i>
+			<span *ngIf="isLowNumberofEquipment" >{{ 'parcDetails.LOWEQUIPMENT'| translate }}</span>
 		</div>
-		<div *ngIf="parc.validatedByInstitution ===true"  class="details">
-			<i class="material-icons">account_balance</i>
-            <span>{{ 'parcDetails.VALIDATEDBYINSTITUTION'| translate }} </span>
-	    </div>
-		<div *ngIf="isLowNumberofEquipment || parc.initialized"  class="details">
-			<i class="material-icons">sms</i>
-			<span *ngIf="parc.initialized">{{'parcDetails.INITIALIAZED'| translate }} </span>
-	        <span *ngIf="isLowNumberofEquipment && !parc.initialized">{{ 'parcDetails.LOWEQUIPMENT'| translate }}</span>
-	    </div>
-	    <div *ngIf="parc.validationNumber"  class="details">
-			<i class="material-icons">done</i>
-	        <span>{{ 'parcDetails.VALIDATEDBY'| translate }} {{parc.validationNumber}} {{ 'parcDetails.USERS'| translate }}</span>
-	    </div>
-	    <div class="details">
-	        <div *ngIf="parc.free != false">
-				<i class="material-icons">monetization_on</i>
-				<span>{{'parcDetails.FREE'|translate}}</span>
-	        </div>
-	        <div *ngIf="parc.free == false">
-				<span>{{'parcDetails.FEE'|translate}}</span>
-	        </div>
-	    </div>
-	    <div class="details" *ngIf="parc.shade == true">
-	        <i class="material-icons">brightness_high</i>
-	        <span>{{ 'parcDetails.NOSHADE'| translate }}</span>
-	    </div>
-	    <div class="details" *ngIf="parc.shade == false">
-	        <i class="material-icons">brightness_medium</i>
-	        <span>{{ 'parcDetails.SHADE'| translate }}</span>
-	    </div>
-	    <div class="details" *ngIf="parc.events == true">
-	        <i class="material-icons">card_giftcard</i>
-	        <span>{{ 'parcDetails.EVENTS'| translate }}</span>
-	    </div>
-	    <div class="details" *ngIf="parc.street_address">
-	        <i class="material-icons">place</i>
-	        <span><a href={{mapURL}}>{{ parc.street_address }}</a></span>
-	    </div>
-		<div class="details" *ngIf="toiletsMarkers.length>0">
-			<i class="material-icons">timer</i>
-			<span>{{'parcDetails.TOILETSAROUNDCOUNT'| translate}} {{toiletsMarkers.length}}</span>
-		</div>
-	    <div>
-			<i class="material-icons" id="parcDetailsLittle" *ngIf="parc.lessThan2years">accessibility</i>
-			 <span *ngIf="parc.lessThan2years">{{'parcDetails.02AGE'| translate}}</span>
-			 <i class="material-icons" id="parcDetailsMiddle" *ngIf="parc.between2and6">accessibility</i>
-			 <span *ngIf="parc.between2and6">{{'parcDetails.26AGE'| translate}}</span>
-			 <i class="material-icons" id="parcDetailsOld" *ngIf="parc.sixandPlus">accessibility</i>
-			 <span *ngIf="parc.sixandPlus">{{'parcDetails.6+AGE'| translate}}</span>
-	    </div>
-	    <div class="separator"></div>
-	    <div class="openingHours" *ngIf="parc.opening_hours" >
-	        <div class="openingHours" *ngIf="parc.opening_hours.open_now === true || parc.opening_hours.open_now === false">
-	            <span *ngIf="parc.opening_hours.open_now === true">{{'parcDetails.CUROPENED'|translate}}</span>
-	            <span *ngIf="parc.opening_hours.open_now === false">{{'parcDetails.CURCLOSED'|translate}}</span>
-	         </div>
-	        <ul>
-	            <li *ngFor="let day of parc.opening_hours.weekday_text">
-	               {{day}} 
-	            </li>
-	        </ul>
-	     	<div class="separator"></div>
-	    </div>
-	    <div id="parcDetailsDescription" *ngIf="parc.description">
-	    	{{parc.description}}<div class="separator"></div>
-	    </div>        
-		<div id="parcDetailsFacilities">
-			 <h5>{{numberOfEquipment}} {{ 'parcDetails.EQUIPMENTS'| translate }}</h5>
-			 <div class="parcDetailsMessage" *ngIf="isLowNumberofEquipment">
-				<span *ngIf="isLowNumberofEquipment" >{{ 'parcDetails.LOWEQUIPMENT'| translate }}</span>
-			 </div>
-			 
-			 <div *ngIf="parc.facilities!=null">
-				<img src="assets/images/Water tap icon icon.png" [ngClass]="parc.facilities.water == true ? 'facilitiesIcon' : 'hide'" />
-				<img src="assets/images/toilets icon.png" [ngClass]="parc.facilities.wc == true ? 'facilitiesIcon' : 'hide'"/>
-				<img  src="assets/images/equipment/childhood-20.png" [ngClass]="parc.facilities.slide == true ? 'facilitiesIcon' : 'hide'" />
-				<img src="assets/images/equipment/childhood.png" [ngClass]="parc.facilities.swing == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/amusement-park-2.png"[ngClass]="parc.facilities.trampoline == true ? 'facilitiesIcon' : 'hide'" />
-				<img src="assets/images/equipment/playground.png" [ngClass]="parc.facilities.monkeyBridge == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/childhood-14.png" [ngClass]="parc.facilities.spider == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/childhood-22.png" [ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/childhood-18.png" [ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/childhood-2.png" [ngClass]="parc.facilities.turnstile == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/childhood-4.png" [ngClass]="parc.facilities.seesaw == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/climb.png" [ngClass]="parc.facilities.climb == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/soccer-field.png" [ngClass]="parc.facilities.football == true ? 'facilitiesIcon' : 'hide'"/>
-				<img src="assets/images/equipment/sports-ball.png" [ngClass]="parc.facilities.basketball == true ? 'facilitiesIcon' : 'hide'"/>
-				<div class="other" *ngIf="parc.facilities.other ==true">
-					<i class="material-icons">info</i>
-					<span>{{parc.facilities.otherDescription}}</span>
-				</div>
+		 
+		 <div *ngIf="parc.facilities!=null">
+			<img src="assets/images/Water tap icon icon.png" [ngClass]="parc.facilities.water == true ? 'facilitiesIcon' : 'hide'" />
+			
+			<img  src="assets/images/equipment/childhood-20.png" [ngClass]="parc.facilities.slide == true ? 'facilitiesIcon' : 'hide'" />
+			<img src="assets/images/equipment/childhood.png" [ngClass]="parc.facilities.swing == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/amusement-park-2.png"[ngClass]="parc.facilities.trampoline == true ? 'facilitiesIcon' : 'hide'" />
+			<img src="assets/images/equipment/playground.png" [ngClass]="parc.facilities.monkeyBridge == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/childhood-14.png" [ngClass]="parc.facilities.spider == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/childhood-22.png" [ngClass]="parc.facilities.animals == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/childhood-18.png" [ngClass]="parc.facilities.sandbox == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/childhood-2.png" [ngClass]="parc.facilities.turnstile == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/childhood-4.png" [ngClass]="parc.facilities.seesaw == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/climb.png" [ngClass]="parc.facilities.climb == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/soccer-field.png" [ngClass]="parc.facilities.football == true ? 'facilitiesIcon' : 'hide'"/>
+			<img src="assets/images/equipment/sports-ball.png" [ngClass]="parc.facilities.basketball == true ? 'facilitiesIcon' : 'hide'"/>
+			<div class="other" *ngIf="parc.facilities.other ==true">
+				<i class="material-icons">info</i>
+				<span>{{parc.facilities.otherDescription}}</span>
 			</div>
 		</div>
-		
-	</div>	
-	<div id="mapStreetView" class="mdl-shadow--4dp"></div>
-	<div id="parcDetailspicture" *ngIf="parc.pictureUrl"></div>
-	<ion-grid>
-	  	<ion-row>
-	  		<ion-col class="current" col-4 *ngIf="localWeather">
-      			<h4>{{'parcDetails.CURRENTWEATHER'|translate}}</h4>
-      		</ion-col>
-      		<ion-col *ngIf="localWeather" col-8 class="forecastWeather">
-		    	<ion-grid>
-		    		<ion-row>
-			    		<ion-col col-4 *ngFor="let weather of localWeatherForecast | slice:1; let i = index" >
-			    			<h4>{{'parcDetails.WEATHERIN'|translate}} {{(i+1)*3}} {{'parcDetails.WEATHERHOURS'|translate}}
-			    			</h4>
-				    	</ion-col>
-				    </ion-row>
-				</ion-grid>
-			</ion-col>
-	  	</ion-row>
-	  	<ion-row>
-	    	<ion-col class="current" col-4 *ngIf="localWeather">
-	      		<i class="wi wi-owm-{{localWeather.weather[0].id}}"></i>
-	      		<h3 class="temperature">{{round(localWeather.main.temp)}} °C</h3>
-	      		<h3 *ngIf="uvIndex"  class="uvIndex uvIndex{{round(uvIndex.value)}}" >{{'parcDetails.UVINDEX'|translate}} : {{round(uvIndex.value)}}</h3>
-	   		</ion-col>
-		    <ion-col *ngIf="localWeather" col-8 class="forecastWeather">
-		    	<ion-grid>
-		    		<ion-row>
-			    		<ion-col col-4 *ngFor="let weather of localWeatherForecast | slice:1;let i = index">
-			    			<i  class="wi wi-owm-{{weather.weather[0].id}}"></i>
-		      				<h3 class="temperature">{{round(weather.main.temp)}} °C</h3>
-				    	</ion-col>
-				    </ion-row>
-				</ion-grid>
-			</ion-col>
-	  </ion-row>
-	</ion-grid>
-</ion-content>
+		<div class="separator"></div>
+	</div>
+	<div class="details" *ngIf="parc.shade == true">
+        <i class="material-icons">brightness_high</i>
+        <span>{{ 'parcDetails.NOSHADE'| translate }}</span>
+    </div>
+    <div class="details" *ngIf="parc.shade == false">
+        <i class="material-icons">brightness_medium</i>
+        <span>{{ 'parcDetails.SHADE'| translate }}</span>
+    </div>
+    <div class="details" *ngIf="parc.events == true">
+        <i class="material-icons">card_giftcard</i>
+        <span>{{ 'parcDetails.EVENTS'| translate }}</span>
+    </div>
+	
+</div>	
+<div id="mapStreetView" class="mdl-shadow--4dp"></div>
+<div class="mapDetails">
+	<h5>{{parc.reviewsLength}} {{ 'parcDetails.REVIEWS'| translate }} </h5>
+	<ion-list *ngIf="parc.reviewsLength>0" class="reviews">
+	  <ion-item class="text"  text-wrap *ngFor="let review	of firstReviews " >
+		<ion-avatar item-start>
+			<img src="{{review.photoUrl}}">
+		</ion-avatar>
+		<h2>
+			{{review.name}} 
+		</h2>
+		<star-rating-comp [starType]="'svg'" [rating]="review.rate" [readOnly]="true"></star-rating-comp>
+		<p>{{review.date | date:'yyyy-MM-dd'}} | {{review.text}}</p>
+	  </ion-item>
+	</ion-list>	
+	<button ion-button icon-left outline [navPush]="parcReviews" [navParams]="{key:parcKey,name:parc.name}" *ngIf="parc.reviewsLength>3">{{'parcDetails.VIEWALLREVIEWS'|translate}} ({{parc.reviewsLength}})</button>	
+	<button ion-button icon-left outline *ngIf="userSigned ===true " (click)="openAddReviewModal()">
+			<i class="material-icons">add</i>{{'parcDetails.ADDREVIEW'|translate}}
+	</button>
+</div>
+
+<div id="parcDetailspicture" *ngIf="parc.pictureUrl"></div>
+<ion-grid class="weather">
+  	<ion-row>
+  		<ion-col class="current" col-4 *ngIf="localWeather">
+  			<h4>{{'parcDetails.CURRENTWEATHER'|translate}}</h4>
+  		</ion-col>
+  		<ion-col *ngIf="localWeather" col-8 class="forecastWeather">
+	    	<ion-grid>
+	    		<ion-row>
+		    		<ion-col col-4 *ngFor="let weather of localWeatherForecast | slice:1; let i = index" >
+		    			<h4>{{'parcDetails.WEATHERIN'|translate}} {{(i+1)*3}} {{'parcDetails.WEATHERHOURS'|translate}}
+		    			</h4>
+			    	</ion-col>
+			    </ion-row>
+			</ion-grid>
+		</ion-col>
+  	</ion-row>
+  	<ion-row>
+    	<ion-col class="current" col-4 *ngIf="localWeather">
+      		<i class="wi wi-owm-{{localWeather.weather[0].id}}"></i>
+      		<h3 class="temperature">{{round(localWeather.main.temp)}} °C</h3>
+      		<h3 *ngIf="uvIndex"  class="uvIndex uvIndex{{round(uvIndex.value)}}" >{{'parcDetails.UVINDEX'|translate}} : {{round(uvIndex.value)}}</h3>
+   		</ion-col>
+	    <ion-col *ngIf="localWeather" col-8 class="forecastWeather">
+	    	<ion-grid>
+	    		<ion-row>
+		    		<ion-col col-4 *ngFor="let weather of localWeatherForecast | slice:1;let i = index">
+		    			<i  class="wi wi-owm-{{weather.weather[0].id}}"></i>
+	      				<h3 class="temperature">{{round(weather.main.temp)}} °C</h3>
+			    	</ion-col>
+			    </ion-row>
+			</ion-grid>
+		</ion-col>
+  </ion-row>
+</ion-grid>
