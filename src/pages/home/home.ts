@@ -109,7 +109,7 @@ export class HomePage implements OnInit{
 	}
 
 	ngOnInit() {
-		this.ga.setCurrentScreen("Home Page");
+		this.ga.setCurrentScreen("Home_Page");
 		this.afAuth.auth.onAuthStateChanged(function(user) {
 	        if (user) {
 	         	document.getElementById('user-pic').style.backgroundImage = 'url(' + this._auth.displayPicture() + ')';
@@ -148,15 +148,8 @@ export class HomePage implements OnInit{
 				} 
 				this.loadMap();
 				
-				if(this.platform.is('ios')){
-					if(this.useNativeMap === false){
-						this.startGeolocation();
-					}
-				}
-				else{
-					if(this.useNativeMap === false){
-						this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
-					}
+				if(this.useNativeMap === false){
+					this.startGeolocation();
 				}
 	        });	
 	       
@@ -202,8 +195,7 @@ export class HomePage implements OnInit{
 			}		
 			
 		}).catch((error) => {
-			console.log('Error getting location', error);
-			this.errorCallback();
+			this.errorCallback(error);			
 		});		
 	};
 
@@ -635,40 +627,43 @@ export class HomePage implements OnInit{
             this.setLocationMarker(resp.coords.latitude,resp.coords.longitude);
             this.markerAddress.setMap(null);
 		}).catch((error) => {
-			console.log('Error getting location', error);
-			this.errorCallback();
+			this.errorCallback(error);			
 		});		
 
     }
     
     errorCallback = function(e) {
-    	//alert(this.geolocationNotAllowedLabel)
+    	console.log(e);
+    	let message = this.geolocationNotAllowedLabel
+    	if(e.code ===1 || e.code ===2 ){
+    		message = this.geolocationNotAllowedLabel;
+    	}
+    	else{
+    		message = e.message;
+    	}
     	let toast = this.toastCtrl.create({
-	      message: this.geolocationNotAllowedLabel,
+	      message: message,
 	      duration: 10000,
 	      showCloseButton: true,
 	      closeButtonText: "Settings"
 	    });
-    	toast.present();
-    	toast.onDidDismiss((data, role) => {    
-       	 	console.log('Dismissed toast');
-        	if(role== "close") {
-        		if(this.useNativeMap ===true){
-           			this.openNativeSettings.open("location"); 
-           		}
-        	}
-    	});
-    	this.diagnostic.requestLocationAuthorization();
+	    if(this.navCtrl.getActive().name === "HomePage"){
+	    	toast.present();
+    		toast.onDidDismiss((data, role) => {    
+	       	 	console.log('Dismissed toast');
+	        	if(role== "close") {
+	        		if(this.useNativeMap ===true){
+	           			this.openNativeSettings.open("location"); 
+	           		}
+	        	}
+	    	});
+    		this.diagnostic.requestLocationAuthorization();
+	    }
     	this.defaultGeoLocation();
     }
 
 	geolocate = function(){
-		if(this.platform.is('ios')){
-			this.startGeolocation();
-		}
-		else{
-			this.diagnostic.isLocationAuthorized().then((this.startGeolocation).bind(this),this.errorCallback.bind(this));
-		}
+		this.startGeolocation();
 	}
 
 	centerControl(controlDiv, map) {
@@ -737,7 +732,6 @@ export class HomePage implements OnInit{
 				
 	        })
 	     	.catch((error) => {
-				console.log('Error getting location', error);
 				 this.googleMapNative.addMarker({
 				    'position': {
 				     	lat: 48.863129,
@@ -778,7 +772,11 @@ export class HomePage implements OnInit{
 	        		this.currentPosition =  location;
 					this.setLocationMarker(res.coords.latitude,res.coords.longitude);
 	        		this.displayParcsAround(false,false);
-	        	});
+	        	}).catch((error) => {
+					this.errorCallback(error);
+					
+					
+				});	
             });
       		/*
             this.googleMapNative.addMarkerCluster({

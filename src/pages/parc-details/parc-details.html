@@ -7,9 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title *ngIf="parc.name!=''">{{parc.name}}</ion-title>
-    <ion-title *ngIf="parc.name==''">{{'list.NONAMEPARC' |translate}}</ion-title>
-    <star-rating-comp [starType]="'svg'" [rating]="parc.rate.rate" [readOnly]="true"></star-rating-comp>
+    <ion-title *ngIf="parc.name!=''">{{parc.name}}
+    	<star-rating-comp [starType]="'svg'" [rating]="parc.rate.rate" [readOnly]="true"></star-rating-comp>
+	</ion-title>
+    <ion-title *ngIf="parc.name==''">{{'list.NONAMEPARC' |translate}}
+    	<star-rating-comp [starType]="'svg'" [rating]="parc.rate.rate" [readOnly]="true"></star-rating-comp>
+    </ion-title>
+    
     <ion-buttons end>
     	<button ion-button icon-only *ngIf="selectedTab===0" (click)="openUpdateParcModal()">
 		<i class="material-icons">mode_edit</i>

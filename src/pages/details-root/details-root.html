@@ -126,8 +126,8 @@
 		<p>{{review.date | date:'yyyy-MM-dd'}} | {{review.text}}</p>
 	  </ion-item>
 	</ion-list>	
-	<button ion-button icon-left outline [navPush]="parcReviews" [navParams]="{key:parcKey,name:parc.name}" *ngIf="parc.reviewsLength>3">{{'parcDetails.VIEWALLREVIEWS'|translate}} ({{parc.reviewsLength}})</button>	
-	<button ion-button icon-left outline *ngIf="userSigned ===true " (click)="openAddReviewModal()">
+	<button ion-button icon-left  [navPush]="parcReviews" [navParams]="{key:parcKey,name:parc.name}" *ngIf="parc.reviewsLength>3">{{'parcDetails.VIEWALLREVIEWS'|translate}} ({{parc.reviewsLength}})</button>	
+	<button ion-button icon-left  *ngIf="userSigned ===true " (click)="openAddReviewModal()">
 			<i class="material-icons">add</i>{{'parcDetails.ADDREVIEW'|translate}}
 	</button>
 </div>
