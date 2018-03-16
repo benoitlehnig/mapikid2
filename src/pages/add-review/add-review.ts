@@ -27,8 +27,8 @@ export class AddReviewPage {
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
   	public navParams: NavParams, public db: AngularFireDatabase,
   	private ga: FirebaseAnalytics,private _auth: AuthService) {
-	this.reviews = db.list('positions/'+this.navParams.get('parc').$key+ '/reviews');
-	this.parcObject = db.object('positions/'+this.navParams.get('parc').$key);
+	
+	this.reviews = db.list('reviews/'+this.navParams.get('parc').$key);
 	this.photoUrl = this._auth.displayPicture();
 	this.userName = this._auth.displayName();
   }
@@ -44,7 +44,7 @@ export class AddReviewPage {
   	var newReview= {
   		name: this._auth.displayName(),
 		text: this.review.description,	
-		uid: this._auth.displayName(),
+		uid: this._auth.displayUid(),
 		photoUrl: this._auth.displayPicture(),
 		rate: this.review.rate,
 		date: this.date
@@ -54,37 +54,11 @@ export class AddReviewPage {
 	);
   	this.reviews.push(newReview).then(
   		newReview  =>{
-  			this.saveReviewAverageRate();
-
-  		}
-
-  		);
+  			this.closeModal();
+  		});
  	}
 
  	onRatingChange = function($event:IStarRatingOnRatingChangeEven) {
         this.review.rate = $event.rating;
     }
-
- 	saveReviewAverageRate = function(){
- 		let averageRate:number = this.review.rate;
-		let numberRate:number=1;
-		this.reviews.subscribe(snapshots=>{
-	        snapshots.forEach(snapshot => {
-	          	console.log(snapshot);
-	          	if(snapshot.rate){
-					averageRate = snapshot.rate+averageRate;
-					numberRate = numberRate+1;
-	        	}
-        	});
-   		})
-		
-		averageRate = averageRate/numberRate;
-		var newRate={'rate':averageRate, 'numberRate':numberRate};
-		console.log(newRate);
-
-		this.parcObject.update({rate:newRate}).then( 
-			
-			_ => this.closeModal()
-		).catch(err => console.log(err, "Failed"));
- 	}
 }

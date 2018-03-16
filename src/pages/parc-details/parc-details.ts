@@ -60,21 +60,7 @@ export class ParcDetailsPage {
 	   		if(!this.parc.rate){
 					this.parc.rate = {'rate': 0};
 				}	
-	   		this.parc.reviewsLength = 0;
-	   		if(this.parc.reviews){ 
-				this.parc.reviewsLength = Object.keys(this.parc.reviews).length;
-				
-				Object.keys(this.parc.reviews).forEach((prop) => { 
-					var string = String(prop);console.log(prop, String(prop),this.parc.reviews[prop]);
-					this.firstReviews.push(this.parc.reviews[prop]);
-					console.log(this.firstReviews);
-				});
-				console.log(this.firstReviews);
-				this.firstReviews.sort(function(a, b) {
-    				return parseFloat(a.date) - parseFloat(b.date);
-				});
-				
-			}
+	   		
 		});
 		this.afAuth.auth.onAuthStateChanged(function(user) {
         	this.userSigned = this._auth.authenticated;

@@ -21,7 +21,7 @@ export class ReviewsRootPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,db: AngularFireDatabase) {
 	console.log(navParams)
-	this.reviews = db.list('positions/'+navParams.data.key+ '/reviews');
+	this.reviews = db.list('reviews/'+navParams.data.key).map( (arr) => { return (arr as Array<any>).reverse(); } ) as FirebaseListObservable<any[]>;
   this.name = navParams.data.name;
 	console.log(this.reviews);
   }

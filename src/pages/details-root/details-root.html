@@ -63,7 +63,7 @@
 		<span *ngIf="parc.sixandPlus">{{'parcDetails.6+AGE'| translate}}</span>
     </div>
     
-    <div id="parcDetailsDescription" *ngIf="parc.description">
+    <div id="parcDetailsDescription" *ngIf="parc.description" class="hidden">
     	<div class="separator"></div>
     	{{parc.description}}
     </div>      
@@ -113,9 +113,9 @@
 </div>	
 <div id="mapStreetView" class="mdl-shadow--4dp"></div>
 <div class="mapDetails">
-	<h5>{{parc.reviewsLength}} {{ 'parcDetails.REVIEWS'| translate }} </h5>
-	<ion-list *ngIf="parc.reviewsLength>0" class="reviews">
-	  <ion-item class="text"  text-wrap *ngFor="let review	of firstReviews " >
+	<h5>{{parc.rate.numberRate}} {{ 'parcDetails.REVIEWS'| translate }} </h5>
+	<ion-list *ngIf="parc.rate.numberRate>0" class="reviews">
+	  <ion-item class="text"  text-wrap *ngFor="let review of reviewsList | async "  >
 		<ion-avatar item-start>
 			<img src="{{review.photoUrl}}">
 		</ion-avatar>
@@ -126,9 +126,9 @@
 		<p>{{review.date | date:'yyyy-MM-dd'}} | {{review.text}}</p>
 	  </ion-item>
 	</ion-list>	
-	<button ion-button icon-left  [navPush]="parcReviews" [navParams]="{key:parcKey,name:parc.name}" *ngIf="parc.reviewsLength>3">{{'parcDetails.VIEWALLREVIEWS'|translate}} ({{parc.reviewsLength}})</button>	
+	<button ion-button icon-left  [navPush]="parcReviews" [navParams]="{key:parcKey,name:parc.name}" *ngIf="parc.rate.numberRate>3">{{'parcDetails.VIEWALLREVIEWS'|translate}} ({{parc.rate.numberRate}})</button>	
 	<button ion-button icon-left  *ngIf="userSigned ===true " (click)="openAddReviewModal()">
-			<i class="material-icons">add</i>{{'parcDetails.ADDREVIEW'|translate}}
+		<i class="material-icons">add</i>{{'parcDetails.ADDREVIEW'|translate}}
 	</button>
 </div>
 

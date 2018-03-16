@@ -71,6 +71,13 @@ export class AuthService {
       return '';
     }
   }
+   displayUid(): string {
+    if (this.currentUser !== null) {
+      return this.currentUser.uid;
+    } else {
+      return '';
+    }
+  }
   displayPicture(): string {
     if (this.currentUser !== null) {
       return this.currentUser.providerData[0].photoURL;

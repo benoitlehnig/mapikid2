@@ -346,15 +346,7 @@ export class HomePage implements OnInit{
 				        });
 				        
 				  });
-				  this.markers.push({
-				    'position': {
-				      lat: parc.parcItem.position.lat,
-				      lng: parc.parcItem.position.lng
-				    },
-				    'title': name,
-				    'snippet': "Tap here to get more details!",
-				    'icon': this._map.getIconNative(parc)
-				  });
+				 
 			}
 			else{
 				this.markers[parc.key].setPosition({
@@ -438,9 +430,11 @@ export class HomePage implements OnInit{
 		        	let options : CameraPosition<any> = {
 		          		target:location,
 		          		zoom: 12,
-		          		tilt: 30
+		          		tilt: 0
 
 		        	};
+		        	this._map.setMapCenter(results[0].geometry.location.lat(),results[0].geometry.location.lng());
+					this._map.setCenter(results[0].geometry.location.lat(),results[0].geometry.location.lng());
 		        	this.googleMapNative.moveCamera(options);
             	}
                 this.markerAddress.setPosition({lat: results[0].geometry.location.lat(), lng:results[0].geometry.location.lng()});
@@ -714,7 +708,7 @@ export class HomePage implements OnInit{
 		        let options : CameraPosition<any> = {
 		          target:location,
 		          zoom: 12,
-		          tilt: 30
+		          tilt: 0
 		        };
 		        this.googleMapNative.addMarker({
 				    'position': {
@@ -763,7 +757,7 @@ export class HomePage implements OnInit{
 		        	let options : CameraPosition<any> = {
 		          		target:location,
 		          		zoom: 12,
-		          		tilt: 30
+		          		tilt: 0
 
 		        	};
 		        	this.googleMapNative.moveCamera(options);

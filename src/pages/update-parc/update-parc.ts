@@ -28,6 +28,9 @@ export class UpdateParcPage {
   parc: {[k: string]: any} = {
           name: "",
           addedBy: "",
+          modifiedBy: "",
+          addedByUid: "",
+          modifiedByUid: "",
           position: "" ,
           description: "",
           open : true,
@@ -185,6 +188,7 @@ export class UpdateParcPage {
     }
     if(this._auth.authenticated !==false ){
       this.parc.modifiedBy = this._auth.displayName();
+      this.parc.modifiedByUid = this._auth.displayUid();
     }
     var validateIncreased = 0;
     if(this.parc.validationNumber){
@@ -210,6 +214,7 @@ export class UpdateParcPage {
     if(this.mode==='add'){
       if(this._auth.authenticated !==false ){
         this.parc.addedBy = this._auth.displayName();
+        this.parc.addedByUid = this._auth.displayUid();
       }
       var newPosition = this.db.database.ref('positions').push();
       console.log(this.parc);

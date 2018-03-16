@@ -1,7 +1,7 @@
 import { Component,Input } from '@angular/core';
 import { NavController, NavParams,ModalController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import GeoFire from 'geofire';
 import {TranslateService} from 'ng2-translate';
 import * as firebase from 'firebase';
@@ -25,7 +25,7 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 export class DetailsRootPage {
 
 	@Input() parcKey:string;
-	parc: {[k: string]: any} = {};
+	parc: {[k: string]: any} = {'rate':{'numberRate':0}};
 	map= null ;
 	mapDetailsMap =null;
 	toiletsMarkers : any[]=[];
@@ -41,6 +41,8 @@ export class DetailsRootPage {
 	public uvIndex:Object;
 	public pollution:Object;
 	firstReviews =[];
+	reviewsList:FirebaseListObservable<any[]>;
+	reviews=[];
 	parcReviews = ReviewsRootPage;
 	userSigned: boolean=false;
 	login = LoginPage;
@@ -81,11 +83,15 @@ export class DetailsRootPage {
 
 	ngOnInit() {
 		this.platform.ready().then(() => {
+
 			console.log("this.parKey",this.parcKey);
 			if(this.parcKey){
 				this.parcObject = this.db.object('positions/'+this.parcKey);
 				this.parcObject.subscribe(snapshot => {
 			   		this.parc = snapshot;
+			   		if(this.parc.rate ===null || !this.parc.rate){
+			   			this.parc.rate= {'numberRate':0};
+			   		}
 			   		if(!this.parc.facilities){
 						this.parc.facilities = null;
 					}
@@ -102,26 +108,17 @@ export class DetailsRootPage {
 					this.codeAddress();
 					this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
 					this.setLowNumberofEquipment();
-					if(this.parc.reviews){ 
-						this.firstReviews =[];
-						this.parc.reviewsLength = Object.keys(this.parc.reviews).length;
-						
-						Object.keys(this.parc.reviews).forEach((prop) => { 
-							var string = String(prop);console.log(prop, String(prop),this.parc.reviews[prop]);
-							this.firstReviews.push(this.parc.reviews[prop]);
-						});
-						this.firstReviews.sort(function(a, b) {
-		    				return parseFloat(a.date) - parseFloat(b.date);
-						});
-						this.firstReviews = this.firstReviews.splice(0,3);
-					}
-					else{
-						this.parc.reviewsLength = 0;
-					}
 					this.loadMap();
 					this.setUpPlaceService();
 					this.triggerGetGoogleData();			   		
 				});
+				this.reviewsList = this.db.list('reviews/'+this.parcKey,{
+					query: {
+				        orderByChild: 'date',
+				        limitToLast: (3)
+				    }
+				}).map( (arr) => { return (arr as Array<any>).reverse(); } ) as FirebaseListObservable<any[]>;
+				
 			}
 		});
 	}
