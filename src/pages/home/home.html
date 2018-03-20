@@ -30,6 +30,7 @@
         <div id="map2"></div>
     </split-area>
     <split-area [size]="20">
+    	<ion-spinner name="crescent" *ngIf="loadingCompleted !=true"></ion-spinner>
 		<ion-list>
 		  	<ion-item class="text" *ngFor="let parc of parcsList" [navPush]="parcDetails" [navParams]="{key:parc.parcItem.$key}">
 			<h2>

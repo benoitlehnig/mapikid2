@@ -21,6 +21,8 @@
 	},
 	"map":{
 		"ADDPARCBUTTON":"Ajouter un parc",
+		"NONAMEPARC" :"Aire de jeux",
+		"TAPHERE" :"Cliquez pour avoir plus d'information",
 		"SNACKBARLABEL":"GeoLocation desactivée. Activez-la ou entrez une addresse dans la barre de recherche !",
 		"NOPARCFOUND" : "Aucune aire de jeux n'est référencée dans cette zone. N'hésitez pas à ajouter celle que vous connaissez ",
 		"GEOLOCALIZEBUTTON" : "Localisez moi",
@@ -57,7 +59,7 @@
 			"FEE":"Payant",
 			"WC": "Toilettes",
 			"WATER": "Eau",
-			"NOSHADE": "Non ombragé et peut être très ensoleillé",
+			"NOSHADE": "Non ombragé",
 			"SHADE": "Ombragé",
 			"EVENTS": "Parfait pour fêter un anniversaire",
 			"MONKEYBRIDGE": "Pont de singe",
@@ -95,7 +97,8 @@
 			"WEATHERIN": "Dans ",
 			"WEATHERHOURS": " heures ",
 			"UVINDEX": "Indice UV",
-			"VALIDATEDBYINSTITUTION" : "Confirmé par la mairie"
+			"VALIDATEDBYINSTITUTION" : "Confirmé par la mairie",
+			"VIEWALLREVIEWS" : "Voir tous les avis"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Ajouter un nouveau parc",
@@ -172,7 +175,8 @@
 		"PHONELABEL" :"Télephone:",
 		"EMAILLABEL" :"Email:",
 		"SENDBUTTON":"Envoyer",
-		"ADDREVIEWCLOSEMODAL":"Annuler"
+		"ADDREVIEWCLOSEMODAL":"Annuler",
+		"FEEDBACKSENT" : "Message envoyé. Merci de votre retour ! Nous allons le regarder dans les plus brefs délais."
 	},
 	"language":{
 		"TITLE" : "Choisissez votre langue",

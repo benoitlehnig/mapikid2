@@ -175,7 +175,9 @@
 		"PHONELABEL": "Telefonnummer:",
 		"EMAILLABEL": "Email:",
 		"SENDBUTTON":"Senden",
-		"ADDREVIEWCLOSEMODAL":"Schließen"
+		"ADDREVIEWCLOSEMODAL":"Schließen",
+		"LEAVEMESSAGE": "Hinterlassen Sie uns eine Nachricht",
+		"FEEDBACKSENT" : "MNachricht gesendet Danke für Ihre Rückkehr! Wir werden es so schnell wie möglich anschauen."
 	},
 	"language":{
 		"TITLE" : "Wähle eine Sprache",

@@ -174,7 +174,9 @@
 		"PHONELABEL" :"Phone Number:",
 		"EMAILLABEL" :"Email:",
 		"SENDBUTTON":"Envia",
-		"ADDREVIEWCLOSEMODAL":"Tanca"
+		"ADDREVIEWCLOSEMODAL":"Tanca",
+		"LEAVEMESSAGE": "Deixa'ns un missatge",
+		"FEEDBACKSENT" : "Missatge enviat. Gràcies pel vostre retorn. Ho veurem el més aviat possible."
 	},
 	"language":{
 		"TITLE" : "Choose Language",

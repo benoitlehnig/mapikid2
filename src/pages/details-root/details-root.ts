@@ -319,6 +319,7 @@ export class DetailsRootPage {
 			
 	}
 	codeAddress = function() {
+			console.log("codeAddress");
 			var geocoder = new google.maps.Geocoder();
 		    var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
 		    geocoder.geocode( {'location': latLng}, function(results, status) {
@@ -331,7 +332,7 @@ export class DetailsRootPage {
 					}
 				}
 		      } else {
-		        alert('Geocode was not successful for the following reason: ' + status);
+		        console.log('Geocode was not successful for the following reason: ' + status);
 		      }
 		}.bind(this));
 	};

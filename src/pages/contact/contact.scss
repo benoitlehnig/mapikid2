@@ -8,13 +8,54 @@ page-contact {
 	.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
 		color:#FFFFFF;
 	}
-	.send{
-		margin-top:64px;
+	.sendWrapper{
+		text-align:center;
+		margin-bottom:12px;
+		margin-top:20px;
 	}
-	.footer{
+	.send{
+		margin-left: auto;
+	    margin-right: auto;
+	    background: #8EC63F;
+	    color: #FFFFFF;
+	    border-radius: 82px;
+	    font-size: 41px;
+	    height: 65px;
+	    width: 65px;
+	    text-align: center;
+	    vertical-align: middle;
+	    padding: 12px 0px 7px 10px;
+	}
+	.logo{
+		height:calc(30%);
+		background:#8EC63F;
 		text-align:center;
 	}
-	.footer img{
-		width:64px;
+	.logo img{
+		height:100%;
+	}
+	.contactList{
+		margin-bottom:0px
+	}
+	ion-avatar {
+		font-size:40px;
+	}
+	.contactList .item-md{
+		background:#8EC63F;
+		color:#FFFFFF;	
+	}
+	.contactList a{
+		color:#FFFFFF;	
+	}
+	.backgroundOnTop{
+		background:#8EC63F;
+		height:60px;
+	}
+	ion-card{
+		position:relative;
+		top:-60px;
+	}
+	.card-md .item-md.item-block .item-inner{
+		border-bottom: 1px solid #dedede;	
 	}
 }

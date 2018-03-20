@@ -173,7 +173,9 @@
 		"PHONELABEL" :"电话:",
 		"EMAILLABEL" :"电子邮件:",
 		"SENDBUTTON":"发送",
-		"ADDREVIEWCLOSEMODAL":"取消"
+		"ADDREVIEWCLOSEMODAL":"取消",
+		"LEAVEMESSAGE": "给我们留言",
+		"FEEDBACKSENT" : "消息已发送。 谢谢你的回报！ 我们会尽快审视它。"
 	},
 	"language":{
 		"TITLE" : "选择你的语言",

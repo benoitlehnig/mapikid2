@@ -7,6 +7,7 @@ import { MapService } from '../../providers/map-service/map-service';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { Storage } from '@ionic/storage';
+import * as moment from 'moment';
 /**
  * Generated class for the ReviewsRootPage page.
  *
@@ -60,7 +61,7 @@ export class UpdateParcPage {
           between2and6: false,
           sixandPlus: false
     };
-  
+  date = moment().format('YYYY-MM-DDTHH:mmZ');  
   localParc:{[k: string]: any} = {'validated':false,'requestedForDeletion':false};
 
   constructor(public platform: Platform,public viewCtrl: ViewController,
@@ -205,11 +206,12 @@ export class UpdateParcPage {
       console.log(this.parc);
       parcObject.update(this.parc);
       console.log(this.parc.$key);
+      this.updateProfile(this.parc.$key);
+      this._map.saveAddress(this.parc.position.lat,this.parc.position.lng,this.parc.$key);
       this.gf.set(this.parc.$key, location).then(function() {
         this.ga.logEvent("parc_management", {"action":"update","parc_key":this.parc.$key});
       }.bind(this));
      
-
     }
     if(this.mode==='add'){
       if(this._auth.authenticated !==false ){
@@ -222,12 +224,21 @@ export class UpdateParcPage {
       console.log(newPosition.$key);
       this.gf.set(newPosition.key, location).then(function() {
           console.log(newPosition.key);
-          this.ga.logEvent("parc_management", {"action":"add","parc_key":this.parc.$key});
+          this.updateProfile(newPosition.key);
+          this._map.saveAddress(this.parc.position.lat,this.parc.position.lng,newPosition.key);
+          this.ga.logEvent("parc_management", {"action":"add","parc_key":newPosition.key});
         }.bind(this));
           
     }
     
     this.closeModal(true);
   }
-}
-;
+  updateProfile = function(parckey){
+    var path = "updatedPlaygrounds";
+    if(this.mode ==="add"){
+        path = "addedPlaygrounds";
+      }
+      var userPlaygrounds = this.db.list('users/'+this._auth.displayUid()+'/'+ path);
+      userPlaygrounds.push({ key: parckey, date: this.date});
+    };
+};

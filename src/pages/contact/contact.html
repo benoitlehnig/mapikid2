@@ -14,30 +14,51 @@
 
 
 <ion-content padding> 
+  <div class="logo">
+      <img src="assets/images/logo8.png"/>
+  </div>
+  <ion-list no-lines class="contactList">
+    <ion-item >
+      <ion-avatar item-start>
+          <ion-icon name="logo-facebook"></ion-icon>
+      </ion-avatar>
+      <h2><a target="_blank" href="mailto:contact@mapnkid.com">https://www.facebook.com/map&kid/</a></h2>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+         <ion-icon name="logo-linkedin"></ion-icon>
+      </ion-avatar>
+      <h2><a target="_blank" href="https://www.linkedin.com/company-beta/11162618/">https://www.linkedin.com/company-beta/11162618/</a></h2>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+          <ion-icon name="globe"></ion-icon>
+      </ion-avatar>
+      <h2><a target="_blank" href="https://wwww.mapnkid.com">mapnkid.com</a></h2>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+          <ion-icon name="mail"></ion-icon>
+      </ion-avatar>
+      <h2><a target="_blank" href="mailto:contact@mapnkid.com">contact@mapnkid.com</a></h2>
+    </ion-item>
+  </ion-list>
+  <div class="backgroundOnTop"></div>
+  <ion-card>
+    <ion-card-header>
+     {{'feedback.LEAVEMESSAGE'|translate}}
+    </ion-card-header>
   <ion-item>
     <ion-label color="primary" stacked>{{'feedback.EMAILLABEL'|translate}}</ion-label>
     <ion-input type="email" [(ngModel)]="email" ></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label color="primary" stacked>{{'feedback.PHONELABEL'|translate}}</ion-label>
-    <ion-input type="tel" [(ngModel)]="phone" ></ion-input>
-  </ion-item>
-  <ion-item>
     <ion-label color="primary" stacked>{{'feedback.MESSAGELABEL'|translate}}</ion-label>
     <ion-input type="text" [(ngModel)]="message" class="message" ></ion-input>
   </ion-item>
-	<button ion-button icon-left block class="send" (click)="saveFeedback()">
-		<i class="material-icons">send</i>{{'feedback.SENDBUTTON'|translate}}
-	</button>
+  <div class="sendWrapper">
+    <ion-icon name="send" class="send" (click)="saveFeedback()"></ion-icon>
+  </div>
+  </ion-card>
+  
 </ion-content>
-<ion-footer>
-  <a target="_blank" href="https://www.facebook.com/map&kid/">
-    	<img src="assets/images/Facebook.png" />
-  	</a>
- 	<a target="_blank" href="https://www.linkedin.com/company-beta/11162618/">
-    	<img src="assets/images/Linkedin.png" />
-  	</a>
-  	<a target="_blank" href="mailto:contact@mapnkid.com">
-  		<img src="assets/images/Email.png" />
-  	</a>
-</ion-footer>

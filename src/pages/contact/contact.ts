@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams ,Platform} from 'ionic-angular';
+import { NavController, NavParams ,Platform,ToastController} from 'ionic-angular';
 import { DatePipe } from '@angular/common';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import {TranslateService} from 'ng2-translate';
 /**
  * Generated class for the ContactPage page.
  *
@@ -22,10 +23,16 @@ export class ContactPage {
 	message:string="";
 	phone:string="";
 	email:string="";
+	toastLabelSent="";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  	public db: AngularFireDatabase,private platform: Platform,
-  	private ga: FirebaseAnalytics,private _auth: AuthService,private datePipe: DatePipe) {
+  	public db: AngularFireDatabase,private platform: Platform,translate: TranslateService,
+  	private ga: FirebaseAnalytics,public toastCtrl: ToastController,
+  	 private _auth: AuthService,private datePipe: DatePipe) {
+
+  	translate.get('feedback.FEEDBACKSENT').subscribe((res: string) => {
+			this.toastLabelSent = res;
+		});
   }
 
   ionViewDidLoad() {
@@ -55,9 +62,15 @@ export class ContactPage {
 	    newFeedback.set(feedback).then(() => {
 	    	this.ga.logEvent("SendComment", {"action" : "SendComment", "message": this.message});
 	    	this.message ="";
-	    	
-	    	}
-	    );
+		    let toast = this.toastCtrl.create({
+		      	message: this.toastLabelSent,
+		      	duration: 15000,
+		        showCloseButton: true,
+		        closeButtonText: "X"
+		    });
+		    toast.present();
+ 	 
+	    });
 	};
 
 }

@@ -175,7 +175,9 @@
 		"PHONELABEL": "Teléfono:",
 		"EMAILLABEL": "Correo electrónico:",
 		"SENDBUTTON":"Enviar",
-		"ADDREVIEWCLOSEMODAL":"Cancelar"
+		"ADDREVIEWCLOSEMODAL":"Cancelar",
+		"LEAVEMESSAGE": "Déjanos un mensaje",
+		"FEEDBACKSENT" : "Mensaje enviado. Gracias por volver ! Lo veremos lo antes posible."
 	},
 	"language":{
 		"TITLE" : "Elija su idioma",

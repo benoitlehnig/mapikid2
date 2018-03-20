@@ -174,7 +174,9 @@
 		"PHONELABEL" :"Phone Number:",
 		"EMAILLABEL" :"Email:",
 		"SENDBUTTON":"Send",
-		"ADDREVIEWCLOSEMODAL":"Close"
+		"ADDREVIEWCLOSEMODAL":"Close",
+		"LEAVEMESSAGE": "Leave us a message",
+		"FEEDBACKSENT" : "Feebdack sent, thanks for your message. We will review it as soon as we can"
 	},
 	"language":{
 		"TITLE" : "Choose Language",

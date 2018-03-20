@@ -599,10 +599,13 @@ export class HomePage implements OnInit{
 		var lng = Number(this._map.getCenter().lng);
 		console.log(lat,lng);
       	for (var i=0; i<this.parcs.length; i++){
-  			this.parcs[i].distance = GeoFire.distance(
+      		if(this.parcs[i]){
+      			this.parcs[i].distance = GeoFire.distance(
   				[lat,lng],
   				[parseFloat(this.parcs[i].parcItem.position.lat), parseFloat(this.parcs[i].parcItem.position.lng)]
-  			).toString().substring(0,4);
+  				).toString().substring(0,4);
+      		}
+  			
   		}
   		if(this.parcs){
   			this.parcs = this.orderByDistance(this.parcs, 'distance',false);

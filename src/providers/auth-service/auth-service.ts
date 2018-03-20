@@ -71,7 +71,7 @@ export class AuthService {
       return '';
     }
   }
-   displayUid(): string {
+  displayUid(): string {
     if (this.currentUser !== null) {
       return this.currentUser.uid;
     } else {

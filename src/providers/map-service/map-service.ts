@@ -13,6 +13,7 @@ import {
 } from '@ionic-native/google-maps';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class MapService {
@@ -20,6 +21,7 @@ export class MapService {
   private googleMapJDK=null ;
   private googleMapNative: GoogleMap; null;
   private baseUrl ='https://us-central1-parcmap.cloudfunctions.net/listPlaygroundsAround';
+  private nominatimUrl  ='http://nominatim.openstreetmap.org/reverse?format=json';
   private mapCenter= {lat:0, lng:0};  
   private useNativeMap:boolean = true;
   private defaultMapOptions: GoogleMapOptions = {
@@ -38,7 +40,7 @@ export class MapService {
         zoom: true
       },
   };
-  constructor(private googleMaps: GoogleMaps, public http: Http, public _geoLoc: Geolocation) {
+  constructor(private googleMaps: GoogleMaps, public http: Http, public _geoLoc: Geolocation,public db: AngularFireDatabase,) {
     
   }
 
@@ -278,6 +280,23 @@ export class MapService {
     let nominatimURL = 'http://nominatim.openstreetmap.org/reverse?format=json&lat='+mlat+'&lon=' + mlng;
     return this.http.get(nominatimURL);
   }
+  saveAddress = function(mlat,mlng,key){
+      var nominatimURL = this.nominatimUrl+'&lat='+mlat+'&lon=' + mlng;
+      console.log(nominatimURL);
+      this.http.get(nominatimURL).map(data => data.json())
+      .subscribe(data=> {
+        var json = data;
+        var parcObject = this.db.object('positions/'+key);
+        parcObject.subscribe(snapshot => {
+            var parc = snapshot;
+            parc.address = json.address;
+            console.log(parc);
+            parcObject.update(parc);
+        });
+      });
+ 
+
+    };
   getDefaultMapOptions(){
     return this.defaultMapOptions;
   }
