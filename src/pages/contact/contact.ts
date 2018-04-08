@@ -47,10 +47,10 @@ export class ContactPage {
 	    	userAgent =  this.platform.platforms();
 	    }
 	    
-	    if (this._auth.authenticated) {
+	    if(this._auth.authenticated) {
 	    	userName =  this._auth.displayName();
 	    }
-	    var newFeedback = this.db.database.ref('feedback').push();
+	    var feedbackList = this.db.list('feedback');
 	    var feedback = {
 	      name: userName,
 	      email: this.email,
@@ -59,7 +59,7 @@ export class ContactPage {
 	      date : this.datePipe.transform(new Date(),' yyyy-MM-ddTHH:mmZ'),
 	      userAgent:  userAgent
 	    };
-	    newFeedback.set(feedback).then(() => {
+	    feedbackList.push(feedback).then(() => {
 	    	this.ga.logEvent("SendComment", {"action" : "SendComment", "message": this.message});
 	    	this.message ="";
 		    let toast = this.toastCtrl.create({

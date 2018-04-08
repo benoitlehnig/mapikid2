@@ -26,6 +26,9 @@ page-contact {
 	    vertical-align: middle;
 	    padding: 12px 0px 7px 10px;
 	}
+	.ion-ios-send{
+		padding: 12px 0 0px 0px;
+	}
 	.logo{
 		height:calc(30%);
 		background:#8EC63F;
@@ -40,11 +43,12 @@ page-contact {
 	ion-avatar {
 		font-size:40px;
 	}
-	.contactList .item-md{
+	ion-icon {
 		background:#8EC63F;
 		color:#FFFFFF;	
 	}
-	.contactList a{
+	.contactList,.contactList .item-md,.contactList .item-ios, .contactList .item-md a, h2 a{
+		background:#8EC63F;
 		color:#FFFFFF;	
 	}
 	.backgroundOnTop{
@@ -58,4 +62,5 @@ page-contact {
 	.card-md .item-md.item-block .item-inner{
 		border-bottom: 1px solid #dedede;	
 	}
+
 }

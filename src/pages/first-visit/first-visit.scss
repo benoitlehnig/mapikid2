@@ -44,16 +44,30 @@ page-first-visit {
 		height:100%;
 	}
 	.imgWrapper{
-		height:calc(50%);
+		height: calc(70%);
+   		text-align: center;
 	}
 	.imgWrapper ion-img {
 		display: inline-block;
 	    /* min-width: 100%; */
 	    background: #8EC63F;
 	    contain: content;
+	   
+   		height: 100%;
+	}
+
+	ion-img img{
+	 	margin-right: auto;
+   		margin-left: auto;
 	}
     
 	.swiper-container{
 		padding-top:32px
+	}
+	.appName{
+		margin-top:32px;
+	}
+	.numberOfParcs{
+		margin-top:32px;
 	}
 }

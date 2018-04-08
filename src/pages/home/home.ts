@@ -644,7 +644,7 @@ export class HomePage implements OnInit{
 	      showCloseButton: true,
 	      closeButtonText: "Settings"
 	    });
-	    if(this.navCtrl.getActive().name === "HomePage"){
+	    if(this.navCtrl.getActive().name === "HomePage" || this.navCtrl.getActive().name ==="l"){
 	    	toast.present();
     		toast.onDidDismiss((data, role) => {    
 	       	 	console.log('Dismissed toast');
