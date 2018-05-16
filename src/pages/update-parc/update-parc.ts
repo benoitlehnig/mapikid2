@@ -214,14 +214,17 @@ export class UpdateParcPage {
      
     }
     if(this.mode==='add'){
+      console.log('add mode');
       if(this._auth.authenticated !==false ){
         this.parc.addedBy = this._auth.displayName();
         this.parc.addedByUid = this._auth.displayUid();
       }
-      var newPosition = this.db.database.ref('positions').push();
+      
+      var newPosition = this.db.list('positions').push();
+ 
       console.log(this.parc);
+      console.log("console.log(newPosition.key);", newPosition.key);
       newPosition.set(this.parc).then(console.log(newPosition.key));
-      console.log(newPosition.$key);
       this.gf.set(newPosition.key, location).then(function() {
           console.log(newPosition.key);
           this.updateProfile(newPosition.key);

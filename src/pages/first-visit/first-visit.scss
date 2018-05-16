@@ -44,10 +44,14 @@ page-first-visit {
 		height:100%;
 	}
 	.imgWrapper{
-		height: calc(70%);
+		height: calc(70% - 70px);
    		text-align: center;
 	}
-	.imgWrapper ion-img {
+	.logo{
+		height: calc(70% - 150px);
+   		text-align: center;
+	}
+	.imgWrapper ion-img,.logo ion-img{
 		display: inline-block;
 	    /* min-width: 100%; */
 	    background: #8EC63F;

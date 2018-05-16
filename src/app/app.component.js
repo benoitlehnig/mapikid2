@@ -16,12 +16,15 @@ import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../pages/home/home';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
+import { NoNetworkPage } from '../pages/no-network/no-network';
 import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
 import { ContactPage } from '../pages/contact/contact';
 import { TranslateService } from 'ng2-translate';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { LanguagePage } from '../pages/language/language';
 import { AdMobFree } from '@ionic-native/admob-free';
+import { Network } from 'ionic-native';
+
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen, translate, app, storage, afAuth, _auth, ga, modalCtrl, admobFree) {
         var _this = this;
@@ -57,20 +60,17 @@ var MyApp = /** @class */ (function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
-            if (_this.bannerActivate === true) {
-                if (_this.platform.is('android')) {
-                    _this.bannerConfig.id = "ca-app-pub-1937225175114473/4113122211";
-                }
-                _this.admobFree.banner.config(_this.bannerConfig);
-                _this.admobFree.banner.prepare()
-                    .then(function () {
-                    // banner Ad is ready
-                    // if we set autoShow to false, then we will need to call the show method here
-                    //this.admobFree.banner.show();
-                })
-                    .catch(function (e) { return console.log(e); });
-            }
             splashScreen.hide();
+
+            let disconnectSub = Network.onDisconnect().subscribe(() => {
+              console.log('you are offline');
+              _this.app.getActiveNav().push(NoNetworkPage);
+            });
+
+            let connectSub = Network.onConnect().subscribe(()=> {
+              console.log('you are online');
+            });
+
             _this.translate = translate;
             _this.translate.setDefaultLang('fr');
             storage.get('langKey').then(function (val) {
@@ -81,6 +81,7 @@ var MyApp = /** @class */ (function () {
                     _this.translate.use('fr');
                 }
             });
+
             storage.get('firstVisit').then(function (val) {
                 //not first visit
                 console.log(val);

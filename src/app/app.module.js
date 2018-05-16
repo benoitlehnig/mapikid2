@@ -16,6 +16,7 @@ import { DetailsRootPage } from '../pages/details-root/details-root';
 import { ReviewsRootPage } from '../pages/reviews-root/reviews-root';
 import { UpdateParcPage } from '../pages/update-parc/update-parc';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
+import { NoNetworkPage } from '../pages/no-network/no-network';
 import { AddReviewPage } from '../pages/add-review/add-review';
 import { ContactPage } from '../pages/contact/contact';
 import { LanguagePage } from '../pages/language/language';
@@ -73,6 +74,7 @@ var AppModule = /** @class */ (function () {
                 ContactPage,
                 LoginPage,
                 LanguagePage,
+                NoNetworkPage,
                 LegalMentionPage,
                 OrderByDistancePipe
             ],
@@ -112,7 +114,8 @@ var AppModule = /** @class */ (function () {
                 ContactPage,
                 LanguagePage,
                 LoginPage,
-                LegalMentionPage
+                LegalMentionPage,
+                NoNetworkPage
             ],
             exports: [
                 TranslateModule,
@@ -121,7 +124,8 @@ var AppModule = /** @class */ (function () {
                 ReviewsRootPage,
                 UpdateParcPage,
                 ContactPage,
-                LanguagePage
+                LanguagePage,
+                NoNetworkPage
             ],
             providers: [
                 StatusBar,

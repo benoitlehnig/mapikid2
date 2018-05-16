@@ -17,6 +17,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { LanguagePage } from '../pages/language/language';
 import { LoginPage } from '../pages/login/login';
 import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
+import { NoNetworkPage } from '../pages/no-network/no-network';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -31,6 +32,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { Network } from '@ionic-native/network';
 
 import {HttpModule,Http} from '@angular/http';
 import {TranslateModule} from 'ng2-translate';
@@ -83,6 +85,7 @@ export function createTranslateLoader(http: Http) {
     LoginPage,
     LanguagePage,
     LegalMentionPage,
+    NoNetworkPage,
     OrderByDistancePipe
   ],
   imports: [
@@ -119,6 +122,7 @@ export function createTranslateLoader(http: Http) {
         ContactPage,
         LanguagePage,
         LoginPage,
+        NoNetworkPage,
         LegalMentionPage
   	  ],
 	 exports: [
@@ -128,7 +132,8 @@ export function createTranslateLoader(http: Http) {
         ReviewsRootPage,
         UpdateParcPage,
         ContactPage,
-        LanguagePage
+        LanguagePage,
+        NoNetworkPage
   ],
   providers: [
     StatusBar,
@@ -147,7 +152,8 @@ export function createTranslateLoader(http: Http) {
     GoogleAnalytics,
     FirebaseAnalytics,
     AdMobFree,
-    WeatherProvider
+    WeatherProvider,
+    Network
   ]
 })
 export class AppModule {}

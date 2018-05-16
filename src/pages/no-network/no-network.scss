@@ -1,0 +1,19 @@
+page-no-network {
+	.imageWrapper{
+   		text-align: center;
+	}
+	.imageWrapper ion-img{
+		display: inline-block;
+	    /* min-width: 100%; */
+	    background: #8EC63F;
+	    contain: content;
+	}
+	.scroll-content{
+		background: #8EC63F;
+	}
+	.text{
+		color:#FFFFFF;
+		text-align:center;
+		font-size:1.3em;
+	}
+}

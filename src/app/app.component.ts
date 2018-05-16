@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
+import { Network } from '@ionic-native/network';
 
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../pages/home/home';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
 import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
+import { NoNetworkPage } from '../pages/no-network/no-network';
 import { ContactPage } from '../pages/contact/contact';
 import {TranslateService,LangChangeEvent} from 'ng2-translate';
 import { AuthService } from '../providers/auth-service/auth-service';
@@ -36,7 +38,8 @@ export class MyApp {
   
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
-    private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,private admobFree: AdMobFree) {
+    private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,
+    private admobFree: AdMobFree,private network: Network) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
@@ -46,20 +49,14 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
         statusBar.styleDefault();
-        if(this.bannerActivate ===true){
-          if(this.platform.is('android')){
-          this.bannerConfig.id = "ca-app-pub-1937225175114473/4113122211";
-          }
-          this.admobFree.banner.config(this.bannerConfig);
+         let disconnectSub = this.network.onDisconnect().subscribe(() => {
+          console.log('you are offline');
+          this.app.getActiveNav().push(NoNetworkPage);
+        });
 
-          this.admobFree.banner.prepare()
-          .then(() => {
-          // banner Ad is ready
-          // if we set autoShow to false, then we will need to call the show method here
-            //this.admobFree.banner.show();
-          })
-          .catch(e => console.log(e));  
-        }
+        let connectSub = this.network.onConnect().subscribe(()=> {
+          console.log('you are online');
+        });
         
         
         splashScreen.hide();
