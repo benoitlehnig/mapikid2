@@ -196,6 +196,9 @@
 		"SIGNINGOOGLE": "Connecta't amb Google",
 		"CLOSE" : "Tanca"
 	},
+	"nonetwork" : {
+		"TEXT" : "Sense xarxa! Map&Kid necessita una connexió a Internet."
+	},
 	"legalMention":{
 		"LEGALMENTION": "Mentions Légales",
 		"EDITOR": "Editeur : Benoit Lehnig",

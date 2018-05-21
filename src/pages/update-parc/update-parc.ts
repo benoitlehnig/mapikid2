@@ -55,7 +55,7 @@ export class UpdateParcPage {
             football:  false,
             basketball:  false,
             other:false,
-            otherDescrition:null
+            otherDescription:null
           },
           lessThan2years: false,
           between2and6: false,

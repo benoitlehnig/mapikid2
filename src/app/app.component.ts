@@ -56,6 +56,7 @@ export class MyApp {
 
         let connectSub = this.network.onConnect().subscribe(()=> {
           console.log('you are online');
+          this.app.getActiveNav().push(FirstVisitPage);
         });
         
         

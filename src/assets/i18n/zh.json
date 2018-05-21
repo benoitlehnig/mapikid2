@@ -195,7 +195,10 @@
 		"SIGNINGOOGLE" : "连接Google", 
 		"CLOSE" : "关闭"
 	},
-		"legalMention":{
+	"nonetwork" : {
+		"TEXT" : "没有网络！ Map＆Kid需要互联网连接"
+	},
+	"legalMention":{
 		"LEGALMENTION": "Mentions Légales",
 		"EDITOR": "Editeur : Benoit Lehnig",
 		"PUBLICATIONDIRECTOR": "Directeur de la publication : Benoit Lehnig ",

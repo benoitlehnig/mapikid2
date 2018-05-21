@@ -196,7 +196,10 @@
 		"SIGNINGOOGLE": "Connetti a Google",
 		"CLOSE" : "Chiudi"
 	},
-		"legalMention":{
+	"nonetwork" : {
+		"TEXT" : "Nessuna rete! Map & Kid ha bisogno di una connessione internet"
+	},
+	"legalMention":{
 		"LEGALMENTION": "Mentions Légales",
 		"EDITOR": "Editeur : Benoit Lehnig",
 		"PUBLICATIONDIRECTOR": "Directeur de la publication : Benoit Lehnig ",

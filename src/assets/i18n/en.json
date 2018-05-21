@@ -196,7 +196,10 @@
 		"SIGNINGOOGLE": "Connect with Google",
 		"CLOSE": "Close"
 	},
-		"legalMention":{
+	"nonetwork" : {
+		"TEXT" : "No network! Map&Kid needs an internet connection."
+	},
+	"legalMention":{
 		"LEGALMENTION": "Mentions Légales",
 		"EDITOR": "Editeur : Benoit Lehnig",
 		"PUBLICATIONDIRECTOR": "Directeur de la publication : Benoit Lehnig ",
