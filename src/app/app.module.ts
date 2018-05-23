@@ -18,6 +18,7 @@ import { LanguagePage } from '../pages/language/language';
 import { LoginPage } from '../pages/login/login';
 import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
 import { NoNetworkPage } from '../pages/no-network/no-network';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -86,6 +87,7 @@ export function createTranslateLoader(http: Http) {
     LanguagePage,
     LegalMentionPage,
     NoNetworkPage,
+    ProfilePage,
     OrderByDistancePipe
   ],
   imports: [
@@ -123,7 +125,8 @@ export function createTranslateLoader(http: Http) {
         LanguagePage,
         LoginPage,
         NoNetworkPage,
-        LegalMentionPage
+        LegalMentionPage,
+        ProfilePage
   	  ],
 	 exports: [
         TranslateModule,
@@ -133,7 +136,8 @@ export function createTranslateLoader(http: Http) {
         UpdateParcPage,
         ContactPage,
         LanguagePage,
-        NoNetworkPage
+        NoNetworkPage,
+        ProfilePage
   ],
   providers: [
     StatusBar,

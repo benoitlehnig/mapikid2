@@ -1,0 +1,54 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'profile.TITLE' |translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-item>
+	    <ion-avatar item-start>
+	      	<img src="{{pictureUrl}}">
+	    </ion-avatar>
+			<h2>{{displayName}}</h2>
+		<p>{{displayEmail}}</p>
+	</ion-item>
+	
+	<ion-list>
+		<ion-item-divider color="light"><h2>{{'profile.MYREVIEWS'| translate}} </h2><ion-badge item-end>{{reviews.length}}</ion-badge>
+		</ion-item-divider>
+		<ion-item *ngFor="let reviewPlayground of reviews" [navPush]="parcDetails" [navParams]="{key:reviewPlayground.playgroundId}">
+			<span class=""  *ngIf="reviewPlayground.name == undefined" >{{ 'list.NONAMEPARC' |translate}}</span>
+			<span class=""  *ngIf="reviewPlayground.name != undefined" >{{reviewPlayground.name}}</span>
+			<ion-item class="reviewItem" *ngFor="let review of reviewPlayground.reviewsArray" >
+				<star-rating-comp [starType]="'svg'" [rating]="review.rate" [readOnly]="true"></star-rating-comp>
+				<p class="" *ngIf="review.text || review.text!='' || review.text !== undefined">{{review.text}}</p>
+            	<p class="" *ngIf="!review.text || review.text ==='' || review.text === undefined">{{profile.NOREVIEWTEXT || translate}}</p>
+            	<ion-note item-end>{{review.date | date:'dd/MM/yyyy'}}</ion-note>
+            </ion-item>
+		</ion-item>
+		<ion-item-divider color="light"><h2>{{'profile.PLAYGROUNDSADDED' | translate}} </h2><ion-badge item-end>{{addedPlaygrounds.length}}</ion-badge></ion-item-divider>
+		<ion-item *ngFor="let playground of addedPlaygrounds" [navPush]="parcDetails" [navParams]="{key:playground.playgroundId}">
+			<span class=""  *ngIf="playground.name == ''" >{{ 'list.NONAMEPARC' |translate}}</span>
+			<span class=""  *ngIf="playground.name != ''" >{{playground.name}}</span>
+			<ion-note item-end>{{playground.date | date:'dd/MM/yyyy'}}</ion-note>
+		</ion-item>
+		<ion-item-divider color="light"><h2>{{'profile.PLAYGROUNDSMODIFIED' | translate}} </h2>
+				<ion-badge item-end>{{updatedPlaygrounds.length}}</ion-badge>
+		</ion-item-divider>
+		<ion-item *ngFor="let playground of updatedPlaygrounds" [navPush]="parcDetails" [navParams]="{key:playground.playgroundId}">
+			<span class=""  *ngIf="playground.name == ''" >{{ 'list.NONAMEPARC' |translate}}</span>
+			<span class=""  *ngIf="playground.name != ''" >{{playground.name}}</span>
+			<ion-note item-end>{{playground.date | date:'dd/MM/yyyy'}}</ion-note>
+		</ion-item>
+	</ion-list>
+
+</ion-content>

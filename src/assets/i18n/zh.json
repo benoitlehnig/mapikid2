@@ -17,7 +17,8 @@
 			"MOREINFO" : "更多信息",
 			"FEEDBACKBUTTON" : "联系我们",
 			"LANGUAGE" : "语言",
-			"LEGALMENTION": "法律信息"
+			"LEGALMENTION": "法律信息",
+			"PROFILE":"我的个人资料"
 	},
 	"map":{
 		"ADDPARCBUTTON":"添加公园",
@@ -257,6 +258,18 @@
 		"CREDIT1": "天气数据来自OpenWeatherMap.org，信用©OpenWeatherMap",
 		"CREDIT2": "大部分已经进口的公园都是来自OpenStreetMap，信贷©OpenStreetMap贡献者",
 		"CREDIT3" : "Playground icons designed by freepik from Flaticon"
-
+	},
+	"profile" : {
+		"TITLE": "我的个人资料",
+		"MYREVIEWS" : "我的意见",
+		"PLAYGROUNDSADDED" : "我的补充",
+		"PLAYGROUNDSMODIFIED": "我的更改",
+		"CLOSE": "关闭",
+		"SUPPRESSPERSONALDATA": "我想删除我所有的个人资料",
+		"CONFIRMATIONTITLE": "确认删除",
+		"CONFIRMATIONCONTENT": "您的所有评论将被删除以及您的帐户信息修改或添加的公园将被保留",
+		"CONFIRMATIONCANCEL": "取消",
+		"CONFIRMATIONCONFIRM": "确认",
+		"NOREVIEWTEXT": "没有评论"
 	}
 }

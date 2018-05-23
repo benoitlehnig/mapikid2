@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 // Do not import from 'firebase' as you'll lose the tree shaking benefits
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Platform } from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -11,7 +12,7 @@ export class AuthService {
   private currentUser: firebase.User;
 
   constructor(public afAuth: AngularFireAuth, public platform:Platform,
-    private googlePlus: GooglePlus,private fb: Facebook) {
+    private googlePlus: GooglePlus,private fb: Facebook, public db: AngularFireDatabase) {
     afAuth.authState.subscribe((user: firebase.User) => this.currentUser = user);
   }
 
@@ -71,6 +72,13 @@ export class AuthService {
       return '';
     }
   }
+  displayEmail(): string {
+    if (this.currentUser !== null) {
+      return this.currentUser.email;
+    } else {
+      return '';
+    }
+  }
   displayUid(): string {
     if (this.currentUser !== null) {
       return this.currentUser.uid;
@@ -83,6 +91,15 @@ export class AuthService {
       return this.currentUser.providerData[0].photoURL;
     } else {
       return '';
+    }
+  }
+
+  getProfile(): FirebaseObjectObservable<any> {
+    if(this.currentUser !== null) {
+      if(this.currentUser.uid){
+        return  this.db.object('users/'+this.currentUser.uid);
+      }
+
     }
   }
 }

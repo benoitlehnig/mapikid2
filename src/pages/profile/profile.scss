@@ -1,0 +1,26 @@
+page-profile {
+	.rating {
+	    -webkit-box-align: left !important;
+	    -webkit-align-items: left!important;
+	    -moz-box-align: left !important;
+	    -ms-flex-align: left !important;
+	    align-items: left !important;
+	    -webkit-box-pack: left !important;
+	    -webkit-justify-content: left !important;
+	    -moz-box-pack: left !important;
+	    -ms-flex-pack: left !important;
+	    justify-content: left !important;
+	}
+	.toolbar-background-md{
+		background:#8EC63F;
+	}
+	.toolbar-title-md{
+		color:#FFFFFF;
+	}
+	.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
+		color:#FFFFFF;
+	}
+	.reviewItem .item-inner{
+		border-bottom:0px!important;
+	}
+}

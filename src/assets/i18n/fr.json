@@ -17,7 +17,8 @@
 			"MOREINFO" : "Plus d'information",
 			"FEEDBACKBUTTON" : "Nous contacter",
 			"LANGUAGE" : "Langue",
-			"LEGALMENTION": "Mentions Légales"
+			"LEGALMENTION": "Mentions Légales", 
+			"PROFILE" : "Mon Profil"
 	},
 	"map":{
 		"ADDPARCBUTTON":"Ajouter un parc",
@@ -259,5 +260,18 @@
 		"CREDIT1": "Les données météo proviennent d'OpenWeatherMap.org. Crédit © OpenWeatherMap",
 		"CREDIT2": "La plupart des parcs déjà importés proviennent d'OpenStreetMap. Crédit © OpenStreetMap contributors",
 		"CREDIT3" : "Les icones d'équipement sont designées par freepik de Flaticon"
+	},
+	"profile" : {
+		"TITLE": "Mon Profil",
+		"MYREVIEWS" : "Mes Avis",
+		"PLAYGROUNDSADDED" : "Mes ajouts",
+		"PLAYGROUNDSMODIFIED": "Mes modifications",
+		"CLOSE": "Fermer",
+		"SUPPRESSPERSONALDATA": "Je veux supprimer toutes mes données personnelles",
+		"CONFIRMATIONTITLE": "Confirmer la suppression",
+		"CONFIRMATIONCONTENT": "Tous vos avis seront supprimés ainsi que les informations relatives à votre compte. Les parcs modifiés ou ajoutés seront conservés.",
+		"CONFIRMATIONCANCEL": "Annuler",
+		"CONFIRMATIONCONFIRM": "Confirmer",
+		"NOREVIEWTEXT": "Pas de commentaire"
 	}
 }

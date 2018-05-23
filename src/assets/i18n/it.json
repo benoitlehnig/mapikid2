@@ -7,17 +7,18 @@
 		"LOADINGLABEL": "Si prega di attendere mentre i parchi giochi stanno caricando"
 	},
 	"header" :{
-			"APPNAME" : "Map&Kid",
-			"SIGNIN": "Accesso",
-			"SIGNINGOOGLE": "Accedi con Google",
-			"SIGNINFACEBOOK": "Accedi con Facebook",
-			"SIGNOUT": "Sign-out",
-			"ENTERLOCATION":"Inserisci una posizione",
-			"NONAMEPARC" :"Parco giochi",
-			"MOREINFO" : "Ulteriori informazioni",
-			"FEEDBACKBUTTON" : "Contattaci",
-			"LANGUAGE": "Vicino",
-			"LEGALMENTION": "Informazioni Legali"
+		"APPNAME" : "Map&Kid",
+		"SIGNIN": "Accesso",
+		"SIGNINGOOGLE": "Accedi con Google",
+		"SIGNINFACEBOOK": "Accedi con Facebook",
+		"SIGNOUT": "Sign-out",
+		"ENTERLOCATION":"Inserisci una posizione",
+		"NONAMEPARC" :"Parco giochi",
+		"MOREINFO" : "Ulteriori informazioni",
+		"FEEDBACKBUTTON" : "Contattaci",
+		"LANGUAGE": "Vicino",
+		"LEGALMENTION": "Informazioni Legali",
+		"PROFILE": "Me Profile"
 	},
 	"map":{
 		"ADDPARCBUTTON":"Aggiungi un nuovo parco",
@@ -258,5 +259,18 @@
 		"CREDIT1": "I dati meteorologici sono raccolti da OpenWeatherMap.org. Credit © OpenWeatherMap",
 		"CREDIT2": "La maggior parte dei parchi già importati proviene da OpenStreetMap. Credit © OpenStreetMap contributors",
 		"CREDIT3" : "Playground icons designed by freepik from Flaticon"
+	},
+	"profile" : {
+		"TITLE": "Me Profile",
+		"MYREVIEWS" : "Le Mie Opinioni",
+		"PLAYGROUNDSADDED" : "Le Mie Aggiunte",
+		"PLAYGROUNDSMODIFIED": "I Miei Cambiamenti",
+		"CLOSE": "Chiudi",
+		"SUPPRESSPERSONALDATA": "Voglio eliminare tutti i miei dati personali",
+		"CONFIRMATIONTITLE": "Conferma cancellazione",
+		"CONFIRMATIONCONTENT": "Tutte le vostre opinioni saranno eliminati così come le informazioni relative al tuo account o aggiunte parchi modificati saranno conservati.",
+		"CONFIRMATIONCANCEL": "Annulla",
+		"CONFIRMATIONCONFIRM": "Conferma",
+		"NOREVIEWTEXT": "Nessun commento"
 	}
 }

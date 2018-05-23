@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { FirstVisitPage } from '../pages/first-visit/first-visit';
 import { LegalMentionPage } from '../pages/legal-mention/legal-mention';
 import { NoNetworkPage } from '../pages/no-network/no-network';
+import { ProfilePage } from '../pages/profile/profile';
 import { ContactPage } from '../pages/contact/contact';
 import {TranslateService,LangChangeEvent} from 'ng2-translate';
 import { AuthService } from '../providers/auth-service/auth-service';
@@ -108,6 +109,9 @@ export class MyApp {
   }
   showLegalMention = function(){
     this.app.getActiveNav().push(LegalMentionPage);
+  }
+  showProfilePage = function(){
+    this.app.getActiveNav().push(ProfilePage);
   }
   signInWithFacebook(): void {
     this._auth.signInWithFacebook()
