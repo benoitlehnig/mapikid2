@@ -6,18 +6,21 @@
 		</ion-header>
   <ion-content>
     <ion-list>
-        <button  ion-item menuClose (click)="signInWithFacebook()" *ngIf="userSigned === false">
+        <button ion-item menuClose (click)="signInWithFacebook()" *ngIf="userSigned === false">
         {{ 'header.SIGNINFACEBOOK'| translate }}
       </button>
       <button ion-item menuClose (click)="signInWithGoogle()" *ngIf="userSigned === false">
         {{ 'header.SIGNINGOOGLE'| translate }}
       </button>
-      <button  ion-item menuClose (click)="showProfilePage()"  *ngIf="userSigned === true">
-        {{'header.PROFILE'|translate}}
-      </button>
-       <button  ion-item menuClose (click)="signOut()" *ngIf="userSigned === true">
-       {{ 'header.SIGNOUT'| translate }}
-      </button>
+      <div id="topProfile" ion-item  *ngIf="userSigned === true"  menuClose (click)="showProfilePage()" >
+          <ion-avatar item-start>
+            <img src="{{pictureUrl}}">
+          </ion-avatar>
+          <h2>{{displayName}}</h2>
+          <p>{{displayEmail}}</p>
+           
+      </div>
+      <button ion-item menuClose *ngIf="userSigned === true"  menuClose (click)="showProfilePage()" >{{'header.PROFILE'|translate}}</button>
       <button  ion-item menuClose (click)="openLanguage()">
         {{'header.LANGUAGE'|translate}}
       </button>
@@ -27,12 +30,10 @@
       <button  ion-item menuClose (click)="showContactPage()">
         {{'header.FEEDBACKBUTTON'|translate}}
       </button>
-     
-     
-      <button  ion-item menuClose (click)="showLegalMention()" >
+      <button ion-item menuClose (click)="showLegalMention()" >
        {{ 'header.LEGALMENTION'| translate }}
       </button>
-
+      <button  ion-item  menuClose (click)="signOut()" class="signout">{{ 'header.SIGNOUT'| translate }}</button>   
     </ion-list>
 
     

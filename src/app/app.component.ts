@@ -35,7 +35,10 @@ export class MyApp {
     autoShow: true
   };
   bannerActivate:boolean = false;
-  
+  pictureUrl:string;
+  displayName:string;
+  displayEmail:string;
+
   
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
@@ -44,6 +47,9 @@ export class MyApp {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
+        this.pictureUrl = this._auth.displayPicture();
+        this.displayName = this._auth.displayName();
+        this.displayEmail = this._auth.displayEmail();
     }.bind(this));
 
     this.platform.ready().then(() => { 

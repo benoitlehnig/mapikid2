@@ -48,4 +48,14 @@ ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
 	color:#FFFFFF;
 	border-color:#FFFFFF;
 }
-
+.signout{
+	position:absolute;
+	bottom:0px;
+}
+#topProfile, #topProfile p{
+	background: #8EC63F;
+	color:#FFFFFF;
+}
+#topProfile .item-inner{
+	border:none;
+}
