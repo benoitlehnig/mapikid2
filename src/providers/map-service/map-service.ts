@@ -21,7 +21,7 @@ export class MapService {
   private googleMapJDK=null ;
   private googleMapNative: GoogleMap; null;
   private baseUrl ='https://us-central1-parcmap.cloudfunctions.net/listPlaygroundsAround';
-  private nominatimUrl  ='http://nominatim.openstreetmap.org/reverse?format=json';
+  private nominatimUrl  ='http://nominatim.openstreetmap.org/reverse?format=json&accept-language=en';
   private mapCenter= {lat:0, lng:0};  
   private useNativeMap:boolean = true;
   private defaultMapOptions: GoogleMapOptions = {
@@ -277,7 +277,7 @@ export class MapService {
   }
   
   getAddress = function(mlat,mlng){
-    let nominatimURL = 'http://nominatim.openstreetmap.org/reverse?format=json&lat='+mlat+'&lon=' + mlng;
+    let nominatimURL = 'http://nominatim.openstreetmap.org/reverse?format=json&accept-language=en&lat='+mlat+'&lon=' + mlng;
     return this.http.get(nominatimURL);
   }
   saveAddress = function(mlat,mlng,key){
