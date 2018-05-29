@@ -88,29 +88,32 @@ export class DetailsRootPage {
 			if(this.parcKey){
 				this.parcObject = this.db.object('positions/'+this.parcKey);
 				this.parcObject.subscribe(snapshot => {
-			   		this.parc = snapshot;
-			   		if(this.parc.rate ===null || !this.parc.rate){
-			   			this.parc.rate= {'numberRate':0};
+			   		
+			   		if(snapshot.$value!==null){
+			   			this.parc = snapshot;
+			   			if(this.parc.rate ===null || !this.parc.rate){
+				   			this.parc.rate= {'numberRate':0};
+				   		}
+				   		if(!this.parc.facilities){
+							this.parc.facilities = null;
+						}
+						var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
+						if(this.marker){
+							this.marker.setPosition(latLng);
+						}
+						if(this.map){
+							this.map.setCenter(latLng);
+						}
+						this.toiletsMarkers = [];
+						this.findClosestToilets();
+						this.getWeather();
+						this.codeAddress();
+						this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
+						this.setLowNumberofEquipment();
+						this.loadMap();
+						this.setUpPlaceService();
+						this.triggerGetGoogleData();
 			   		}
-			   		if(!this.parc.facilities){
-						this.parc.facilities = null;
-					}
-					var latLng = new google.maps.LatLng(this.parc.position.lat, this.parc.position.lng);
-					if(this.marker){
-						this.marker.setPosition(latLng);
-					}
-					if(this.map){
-						this.map.setCenter(latLng);
-					}
-					this.toiletsMarkers = [];
-					this.findClosestToilets();
-					this.getWeather();
-					this.codeAddress();
-					this.mapURL = this.mapURL+this.parc.position.lat+","+this.parc.position.lng;
-					this.setLowNumberofEquipment();
-					this.loadMap();
-					this.setUpPlaceService();
-					this.triggerGetGoogleData();			   		
 				});
 				this.reviewsList = this.db.list('reviews/'+this.parcKey,{
 					query: {
@@ -176,6 +179,7 @@ export class DetailsRootPage {
 			if(this.parc.facilities.climb ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.football ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.basketball ===true){this.numberOfEquipment++};
+			if(this.parc.facilities.inclusive ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.trampoline ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.other){this.numberOfEquipment++};
 		}

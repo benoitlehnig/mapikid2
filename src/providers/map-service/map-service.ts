@@ -288,10 +288,13 @@ export class MapService {
         var json = data;
         var parcObject = this.db.object('positions/'+key);
         parcObject.subscribe(snapshot => {
-            var parc = snapshot;
-            parc.address = json.address;
-            console.log(parc);
-            parcObject.update(parc);
+            if(snapshot.$value!==null){
+              var parc = snapshot;
+              parc.address = json.address;
+              console.log(parc);
+              parcObject.update(parc);
+            }
+            
         });
       });
  

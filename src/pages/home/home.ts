@@ -271,6 +271,11 @@ export class HomePage implements OnInit{
 			}
 			this.markersEntered =0;
 		}.bind(this));
+
+
+		var onKeyExitdRegistration =  this.geoQuery.on("key_exited", function(key, location, distance) {
+			console.log(key, location, distance);
+		}.bind(this));
 	}
 
 
@@ -288,16 +293,23 @@ export class HomePage implements OnInit{
 				if(!parc.parcItem.rate){
 					parc.parcItem.rate = {'rate': 0};
 				}				
-				this.parcs.push(parc);	
+				
 				if(!this.keys[key]){
+					this.parcs.push(parc);	
+					this.keys[key] = key;
 					this.displayParcMarker(parc,'add');
+					this.numberParcLoaded = this.numberParcLoaded +1;
+					this.checkCompleteLoad();
 				}
 				else{
+					console.log(this.getPlaygroundPosition(key));
+					if(this.getPlaygroundPosition(key) !==-1 ){
+						this.parcs[this.getPlaygroundPosition(key)].parcItem = snapshot;
+					}
 					this.displayParcMarker(parc,'update');
 				}
-				this.numberParcLoaded = this.numberParcLoaded +1;
-				this.checkCompleteLoad();
-				this.keys[key] = key;
+				
+				
 			});	
 		}
 	}
@@ -567,6 +579,8 @@ export class HomePage implements OnInit{
 						  	var parc = {'key':data[i].key, 'distance':0,'reviewsLength':0,'parcItem': data[i].content };
 							if(this.keys[data[i].key]){
 								this.displayParcMarker(parc,'update');
+								console.log(this.getPlaygroundPosition(data[i].key));
+								console.log(this.parcs[this.getPlaygroundPosition(data[i].key)]);
 							}
 							else{
 								if(!parc.parcItem.rate){
@@ -591,6 +605,16 @@ export class HomePage implements OnInit{
     	this._map.getPlaygroundDetails(this.parcs).map(data => data.json())
 			.subscribe(data=> {console.log(data)})
   
+    }
+
+    getPlaygroundPosition(key){
+    	var returnedValue = -1;
+    	for (var i=0; i<this.parcs.length; i++){
+    		if(this.parcs[i].key === key){
+    			returnedValue = i
+    		}
+    	}
+    	return returnedValue;
     }
 
     updateDistance = function(){

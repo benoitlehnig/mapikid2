@@ -42,7 +42,7 @@
 					<star-rating-comp [starType]="'svg'" [rating]="parc.parcItem.rate.rate" [readOnly]="true"></star-rating-comp>
 				</span> | {{parc.distance}} km
 			</h3>
-			<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>4 && parc.parcItem.open">
+			<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>2 && parc.parcItem.open">
 				<i class="material-icons" >beenhere</i>
 			</ion-avatar>
 			<ion-avatar item-end  *ngIf="parc.parcItem.validatedByInstitution ===true">

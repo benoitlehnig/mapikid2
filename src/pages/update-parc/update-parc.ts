@@ -39,6 +39,7 @@ export class UpdateParcPage {
           shade:true,
           free : true,
           events: false,
+          inclusive:false,
           facilities:{
             swing : false,
             slide :false,
@@ -95,7 +96,7 @@ export class UpdateParcPage {
               climb:  false,
               football:  false,
               basketball:  false,
-              otherDescription: null
+              otherDescription: null,
         };
       }
       else {
@@ -120,6 +121,7 @@ export class UpdateParcPage {
     else{
       this.parc.position =  this.navParams.get('position');
     }
+    if(!this.parc.inclusive){this.parc.inclusive = false;}
     storage.get(this.parc.$key).then((val) => {
       console.log(val);
       if(val !==null){

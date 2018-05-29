@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams,Tabs,Tab,ModalController,ToastController,Platform   } from 'ionic-angular';
+import { NavController, NavParams,Tabs,Tab,ModalController,ToastController,Platform,App   } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../../providers/auth-service/auth-service';
@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import {TranslateService} from 'ng2-translate';
 
 import { DetailsRootPage } from '../details-root/details-root';
+import { HomePage } from '../home/home';
 import { ReviewsRootPage } from '../reviews-root/reviews-root';
 import { UpdateParcPage } from '../update-parc/update-parc';
 import { AddReviewPage } from '../add-review/add-review';
@@ -48,8 +49,8 @@ export class ParcDetailsPage {
 	parcKey:string="";
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
-  	db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
-  	public afAuth: AngularFireAuth, private _auth: AuthService,
+  	public db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
+  	public afAuth: AngularFireAuth, private _auth: AuthService,private app: App,
   	public toastCtrl: ToastController,translate: TranslateService,private ga: FirebaseAnalytics) {
 		console.log(navParams);
 	
@@ -154,11 +155,34 @@ export class ParcDetailsPage {
 			removalIncreased = this.parc.removalRequestNumber;
 		}
 		this.ga.logEvent("parc_management", {"action":"removal request","parc_key":this.parc.$key});
+		
+		
 		removalIncreased = removalIncreased+1;
+		var canRemove = false;
+		//if this is the same user who created it and no one else validated it
+		console.log(this.parc.addedByUid,this._auth.displayUid() , this.parc.validationNumber,removalIncreased);
+		if(this.parc.addedByUid === this._auth.displayUid() && this.parc.validationNumber === 1){
+			console.log("can be removed : same user");
+			canRemove = true;
+		}
+		//if this is the same user who created it and no one else validated it
+		else if(this.parc.removalIncreased > 3){
+			console.log("can be removed : more removal request than validation");
+			canRemove = true;
+		}
 		//removal of the parc
-		if(removalIncreased>5){	
-			//$scope.positionRef.child($scope.parc.$key).remove();
-			//$scope.geoFire.remove($scope.parc.$key).then($scope.closeParcDetails());
+		if(canRemove ===true){	
+			console.log(this.parcObject);
+			
+			var geoFireObject = this.db.object('geofire/'+this.navParams.get('key'));
+			geoFireObject.subscribe(snapshot => {
+				console.log(snapshot);
+				console.log(geoFireObject);
+				
+			});
+			geoFireObject.remove();
+			this.parcObject.remove().then(this.app.getActiveNav().setRoot(HomePage));
+			
 			
 		}
 		else{

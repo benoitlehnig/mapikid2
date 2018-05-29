@@ -52,7 +52,10 @@
 			<span>{{'parcDetails.FEE'|translate}}</span>
         </div>
     </div>
-    
+     <div *ngIf="parc.inclusive" class="details">
+		<i class="material-icons">accessible</i>
+        <span>{{ 'parcDetails.INCLUSIVE'| translate }}</span>
+    </div>
     <div  *ngIf="parc.lessThan2years || parc.between2and6 || parc.sixandPlus">
     	<div class="separator"></div>
 		<i class="material-icons" id="parcDetailsLittle" *ngIf="parc.lessThan2years">accessibility</i>
