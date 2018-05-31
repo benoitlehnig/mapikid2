@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams,Tabs,Tab,ModalController,ToastController,Platform,App   } from 'ionic-angular';
+import { NavController, NavParams,Tabs,Tab,ModalController,ToastController,Platform,App	   } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../../providers/auth-service/auth-service';
@@ -181,9 +181,7 @@ export class ParcDetailsPage {
 				
 			});
 			geoFireObject.remove();
-			this.parcObject.remove().then(this.app.getActiveNav().setRoot(HomePage));
-			
-			
+			this.parcObject.remove().then(this.app.getActiveNav().setRoot(HomePage));			
 		}
 		else{
 			this.parcObject.update({ removalRequestNumber: removalIncreased });
