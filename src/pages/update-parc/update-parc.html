@@ -34,6 +34,13 @@
       <ion-toggle [(ngModel)]="parc.events"></ion-toggle>
   </ion-item>
   <ion-item>
+      <ion-avatar item-start>
+         <i class="material-icons">accessible</i>
+      </ion-avatar>
+      <ion-label>{{'parcUpdate.INCLUSIVE'|translate}}</ion-label>
+      <ion-toggle [(ngModel)]="parc.inclusive"></ion-toggle>
+  </ion-item>
+  <ion-item>
     <ion-avatar item-start>
         <i class="material-icons" id="parcDetailsLittle">accessibility</i>
     </ion-avatar>
@@ -145,13 +152,6 @@
       </ion-avatar>
       <ion-label>{{'parcUpdate.BASKETBALL'|translate}}</ion-label>
       <ion-toggle [(ngModel)]="parc.facilities.basketball"></ion-toggle>
-  </ion-item>
-  <ion-item>
-      <ion-avatar item-start>
-        <img class="facilitiesIcon"  src="assets/images/equipment/inclusive.png">
-      </ion-avatar>
-      <ion-label>{{'parcUpdate.INCLUSIVE'|translate}}</ion-label>
-      <ion-toggle [(ngModel)]="parc.facilities.inclusive"></ion-toggle>
   </ion-item>
   <ion-item class="other">
       <ion-avatar item-start>

@@ -182,6 +182,9 @@ export class MapService {
         height: 18
       }
     };
+    if(parc.parcItem.inclusive){
+      image.url ='./assets/images/marker_open_inclusive.png'
+    }
     if(!parc.parcItem.open){
       image.url ='./assets/images/marker_closed.png'
     }

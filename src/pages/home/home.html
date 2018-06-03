@@ -45,6 +45,9 @@
 			<ion-avatar item-end  *ngIf="parc.parcItem.validationNumber>2 && parc.parcItem.open">
 				<i class="material-icons" >beenhere</i>
 			</ion-avatar>
+			<ion-avatar item-end  *ngIf="parc.parcItem.inclusive ===true">
+				<i class="material-icons">accessible</i>
+			</ion-avatar>
 			<ion-avatar item-end  *ngIf="parc.parcItem.validatedByInstitution ===true">
 				<i class="material-icons">account_balance</i>
 			</ion-avatar>
