@@ -100,7 +100,8 @@
 		"WEATHERHOURS": " hores",
 		"UVINDEX": "Índex UV",
 		"VALIDATEDBYINSTITUTION": "Confirmat per l'Ajuntament",
-		"VIEWALLREVIEWS" : "Veure totes les ressenyes"
+		"VIEWALLREVIEWS" : "Veure totes les ressenyes",
+		"HIGHWAY":"Area d'autopista"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"Afegeix un nou parc",
@@ -136,7 +137,8 @@
 		"TOASTPARCUPDATED": "Parc infantil estimat, gràcies per la modificació !",
 		"TOASTPARCADDED": "S'ha afegit amb èxit el joc, gràcies !",
 		"EQUIPMENTS":"instal·lacions",
-		"OTHER":"Afegiu equips no inclosos a la llista anterior"
+		"OTHER":"Afegiu equips no inclosos a la llista anterior",
+		"HIGHWAY":"Area d'autopista"
 	},
 	"firstVisit":{
 		"APPNAME":"Map&Kid",

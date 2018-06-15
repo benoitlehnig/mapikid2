@@ -40,6 +40,7 @@ export class UpdateParcPage {
           free : true,
           events: false,
           inclusive:false,
+          highway:false,
           facilities:{
             swing : false,
             slide :false,
@@ -122,6 +123,7 @@ export class UpdateParcPage {
       this.parc.position =  this.navParams.get('position');
     }
     if(!this.parc.inclusive){this.parc.inclusive = false;}
+    if(!this.parc.highway){this.parc.parc = false;}
     storage.get(this.parc.$key).then((val) => {
       console.log(val);
       if(val !==null){

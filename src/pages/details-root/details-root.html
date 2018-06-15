@@ -52,7 +52,11 @@
 			<span>{{'parcDetails.FEE'|translate}}</span>
         </div>
     </div>
-     <div *ngIf="parc.inclusive" class="details">
+    <div *ngIf="parc.highway" class="details">
+		<i class="material-icons">directions_car</i>
+        <span>{{ 'parcDetails.HIGHWAY'| translate }}</span>
+    </div>
+    <div *ngIf="parc.inclusive" class="details">
 		<i class="material-icons">accessible</i>
         <span>{{ 'parcDetails.INCLUSIVE'| translate }}</span>
     </div>

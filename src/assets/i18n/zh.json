@@ -100,7 +100,8 @@
 			"WEATHERHOURS": " 小时内",
 			"UVINDEX": "紫外线指数",
 			"VALIDATEDBYINSTITUTION" : "由市政厅确认",
-			"VIEWALLREVIEWS" : "查看所有评论"
+			"VIEWALLREVIEWS" : "查看所有评论",
+			"HIGHWAY":"公路区域"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC" :"添加新公园",
@@ -136,7 +137,8 @@
 		"TOASTPARCUPDATED": "公园已经成功修改，谢谢！",
 		"TOASTPARCADDED": "公园已经成功添加，谢谢！",
 		"EQUIPMENTS":"设备",
-		"OTHER":"添加上面未列出的设备"
+		"OTHER":"添加上面未列出的设备",
+		"HIGHWAY":"公路区域"
 	},
 	"firstVisit":{
 		"APPNAME": "Map&Kid",

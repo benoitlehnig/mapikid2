@@ -179,7 +179,6 @@ export class DetailsRootPage {
 			if(this.parc.facilities.climb ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.football ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.basketball ===true){this.numberOfEquipment++};
-			if(this.parc.facilities.inclusive ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.trampoline ===true){this.numberOfEquipment++};
 			if(this.parc.facilities.other){this.numberOfEquipment++};
 		}

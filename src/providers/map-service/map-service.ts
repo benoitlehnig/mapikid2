@@ -185,6 +185,9 @@ export class MapService {
     if(parc.parcItem.inclusive){
       image.url ='./assets/images/marker_open_inclusive.png'
     }
+    if(parc.parcItem.highway){
+      image.url ='./assets/images/marker_open_highway.png'
+    }
     if(!parc.parcItem.open){
       image.url ='./assets/images/marker_closed.png'
     }

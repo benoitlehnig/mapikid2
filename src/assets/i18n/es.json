@@ -100,7 +100,8 @@
 		"WEATHERHOURS": " horas",
 		"UVINDEX": "Índice UV",
 		"VALIDATEDBYINSTITUTION" : "Confermato dal municipio",
-		"VIEWALLREVIEWS" : "Ver todas las críticas"
+		"VIEWALLREVIEWS" : "Ver todas las críticas",
+		"HIGHWAY":"área de la autopista"
 	},
 	"parcUpdate" :{
 		"ADDNEWPARC": "Agregar un nuevo parque",
@@ -136,7 +137,8 @@
 		"TOASTPARCUPDATED": "El parque ha sido cambiado con éxito, ¡gracias!",
 		"TOASTPARCADDED": "¡El parque se ha agregado con éxito, gracias!",
 		"EQUIPMENTS":"Equipos",
-		"OTHER":"Agregar equipo no mencionado anteriormente"
+		"OTHER":"Agregar equipo no mencionado anteriormente",
+		"HIGHWAY":"área de la autopista"
 	},
 	"firstVisit":{
 		"APPNAME" :"Map&Kid",
