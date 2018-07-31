@@ -275,6 +275,7 @@
 		"CONFIRMATIONCONTENT": "Tous vos avis seront supprimés ainsi que les informations relatives à votre compte. Les parcs modifiés ou ajoutés seront conservés.",
 		"CONFIRMATIONCANCEL": "Annuler",
 		"CONFIRMATIONCONFIRM": "Confirmer",
-		"NOREVIEWTEXT": "Pas de commentaire"
+		"NOREVIEWTEXT": "Pas de commentaire",
+		"MYSCORE": "Mon score Map&Kidos"
 	}
 }

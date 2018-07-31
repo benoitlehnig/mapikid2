@@ -174,27 +174,101 @@ export class MapService {
   	}	
   	return iconPath;
   }
-   getIconNative(parc){
+   getIconNative(playground){
+    let parc = playground.parcItem;
+    console.log("getIcon:",parc);
+    var baseUrl="./assets/images/map/";
+    var url =baseUrl+"notValidated_standard.png";
+
+    //closed playground
+    if(!parc.open){
+      url =baseUrl+"closed.png";
+    }
+    else if(parc.free===false){
+      url =baseUrl+"notFree.png";
+    }
+    else{
+      //parc opened and not validated
+      if(parc.validationNumber !== undefined){
+        console.log("(parc.validationNumber !== undefined");
+        if(parc.validationNumber >=1){
+          url =baseUrl+"validated_standard.png";
+          //validated playground
+          //testing inclusive
+          if(parc.inclusive ===undefined){
+            //not inclusive
+          }else{
+            //validated playground and inclusive
+            if(parc.inclusive ===true){
+              url =baseUrl+"validated_accessible.png";
+            }
+          }
+          if(parc.highway === undefined){
+            //not highway
+
+          }
+          else{
+            if(parc.highway === true){
+              //validated playground and highway
+              url =baseUrl+"validated_highway.png";
+            }
+          }
+        }
+        else{
+          //not a validated playground
+          //testing inclusive
+          url =baseUrl+"notValidated_standard.png";
+          if(parc.inclusive ===undefined){
+            //not inclusive
+
+          }else{
+            //not validated playground and inclusive
+            if(parc.inclusive ===true){
+              url =baseUrl+"notValidated_accessible.png";
+            }
+          }
+          if(parc.highway === undefined){
+            //not highway
+          }
+          else{
+            if(parc.highway === true){
+              //not validated playground and highway
+               url =baseUrl+"notValidated_highway.png";
+            }
+          }
+        }
+      }
+      else{
+        // not validated
+        url =baseUrl+"notValidated_standard.png";
+        if(parc.inclusive ===undefined){
+          //not inclusive
+        }else{
+          //not validated playground and inclusive
+          if(parc.inclusive ===true){
+            url =baseUrl+"notValidated_accessible.png";
+          }
+        }
+        if(parc.highway === undefined){
+          //not highway
+        }
+        else{
+          if(parc.highway === true){
+            //not validated playground and highway
+             url =baseUrl+"notValidated_highway.png";
+          }
+        }
+      }
+    }
+    console.log(url);
+
     let image = {
-      url: './assets/images/marker_open.png',
+      url: url,
       size: {
-        width: 18,
-        height: 18
+        width: 25,
+        height: 32
       }
     };
-    if(parc.parcItem.inclusive){
-      image.url ='./assets/images/marker_open_inclusive.png'
-    }
-    if(parc.parcItem.highway){
-      image.url ='./assets/images/marker_open_highway.png'
-    }
-    if(!parc.parcItem.open){
-      image.url ='./assets/images/marker_closed.png'
-    }
-
-    if(parc.parcItem.free===false){
-      image.url ='./assets/images/marker_fee.png'
-    }  
     return image;
   }
 

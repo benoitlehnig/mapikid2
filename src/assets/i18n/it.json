@@ -275,6 +275,7 @@
 		"CONFIRMATIONCONTENT": "Tutte le vostre opinioni saranno eliminati così come le informazioni relative al tuo account o aggiunte parchi modificati saranno conservati.",
 		"CONFIRMATIONCANCEL": "Annulla",
 		"CONFIRMATIONCONFIRM": "Conferma",
-		"NOREVIEWTEXT": "Nessun commento"
+		"NOREVIEWTEXT": "Nessun commento",
+		"MYSCORE": "Il punteggio di My Map&Kidos"
 	}
 }

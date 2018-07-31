@@ -21,6 +21,17 @@
 			<h2>{{displayName}}</h2>
 		<p>{{displayEmail}}</p>
 	</ion-item>
+	<ion-list class="myScore">
+		<ion-list-header>
+     		{{'profile.MYSCORE'| translate}}: {{score}} 
+   		</ion-list-header>
+		<ion-item >
+	      	<ion-range min="0" max="100" pin="false" [(ngModel)]="scorePercentile" color="secondary">
+	        	<ion-icon range-left small name="happy"></ion-icon>
+	        	<ion-icon range-right name="happy"></ion-icon>
+	      	</ion-range>
+	    </ion-item>
+	</ion-list>
 	
 	<ion-list>
 		<ion-item-divider color="light"><h2>{{'profile.MYREVIEWS'| translate}} </h2><ion-badge item-end>{{reviews.length}}</ion-badge>

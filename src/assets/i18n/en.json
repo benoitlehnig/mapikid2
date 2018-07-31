@@ -275,6 +275,7 @@
 		"CONFIRMATIONCONTENT": "All your reviews will be deleted as well as your account information. Modified or added playgrounds will be retained.",
 		"CONFIRMATIONCANCEL": "Cancel",
 		"CONFIRMATIONCONFIRM": "Confirm",
-		"NOREVIEWTEXT": "No text entered"
+		"NOREVIEWTEXT": "No text entered",
+		"MYSCORE": "My score Map&Kidos"
 	}
 }

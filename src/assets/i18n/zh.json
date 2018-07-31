@@ -274,6 +274,7 @@
 		"CONFIRMATIONCONTENT": "您的所有评论将被删除以及您的帐户信息修改或添加的公园将被保留",
 		"CONFIRMATIONCANCEL": "取消",
 		"CONFIRMATIONCONFIRM": "确认",
-		"NOREVIEWTEXT": "没有评论"
+		"NOREVIEWTEXT": "没有评论",
+		"MYSCORE": "我的地图和Kidos得分",
 	}
 }
