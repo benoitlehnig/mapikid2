@@ -38,5 +38,9 @@ page-parc-details {
     .toolbar-content .rating.color-default[_ngcontent-c1] .star-container[_ngcontent-c1] .star[_ngcontent-c1] svg[_ngcontent-c1]{
         fill: #FFF;
     }
+    .validateButton .fab-md {
+        width: 100%;
+        border-radius:0px;
+    }
   
 }

@@ -81,8 +81,7 @@ export class MapService {
         }
         this.setMapCenter(location.lat,location.lng);
         this.googleMapNative.moveCamera(options);
-        console.log(res)});
-      console.log("camera ready");
+      });
       this.googleMapNative.on(GoogleMapsEvent.MAP_CLICK).subscribe(
             (data) => {
                 alert("Click MAP");
@@ -148,33 +147,14 @@ export class MapService {
 
 
   getIconPath(parc){
-  	var iconPath = {
-      path: google.maps.SymbolPath.CIRCLE,
-      fillColor:  '#FE9F1F',  
-      fillOpacity: 1,                
-      scale: 8,
-      strokeColor: '#FE9F1F',
-      strokeWeight: 4
+    var image = this.getIconNative(parc);
+  	var icon = {
+        url: image.url,
+        size: new google.maps.Size(25, 32)
     };
-  	if(parc.parcItem.source !="community"){
-	 	  iconPath.fillColor= '#FE9F1F';
-      iconPath.fillOpacity = 0.4;
-	 	  iconPath.strokeColor= '#FE9F1F';
-	  }
-	  if(!parc.parcItem.open){
-	 	  iconPath.fillColor= "#efefef";
-      iconPath.fillOpacity= 0;
-	 	  iconPath.strokeColor= "#efefef";
-	  }
-
-  	if(parc.parcItem.free===false){
-      iconPath.fillColor= "#F96466";
-      iconPath.strokeColor= "#F2403C";
-      iconPath.fillOpacity= 1;
-  	}	
-  	return iconPath;
+  	return icon;
   }
-   getIconNative(playground){
+  getIconNative(playground){
     let parc = playground.parcItem;
     console.log("getIcon:",parc);
     var baseUrl="./assets/images/map/";
@@ -260,7 +240,6 @@ export class MapService {
         }
       }
     }
-    console.log(url);
 
     let image = {
       url: url,
@@ -328,18 +307,13 @@ export class MapService {
     }
   
    setCurrentMapCenter = function(){  
-    console.log("setCurrentMapCenter>>", this.mapCenter);  
     if(this.useNativeMap ===true){
-     // var target = this.googleMapNative.getCameraTarget();
-     // this.mapCenter = {lat: target.lat, lng: target.lng};
     }
     else{
       if(this.googleMapJDK !==null){
          this.mapCenter = {lat: this.googleMapJDK.getCenter().lat(), lng: this.googleMapJDK.getCenter().lng()};  
       }
-     
     }
-    console.log("setCurrentMapCenter>> end ",this.mapCenter);
   }
   setMapCenter = function(lat,lng){
     if(this.useNativeMap ===true){
@@ -362,7 +336,6 @@ export class MapService {
   }
   saveAddress = function(mlat,mlng,key){
       var nominatimURL = this.nominatimUrl+'&lat='+mlat+'&lon=' + mlng;
-      console.log(nominatimURL);
       this.http.get(nominatimURL).map(data => data.json())
       .subscribe(data=> {
         var json = data;
@@ -371,7 +344,6 @@ export class MapService {
             if(snapshot.$value!==null){
               var parc = snapshot;
               parc.address = json.address;
-              console.log(parc);
               parcObject.update(parc);
             }
             
