@@ -33,5 +33,9 @@
 <ion-content padding scroll="false" class="topNoScroll">
 	<page-details-root [parcKey]="parcKey"></page-details-root>
 </ion-content>
+<ion-fab bottom center *ngIf="selectedTab===0 && localParc.validated ==false" (click)="validate()" class="validateButton">
+    <button ion-fab color="vibrant"><i class="material-icons" >done</i>{{'parcDetails.VALIDATE'|translate}}</button>
 </ion-fab>
+<ion-fab bottom center *ngIf="selectedTab===0 && localParc.validated ==true"  class="validateButton">
+    <button  ion-fab color="vibrant" disabled outline><i class="material-icons" >done</i>{{'parcDetails.VALIDATED'|translate}}</button>
 </ion-fab>
