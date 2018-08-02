@@ -38,9 +38,26 @@ page-parc-details {
     .toolbar-content .rating.color-default[_ngcontent-c1] .star-container[_ngcontent-c1] .star[_ngcontent-c1] svg[_ngcontent-c1]{
         fill: #FFF;
     }
-    .validateButton .fab-md {
-        width: 100%;
-        border-radius:0px;
+    .validateButton{
+        height:100px;
+        width:100px;
+        left: calc(50% - 60px);
     }
-  
+    .validateButton > .button-inner {
+        flex-direction: column;
+        font-size:0.7em;
+        background-color: #8EC63F;
+        position: relative;
+        top: -77px; 
+    }
+    .validateButton ion-icon{
+        font-size: 4em;
+        position: relative;
+        top: 28px;
+        float: right;
+     }
+
+    ion-fab[bottom][edge] {
+        bottom: -41px;
+    }
 }
