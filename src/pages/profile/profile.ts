@@ -37,18 +37,18 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+
     this.profileObject = this._auth.getProfile();
     
     this.profileObject.subscribe(snapshot => {
-    	console.log(snapshot);
+    
     	this.profile = snapshot;
     	this.pictureUrl = this._auth.displayPicture();
     	this.displayName = this._auth.displayName();
     	this.displayEmail = this._auth.displayEmail();
     	if(this.profile.updatedPlaygrounds){
     		Object.keys(this.profile.updatedPlaygrounds).forEach((prop) => { 
-    			console.log(this.profile.updatedPlaygrounds[prop]);
+    		
     			var item ={
     				playgroundId: this.profile.updatedPlaygrounds[prop].key,
     				name:"",
@@ -70,7 +70,7 @@ export class ProfilePage {
 		  }
   		if(this.profile.addedPlaygrounds){
   			Object.keys(this.profile.addedPlaygrounds).forEach((prop) => { 
-      			console.log("addedPlaygrounds",this.profile.addedPlaygrounds[prop]);
+ 
       			var item ={
       				playgroundId: this.profile.addedPlaygrounds[prop].key,
       				name:"",
@@ -102,21 +102,21 @@ export class ProfilePage {
   computeScore(){
     var settingScore = this.db.object('settings/score');
       settingScore.subscribe(snapshot => {
-        console.log("computeScore",this.reviews.length,this.addedPlaygrounds.length , this.updatedPlaygrounds.length);
+        
         var maxScore = snapshot.maxScore;
         var weightAdded = snapshot.weightAdded;
         var weightUpdated = snapshot.weightUpdated;
         var weightReview = snapshot.weightReview;
         this.score = weightReview*this.reviews.length + weightUpdated*this.updatedPlaygrounds.length + weightAdded*this.addedPlaygrounds.length;
         this.scorePercentile = Math.round(100*this.score/maxScore);
-        console.log(this.scorePercentile,this.scorePercentile);
+        
     });
   }
 
 	formatReviews() {
   	if(this.profile.reviews){
   		Object.keys(this.profile.reviews).forEach((prop) => { 
-  			console.log(this.profile.reviews[prop],this.profile.reviews[prop].length,prop);
+  			
   			var reviewPlayground = {
   				playgroundId : prop,
   				name:"",

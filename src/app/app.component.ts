@@ -20,7 +20,8 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import * as firebase from 'firebase/app';
 
 import { LanguagePage } from '../pages/language/language';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+
+import { AppRate } from '@ionic-native/app-rate';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,11 +30,7 @@ export class MyApp {
   rootPage:any = HomePage;
   translate: TranslateService;
   userSigned: boolean=false;
-  bannerConfig: AdMobFreeBannerConfig = {
-    id: 'ca-app-pub-1937225175114473/3354580488',
-    isTesting: false,
-    autoShow: true
-  };
+
   bannerActivate:boolean = false;
   pictureUrl:string;
   displayName:string;
@@ -43,7 +40,7 @@ export class MyApp {
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
     private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,
-    private admobFree: AdMobFree,private network: Network) {
+    private network: Network,private appRate: AppRate) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
@@ -56,6 +53,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
         statusBar.styleDefault();
+        statusBar.backgroundColorByHexString('#8EC63F');
          let disconnectSub = this.network.onDisconnect().subscribe(() => {
           console.log('you are offline');
           this.app.getActiveNav().push(NoNetworkPage);
@@ -98,7 +96,15 @@ export class MyApp {
           storage.set('langKey', event.lang);
         });
 
-        
+
+        //app rate
+        this.appRate.preferences = {
+          usesUntilPrompt: 2,
+          storeAppURL: {
+           ios: '1307446141',
+           android: 'market://details?id=com.mapikid.com'
+          }
+        };   
         
     });
   }

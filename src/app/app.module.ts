@@ -46,6 +46,8 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { AdMobFree } from '@ionic-native/admob-free';
 
+import { AppRate } from '@ionic-native/app-rate';
+
 import {
  GoogleMaps,
  GoogleMap,
@@ -157,7 +159,8 @@ export function createTranslateLoader(http: Http) {
     FirebaseAnalytics,
     AdMobFree,
     WeatherProvider,
-    Network
+    Network,
+    AppRate
   ]
 })
 export class AppModule {}
