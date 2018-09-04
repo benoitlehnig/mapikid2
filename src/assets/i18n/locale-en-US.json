@@ -275,6 +275,19 @@
 		"CONFIRMATIONCONTENT": "All your reviews will be deleted as well as your account information. Modified or added playgrounds will be retained.",
 		"CONFIRMATIONCANCEL": "Cancel",
 		"CONFIRMATIONCONFIRM": "Confirm",
-		"NOREVIEWTEXT": "No text entered"
+		"NOREVIEWTEXT": "No text entered",
+		"MYSCORE": "My score Map&Kidos"
+	},
+	"appRate":{
+		"TITLE": "Would you mind rating %@?",
+	    "MESSAGE": "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
+	    "CANCELBUTTONLABEL": "No, Thanks",
+	    "LATERBUTTONLABEL": "Remind Me Later",
+	    "RATEBUTTONLABEL": "Rate It Now",
+	    "YESBUTTONLABEL": "Yes!",
+	    "NOBUTTONLABEL": "Not really",
+	    "APPRATEPROMPTTILE": "If you like using %@, would you like provide some feeback ? ",
+	    "FEEDBACKPROMPTTILE": "Mind giving us some feedback?"
 	}
+	
 }

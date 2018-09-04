@@ -277,5 +277,16 @@
 		"CONFIRMATIONCONFIRM": "Confirma",
 		"NOREVIEWTEXT": "Sense comentaris",
 		"MYSCORE":"El meu Puntuació Map&Kidos"
+	},
+	"appRate":{
+		"TITLE": "Vols puntuar %@ ?",
+	    "MESSAGE": "trigarà menys d'un minut i us ajudarà a %@. Gràcies pel vostre suport ! ",
+	    "CANCELBUTTONLABEL": "No, gràcies",
+	    "LATERBUTTONLABEL": "Recorda'm més tard",
+	    "RATEBUTTONLABEL": "Nota ara",
+	    "YESBUTTONLABEL": "Si !",
+	    "NOBUTTONLABEL": "De debò",
+	    "APPRATEPROMPTTILE": "Si t'agrada el %@, vols donar-te la teva opinió sobre l'aplicació? ",
+	    "FEEDBACKPROMPTTILE": "Dóna'ns la teva opinió!"
 	}
 }

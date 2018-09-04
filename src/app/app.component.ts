@@ -21,7 +21,7 @@ import * as firebase from 'firebase/app';
 
 import { LanguagePage } from '../pages/language/language';
 
-import { AppRate } from '@ionic-native/app-rate';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -40,7 +40,7 @@ export class MyApp {
   constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
     private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,
-    private network: Network,private appRate: AppRate) {
+    private network: Network) {
 
     this.afAuth.auth.onAuthStateChanged(function(user) {
         this.userSigned = this._auth.authenticated;
@@ -97,14 +97,7 @@ export class MyApp {
         });
 
 
-        //app rate
-        this.appRate.preferences = {
-          usesUntilPrompt: 2,
-          storeAppURL: {
-           ios: '1307446141',
-           android: 'market://details?id=com.mapikid.com'
-          }
-        };   
+           
         
     });
   }

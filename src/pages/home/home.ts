@@ -32,7 +32,7 @@ import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
-
+import { AppRate } from '@ionic-native/app-rate';
 
 
 @Component({
@@ -87,6 +87,17 @@ export class HomePage implements OnInit{
 	loadingCompleted: boolean=true;
 	httpRequestActivated: boolean = false;
 	useNativeMap:boolean = true;
+	customLocale:any= {
+	    title: "Would you mind rating %@?",
+	    message: "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
+	    cancelButtonLabel: "No, Thanks",
+	    laterButtonLabel: "Remind Me Later",
+	    rateButtonLabel: "Rate It Now",
+	    yesButtonLabel: "Yes!",
+	    noButtonLabel: "Not really",
+	    appRatePromptTitle: 'Do you like using %@',
+	    feedbackPromptTitle: 'Mind giving us some feedback?',
+	};
 
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -95,7 +106,7 @@ export class HomePage implements OnInit{
 		public mapCluster: GoogleMapsClusterProvider,
 		public loadingCtrl: LoadingController,private translate: TranslateService,
 		private diagnostic: Diagnostic,public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,
-		private ga: FirebaseAnalytics,private storage: Storage, public modalCtrl: ModalController) {
+		private ga: FirebaseAnalytics,private storage: Storage, public modalCtrl: ModalController,private appRate: AppRate) {
 
 
 		this.acService = new google.maps.places.AutocompleteService();        
@@ -109,6 +120,7 @@ export class HomePage implements OnInit{
 	}
 
 	ngOnInit() {
+		console.log(this.customLocale);
 		this.ga.setCurrentScreen("Home_Page");
 		this.afAuth.auth.onAuthStateChanged(function(user) {
 	        if (user) {
@@ -151,11 +163,50 @@ export class HomePage implements OnInit{
 				if(this.useNativeMap === false){
 					this.startGeolocation();
 				}
-	        });	
+				this.prepareAppRate();
+				
+       	 		
+    		});
+		
 	       
 		});			
 	}
-	
+	prepareAppRate=function(){
+		this.translate.get(['appRate.TITLE','appRate.MESSAGE','appRate.CANCELBUTTONLABEL',
+					'appRate.LATERBUTTONLABEL','appRate.RATEBUTTONLABEL','appRate.YESBUTTONLABEL',
+					'appRate.NOBUTTONLABEL','appRate.APPRATEPROMPTTILE','appRate.FEEDBACKPROMPTTILE']).subscribe(function (res) {
+   	 		this.customLocale.title = res['appRate.TITLE'];
+   	 		this.customLocale.message = res['appRate.MESSAGE'];
+   	 		this.customLocale.cancelButtonLabel = res['appRate.CANCELBUTTONLABEL'];
+   	 		this.customLocale.laterButtonLabel = res['appRate.LATERBUTTONLABEL'];
+   	 		this.customLocale.rateButtonLabel = res['appRate.RATEBUTTONLABEL'];
+   	 		this.customLocale.yesButtonLabel = res['appRate.YESBUTTONLABEL'];
+   	 		this.customLocale.noButtonLabel = res['appRate.NOBUTTONLABEL'];
+   	 		this.customLocale.appRatePromptTitle = res['appRate.APPRATEPROMPTTILE'];
+   	 		this.customLocale.feedbackPromptTitle = res['appRate.FEEDBACKPROMPTTILE'];
+			this.storage.get('langKey').then((val) => {
+				console.log("this.customLocale",this.customLocale);
+				this.appRate.preferences = {
+					displayAppName:'Map&Kid',
+					promptAgainForEachNewVersion:false,
+					useCustomRateDialog:false,
+	        		useLanguage:val,
+	         	 	usesUntilPrompt: 2,
+	         	 	simpleMode:true,
+	         	 	storeAppURL: {
+	           			ios: '1307446141',
+	           			android: 'market://details?id=com.mapikid.app'
+	           		},
+	           		callbacks:{
+	           		
+	           		},
+	           		customLocale: this.customLocale
+	        	};
+	        	this.appRate.promptForRating(false);
+			});
+        }.bind(this));
+	}
+
 	setLocationMarker = function(lat,lng){
 		if(this.useNativeMap ===true){
 			console.log("geoLocationMarkerNative");

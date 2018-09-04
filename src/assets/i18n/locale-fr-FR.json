@@ -275,6 +275,18 @@
 		"CONFIRMATIONCONTENT": "Tous vos avis seront supprimés ainsi que les informations relatives à votre compte. Les parcs modifiés ou ajoutés seront conservés.",
 		"CONFIRMATIONCANCEL": "Annuler",
 		"CONFIRMATIONCONFIRM": "Confirmer",
-		"NOREVIEWTEXT": "Pas de commentaire"
+		"NOREVIEWTEXT": "Pas de commentaire",
+		"MYSCORE": "Mon score Map&Kidos"
+	},
+	"appRate":{
+		"TITLE": "Voulez-vous noter %@ ?",
+	    "MESSAGE": "Cela prendra moins d'une minute et cela aidera %@. Merci de votre soutien ! ",
+	    "CANCELBUTTONLABEL": "Non merci",
+	    "LATERBUTTONLABEL": "Me le rappeler plus tard",
+	    "RATEBUTTONLABEL": "Noter maintenant",
+	    "YESBUTTONLABEL": "Oui !",
+	    "NOBUTTONLABEL": "Pas vraiment",
+	    "APPRATEPROMPTTILE": "Si vous aimez %@, voulez-vous donner votre avis sur l'application ? ",
+	    "FEEDBACKPROMPTTILE": "Donnez-nous votre avis !"
 	}
 }

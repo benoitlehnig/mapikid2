@@ -98,6 +98,11 @@
 				<i class="material-icons">info</i>
 				<span>{{parc.facilities.otherDescription}}</span>
 			</div>
+			<div *ngIf="parc.references" class="references">
+               <div *ngFor="let reference of parc.references" >
+                  <div> <a href="{{reference.url}}" target="_blank"> <img src="{{reference.pictureUrl}}" class="referencePicture"/>{{reference.title}}</a></div>
+               </div>
+            </div>
 		</div>
 		<div class="separator"></div>
 	</div>

@@ -276,5 +276,16 @@
 		"CONFIRMATIONCONFIRM": "确认",
 		"NOREVIEWTEXT": "没有评论",
 		"MYSCORE": "我的地图和Kidos得分",
+	},
+	"appRate":{
+		"TITLE": "你想评价 %@?",
+	    "MESSAGE": "这将需要不到一分钟的时间，它将有助于 %@. 感谢您的支持！",
+	    "CANCELBUTTONLABEL": "不，谢谢",
+	    "LATERBUTTONLABEL": "稍后提醒我",
+	    "RATEBUTTONLABEL": "现在注意",
+	    "YESBUTTONLABEL": "是的！",
+	    "NOBUTTONLABEL": "N不是真的",
+	    "APPRATEPROMPTTILE": "如果您喜欢 %@, 想要就申请表达您的意见吗 ? ",
+	    "FEEDBACKPROMPTTILE": "给我们你的意见?"
 	}
 }

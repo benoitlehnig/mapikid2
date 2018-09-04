@@ -278,5 +278,16 @@
         "CONFIRMATIONCONFIRM": "Bestätigen",
         "NOREVIEWTEXT": "Keine Kommentare",
         "MYSCORE": "Meine Punktzahl Map&Kidos"
-    }
+    },
+    "appRate":{
+		"TITLE": "Möchten Sie %@ bewerten?",
+	    "MESSAGE": "Es dauert weniger als eine Minute und es wird. Vielen Dank für Ihre Unterstützung!",
+	    "CANCELBUTTONLABEL": "Nein danke",
+	    "LATERBUTTONLABEL": "Erinnere mich später",
+	    "RATEBUTTONLABEL": "Notiz jetzt",
+	    "YESBUTTONLABEL": "Ja!",
+	    "NOBUTTONLABEL": "Nicht wirklich",
+	    "APPRATEPROMPTTILE": "Wenn Sie %@, mögen, möchten Sie Ihre Meinung zu der Anwendung geben?",
+	    "FEEDBACKPROMPTTILE": "Gib uns deine Meinung!"
+	}
 }

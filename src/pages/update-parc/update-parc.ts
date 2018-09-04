@@ -61,10 +61,16 @@ export class UpdateParcPage {
           },
           lessThan2years: false,
           between2and6: false,
-          sixandPlus: false
+          sixandPlus: false,
+          references: null
     };
   date = moment().format('YYYY-MM-DDTHH:mmZ');  
   localParc:{[k: string]: any} = {'validated':false,'requestedForDeletion':false};
+  reference:{
+    title: null,
+    url:null,
+    pictureUrl: null
+  };
 
   constructor(public platform: Platform,public viewCtrl: ViewController,
     public navCtrl: NavController, public navParams: NavParams,
@@ -117,6 +123,9 @@ export class UpdateParcPage {
         if(!this.parc.facilities.basketball){this.parc.facilities.basketball = false;}
         if(!this.parc.facilities.other){this.parc.facilities.other = false;}
         if(!this.parc.facilities.otherDescription){this.parc.facilities.otherDescription = null;}
+      }
+      if(this.parc.references !== null || this.parc.references){
+        this.reference = this.parc.references[0];
       }
     }
     else{
@@ -199,6 +208,14 @@ export class UpdateParcPage {
     if(this.parc.validationNumber){
       validateIncreased = this.parc.validationNumber;
     }
+    if(this.reference.title !==null && this.reference.title !==undefined  &&
+          this.reference.url !==null && this.reference.url !==undefined){
+          this.parc.references = [{
+            title: this.reference.title,
+            url:this.reference.url,
+            pictureUrl: this.reference.pictureUrl
+          }];
+        }
     this.parc.validationNumber = validateIncreased+1;
     this.parc.initialized = false;
     this.localParc.validated = true;

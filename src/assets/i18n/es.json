@@ -278,5 +278,16 @@
 		"CONFIRMATIONCONFIRM": "Confirmar",
 		"NOREVIEWTEXT": "Sin comentarios",
 		"MYSCORE": "Mon score Map&Kidos"
+	},
+	"appRate":{
+		"TITLE": "¿Quieres calificar %@?",
+	    "MESSAGE": "Tomará menos de un minuto y ayudará %@! Gracias por su apoyo!",
+	    "CANCELBUTTONLABEL": "No, gracias",
+	    "LATERBUTTONLABEL": "Recuérdame más tarde",
+	    "RATEBUTTONLABEL": "Nota ahora",
+	    "YESBUTTONLABEL": "¡Sí!",
+	    "NOBUTTONLABEL": "No realmente",
+	    "APPRATEPROMPTTILE": "Si le gusta% @, ¿quiere darle su opinión sobre la aplicación?",
+	    "FEEDBACKPROMPTTILE": "¡Danos tu opinión!"
 	}
 }
