@@ -42,6 +42,12 @@ page-parc-details {
         height:100px;
         width:100px;
         left: calc(50% - 60px);
+        
+    }
+    .validateFabButton{
+        opacity:1;
+        position:absolute;
+        transition:2s linear!important;
     }
     .validateButton > .button-inner {
         flex-direction: column;
@@ -61,3 +67,16 @@ page-parc-details {
         bottom: -41px;
     }
 }
+.toastClass {
+    > div{
+        background: #8EC63F url(/assets/images/logo8.png) no-repeat !important;
+        border: 2px solid #ffffff;
+        border-radius: 7px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 34px !important;
+    }
+    > div .toast-message{
+        padding-left: 50px !important;
+    }
+ }

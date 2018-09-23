@@ -1,15 +1,15 @@
 page-profile {
 	.rating {
-	    -webkit-box-align: left !important;
-	    -webkit-align-items: left!important;
-	    -moz-box-align: left !important;
-	    -ms-flex-align: left !important;
-	    align-items: left !important;
-	    -webkit-box-pack: left !important;
-	    -webkit-justify-content: left !important;
-	    -moz-box-pack: left !important;
-	    -ms-flex-pack: left !important;
-	    justify-content: left !important;
+		-webkit-box-align: left !important;
+		-webkit-align-items: left!important;
+		-moz-box-align: left !important;
+		-ms-flex-align: left !important;
+		align-items: left !important;
+		-webkit-box-pack: left !important;
+		-webkit-justify-content: left !important;
+		-moz-box-pack: left !important;
+		-ms-flex-pack: left !important;
+		justify-content: left !important;
 	}
 	.toolbar-background-md{
 		background:#8EC63F;
@@ -29,5 +29,26 @@ page-profile {
 	}
 	.myScore h2{
 		text-align:center;
+	}
+	.stat td{
+		padding-right: 20px;
+	}
+	.stat h5, .stat div{
+		text-align:right;
+	}
+	.stat h5{
+		margin-bottom:2px;
+		font-weight: bold;
+	}
+	.stat{
+		margin-left:auto;
+		margin-right:auto;
+		margin-top: 24px;
+	}
+	.item-ios.item-block .item-inner,.item-inner {
+		border-bottom:none !important;
+	}
+	.c100.big {
+		margin-top:24px;
 	}
 }

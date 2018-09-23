@@ -2,6 +2,7 @@ import { Component,ViewChild } from '@angular/core';
 import { Platform, App, ModalController  } from 'ionic-angular';
 
 import { CommonModule } from '@angular/common';
+import {timer} from 'rxjs/observable/timer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
@@ -35,9 +36,10 @@ export class MyApp {
   pictureUrl:string;
   displayName:string;
   displayEmail:string;
+  showSplash:boolean=true;
 
   
-  constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(private platform: Platform, statusBar: StatusBar,private splashScreen: SplashScreen,
     translate: TranslateService,private app: App, private storage: Storage, public afAuth: AngularFireAuth, 
     private _auth: AuthService,private ga: FirebaseAnalytics,public modalCtrl: ModalController,
     private network: Network) {
@@ -65,7 +67,9 @@ export class MyApp {
         });
         
         
-        splashScreen.hide();
+        this.splashScreen.hide();
+        timer(3000).subscribe(()=>this.showSplash = false);
+
         this.translate= translate;
         this.translate.setDefaultLang('fr');
         

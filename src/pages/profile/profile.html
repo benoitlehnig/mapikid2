@@ -15,48 +15,40 @@
 
 <ion-content padding>
 	<ion-item>
-	    <ion-avatar item-start>
-	      	<img src="{{pictureUrl}}">
-	    </ion-avatar>
-			<h2>{{displayName}}</h2>
-		<p>{{displayEmail}}</p>
-	</ion-item>
-	<ion-list class="myScore">
-		<ion-list-header>
-     	<h1>{{'profile.MYSCORE'| translate}}</h1>
-   		</ion-list-header>
-   		<div class="c100 p{{scorePercentile}} big green center">
-          <span>{{score}}</span>
-            <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
-            </div>
-        </div>
-        <h2>{{'profile.MYREVIEWS'| translate}} </h2>
-		<div class="c100 p100 small green center">
-          	<span>{{reviews.length}}</span>
-          	<div class="slice">
-            	<div class="bar"></div>
-            	<div class="fill"></div>
-          	</div>
-        </div>
-        <h2>{{'profile.PLAYGROUNDSADDED' | translate}} </h2>
-        <div class="c100 p100 small green center">
-          	<span>{{addedPlaygrounds.length}}</span>
-          	<div class="slice">
-            	<div class="bar"></div>
-            	<div class="fill"></div>
-          	</div>
-        </div>
-        <h2>{{'profile.PLAYGROUNDSMODIFIED' | translate}} </h2>
-        <div class="c100 p100 small green center">
-          	<span>{{updatedPlaygrounds.length}}</span>
-          	<div class="slice">
-            	<div class="bar"></div>
-            	<div class="fill"></div>
-          	</div>
-        </div>
-	</ion-list>
+   <ion-avatar item-start>
+    <img src="{{pictureUrl}}">
+  </ion-avatar>
+  <h2>{{displayName}}</h2>
+  <p>{{displayEmail}}</p>
+</ion-item>
+<ion-list class="myScore">
+  <ion-list-header>
+    <h1>{{'profile.MYSCORE'| translate}}</h1>
+  </ion-list-header>
+  <div class="c100 p{{scorePercentile}} big green center">
+    <span>{{score}}</span>
+    <div class="slice">
+      <div class="bar"></div>
+      <div class="fill"></div>
+    </div>
+  </div>
+  <table class="center stat">
+    <td>
+      <h5>{{reviews.length}}</h5>
+      <div>{{'profile.MYREVIEWS' | translate}}</div> 
+    </td>
+    <td>
+      <h5>{{addedPlaygrounds.length}}</h5>
+      <div>{{'profile.PLAYGROUNDSADDED' | translate}}</div> 
+    </td>
+    <td>
+      <h5>{{updatedPlaygrounds.length}}</h5>
+      <div>{{'profile.PLAYGROUNDSMODIFIED' | translate}}</div> 
+    </td>
+  </table>
+  
+  
+</ion-list>
 	<!--
 	<ion-list>
 		<ion-item-divider color="light"><h2>{{'profile.MYREVIEWS'| translate}} </h2><ion-badge item-end>{{reviews.length}}</ion-badge>
@@ -86,5 +78,5 @@
 			<ion-note item-end>{{playground.date | date:'dd/MM/yyyy'}}</ion-note>
 		</ion-item>
 	</ion-list>
-	-->
+-->
 </ion-content>

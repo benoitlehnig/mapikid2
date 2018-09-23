@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild,Renderer,ElementRef } from '@angular/core';
 import { NavController, NavParams,Tabs,Tab,ModalController,ToastController,Platform,App	   } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -15,6 +15,7 @@ import { AddReviewPage } from '../add-review/add-review';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { LoginPage } from '../login/login';
 
+import {timer} from 'rxjs/observable/timer';
 
 /**
  * Generated class for the ParcDetailsPage page.
@@ -31,6 +32,7 @@ import { LoginPage } from '../login/login';
 export class ParcDetailsPage {
 	
 	@ViewChild('myTabs') tabRef: Tabs;
+	@ViewChild('validateFabButton', {read:ElementRef}) validateFabButton;
 	
 	selectedTab =0;
 	parcObject: FirebaseObjectObservable<any>;
@@ -50,6 +52,7 @@ export class ParcDetailsPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
   	public db: AngularFireDatabase,public modalCtrl: ModalController, private storage: Storage,
+  	public renderer:Renderer,
   	public afAuth: AngularFireAuth, private _auth: AuthService,private app: App,
   	public toastCtrl: ToastController,translate: TranslateService,private ga: FirebaseAnalytics) {
 		console.log(navParams);
@@ -143,10 +146,13 @@ export class ParcDetailsPage {
 		validateIncreased = validateIncreased+1;
 		this.parcObject.update({ validationNumber: validateIncreased });
 		this.parcObject.update({ initialized: false });
-		this.localParc.validated = true;
+		
 	    this.storage.set(this.parc.$key, JSON.stringify(this.localParc));
 	    this.presentToast(this.toastLabelValidated);
 	    this.ga.logEvent("parc_management", {"action":"validate","parc_key":this.parc.$key});
+	    console.log("this.validateFabButton",this.validateFabButton);
+	    this.renderer.setElementStyle(this.validateFabButton.nativeElement,'bottom','-200px');
+	    timer(3000).subscribe(()=>this.localParc.validated = true);
 	}
 
 	suggestRemove = function(){
@@ -189,13 +195,16 @@ export class ParcDetailsPage {
 		this.localParc.requestedForDeletion = true;
 	    this.storage.set(this.parc.$key, JSON.stringify(this.localParc));
 	    this.presentToast(this.toastLabelDeleted);
+
 	}
 	presentToast(message) {
 	    let toast = this.toastCtrl.create({
 	      message: message,
-	      duration: 15000,
+	      duration: 5000,
 	      showCloseButton: true,
-	      closeButtonText: "X"
+	      closeButtonText: "X",
+	      position: 'top',
+	      cssClass: "toastClass"
 	    });
 	    toast.present();
  	 }

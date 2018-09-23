@@ -44,7 +44,6 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import { MapService } from '../providers/map-service/map-service';
 import { IonicPageModule } from 'ionic-angular';
 
-import { AdMobFree } from '@ionic-native/admob-free';
 
 import { AppRate } from '@ionic-native/app-rate';
 
@@ -157,7 +156,6 @@ export function createTranslateLoader(http: Http) {
     OpenNativeSettings,
     GoogleAnalytics,
     FirebaseAnalytics,
-    AdMobFree,
     WeatherProvider,
     Network,
     AppRate
