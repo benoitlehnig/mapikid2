@@ -27,7 +27,14 @@
 		"SNACKBARLABEL":"GeoLocation desactivée. Activez-la ou entrez une addresse dans la barre de recherche !",
 		"NOPARCFOUND" : "Aucune aire de jeux n'est référencée dans cette zone. N'hésitez pas à ajouter celle que vous connaissez ",
 		"GEOLOCALIZEBUTTON" : "Localisez moi",
-		"GEOLOCATIONNOTALLOWED": "La geo-localisation n'est pas authorisée. Allez dans parametres pour l'activer. "
+		"GEOLOCATIONNOTALLOWED": "La geo-localisation n'est pas authorisée. Allez dans parametres pour l'activer. ",
+		"FILTER":"Filtres",
+		"FILTERFREE":"Gratuit",
+		"FILTEROPENED":"Ouvert",
+		"FILTERVALIDATED":"Validés",
+		"FILTER02YEARS":"0-2 ans",
+		"FILTER26YEARS":"2-6 ans",
+		"FILTER6YEARS":"+6 ans"
 	},
 	"list":{
 		"PARCAROUND": "Parcs autour ",

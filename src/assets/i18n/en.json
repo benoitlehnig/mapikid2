@@ -27,7 +27,14 @@
 		"TAPHERE" :"Tap here for more information",
 		"NOPARCFOUND" : "No playground is referenced in this area. Don't hesitate to add playgrounds !",
 		"GEOLOCALIZEBUTTON" : "Locate Me",
-		"GEOLOCATIONNOTALLOWED": "Geolocation is not authorized for Map&Kid. Please go to settings to activate geolocation."
+		"GEOLOCATIONNOTALLOWED": "Geolocation is not authorized for Map&Kid. Please go to settings to activate geolocation.",
+		"FILTER":"Filter",
+		"FILTERFREE":"Free",
+		"FILTEROPENED":"Open",
+		"FILTERVALIDATED":"Validated",
+		"FILTER02YEARS":"0-2 years",
+		"FILTER26YEARS":"2-6 years",
+		"FILTER6YEARS":"+6 years"
 	},
 	"list":{
 		"PARCAROUND": "Parks Around ",

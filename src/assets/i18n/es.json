@@ -27,7 +27,14 @@
 		"NONAMEPARC" :"Playground",
 		"TAPHERE" :"Haz clic para tener más información",
 		"GEOLOCALIZEBUTTON" : "Ubíquenme",
-		"GEOLOCATIONNOTALLOWED": "La geolocalización no está permitida, vaya a la configuración para activarlo."
+		"GEOLOCATIONNOTALLOWED": "La geolocalización no está permitida, vaya a la configuración para activarlo.",
+		"FILTER":"Filtro",
+		"FILTERFREE":"Free",
+		"FILTEROPENED":"Abrir",
+		"FILTERVALIDATED":"Validado",
+		"FILTER02YEARS":"0-2 años",
+		"FILTER26YEARS":"2-6 años",
+		"FILTER6YEARS":"+6 años"
 	},
 	"list":{
 			"PARCAROUND": "Parques alrededor ",

@@ -2,14 +2,17 @@
   <ion-navbar hideBackButton="true">
     
     <img src="assets/images/logo8.png" height="40px" id="logo">
+	 
 	<ion-searchbar 
 		[(ngModel)]="autocomplete.query" 
 		[showCancelButton]="true" 
 		(ionInput)="updateSearch()" 
 		placeholder="{{'header.ENTERLOCATION' | translate }}" style="width:70%;float:left">
 	</ion-searchbar>
-	<ion-spinner name="crescent" *ngIf="loadingCompleted !=true"></ion-spinner>
+	<button id="filterButton" ion-button (click)="showFilters()" *ngIf="!areFiltersDisplayed" [ngClass]="{'filtered': filterApplies==true}" >{{'map.FILTER' | translate }} </button>
 	<div id="user-pic"></div>
+	<ion-spinner name="crescent" *ngIf="loadingCompleted !=true"></ion-spinner>
+	
 	<button ion-button menuToggle right	>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -18,14 +21,28 @@
 
 <ion-content padding >
 	
-	<ion-list>
-		<ion-item *ngFor="let item of autocompleteItems" 
-		(click)="chooseItem(item)">
-		{{ item.description }}
-		</ion-item>
-	</ion-list>
+	
+	<div #filters *ngIf="areFiltersDisplayed" class="filter" >
+		
+		<div class="separator"></div>
+		<button ion-button round [outline]="!filtersFree" (click)="applyFilters('filtersFree')">{{'map.FILTERFREE' | translate }}</button>
+		<button ion-button round [outline]="!filtersClosed" (click)="applyFilters('filtersClosed')">{{'map.FILTEROPENED' | translate }}</button>
+		<button ion-button round [outline]="!filtersValidated" (click)="applyFilters('filtersValidated')">{{'map.FILTERVALIDATED' | translate }}</button>
+		<button ion-button round [outline]="!filtersLessThan2years" (click)="applyFilters('filtersLessThan2years')">{{'map.FILTER02YEARS' | translate }}</button>
+		<button ion-button round [outline]="!filtersBetween2and6" (click)="applyFilters('filtersBetween2and6')">{{'map.FILTER26YEARS' | translate }}</button>
+		<button ion-button round [outline]="!filtersSixandPlus" (click)="applyFilters('filtersSixandPlus')">{{'map.FILTER6YEARS' | translate }}</button>
+		<div class="separator"></div>
+		<ion-list>
+			<ion-item *ngFor="let item of autocompleteItems" 
+			(click)="chooseItem(item)">
+			{{ item.description }}
+			</ion-item>
+		</ion-list>
+		
+		
+	</div>
 	<split direction="vertical" gutterSize="24" (dragEnd)="dragEnd($event)">
-    <split-area [size]="80" id="mapSplit">
+    <split-area [size]="80" id="mapSplit" (click)="hideFilters()">
         <div id="map"></div>
         <div id="map2"></div>
     </split-area>

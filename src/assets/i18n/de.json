@@ -27,7 +27,14 @@
 		"TAPHERE" :"Klicken, um weitere Informationen zu erhalten",
 		"NOPARCFOUND" : "Kein Spielplatz ist in diesem Bereich referenziert. Zögern Sie nicht, Spielplätze hinzuzufügen!",
 		"GEOLOCALIZEBUTTON" : "Suche mich",
-		"GEOLOCATIONNOTALLOWED": "Geolocation ist nicht für Map&Kid zugelassen. Bitte Geoocation aktivieren."
+		"GEOLOCATIONNOTALLOWED": "Geolocation ist nicht für Map&Kid zugelassen. Bitte Geoocation aktivieren.",
+		"FILTER":"Filter",
+		"FILTERFREE":"Frei",
+		"FILTEROPENED":"Öffnen",
+		"FILTERVALIDATED":"Validiert",
+		"FILTER02YEARS":"0-2 Jahre",
+		"FILTER26YEARS":"2-6 Jahre",
+		"FILTER6YEARS":"+6 Jahre"
 	},
 	"list":{
 		"PARCAROUND": "Parks herum ",

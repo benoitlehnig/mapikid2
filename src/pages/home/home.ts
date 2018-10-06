@@ -98,6 +98,14 @@ export class HomePage implements OnInit{
 	    appRatePromptTitle: 'Do you like using %@',
 	    feedbackPromptTitle: 'Mind giving us some feedback?',
 	};
+	areFiltersDisplayed:boolean=false;
+	filtersFree:boolean=false;
+	filtersLessThan2years:boolean=false;
+	filtersBetween2and6:boolean=false;
+	filtersSixandPlus:boolean=false;
+	filtersClosed:boolean=false; 
+	filtersValidated:boolean=false; 
+	filterApplies:boolean=false;
 
 	constructor(public navCtrl: NavController, db: AngularFireDatabase,
 		public platform: Platform,
@@ -120,7 +128,6 @@ export class HomePage implements OnInit{
 	}
 
 	ngOnInit() {
-		console.log(this.customLocale);
 		this.ga.setCurrentScreen("Home_Page");
 		this.afAuth.auth.onAuthStateChanged(function(user) {
 	        if (user) {
@@ -185,7 +192,6 @@ export class HomePage implements OnInit{
    	 		this.customLocale.appRatePromptTitle = res['appRate.APPRATEPROMPTTILE'];
    	 		this.customLocale.feedbackPromptTitle = res['appRate.FEEDBACKPROMPTTILE'];
 			this.storage.get('langKey').then((val) => {
-				console.log("this.customLocale",this.customLocale);
 				this.appRate.preferences = {
 					displayAppName:'Map&Kid',
 					promptAgainForEachNewVersion:false,
@@ -209,7 +215,6 @@ export class HomePage implements OnInit{
 
 	setLocationMarker = function(lat,lng){
 		if(this.useNativeMap ===true){
-			console.log("geoLocationMarkerNative");
 			this.geoLocationMarkerNative.setPosition( {
 				lat: lat,
 				lng: lng
@@ -331,28 +336,33 @@ export class HomePage implements OnInit{
 			this.checkCompleteLoad();
 		}
 		else{
-			var parc = {'key':key, 'distance':distance.toString().substring(0,4),'reviewsLength':0,'parcItem': null };
+			var parc = {'key':key, 'distance':distance.toString().substring(0,4),'reviewsLength':0,'parcItem': null,'hidden':false };
 			var parcItemObject: FirebaseObjectObservable<any>;
 	        parcItemObject = this.db.object('positions/'+key);
 			var subscription = parcItemObject.subscribe(snapshot => {			
 				parc.parcItem = snapshot;
-				if(!parc.parcItem.rate){
-					parc.parcItem.rate = {'rate': 0};
-				}				
-				
-				if(!this.keys[key]){
-					this.parcs.push(parc);	
-					this.keys[key] = key;
-					this.displayParcMarker(parc,'add');
 					this.numberParcLoaded = this.numberParcLoaded +1;
-					this.checkCompleteLoad();
-				}
-				else{
-					if(this.getPlaygroundPosition(key) !==-1 ){
-						this.parcs[this.getPlaygroundPosition(key)].parcItem = snapshot;
+					parc.hidden = this.isFiltered(parc.parcItem);
+					
+					if(!parc.parcItem.rate){
+						parc.parcItem.rate = {'rate': 0};
+					}				
+					
+					if(!this.keys[key]){
+						this.parcs.push(parc);	
+						this.keys[key] = key;
+						this.displayParcMarker(parc,'add');
+						
+						this.checkCompleteLoad();
 					}
-					this.displayParcMarker(parc,'update');
-				}
+					else{
+						if(this.getPlaygroundPosition(key) !==-1 ){
+							this.parcs[this.getPlaygroundPosition(key)].parcItem = snapshot;
+						}
+						this.displayParcMarker(parc,'update');
+					}
+
+					
 				
 				
 			});	
@@ -362,7 +372,10 @@ export class HomePage implements OnInit{
 	orderByDistance = function(items, field, reverse) {
 	    var filtered = [];
 	    for(let item of items){
-	       filtered.push(item);
+	    	if(item.hidden != true){
+	    		 filtered.push(item);
+	    	}
+	      
 	    };
 	    filtered.sort(function (a, b) {
 	        return ( parseFloat(a[field]) >  parseFloat(b[field]) ? 1 : -1);
@@ -377,7 +390,8 @@ export class HomePage implements OnInit{
 			if(parc.parcItem.name !==''){
 				name = parc.parcItem.name;
 			}
-			if(mode==='add'){
+			
+				if(mode==='add'){
 				this.googleMapNative.addMarker({
 				    'position': {
 				      lat: parc.parcItem.position.lat,
@@ -385,31 +399,27 @@ export class HomePage implements OnInit{
 				    },
 				    'title': name,
 				    'snippet': this.tapHereLabel,
-				    'icon': this._map.getIconNative(parc)
+				    'icon': this._map.getIconNative(parc),
+				    'visible': !parc.hidden,
+
 				  }).then((marker: Marker) => {
 				  		this.markers[parc.key]= marker;
-				  		/*this.markerCluster.push({
-					    'position': {
-					      lat: parc.parcItem.position.lat,
-					      lng: parc.parcItem.position.lng
-					    },
-					    'title': name,
-					    'snippet': "Tap here to get more details!",
-					    'icon': this._map.getIconNative(parc)
-					  });
-					  */
+
 				  		marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(() => {
 				          	this.navCtrl.push(ParcDetailsPage, {key:parc.key} );
 				        });
 				        
-				  });
-				 
+				 });
+			
+
 			}
+			
 			else{
 				this.markers[parc.key].setPosition({
 				      lat: parc.parcItem.position.lat,
 				      lng: parc.parcItem.position.lng
-				    })
+				    });
+				this.markers[parc.key].setVisible(!parc.hidden);
 			}
 		}
 		else{
@@ -422,21 +432,24 @@ export class HomePage implements OnInit{
 			if(parc.parcItem.position){
 				if(parc.parcItem.position.lat && parc.parcItem.position.lng){
 					if(mode==='add'){
-				   	var marker = new google.maps.Marker({
-				        position:  new google.maps.LatLng(parc.parcItem.position.lat, parc.parcItem.position.lng),
-				        map: this.googleMapJDK,
-				        title: parc.parcItem.name,
-				        icon:this._map.getIconPath(parc)
-			   		});
-			   		marker.addListener('click', function() {
-		      			this.navCtrl.push(ParcDetailsPage, {key:parc.key} );
-			      	}.bind(this));
-			      	this.markers[parc.key]= marker;
-					this.mapCluster.addMarker(marker, true);
-				   	}
+						
+							var marker = new google.maps.Marker({
+					        position:  new google.maps.LatLng(parc.parcItem.position.lat, parc.parcItem.position.lng),
+					        map: this.googleMapJDK,
+					        title: parc.parcItem.name,
+					        icon:this._map.getIconPath(parc)
+				   		});
+				   		marker.addListener('click', function() {
+			      			this.navCtrl.push(ParcDetailsPage, {key:parc.key} );
+				      	}.bind(this));
+				      	this.markers[parc.key]= marker;
+				      	marker.setVisible(!parc.hidden);
+						this.mapCluster.addMarker(marker, true);
+					}  
 				   	else{
 				   		this.markers[parc.key].setPosition(new google.maps.LatLng(parc.parcItem.position.lat, parc.parcItem.position.lng));	
-				   	}
+				   		this.markers[parc.key].setVisible(!parc.hidden);
+				   }
 				}
 			}
 			else{
@@ -446,6 +459,7 @@ export class HomePage implements OnInit{
 	} 
 	
 	updateSearch() {
+		this.showFilters();
 		if (this.autocomplete.query == '') {
 			this.autocompleteItems = [];
 			return;
@@ -469,6 +483,7 @@ export class HomePage implements OnInit{
 	chooseItem(item){
 		this.autocompleteItems=[];
 		this.geocodeAddress(item);
+		this.hideFilters();
 	}  
 	
 	geocodeAddress(item){
@@ -495,7 +510,6 @@ export class HomePage implements OnInit{
 		        	this.googleMapNative.moveCamera(options);
             	}
                 this.markerAddress.setPosition({lat: results[0].geometry.location.lat(), lng:results[0].geometry.location.lng()});
-                console.log(this.markerAddress.getPosition().lat(), this.markerAddress.getPosition().lng());
                 this.markerAddress.setTitle(item.description);
                 if(this.useNativeMap === false){
                 	this.markerAddress.setMap( this.googleMapJDK);
@@ -619,7 +633,8 @@ export class HomePage implements OnInit{
 		    	this._map.getPlaygroundsByGeographicCoordinates(this._map.getCenter().lat,this._map.getCenter().lng,radius).map(data => data.json())
 					.subscribe(data=> {
 					  	for(var i = 0;i<data.length;i++){
-						  	var parc = {'key':data[i].key, 'distance':0,'reviewsLength':0,'parcItem': data[i].content };
+					  		
+				  			var parc = {'key':data[i].key, 'distance':0,'reviewsLength':0,'parcItem': data[i].content };
 							if(this.keys[data[i].key]){
 								this.displayParcMarker(parc,'update');
 							}
@@ -630,7 +645,9 @@ export class HomePage implements OnInit{
 								this.displayParcMarker(parc,'add');
 								this.keys[data[i].key] = data[i].key;
 								this.parcs.push(parc);	
-							}													
+							}	
+					  		
+						  													
 						}
 						this.updateDistance();
 						this.loadingCompleted = true;
@@ -642,6 +659,58 @@ export class HomePage implements OnInit{
 				}
     	}
     };
+
+    isFiltered(parc){
+    	let isFiltered = false;
+    	if(this.filtersFree === true){
+    		if(parc.free !==null && parc.free !==undefined  ){
+	    		if(this.filtersFree !== parc.free){
+	    			isFiltered = true;
+	    		}
+	    	}
+    	}    
+    	if(this.filtersLessThan2years ==true){
+    		if(parc.lessThan2years !==null && parc.lessThan2years !== undefined  ){
+	    		if(this.filtersLessThan2years !== parc.lessThan2years){
+	    			isFiltered = true;
+	    		}
+	    	}
+    	}
+    	if(this.filtersBetween2and6 ==true){
+    		if(parc.between2and6 !==null && parc.between2and6 !== undefined  ){
+	    		if(this.filtersBetween2and6 !== parc.between2and6){
+	    			isFiltered = true;
+	    		}
+	    	}
+    	}	
+    	if(this.filtersSixandPlus ==true){
+    		if(parc.sixandPlus !==null && parc.sixandPlus !== undefined  ){
+	    		if(this.filtersSixandPlus !== parc.sixandPlus){
+	    			isFiltered = true;
+	    		}
+	    	}
+    	}	
+    	if(this.filtersClosed ==true){
+    		
+    		if(parc.open !==null && parc.open !== undefined  ){
+	    		if(this.filtersClosed !== parc.open){
+	    			isFiltered = true;
+	    		}
+	    	}
+    	}	
+    	if(this.filtersValidated ==true){
+    		if(parc.validationNumber !==null && parc.validationNumber !== undefined  ){
+	    		if(parc.validationNumber<1){
+	    			isFiltered = true;
+	    		}
+	    	}
+	    	else{
+	    		isFiltered = true;
+	    	}
+    	}	
+    	
+    	return isFiltered;
+    }
     getPlaygroundsDetails =  function(){
     	this._map.getPlaygroundDetails(this.parcs).map(data => data.json())
 			.subscribe(data=> {console.log(data)})
@@ -671,10 +740,9 @@ export class HomePage implements OnInit{
       		}
   			
   		}
-  		if(this.parcs){
-  			this.parcs = this.orderByDistance(this.parcs, 'distance',false);
-  		}
-  		this.parcsList = this.parcs.slice(0,10);
+
+  		this.parcsList = this.orderByDistance(this.parcs, 'distance',false);
+  		this.parcsList = this.parcsList.slice(0,10);
     };
 
     geolocateUser = function(){
@@ -804,12 +872,17 @@ export class HomePage implements OnInit{
 				
 			});
       	
-      
+      		this.googleMapNative.on(GoogleMapsEvent.MAP_CLICK).subscribe(
+            (data) => {
+ 
+                this.hideFilters();
+            });
        		this.googleMapNative.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(
             (data) => {
  
                 var target = this.googleMapNative.getCameraTarget();
      			var mapCenter = {lat: target.lat, lng: target.lng};
+     			this.hideFilters();
 				this._map.setMapCenter(mapCenter.lat,mapCenter.lng);
 				this._map.setCenter(mapCenter.lat,mapCenter.lng);
 				this.displayParcsAround(false,false);
@@ -862,5 +935,39 @@ export class HomePage implements OnInit{
   getLocation(){
     var positionOptions = {timeout: 10000, enableHighAccuracy: true};
     return this.geolocation.getCurrentPosition(positionOptions);   
+  }
+  showFilters(){
+  	this.areFiltersDisplayed = true;
+  }
+  hideFilters(){
+  	this.areFiltersDisplayed = false;
+  }
+  applyFilters(filter){
+  	if(filter ==="filtersFree"){
+  		this.filtersFree = !this.filtersFree;
+  	}
+  	if(filter ==="filtersValidated"){
+  		this.filtersValidated = !this.filtersValidated;
+  	}
+  	if(filter ==="filtersClosed"){
+  		this.filtersClosed = !this.filtersClosed;
+  	}
+  	if(filter ==="filtersLessThan2years"){
+  		this.filtersLessThan2years = !this.filtersLessThan2years;
+  	}
+  	if(filter ==="filtersBetween2and6"){
+  		this.filtersBetween2and6 = !this.filtersBetween2and6;
+  	}
+  	if(filter ==="filtersSixandPlus"){
+  		this.filtersSixandPlus = !this.filtersSixandPlus;
+  	}
+  	this.filterApplies = this.filtersFree||this.filtersValidated||this.filtersClosed||this.filtersLessThan2years||this.filtersBetween2and6||this.filtersSixandPlus;
+  	
+  	console.log("filterApplies", this.filterApplies);
+  	for (var i=0; i<this.parcs.length; i++){
+  		this.parcs[i].hidden = this.isFiltered(this.parcs[i].parcItem);
+  		this.markers[this.parcs[i].key].setVisible(!this.parcs[i].hidden);
+	}
+	this.updateDistance();
   }
 }

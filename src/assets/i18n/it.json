@@ -27,7 +27,14 @@
 		"TAPHERE" :"Fai clic per avere maggiori informazioni",
 		"NOPARCFOUND" : "Nell'area non si fa riferimento alcun parco giochi. Non esitare a aggiungere campi da gioco!",
 		"GEOLOCALIZEBUTTON" : "Localizza me",
-		"GEOLOCATIONNOTALLOWED": "Geolocazione non è autorizzata per Map&Kid. Attiva la geolocalizzazione."
+		"GEOLOCATIONNOTALLOWED": "Geolocazione non è autorizzata per Map&Kid. Attiva la geolocalizzazione.",
+		"FILTER":"Filtro",
+		"FILTERFREE":"Libero",
+		"FILTEROPENED":"Aperto",
+		"FILTERVALIDATED":"Validato",
+		"FILTER02YEARS":"0-2 anni",
+		"FILTER26YEARS":"2-6 anni",
+		"FILTER6YEARS":"+6 anni"
 	},
 	"list":{
 		"PARCAROUND": "Parchi intorno ",

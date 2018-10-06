@@ -68,16 +68,46 @@ page-home {
 	.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
 		color: #FFFFFF;
 	}
+	.searchbar-has-focus{
+		width:79%!important;
+		position:relative;
+		left:-20px;
+	}
+	.spinner{
+		margin: 0px;
+	}
 	ion-spinner {
 		float: left;
 	    position: absolute;
 	    margin-left: -38px;
     	margin-top: 8px;
 	}
+
 	.spinner-crescent circle{
 	    stroke: #8EC63F;
 	}
-	
+	.filter{
+		position: absolute;
+	    top: -2px;
+	    z-index: 998;
+	    background: #FFFFFF;
+	    width: -webkit-fill-available;
+	}
+	#filterButton{
+		position: relative;
+	    left: -48px;
+	    top: 1px;
+	    width: 35px;
+	    font-size: 0.6em;
+	    float:left;
+	}
+	.filtered{
+		background-color:#FE9F1F;
+	}
+	.separator{
+		background:#8EC63F;
+		height:3px;
+	}
 	#centerControlDiv{
 		background-color: rgb(255, 255, 255);
 	    border: 2px solid rgb(255, 255, 255);

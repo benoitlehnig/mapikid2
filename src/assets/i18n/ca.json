@@ -27,7 +27,14 @@
 		"TAPHERE" :"Feu clic per tenir més informació",
 		"NOPARCFOUND" : "No es fa referència a cap parc infantil en aquesta zona. No dubti a afegir patis infantils!",
 		"GEOLOCALIZEBUTTON" : "Localitzeu-me",
-		"GEOLOCATIONNOTALLOWED": "Geolocalización no està autoritzada per Map&Kid. Aneu a la configuració per activar la geolocalización"
+		"GEOLOCATIONNOTALLOWED": "Geolocalización no està autoritzada per Map&Kid. Aneu a la configuració per activar la geolocalización",
+		"FILTER":"Filtre",
+		"FILTERFREE":"Lliure",
+		"FILTEROPENED":"Obrir",
+		"FILTERVALIDATED":"Validat",
+		"FILTER02YEARS":"0-2 anys",
+		"FILTER26YEARS":"2-6 anys",
+		"FILTER6YEARS":"+6 anys"
 	},
 	"list":{
 		"PARCAROUND": "Parcs al voltant ",

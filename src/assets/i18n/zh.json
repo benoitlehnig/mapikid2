@@ -27,7 +27,14 @@
 		"NONAMEPARC" :"游乐区",
 		"TAPHERE" :"点击以获取更多信息",
 		"GEOLOCALIZEBUTTON" : "找我",
-		"GEOLOCATIONNOTALLOWED": "地理位置定位是不允许的，去设置激活它 "
+		"GEOLOCATIONNOTALLOWED": "地理位置定位是不允许的，去设置激活它 ",
+		"FILTER":"过滤器",
+		"FILTERFREE":"免费",
+		"FILTEROPENED":"免费	",
+		"FILTERVALIDATED":"验证",
+		"FILTER02YEARS":"0-2岁",
+		"FILTER26YEARS":"2-6岁",
+		"FILTER6YEARS":"+ 6年"
 	},
 	"list":{
 			"PARCAROUND": "公园周边 ",
